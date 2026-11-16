@@ -1136,4 +1136,88 @@ html[data-theme="light"] .theme-fab {
   .cert-sheet strong,
   .cert-sheet b { color: #141a2e !important; }
   .cert-sheet__name { font-size: 30pt; }
+
+   /* ==========================================================================
+   Sello de Recorrido / Certificado Mejorado y Animado
+   ========================================================================== */
+
+.badge-seal {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.2rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: radial-gradient(circle at 35% 30%, #aefbf0, var(--turq-deep) 60%, #095c4e);
+  color: #04241e;
+  box-shadow: 
+    0 0 0 10px rgba(79, 224, 193, 0.15), 
+    0 20px 45px -12px rgba(79, 224, 193, 0.6);
+  animation: sealFloat 4s ease-in-out infinite, sealPulseGlow 3s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 300ms var(--ease), box-shadow 300ms var(--ease);
+}
+
+/* Anillo luminoso exterior decorativo en rotación sutil */
+.badge-seal::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed rgba(79, 224, 193, 0.5);
+  animation: sealSpin 18s linear infinite;
+  pointer-events: none;
+}
+
+/* Efecto hover interactivo al pasar el cursor */
+.badge-seal:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 
+    0 0 0 14px rgba(79, 224, 193, 0.22), 
+    0 26px 55px -10px rgba(79, 224, 193, 0.8);
+}
+
+.badge-seal svg {
+  width: 56px;
+  height: 56px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 300ms var(--ease);
+}
+
+.badge-seal:hover svg {
+  transform: scale(1.1) rotate(6deg);
+}
+
+/* Animaciones fluidas */
+@keyframes sealFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes sealPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 8px rgba(79, 224, 193, 0.12), 0 18px 40px -12px rgba(79, 224, 193, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(79, 224, 193, 0.25), 0 24px 50px -10px rgba(79, 224, 193, 0.75);
+  }
+}
+
+@keyframes sealSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Adaptación automática para el Modo Claro */
+html[data-theme="light"] .badge-seal {
+  background: radial-gradient(circle at 35% 30%, #5eead4, #0f766e 60%, #115e59);
+  color: #f0fdft;
+  box-shadow: 
+    0 0 0 10px rgba(13, 148, 136, 0.18), 
+    0 20px 45px -12px rgba(13, 148, 136, 0.45);
+}
+
+html[data-theme="light"] .badge-seal::before {
+  border: 2px dashed rgba(13, 148, 136, 0.45);
 }
