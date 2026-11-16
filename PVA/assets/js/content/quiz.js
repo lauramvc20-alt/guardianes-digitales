@@ -1,28 +1,23 @@
-/* ==========================================================================
-   PVA · Evaluación de conocimientos
-   Cinco preguntas elaboradas a partir del contenido del documento académico.
-   No existía un cuestionario previo en el PDF: las preguntas son una decisión
-   de diseño documentada en README.md.
-   ========================================================================== */
 (function (global) {
   "use strict";
 
   var PVA = global.PVA;
+  PVA.content = PVA.content || {};
 
   PVA.content.quiz = {
     title: "Evaluación de conocimientos",
     intro:
-      "Cinco preguntas sobre el protocolo PVA, phishing, vishing, protección de " +
+      "Cinco preguntas sobre el protocolo PVA, smishing, vishing, protección de " +
       "cuentas y ofertas de empleo sospechosas. Cada respuesta recibe " +
       "retroalimentación inmediata.",
     note:
-      "No hay nota mínima para continuar: el Kit Digital se desbloquea al completar " +
-      "las cinco preguntas. Puedes repetir la evaluación cuando quieras.",
+      "No hay nota mínima para continuar: el Kit Digital se desbloquea al " +
+      "completar las cinco preguntas. Puedes repetir la evaluación cuando quieras.",
     questions: [
       {
         topic: "Protocolo PVA",
         icon: "shieldCheck",
-        q: "Un mensaje te pide «verificar tu cuenta» en las próximas horas. ¿Cuál es la secuencia correcta del protocolo PVA?",
+        q: "Un mensaje SMS te pide «verificar tu cuenta» en las próximas horas. ¿Cuál es la secuencia correcta del protocolo PVA?",
         options: [
           "Pausar, verificar por un canal oficial y actuar (bloquear o reportar).",
           "Hacer clic, llenar el formulario y avisar al banco después.",
@@ -31,41 +26,40 @@
         ],
         answer: 0,
         explain:
-          "PAUSA detiene la interacción; VERIFICA comprueba por un canal oficial " +
-          "elegido por ti; ACTÚA bloquea, reporta y protege tus cuentas. Hacer clic " +
-          "o responder ya es interactuar con el posible estafador."
+          "PAUSA detiene la interacción; VERIFICA comprueba por un canal oficial elegido " +
+          "por ti; ACTÚA bloquea, reporta y protege tus cuentas."
       },
       {
-        topic: "Phishing",
-        icon: "mail",
-        q: "¿Cuál es la característica principal del phishing?",
+        topic: "Smishing",
+        icon: "sms",
+        q: "¿Cuál es la característica principal del smishing?",
         options: [
           "Robar físicamente el teléfono para entrar a la banca móvil.",
-          "Enviar publicidad de productos con descuentos reales.",
-          "Imitar comunicaciones de empresas o entidades para obtener datos personales o bancarios.",
+          "Enviar publicidad de productos con descuentos reales por correo.",
+          "Enviar mensajes de texto (SMS o mensajería) suplantando entidades con enlaces falsos para robar datos.",
           "Actualizar el sistema operativo sin pedir permiso."
         ],
         answer: 2,
         explain:
-          "El phishing usa mensajes, correos o enlaces que imitan comunicaciones " +
-          "oficiales para que la víctima entregue información o ingrese a páginas " +
-          "falsas. El smishing lo hace por SMS y el vishing por llamada."
+          "El smishing es una modalidad de suplantación que usa mensajes SMS o de " +
+          "mensajería instantánea imitando comunicaciones oficiales para que la víctima " +
+          "ingrese a enlaces falsos o entregue datos personales y bancarios."
       },
       {
         topic: "Vishing",
         icon: "phone",
-        q: "Recibes una llamada de alguien que dice ser tu banco y te pide el código de verificación. ¿Qué haces?",
+        q: "En un caso de vishing, recibes una llamada de alguien que dice ser tu banco y te pide el código de verificación. ¿Qué haces?",
         options: [
-          "Le doy el código porque la llamada parece del banco.",
-          "Cuelgo y llamo al número oficial del banco desde la app o la tarjeta.",
+          "Le doy el código porque la voz y el tono parecen de un asesor real.",
+          "Cuelgo de inmediato y llamo al número oficial del banco desde la app o la tarjeta.",
           "Le pido que me llame luego y le comparto el código por SMS.",
           "Le dicto solo la mitad del código para comprobar."
         ],
         answer: 1,
         explain:
-          "Ningún banco legítimo pide el código de verificación por teléfono. El " +
-          "vishing usa la urgencia y la confianza para obtener ese código, que es " +
-          "la segunda llave de tu cuenta. Corta y verifica por el canal oficial."
+          "Ningún banco legítimo pide el código de verificación por llamada telefónica. El " +
+          "vishing usa la suplantación de voz y la urgencia para obtener ese código, que es " +
+          "la segunda llave de tu cuenta. Corta y verifica por un canal oficial."
       },
       {
         topic: "Protección de cuentas y datos",
@@ -80,8 +74,7 @@
         answer: 3,
         explain:
           "La combinación de contraseñas únicas, 2FA y alertas bancarias reduce el " +
-          "impacto de una filtración. Reutilizar claves o compartir códigos anula " +
-          "varias capas de protección a la vez."
+          "impacto de una filtración y evita que una sola clave comprometa todo."
       },
       {
         topic: "Ofertas de empleo sospechosas",
@@ -96,8 +89,7 @@
         answer: 1,
         explain:
           "El pago anticipado y la solicitud de documentos por canales informales son " +
-          "señales de una falsa oferta. Con tu documento pueden suplantarte y pedir " +
-          "créditos a tu nombre. Verifica la vacante por el sitio oficial de la empresa."
+          "señales de una falsa oferta. Verifica la vacante por el sitio oficial de la empresa."
       }
     ]
   };

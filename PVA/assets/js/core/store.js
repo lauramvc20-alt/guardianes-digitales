@@ -1,14 +1,9 @@
-/* ==========================================================================
-   PVA · Estado del curso: etapas, desbloqueos y persistencia local
-   ========================================================================== */
 (function (global) {
   "use strict";
 
-  var PVA = global.PVA;
+  var PVA = (global.PVA = global.PVA || {});
   var KEY = "pva.guardian.v1";
 
-  /* Etapas del recorrido, en orden obligatorio.
-     requires: etapas que deben estar completas para desbloquear esta. */
   var STAGES = [
     {
       id: "bienvenida",
@@ -34,14 +29,14 @@
     },
     {
       id: "m2",
-      label: "Módulo 2 · Phishing y vishing",
-      navLabel: "Phishing y vishing",
-      short: "Amenazas y señales de alerta",
+      label: "Módulo 2 · Smishing y vishing",
+      navLabel: "Smishing y vishing",
+      short: "Mensajes y llamadas engañosas",
       route: "#/modulo/2",
       minutes: 3,
       requires: ["m1"],
       icon: "mail",
-      blurb: "Cómo reconocer mensajes y llamadas que suplantan entidades."
+      blurb: "Cómo reconocer mensajes SMS y llamadas de voz que suplantan entidades."
     },
     {
       id: "m3",
@@ -112,6 +107,7 @@
   ];
 
   var STAGE_IDS = STAGES.map(function (s) { return s.id; });
+  var memoryFallback = null;
 
   function emptyState() {
     return {
@@ -131,8 +127,6 @@
   function mergeState(raw) {
     var base = emptyState();
     if (!raw || typeof raw !== "object") return base;
-
-    base.v = 1;
     base.done = raw.done && typeof raw.done === "object" ? raw.done : {};
     base.activity = Object.assign(base.activity, raw.activity || {});
     base.quiz = Object.assign(base.quiz, raw.quiz || {});
@@ -141,11 +135,11 @@
     base.createdAt = raw.createdAt || null;
     base.updatedAt = raw.updatedAt || null;
 
-    // Solo etapas válidas cuentan como completadas.
     var cleanDone = {};
-    STAGE_IDS.forEach(function (id) { if (base.done[id]) cleanDone[id] = true; });
+    STAGE_IDS.forEach(function (id) {
+      if (base.done[id]) cleanDone[id] = true;
+    });
     base.done = cleanDone;
-
     return base;
   }
 
@@ -154,13 +148,14 @@
   function readStorage() {
     try {
       var raw = global.localStorage.getItem(KEY);
-      return raw ? JSON.parse(raw) : null;
+      return raw ? JSON.parse(raw) : memoryFallback;
     } catch (e) {
-      return null;
+      return memoryFallback;
     }
   }
 
   function writeStorage() {
+    memoryFallback = JSON.parse(JSON.stringify(state));
     try {
       global.localStorage.setItem(KEY, JSON.stringify(state));
       return true;
@@ -171,7 +166,7 @@
 
   function emit(reason) {
     listeners.forEach(function (fn) {
-      try { fn(state, reason); } catch (e) { /* noop */ }
+      try { fn(state, reason); } catch (e) {}
     });
   }
 
@@ -198,7 +193,9 @@
     return null;
   }
 
-  function isDone(id) { return !!state.done[id]; }
+  function isDone(id) {
+    return !!state.done[id];
+  }
 
   function areRequirementsMet(stage) {
     return stage.requires.every(function (dep) { return isDone(dep); });
@@ -206,8 +203,7 @@
 
   function isUnlocked(id) {
     var stage = stageById(id);
-    if (!stage) return false;
-    return areRequirementsMet(stage);
+    return stage ? areRequirementsMet(stage) : false;
   }
 
   function markDone(id) {
@@ -230,17 +226,9 @@
 
   function currentStage() {
     for (var i = 0; i < STAGES.length; i++) {
-      var stage = STAGES[i];
-      if (!isDone(stage.id) && areRequirementsMet(stage)) return stage;
-    }
-    return null;
-  }
-
-  function nextStageAfter(id) {
-    var index = STAGE_IDS.indexOf(id);
-    if (index < 0) return null;
-    for (var i = index + 1; i < STAGES.length; i++) {
-      if (areRequirementsMet(STAGES[i])) return STAGES[i];
+      if (!isDone(STAGES[i].id) && areRequirementsMet(STAGES[i])) {
+        return STAGES[i];
+      }
     }
     return null;
   }
@@ -252,9 +240,12 @@
 
   function setActivity(id, patch, silent) {
     var target = activity(id);
-    Object.keys(patch || {}).forEach(function (key) { target[key] = patch[key]; });
+    Object.keys(patch || {}).forEach(function (k) { target[k] = patch[k]; });
     if (!silent) save("activity:" + id);
-    else { state.updatedAt = new Date().toISOString(); writeStorage(); }
+    else {
+      state.updatedAt = new Date().toISOString();
+      writeStorage();
+    }
     return target;
   }
 
@@ -303,7 +294,6 @@
     completedCount: completedCount,
     percent: percent,
     currentStage: currentStage,
-    nextStageAfter: nextStageAfter,
     activity: activity,
     setActivity: setActivity,
     reset: reset,

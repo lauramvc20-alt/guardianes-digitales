@@ -1,11 +1,7 @@
-/* ==========================================================================
-   PVA · Enrutador con rutas protegidas por el avance del curso
-   ========================================================================== */
 (function (global) {
   "use strict";
 
   var PVA = global.PVA;
-  var U = PVA.utils;
   var store = PVA.store;
 
   var routes = [
@@ -13,7 +9,7 @@
     { path: "/bienvenida", view: "welcome", title: "Bienvenida", stage: "bienvenida" },
     { path: "/ruta", view: "roadmap", title: "Ruta del curso", stage: null },
     { path: "/modulo/1", view: "module", title: "Módulo 1 · Protocolo PVA", stage: "m1", module: 1 },
-    { path: "/modulo/2", view: "module", title: "Módulo 2 · Phishing y vishing", stage: "m2", module: 2 },
+    { path: "/modulo/2", view: "module", title: "Módulo 2 · Smishing y vishing", stage: "m2", module: 2 },
     { path: "/modulo/3", view: "module", title: "Módulo 3 · Protección de datos", stage: "m3", module: 3 },
     { path: "/modulo/4", view: "module", title: "Módulo 4 · Simulaciones", stage: "m4", module: 4 },
     { path: "/evaluacion", view: "assessment", title: "Evaluación de conocimientos", stage: "evaluacion" },
@@ -23,19 +19,17 @@
   ];
 
   function currentPath() {
-    var hash = global.location.hash || "#/";
-    var path = hash.replace(/^#/, "");
-    if (!path) path = "/";
+    var raw = global.location.hash || "#/";
+    var path = raw.replace(/^#/, "") || "/";
     if (path.charAt(0) !== "/") path = "/" + path;
     return path.replace(/\/+$/, "") || "/";
   }
 
   function resolve(path) {
-    var match = null;
-    routes.forEach(function (route) {
-      if (!match && route.path === path) match = route;
-    });
-    return match;
+    for (var i = 0; i < routes.length; i++) {
+      if (routes[i].path === path) return routes[i];
+    }
+    return null;
   }
 
   function navigate(path, replace) {
@@ -55,7 +49,6 @@
     var route = resolve(path);
     var view = document.getElementById("view");
     var crumb = document.getElementById("crumb");
-
     if (!view) return;
 
     if (!route) {
@@ -63,13 +56,14 @@
       return;
     }
 
-    /* ---- Ruta protegida: se valida antes de renderizar ---- */
     if (route.stage && !store.isUnlocked(route.stage)) {
       var stage = store.stageById(route.stage);
       var blocked = store.currentStage();
+      var hint = blocked
+        ? "Continúa con «" + blocked.navLabel + "» para avanzar."
+        : "Sigue el recorrido desde la ruta.";
       PVA.ui.toast(
-        "Aún no puedes abrir " + (stage ? stage.label : "esta etapa") + ". " +
-        (blocked ? "Continúa con «" + blocked.navLabel + "»." : ""),
+        "Aún no puedes abrir " + (stage ? stage.label : "esta etapa") + ". " + hint,
         "lock",
         5200
       );
@@ -83,7 +77,6 @@
       return;
     }
 
-    /* Se reemplaza el nodo para eliminar listeners de la vista anterior. */
     var fresh = view.cloneNode(false);
     if (view.parentNode) view.parentNode.replaceChild(fresh, view);
     view = fresh;
