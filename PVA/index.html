@@ -98,5 +98,37 @@
   <script defer src="assets/js/views/survey.js"></script>
 
   <script defer src="assets/js/app.js"></script>
+
+  <button type="button" class="theme-fab print-hide" id="theme-toggle" aria-label="Cambiar entre modo noche y modo día">
+    <span id="theme-icon">☀️</span>
+    <span id="theme-label">Modo día</span>
+  </button>
+  <script>
+    (function () {
+      const KEY = 'pva_theme_v1';
+      const btn = document.getElementById('theme-toggle');
+      const icon = document.getElementById('theme-icon');
+      const label = document.getElementById('theme-label');
+      function applyTheme(t) {
+        if (t === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+          if (icon) icon.textContent = '🌙';
+          if (label) label.textContent = 'Modo noche';
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          if (icon) icon.textContent = '☀️';
+          if (label) label.textContent = 'Modo día';
+        }
+      }
+      applyTheme(localStorage.getItem(KEY) || 'dark');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+          localStorage.setItem(KEY, next);
+          applyTheme(next);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
