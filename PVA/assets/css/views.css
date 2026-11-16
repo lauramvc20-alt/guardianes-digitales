@@ -1,5 +1,5 @@
 /* ==========================================================================
-PVA · Vistas, acordeón exclusivo, actividades y certificado
+PVA · Vistas completas (clases exactas del proyecto original + ajustes)
 ========================================================================== */
 
 /* ---------- Hero y paneles ---------- */
@@ -18,7 +18,7 @@ overflow: visible;
 
 .hero--split {
 display: grid;
-grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr);
+grid-template-columns: minmax(0, 1.45fr) minmax(200px, 0.75fr);
 gap: 1.5rem;
 align-items: center;
 }
@@ -46,11 +46,11 @@ place-items: center;
 /* ---------- Robot RO-BIT ---------- */
 .robot {
 display: inline-block;
-width: clamp(150px, 18vw, 195px);
+width: clamp(145px, 16vw, 190px);
 filter: drop-shadow(0 18px 28px rgba(3, 6, 16, 0.7));
 }
 .robot--small {
-width: 68px;
+width: 66px;
 flex: none;
 }
 .robot--float {
@@ -92,7 +92,35 @@ margin-bottom: 0.25rem;
 .robot-bubble--warn .robot-bubble__body > b { color: var(--yellow); }
 .robot-bubble--alert .robot-bubble__body > b { color: var(--coral-soft); }
 
-/* ---------- Dashboard y tarjetas de recorrido ---------- */
+/* ---------- Dashboard y tarjetas del recorrido ---------- */
+.section-head {
+display: flex;
+flex-wrap: wrap;
+align-items: flex-end;
+justify-content: space-between;
+gap: 0.75rem;
+margin-bottom: 0.9rem;
+}
+.section-head h2 { margin-bottom: 0.2rem; }
+.section-head p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+.progress-card {
+display: grid;
+gap: 0.85rem;
+}
+.progress-card__top {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: space-between;
+gap: 0.75rem;
+}
+.progress-card__stat {
+font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem);
+font-weight: 800;
+color: #fff;
+}
+
 .course-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -438,7 +466,7 @@ font-size: 0.86rem;
 margin-bottom: 0.3rem;
 }
 
-/* ---------- Actividades Interactivas (Opciones, SMS, Compromisos, Escenarios) ---------- */
+/* ---------- Actividades Interactivas (clases exactas de activities.js y assessment.js) ---------- */
 .qc-item {
 padding: 0.95rem;
 border-radius: var(--r-md);
@@ -456,15 +484,13 @@ margin-bottom: 0.65rem;
 font-size: 0.94rem;
 }
 
-.choices,
-.options {
+.choices {
 display: grid;
 gap: 0.5rem;
 margin-top: 0.6rem;
 }
 
-.choice,
-.opt {
+.choice {
 width: 100%;
 display: flex;
 align-items: center;
@@ -481,15 +507,13 @@ text-align: left;
 cursor: pointer;
 transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease), color var(--speed) var(--ease);
 }
-.choice:hover,
-.opt:hover {
+.choice:hover {
 background: rgba(148, 168, 214, 0.16);
 color: #fff;
 border-color: var(--lavender);
 }
 
-.choice__mark,
-.opt__letter {
+.choice__mark {
 flex: none;
 display: grid;
 place-items: center;
@@ -507,32 +531,27 @@ width: 13px;
 height: 13px;
 }
 
-.choice.is-picked,
-.opt.is-picked {
+.choice.is-picked {
 border-color: var(--lavender);
 background: rgba(139, 108, 246, 0.2);
 color: #fff;
 }
-.choice.is-correct,
-.opt.is-correct {
+.choice.is-correct {
 border-color: var(--turq);
 background: rgba(79, 224, 193, 0.16);
 color: #fff;
 }
-.choice.is-correct .choice__mark,
-.opt.is-correct .opt__letter {
+.choice.is-correct .choice__mark {
 background: var(--turq);
 border-color: var(--turq);
 color: #07201b;
 }
-.choice.is-wrong,
-.opt.is-wrong {
+.choice.is-wrong {
 border-color: var(--coral);
 background: rgba(255, 122, 107, 0.15);
 color: #ffd9d4;
 }
-.choice.is-wrong .choice__mark,
-.opt.is-wrong .opt__letter {
+.choice.is-wrong .choice__mark {
 background: var(--coral);
 border-color: var(--coral);
 color: #2b0906;
@@ -564,8 +583,8 @@ background: rgba(255, 209, 102, 0.12);
 color: #ffeeb8;
 }
 
-/* ---------- Cazador de señales SMS (Módulo 2) ---------- */
-.sms-card {
+/* ---------- Cazador de señales SMS (Módulo 2 - clases exactas de activities.js) ---------- */
+.sms-box {
 margin-top: 0.85rem;
 padding: 1rem 1.1rem;
 border-radius: var(--r-md);
@@ -573,7 +592,7 @@ border: 1px solid var(--line-strong);
 background: #091124;
 box-shadow: var(--shadow-sm);
 }
-.sms-head {
+.sms-box__head {
 display: flex;
 flex-wrap: wrap;
 align-items: center;
@@ -584,9 +603,14 @@ border-bottom: 1px solid var(--line);
 font-size: 0.82rem;
 color: var(--muted);
 }
-.sms-body {
+.sms-box__from {
+font-weight: 700;
+color: var(--ink);
+font-family: var(--font-mono);
+}
+.sms-box__body {
 font-size: 0.95rem;
-line-height: 1.75;
+line-height: 1.8;
 color: var(--ink);
 }
 
@@ -611,32 +635,33 @@ background: rgba(79, 224, 193, 0.2);
 color: #d6fff6;
 }
 
-.signal-list {
+.flag-list {
 display: grid;
 gap: 0.5rem;
 margin-top: 0.85rem;
 }
-.signal-item {
+.flag-item {
 padding: 0.65rem 0.85rem;
 border-radius: var(--r-sm);
 border: 1px solid rgba(79, 224, 193, 0.35);
 background: rgba(79, 224, 193, 0.09);
 font-size: 0.85rem;
+color: var(--ink-soft);
 }
-.signal-item b {
+.flag-item b {
 color: var(--turq);
 display: block;
 margin-bottom: 0.15rem;
 }
 
-/* ---------- Compromisos (Módulo 3) ---------- */
+/* ---------- Compromisos (Módulo 3 - clases exactas de activities.js) ---------- */
 .commit-grid {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
 gap: 0.65rem;
 margin-top: 0.85rem;
 }
-.commit {
+.commit-card {
 display: flex;
 flex-direction: column;
 align-items: flex-start;
@@ -651,32 +676,32 @@ text-align: left;
 cursor: pointer;
 transition: border-color var(--speed) var(--ease), background var(--speed) var(--ease);
 }
-.commit:hover {
+.commit-card:hover {
 border-color: var(--lavender);
 background: rgba(148, 168, 214, 0.12);
 }
-.commit.is-picked {
+.commit-card.is-picked {
 border-color: var(--turq);
 background: rgba(79, 224, 193, 0.14);
 color: #fff;
 }
-.commit__tag {
-font-size: 0.68rem;
-font-weight: 700;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-color: var(--turq);
+.commit-card__top {
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+gap: 0.5rem;
 }
-.commit b {
+.commit-card b {
 font-size: 0.9rem;
 color: #fff;
 }
-.commit span {
+.commit-card span {
 font-size: 0.8rem;
 color: var(--muted);
 }
 
-/* ---------- Escenarios de simulación (Módulo 4) ---------- */
+/* ---------- Escenarios de simulación (Módulo 4 - clases exactas de activities.js) ---------- */
 .scenario {
 padding: 1rem 1.1rem;
 border-radius: var(--r-md);
@@ -692,14 +717,28 @@ justify-content: space-between;
 gap: 0.5rem;
 margin-bottom: 0.6rem;
 }
-.scenario__msg {
-padding: 0.8rem 0.95rem;
+.scenario__bubble {
+padding: 0.85rem 1rem;
 border-radius: var(--r-sm);
 border-left: 3px solid var(--coral);
 background: rgba(255, 122, 107, 0.08);
 font-size: 0.9rem;
 color: var(--ink);
-margin-bottom: 0.75rem;
+margin: 0.65rem 0 0.8rem;
+}
+.scenario__bubble small {
+display: block;
+font-family: var(--font-mono);
+font-size: 0.74rem;
+color: var(--coral-soft);
+margin-bottom: 0.3rem;
+}
+
+.signal-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 0.4rem;
+margin-top: 0.5rem;
 }
 
 /* ---------- Evaluación (Quiz) ---------- */
@@ -715,6 +754,17 @@ align-items: center;
 justify-content: space-between;
 gap: 0.5rem;
 margin-bottom: 0.65rem;
+}
+.score-pill {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.45rem 0.95rem;
+border-radius: var(--r-pill);
+background: rgba(79, 224, 193, 0.14);
+border: 1px solid rgba(79, 224, 193, 0.4);
+color: var(--turq);
+font-weight: 700;
 }
 
 /* ---------- Kit Digital ---------- */
@@ -735,6 +785,29 @@ background: rgba(16, 26, 51, 0.78);
 }
 .kit-card.is-opened {
 border-color: rgba(79, 224, 193, 0.4);
+}
+.kit-card__top {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 0.5rem;
+}
+.kit-card__icon {
+display: grid;
+place-items: center;
+width: 38px;
+height: 38px;
+border-radius: 12px;
+background: rgba(139, 108, 246, 0.16);
+color: var(--lavender);
+}
+.kit-card__foot {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 0.5rem;
+padding-top: 0.65rem;
+border-top: 1px solid var(--line);
 }
 
 /* ---------- Finalización y Certificado ---------- */
