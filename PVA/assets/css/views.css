@@ -277,7 +277,7 @@ a.route-card:hover { transform: translateY(-2px); border-color: var(--line-stron
 
 .module-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 1.2rem; align-items: start; }
 
-/* Separación uniforme entre TODAS las tarjetas de la columna lateral (.aside-card, .robot-bubble, etc.) */
+/* Separación uniforme entre TODAS las tarjetas de la columna lateral */
 .module-layout > aside,
 .welcome-grid > aside {
   display: flex;
@@ -705,7 +705,6 @@ button.flag.is-found { border-bottom: 1.5px solid var(--coral); }
   background: radial-gradient(circle, rgba(79, 224, 193, 0.3), transparent 70%);
   pointer-events: none;
 }
-/* Todos los encabezados y negrillas dentro del certificado van en color oscuro legible */
 .cert-sheet h2,
 .cert-sheet__main-title {
   font-size: clamp(1.3rem, 1rem + 1.4vw, 1.9rem);
@@ -816,7 +815,7 @@ button.flag.is-found { border-bottom: 1.5px solid var(--coral); }
 .robot-bubble--alert { border-color: rgba(255, 122, 107, 0.32); background: rgba(255, 122, 107, 0.07); }
 .robot-bubble--alert b { color: var(--coral-soft); }
 
-/* ---------------- Modo Día (tema claro ajustado a la interfaz RO-BIT) ---------------- */
+/* ---------------- Modo Claro (cobertura integral: sidebar, modales, vistas y botones) ---------------- */
 html[data-theme="light"] {
   --bg: #f1f5fb;
   --bg-2: #e7eef8;
@@ -825,27 +824,102 @@ html[data-theme="light"] {
   --ink-soft: #2e3b5e;
   --muted: #536285;
   --muted-2: #6f7fa3;
-  --line: rgba(20, 35, 70, 0.13);
-  --line-strong: rgba(20, 35, 70, 0.24);
+  --line: rgba(20, 35, 70, 0.14);
+  --line-strong: rgba(20, 35, 70, 0.25);
   --turq: #0d9488;
   --turq-deep: #0f766e;
   --lavender: #6d28d9;
 }
+
 html[data-theme="light"] body {
   background: radial-gradient(900px 500px at 85% -10%, rgba(13, 148, 136, 0.12), transparent 60%), #f1f5fb !important;
-  color: #131c36;
+  color: #131c36 !important;
 }
+
+/* Barra lateral izquierda y navegación */
 html[data-theme="light"] .sidebar,
 html[data-theme="light"] .topbar {
-  background: rgba(255, 255, 255, 0.92) !important;
-  border-color: rgba(20, 35, 70, 0.12) !important;
+  background: #ffffff !important;
+  border-color: rgba(20, 35, 70, 0.14) !important;
+  color: #131c36 !important;
 }
+html[data-theme="light"] .brand__title,
+html[data-theme="light"] .brand b,
+html[data-theme="light"] .sidebar__foot b,
+html[data-theme="light"] .nav-item,
+html[data-theme="light"] .nav-item b,
+html[data-theme="light"] .nav-link,
+html[data-theme="light"] .nav-link b {
+  color: #131c36 !important;
+}
+html[data-theme="light"] .brand__sub,
+html[data-theme="light"] .nav-group,
+html[data-theme="light"] .nav-item span,
+html[data-theme="light"] .nav-link span,
+html[data-theme="light"] .sidebar__foot,
+html[data-theme="light"] .sidebar__foot small,
+html[data-theme="light"] .footer {
+  color: #536285 !important;
+}
+html[data-theme="light"] .nav-item:hover,
+html[data-theme="light"] .nav-link:hover {
+  background: rgba(13, 148, 136, 0.08) !important;
+}
+html[data-theme="light"] .nav-item.is-active,
+html[data-theme="light"] .nav-link.is-active {
+  background: linear-gradient(100deg, rgba(109, 40, 217, 0.12), rgba(13, 148, 136, 0.12)) !important;
+  border-color: rgba(109, 40, 217, 0.3) !important;
+}
+
+/* Botones secundarios y neutros en modo claro */
+html[data-theme="light"] .btn--ghost,
+html[data-theme="light"] .btn--secondary,
+html[data-theme="light"] .icon-btn,
+html[data-theme="light"] .menu-btn {
+  background: #f4f7fc !important;
+  color: #131c36 !important;
+  border-color: rgba(20, 35, 70, 0.2) !important;
+}
+html[data-theme="light"] .btn--ghost:hover,
+html[data-theme="light"] .btn--secondary:hover {
+  background: #e7eef9 !important;
+}
+
+/* Ventanas modales y diálogos (ej. Reiniciar recorrido) */
+html[data-theme="light"] .modal,
+html[data-theme="light"] .dialog-backdrop {
+  background: rgba(15, 23, 42, 0.45) !important;
+}
+html[data-theme="light"] .modal__box,
+html[data-theme="light"] .modal__card,
+html[data-theme="light"] .dialog,
+html[data-theme="light"] .toast {
+  background: #ffffff !important;
+  color: #131c36 !important;
+  border: 1px solid rgba(20, 35, 70, 0.18) !important;
+  box-shadow: 0 24px 60px -15px rgba(15, 23, 42, 0.28) !important;
+}
+html[data-theme="light"] .modal__box h2,
+html[data-theme="light"] .modal__box h3,
+html[data-theme="light"] .modal__card h2,
+html[data-theme="light"] .modal__card h3,
+html[data-theme="light"] .dialog h2,
+html[data-theme="light"] .dialog h3 {
+  color: #131c36 !important;
+}
+html[data-theme="light"] .modal__box p,
+html[data-theme="light"] .modal__card p,
+html[data-theme="light"] .dialog p {
+  color: #2e3b5e !important;
+}
+
+/* Tarjetas principales y vistas */
 html[data-theme="light"] .hero {
   background:
     radial-gradient(680px 340px at 88% -20%, rgba(13, 148, 136, 0.16), transparent 65%),
     radial-gradient(560px 380px at 4% 120%, rgba(109, 40, 217, 0.14), transparent 65%),
-    linear-gradient(150deg, #ffffff 0%, #eef3fc 100%);
-  border-color: rgba(20, 35, 70, 0.15);
+    linear-gradient(150deg, #ffffff 0%, #eef3fc 100%) !important;
+  border-color: rgba(20, 35, 70, 0.15) !important;
 }
 html[data-theme="light"] .hero__meta b,
 html[data-theme="light"] .fact b,
@@ -859,7 +933,7 @@ html[data-theme="light"] .score-ring b,
 html[data-theme="light"] h1,
 html[data-theme="light"] h2,
 html[data-theme="light"] h3 {
-  color: #131c36;
+  color: #131c36 !important;
 }
 html[data-theme="light"] .course-card,
 html[data-theme="light"] .side-note,
@@ -878,47 +952,49 @@ html[data-theme="light"] .card,
 html[data-theme="light"] .panel {
   background: #ffffff !important;
   border-color: rgba(20, 35, 70, 0.14) !important;
-  box-shadow: 0 10px 28px -14px rgba(19, 28, 54, 0.16);
+  box-shadow: 0 10px 28px -14px rgba(19, 28, 54, 0.14) !important;
 }
 html[data-theme="light"] .step-card.is-open {
   background: linear-gradient(160deg, #f5f2ff, #ffffff) !important;
   border-color: rgba(109, 40, 217, 0.35) !important;
 }
-html[data-theme="light"] .case-file {
-  background: #f6f8fd;
-  border-color: rgba(20, 35, 70, 0.2);
+html[data-theme="light"] .case-file,
+html[data-theme="light"] .practice,
+html[data-theme="light"] .stage-row {
+  background: #f6f8fd !important;
+  border-color: rgba(20, 35, 70, 0.16) !important;
 }
 html[data-theme="light"] .option {
-  background: #f8faff;
-  color: #1f2b4a;
+  background: #f8faff !important;
+  color: #1f2b4a !important;
 }
 html[data-theme="light"] .option:hover {
-  background: #eef3ff;
-  color: #0d152b;
+  background: #eef3ff !important;
+  color: #0d152b !important;
 }
 html[data-theme="light"] .feedback {
-  background: rgba(13, 148, 136, 0.1);
-  color: #0b4f48;
+  background: rgba(13, 148, 136, 0.1) !important;
+  color: #0b4f48 !important;
 }
 html[data-theme="light"] .feedback--bad {
-  background: rgba(220, 38, 38, 0.08);
-  color: #7f1d1d;
+  background: rgba(220, 38, 38, 0.08) !important;
+  color: #7f1d1d !important;
 }
 html[data-theme="light"] .feedback--warn {
-  background: rgba(217, 119, 6, 0.1);
-  color: #78350f;
+  background: rgba(217, 119, 6, 0.1) !important;
+  color: #78350f !important;
 }
 html[data-theme="light"] .robot-bubble {
-  background: rgba(13, 148, 136, 0.08);
-  border-color: rgba(13, 148, 136, 0.25);
+  background: rgba(13, 148, 136, 0.08) !important;
+  border-color: rgba(13, 148, 136, 0.25) !important;
 }
 html[data-theme="light"] .score-ring {
   background:
     radial-gradient(circle at center, #ffffff 62%, transparent 63%),
-    conic-gradient(var(--turq) calc(var(--pct) * 1%), rgba(20, 35, 70, 0.12) 0);
+    conic-gradient(var(--turq) calc(var(--pct) * 1%), rgba(20, 35, 70, 0.12) 0) !important;
 }
 
-/* Botón flotante de cambio Modo Noche / Modo Día */
+/* Botón flotante Modo Claro / Modo Oscuro */
 .theme-fab {
   position: fixed;
   right: 16px;
@@ -942,8 +1018,9 @@ html[data-theme="light"] .score-ring {
 }
 .theme-fab:hover { transform: translateY(-2px); border-color: var(--turq); }
 html[data-theme="light"] .theme-fab {
-  background: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
   color: #131c36;
+  border-color: rgba(20, 35, 70, 0.22);
   box-shadow: 0 8px 22px -6px rgba(19, 28, 54, 0.22);
 }
 
