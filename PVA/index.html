@@ -99,9 +99,9 @@
 
   <script defer src="assets/js/app.js"></script>
 
-  <button type="button" class="theme-fab print-hide" id="theme-toggle" aria-label="Cambiar entre modo noche y modo día">
+<button type="button" class="theme-fab print-hide" id="theme-toggle" aria-label="Cambiar entre modo claro y modo oscuro">
     <span id="theme-icon">☀️</span>
-    <span id="theme-label">Modo día</span>
+    <span id="theme-label">Modo claro</span>
   </button>
   <script>
     (function () {
@@ -113,11 +113,11 @@
         if (t === 'light') {
           document.documentElement.setAttribute('data-theme', 'light');
           if (icon) icon.textContent = '🌙';
-          if (label) label.textContent = 'Modo noche';
+          if (label) label.textContent = 'Modo oscuro';
         } else {
           document.documentElement.removeAttribute('data-theme');
           if (icon) icon.textContent = '☀️';
-          if (label) label.textContent = 'Modo día';
+          if (label) label.textContent = 'Modo claro';
         }
       }
       applyTheme(localStorage.getItem(KEY) || 'dark');
