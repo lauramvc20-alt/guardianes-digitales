@@ -1902,3 +1902,9 @@ html[data-theme="light"] .ctx-closing svg { color: #0f766e; }
   .hero__logo { width: 84px; }
   .hero__cta .btn { flex: 1 1 100%; justify-content: center; }
 }
+
+.ctx-stat { display: flex !important; gap: 0.5rem; align-items: flex-start; font-size: 0.82rem; color: var(--muted) !important; }
+.ctx-stat svg { flex: none; width: 15px; height: 15px; margin-top: 2px; color: var(--turq); }
+.ctx-extra { font-size: 0.85rem; }
+html[data-theme="light"] .ctx-stat { color: #475569 !important; }
+html[data-theme="light"] .ctx-stat svg { color: #0f766e; }

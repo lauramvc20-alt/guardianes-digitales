@@ -331,12 +331,77 @@
       {
         id: "encuesta-datos",
         title: "Encuesta de diagnóstico",
-        keywords: ["85", "20 personas", "cifras", "porcentaje", "resultados de la encuesta", "muestra", "colombia", "estadistica", "por que este curso"],
+        keywords: ["85", "20 personas", "cifras", "porcentaje", "resultados de la encuesta", "muestra", "colombia", "estadistica", "por que este curso", "encuesta de diagnostico", "diagnostico", "datos del proyecto", "estadisticas"],
         answer: [
-          "En la encuesta de diagnóstico del proyecto, el 85 % de las 20 personas consultadas recibió mensajes o llamadas sospechosas, el 20 % dijo haber sido víctima directa de una estafa y el 47,6 % identificó el smishing, y también el vishing, como canales frecuentes.",
-          "Ojo: es una muestra de conveniencia de 20 personas. Describe a quienes participaron y no representa a toda Colombia."
+          "En la encuesta de diagnóstico (20 personas, Google Forms): el 85 % recibió mensajes o llamadas sospechosas (55 % de forma ocasional y 30 % frecuente), el 20 % fue víctima directa de una estafa y el 50 % conoce a un familiar o amigo cercano que lo fue. El smishing y el vishing concentran cada uno el 47,6 % de las elecciones de canal.",
+          "Ojo: es una muestra de conveniencia de 20 personas. Describe a quienes participaron y no representa estadísticamente a toda Colombia."
         ],
-        follow: ["pva"]
+        follow: ["habitos", "origen"]
+      },
+      {
+        id: "habitos",
+        title: "Hábitos de seguridad en la encuesta",
+        keywords: ["habitos", "que hace la gente", "autopercepcion", "se sienten capacitados", "cuantos usan 2fa", "cuantos verifican", "78", "57", "47 4"],
+        answer: [
+          "Entre las 20 personas: el 78,9 % cuelga o ignora el contacto sospechoso y verifica por el canal oficial; el 57,9 % usa contraseñas distintas por aplicación y el 47,4 % tiene activada la autenticación en dos pasos. Solo el 5,3 % revisa técnicamente los enlaces.",
+          "En autopercepción (escala 1 a 5), el 55 % se siente moderadamente capacitado y el 30 % poco capacitado. Es una muestra pequeña y de conveniencia."
+        ],
+        links: [M3],
+        follow: ["dospasos", "enlaces"]
+      },
+      {
+        id: "origen",
+        title: "¿De dónde surge el curso?",
+        keywords: ["origen", "nacio", "surgio", "surge", "nacio este curso", "de donde surge", "para que sirve el curso", "objetivo del curso", "quien hizo", "quienes hicieron", "areandina", "proyecto", "problema", "planteamiento", "por que existe", "justificacion", "ods"],
+        answer: [
+          "El curso nace de un proyecto de Ingeniería de Sistemas de la Fundación Universitaria del Área Andina. Parte de un problema: muchos adultos jóvenes y adultos que usan servicios financieros y plataformas digitales en Colombia desconocen cómo identificar, prevenir y reaccionar ante estafas e ingeniería social.",
+          "La propuesta es una experiencia gamificada de microlearning, gratuita y sin registro, con el protocolo PAUSA, VERIFICA y ACTÚA y un Kit digital. Se relaciona con los ODS 4, 8, 9 y 16."
+        ],
+        follow: ["encuesta-datos", "consecuencias"]
+      },
+      {
+        id: "modalidades",
+        title: "Modalidades de estafa",
+        keywords: ["modalidades", "tipos de estafa", "tipos de estafas", "que estafas hay", "formas de estafa", "marketplace", "compraventa", "compra y venta", "comprobante falso", "rappi", "bancolombia", "encuesta falsa", "encuestas enganosas"],
+        answer: [
+          "El documento del proyecto destaca cinco: falsas ofertas de empleo (piden documentos o pagos), estafas en compras y ventas por internet (como en Facebook Marketplace), phishing y mensajes fraudulentos, suplantación de empresas y entidades (por ejemplo Rappi o Bancolombia) e ingeniería social con encuestas engañosas.",
+          "En todas se busca que entregues datos, códigos o dinero sin verificar."
+        ],
+        links: [M2, M4],
+        follow: ["empleo", "social"]
+      },
+      {
+        id: "causas",
+        title: "Causas del problema",
+        keywords: ["causas", "por que caen", "por que la gente cae", "por que funcionan", "por que me pueden enganar", "alfabetizacion digital", "vulnerable", "vulnerabilidad"],
+        answer: [
+          "Según el proyecto, influyen la brecha de alfabetización digital (no siempre se sabe comprobar dominios o distinguir una comunicación oficial), la urgencia, el miedo a perder una cuenta, la curiosidad y la necesidad de empleo, la publicación excesiva de datos personales, la reutilización de contraseñas y la falta de autenticación en dos pasos.",
+          "Además, la inteligencia artificial permite crear mensajes más personalizados y convincentes."
+        ],
+        links: [M2],
+        follow: ["consecuencias", "ia"]
+      },
+      {
+        id: "consecuencias",
+        title: "Consecuencias de una estafa",
+        keywords: ["consecuencias", "que pasa si me estafan", "efectos", "danos", "perder dinero", "deudas", "estres", "vergüenza", "verguenza", "ansiedad"],
+        answer: [
+          "Van más allá de perder dinero: pueden perderse ahorros, asumirse deudas ajenas o pagar por productos inexistentes, además del tiempo en bloqueos y reclamaciones.",
+          "También hay efectos emocionales y sociales: desconfianza, vergüenza, ansiedad y estrés, y menos confianza en los servicios digitales."
+        ],
+        links: [M1],
+        follow: ["actua", "victima"]
+      },
+      {
+        id: "ia",
+        title: "La IA y las estafas",
+        keywords: ["ia en estafas", "la ia", "usan la ia", "inteligencia artificial estafas", "estafadores usan", "fraudes con ia", "spear phishing", "spear-phishing", "deepfake", "bots", "llamadas automaticas", "25 millones", "interpol", "mensajes personalizados"],
+        answer: [
+          "El proyecto señala que la IA permite crear mensajes muy creíbles y adaptados a la víctima (spear-phishing), clonar voces con pocas muestras, automatizar miles de llamadas o mensajes y segmentar víctimas con datos de redes sociales.",
+          "Un caso citado ocurrió en 2024: clonaron la voz de un directivo para desviar 25 millones de dólares. Por eso se verifica siempre por un canal oficial independiente."
+        ],
+        links: [M2],
+        follow: ["voz", "verifica"]
       },
       {
         id: "gracias",

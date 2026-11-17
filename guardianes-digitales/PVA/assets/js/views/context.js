@@ -54,6 +54,7 @@
           '<article class="ctx-card ctx-card--reality">' +
             '<h3><span class="ctx-n">A</span>' + U.esc(R.title) + "</h3>" +
             "<p>" + U.esc(R.text) + "</p>" +
+            '<p class="ctx-stat">' + U.icon("info") + "<span>" + U.esc(R.stat) + "</span></p>" +
             '<ul class="ctx-channels">' +
               R.channels.map(function (c) {
                 return '<li><span aria-hidden="true">' + U.icon(c.icon) + "</span>" + U.esc(c.label) + "</li>";
@@ -71,6 +72,7 @@
                 S.channels.map(channelBar).join("") +
               "</div>" +
             "</div>" +
+            '<p class="ctx-extra">' + U.esc(S.extra) + "</p>" +
             '<p class="ctx-method" role="note">' + U.icon("info") + "<span>" + U.esc(S.method) + "</span></p>" +
           "</article>" +
 
