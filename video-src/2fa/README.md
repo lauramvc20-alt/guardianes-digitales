@@ -17,6 +17,13 @@ npm run poster                  # out/poster.png
 En equipos sin Chrome instalado Remotion lo descarga solo. En entornos restringidos:
 `REMOTION_BROWSER=/ruta/a/chrome npm run render -- --chrome-mode=chrome-for-testing`.
 
+## Voz actual: ElevenLabs (plan gratuito, voz Eric)
+```bash
+ELEVENLABS_API_KEY=... python3 audio/voz_elevenlabs.py   # la clave va en el entorno, nunca en el código
+```
+El plan gratuito pide mencionar a ElevenLabs en los créditos al publicar el audio (ya figura en el Kit).
+Las líneas de la voz provisional anterior (espeak) están en `audio/lines_espeak/`.
+
 ## Cambiar la voz
 Cualquier voz sirve: basta con dejar un `audio/lines/<id>.wav` por línea del `audio/guion.json`
 (`voz_piper.py` = neuronal es_MX, `voz_sabina.ps1` = voz de Windows, o grabación propia).
@@ -32,5 +39,5 @@ Junto a `tutorial-2fa-subtitulado.mp4`, `tutorial-2fa-poster.jpg` y `tutorial-2f
 
 ## Créditos y licencias
 Música y efectos: composición propia sintetizada en `audio/build_audio.py` (sin licencias externas).
-Voz provisional: espeak-ng + mbrola-mx1 (software libre). Motion graphics: Remotion
+Voz: ElevenLabs (plan gratuito, voz Eric). Alternativa libre: espeak-ng + mbrola-mx1 o Piper. Motion graphics: Remotion
 (revisar su licencia para el uso previsto). Tipografía: Inter / Segoe UI del sistema.

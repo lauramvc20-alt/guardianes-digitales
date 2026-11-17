@@ -27,6 +27,7 @@
       captioned: "assets/media/2fa/tutorial-2fa-subtitulado.mp4",
       poster: "assets/media/2fa/tutorial-2fa-poster.jpg",
       captions: "assets/media/2fa/tutorial-2fa.es.vtt",
+      credits: "Narración generada con ElevenLabs. Música y efectos originales del proyecto.",
       steps: [
         "Entra a la configuración de seguridad de tu cuenta.",
         "Busca «Verificación en dos pasos» o «Autenticación de dos factores».",

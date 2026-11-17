@@ -1,30 +1,30 @@
 {
-  "total": 25.686,
+  "total": 25.497,
   "fps": 30,
   "escenas": [
     {
       "id": 1,
       "nombre": "Introducción",
       "inicio": 0.0,
-      "fin": 3.661
+      "fin": 3.389
     },
     {
       "id": 2,
       "nombre": "¿Qué es?",
-      "inicio": 3.661,
-      "fin": 8.23
+      "inicio": 3.389,
+      "fin": 7.656
     },
     {
       "id": 3,
       "nombre": "¿Cómo activarla?",
-      "inicio": 8.23,
-      "fin": 18.575
+      "inicio": 7.656,
+      "fin": 18.881
     },
     {
       "id": 4,
       "nombre": "Recomendación final",
-      "inicio": 18.575,
-      "fin": 25.686
+      "inicio": 18.881,
+      "fin": 25.497
     }
   ],
   "lineas": [
@@ -33,56 +33,56 @@
       "escena": 1,
       "texto": "Protege tus cuentas con la verificación en dos pasos.",
       "inicio": 0.35,
-      "fin": 3.511
+      "fin": 3.239
     },
     {
       "id": "L2",
       "escena": 2,
       "texto": "Es una segunda comprobación de tu identidad, además de la contraseña.",
-      "inicio": 3.961,
-      "fin": 7.88
+      "inicio": 3.689,
+      "fin": 7.306
     },
     {
       "id": "L3a",
       "escena": 3,
       "texto": "Entra a la configuración de seguridad de tu cuenta.",
-      "inicio": 8.53,
-      "fin": 11.335
+      "inicio": 7.956,
+      "fin": 10.394
     },
     {
       "id": "L3b",
       "escena": 3,
       "texto": "Busca «verificación en dos pasos».",
-      "inicio": 11.635,
-      "fin": 13.753
+      "inicio": 10.694,
+      "fin": 12.572
     },
     {
       "id": "L3c",
       "escena": 3,
       "texto": "Actívala.",
-      "inicio": 14.053,
-      "fin": 14.502
+      "inicio": 12.872,
+      "fin": 13.688
     },
     {
       "id": "L3d",
       "escena": 3,
       "texto": "Y elige un método: una app autenticadora o una llave de seguridad.",
-      "inicio": 14.802,
-      "fin": 18.225
+      "inicio": 13.988,
+      "fin": 18.531
     },
     {
       "id": "L4a",
       "escena": 4,
       "texto": "Una contraseña no siempre es suficiente.",
-      "inicio": 18.875,
-      "fin": 21.089
+      "inicio": 19.181,
+      "fin": 21.157
     },
     {
       "id": "L4b",
       "escena": 4,
       "texto": "Añade una segunda capa de protección.",
-      "inicio": 21.389,
-      "fin": 23.486
+      "inicio": 21.457,
+      "fin": 23.297
     }
   ],
   "eventos": [
@@ -92,103 +92,103 @@
     },
     {
       "evento": "whoosh-1",
-      "t": 3.511
+      "t": 3.239
     },
     {
       "evento": "pass-0",
-      "t": 4.811
+      "t": 4.539
     },
     {
       "evento": "pass-1",
-      "t": 4.921
+      "t": 4.649
     },
     {
       "evento": "pass-2",
-      "t": 5.031
+      "t": 4.759
     },
     {
       "evento": "pass-3",
-      "t": 5.141
+      "t": 4.869
     },
     {
       "evento": "pass-4",
-      "t": 5.251
+      "t": 4.979
     },
     {
       "evento": "pass-5",
-      "t": 5.361
+      "t": 5.089
     },
     {
       "evento": "pass-6",
-      "t": 5.471
+      "t": 5.199
     },
     {
       "evento": "pass-7",
-      "t": 5.581
+      "t": 5.309
     },
     {
       "evento": "pop-telefono",
-      "t": 5.861
+      "t": 5.589
     },
     {
       "evento": "code-0",
-      "t": 6.511
+      "t": 6.239
     },
     {
       "evento": "code-1",
-      "t": 6.651
+      "t": 6.379
     },
     {
       "evento": "code-2",
-      "t": 6.791
+      "t": 6.519
     },
     {
       "evento": "code-3",
-      "t": 6.931
+      "t": 6.659
     },
     {
       "evento": "code-4",
-      "t": 7.071
+      "t": 6.799
     },
     {
       "evento": "code-5",
-      "t": 7.211
+      "t": 6.939
     },
     {
       "evento": "ok-identidad",
-      "t": 7.511
+      "t": 7.239
     },
     {
       "evento": "whoosh-2",
-      "t": 8.08
+      "t": 7.506
     },
     {
       "evento": "click-seguridad",
-      "t": 10.13
+      "t": 9.556
     },
     {
       "evento": "click-fila",
-      "t": 13.585
+      "t": 12.644
     },
     {
       "evento": "toggle-on",
-      "t": 14.503
+      "t": 13.322
     },
     {
       "evento": "click-metodo",
-      "t": 16.402
+      "t": 15.588
     },
     {
       "evento": "whoosh-3",
-      "t": 18.425
+      "t": 18.731
     },
     {
       "evento": "segunda-capa",
-      "t": 22.289
+      "t": 22.357
     },
     {
       "evento": "logo",
-      "t": 23.836
+      "t": 23.647
     }
   ]
 }

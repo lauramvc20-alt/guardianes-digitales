@@ -35,6 +35,7 @@
           '<ol class="kit-video__steps">' + steps + "</ol>" +
           '<p class="tiny muted">Los subtítulos se activan desde el botón CC del reproductor. ' +
             '<a href="' + U.esc(v.captioned) + '" download>Descargar versión con subtítulos incrustados</a></p>' +
+          '<p class="tiny muted">' + U.esc(v.credits) + "</p>" +
         "</div>" +
       "</section>"
     );
