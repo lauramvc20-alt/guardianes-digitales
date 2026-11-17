@@ -6,9 +6,11 @@
   <meta name="theme-color" content="#070b18" />
   <meta name="description" content="Curso interactivo PAUSA, VERIFICA Y ACTÚA: Sé un guardián digital. Experiencia educativa gratuita sobre estafas digitales, phishing y vishing." />
   <title>PAUSA, VERIFICA Y ACTÚA · Sé un guardián digital</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 48 48%27%3E%3Cpath d=%27M24 3.2 42 13.4v21.2L24 44.8 6 34.6V13.4L24 3.2Z%27 fill=%27%234fe0c1%27 stroke=%27%234fe0c1%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3Cpath d=%27M9.8 24C13.4 17.6 18.4 14.4 24 14.4S34.6 17.6 38.2 24C34.6 30.4 29.6 33.6 24 33.6S13.4 30.4 9.8 24Z%27 fill=%27%230b1226%27/%3E%3Crect x=%2719.2%27 y=%2719.2%27 width=%273.6%27 height=%279.6%27 rx=%271.4%27 fill=%27%234fe0c1%27/%3E%3Crect x=%2725.2%27 y=%2719.2%27 width=%273.6%27 height=%279.6%27 rx=%271.4%27 fill=%27%234fe0c1%27/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/shell.css" />
   <link rel="stylesheet" href="assets/css/views.css" />
+  <link rel="stylesheet" href="assets/css/chatbot.css" />
 </head>
 <body>
   <a class="skip-link" href="#view">Saltar al contenido principal</a>
@@ -16,17 +18,16 @@
   <div class="app" id="app">
     <aside class="rail" id="rail" aria-label="Navegación del curso">
       <a class="rail__brand" href="#/" aria-label="PVA · Guardián digital: ir al panel del estudiante">
-        <span class="brand__mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" role="presentation">
-            <path d="M16 2.8 27 7v8.4c0 6.2-4.4 11.4-11 13.8-6.6-2.4-11-7.6-11-13.8V7L16 2.8Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
-            <path d="M10.6 15.9l3.6 3.7 7.2-7.6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
+        <span class="brand__mark" aria-hidden="true"></span>
         <span class="brand__text">
           <strong>PVA</strong>
           <small>Guardián digital</small>
         </span>
       </a>
+
+      <button class="rail__collapse" type="button" id="railToggle" aria-controls="rail" aria-label="Ocultar el panel lateral" title="Ocultar panel">
+        <span id="railToggleIcon" aria-hidden="true"></span>
+      </button>
 
       <nav class="rail__nav" id="nav" aria-label="Ruta del curso"></nav>
 
@@ -44,6 +45,10 @@
         <p class="rail__note">Tu avance se guarda en este navegador y dispositivo.</p>
       </div>
     </aside>
+
+    <button class="rail-open" type="button" id="railOpen" aria-controls="rail" aria-expanded="false" aria-label="Mostrar el panel lateral" title="Mostrar panel" hidden>
+      <span id="railOpenIcon" aria-hidden="true"></span><span class="rail-open__t">Menú</span>
+    </button>
 
     <div class="shell">
       <header class="topbar">
@@ -80,10 +85,15 @@
   <script defer src="assets/js/content/simulations.js"></script>
   <script defer src="assets/js/content/quiz.js"></script>
   <script defer src="assets/js/content/kit.js"></script>
+  <script defer src="assets/js/content/context.js"></script>
+  <script defer src="assets/js/content/robot-kb.js"></script>
 
+  <script defer src="assets/js/components/logo.js"></script>
   <script defer src="assets/js/components/robot.js"></script>
+  <script defer src="assets/js/components/chatbot.js"></script>
   <script defer src="assets/js/components/activities.js"></script>
 
+  <script defer src="assets/js/views/context.js"></script>
   <script defer src="assets/js/views/dashboard.js"></script>
   <script defer src="assets/js/views/welcome.js"></script>
   <script defer src="assets/js/views/roadmap.js"></script>

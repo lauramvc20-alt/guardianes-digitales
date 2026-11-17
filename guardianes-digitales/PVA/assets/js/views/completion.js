@@ -14,7 +14,7 @@
             '<span class="cert-sheet__kicker">Reconocimiento simbólico · RO-BIT</span>' +
             '<h3 class="cert-sheet__main-title">PAUSA, VERIFICA Y ACTÚA</h3>' +
           '</div>' +
-          '<span class="cert-sheet__seal" aria-hidden="true">' + U.icon("seal") + "</span>" +
+          '<span class="cert-sheet__seal cert-sheet__seal--logo" aria-hidden="true">' + PVA.logo.svg() + "</span>" +
         "</div>" +
         '<p style="margin-top:.8rem;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;color:#433299;font-weight:800">' +
           "Se otorga a" +
@@ -75,7 +75,7 @@
     root.innerHTML =
       '<section class="completion-hero enter print-hide">' +
         '<span class="kicker kicker--yellow">Recorrido completo</span>' +
-        '<div class="badge-seal" aria-hidden="true">' + U.icon("seal") + "</div>" +
+        '<div class="badge-seal badge-seal--logo" aria-hidden="true">' + PVA.logo.svg() + "</div>" +
         '<h1>Guardián Digital</h1>' +
         '<p class="lede" style="max-width:56ch;margin:0 auto .8rem">' +
           "Completaste el protocolo PVA, los módulos de smishing y vishing, el simulacro, " +

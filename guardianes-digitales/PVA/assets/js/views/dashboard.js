@@ -19,10 +19,6 @@
     return "";
   }
 
-  function stat(value, label) {
-    return '<div class="stat"><b>' + U.esc(value) + "</b><span>" + U.esc(label) + "</span></div>";
-  }
-
   /* Recorrido horizontal: una marca por etapa con su estado. */
   function stepperHtml() {
     return store.STAGES.map(function (stage, i) {
@@ -74,27 +70,19 @@
             "<strong>Sé un guardián digital.</strong> Una experiencia breve para aprender a " +
             "reconocer estafas, verificar por canales oficiales y proteger tus datos." +
           "</p>" +
-          '<div class="hero__meta">' +
-            "<div><b>4</b><span>módulos</span></div>" +
-            "<div><b>5</b><span>preguntas</span></div>" +
-            "<div><b>9</b><span>etapas</span></div>" +
-            "<div><b>$0</b><span>costo</span></div>" +
-          "</div>" +
           '<div class="hero__cta">' +
             '<a class="btn" href="' + ctaHref + '">' + U.esc(ctaLabel) + " " + U.icon("arrowRight") + "</a>" +
             (allDone ? '<a class="btn btn--ghost" href="#/encuesta">' + U.icon("layers") + " Ir a la encuesta</a>" : "") +
             '<a class="btn btn--ghost" href="#/ruta">' + U.icon("route") + " Ver la ruta completa</a>" +
           "</div>" +
+          '<button class="hero__more" type="button" data-scroll-context>' + U.icon("chevron") + " ¿Por qué este curso?</button>" +
         "</div>" +
         '<div class="hero__art">' +
-          '<div class="companion">' +
-            '<p class="companion__bubble" role="status">' + robotLine + "</p>" +
-            '<div class="companion__robot">' + PVA.robot.svg("welcome", { float: true }) + "</div>" +
-          "</div>" +
+          '<div class="hero__logo" aria-hidden="true">' + PVA.logo.svg() + "</div>" +
         "</div>" +
       "</section>" +
 
-      '<div class="dash-grid dash-grid--wide">' +
+      '<div class="dash-grid dash-grid--single">' +
         '<section class="panel pad enter-2 journey" aria-labelledby="courseTitle">' +
           '<div class="page-head__row">' +
             "<div>" +
@@ -108,17 +96,16 @@
             ". Tu avance se guarda en este navegador.</p>" +
         "</section>" +
 
-        '<aside class="side-note enter-3" aria-labelledby="whyTitle">' +
-          '<h2 id="whyTitle" style="font-size:1.05rem">¿Por qué este curso?</h2>' +
-          '<div class="stat-strip" style="grid-template-columns:1fr 1fr">' +
-            stat("85 %", "recibió mensajes o llamadas sospechosas") +
-            stat("20 %", "fue víctima directa de una estafa") +
-            stat("47,6 %", "identificó el smishing como frecuente") +
-            stat("47,6 %", "identificó el vishing como frecuente") +
-          "</div>" +
-          '<p class="tiny muted" style="margin-top:.7rem">Encuesta a 20 personas en Colombia; muestra de conveniencia, no representativa.</p>' +
-        "</aside>" +
-      "</div>";
+      "</div>" +
+      PVA.views.context.html();
+
+    var more = root.querySelector("[data-scroll-context]");
+    if (more) {
+      more.addEventListener("click", function () {
+        var target = document.getElementById("contexto");
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
   }
 
   PVA.views = PVA.views || {};
