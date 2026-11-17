@@ -17,6 +17,23 @@
     note:
       "Los recursos abren en Google Drive, en una pestaña nueva. Son de acceso " +
       "gratuito y no requieren registro en esta plataforma.",
+    video: {
+      title: "Tutorial en video: verificación en dos pasos (2FA)",
+      kicker: "Tutorial animado · 26 s",
+      description:
+        "Qué es la verificación en dos pasos, cómo se activa y por qué protege tus cuentas. " +
+        "Incluye narración y subtítulos en español.",
+      src: "assets/media/2fa/tutorial-2fa.mp4",
+      captioned: "assets/media/2fa/tutorial-2fa-subtitulado.mp4",
+      poster: "assets/media/2fa/tutorial-2fa-poster.jpg",
+      captions: "assets/media/2fa/tutorial-2fa.es.vtt",
+      steps: [
+        "Entra a la configuración de seguridad de tu cuenta.",
+        "Busca «Verificación en dos pasos» o «Autenticación de dos factores».",
+        "Actívala.",
+        "Elige un método: app autenticadora o llave de seguridad."
+      ]
+    },
     resources: [
       {
         id: "guia",

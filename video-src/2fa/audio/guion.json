@@ -1,0 +1,42 @@
+[
+  {
+    "id": "L1",
+    "escena": 1,
+    "texto": "Protege tus cuentas con la verificación en dos pasos."
+  },
+  {
+    "id": "L2",
+    "escena": 2,
+    "texto": "Es una segunda comprobación de tu identidad, además de la contraseña."
+  },
+  {
+    "id": "L3a",
+    "escena": 3,
+    "texto": "Entra a la configuración de seguridad de tu cuenta."
+  },
+  {
+    "id": "L3b",
+    "escena": 3,
+    "texto": "Busca «verificación en dos pasos»."
+  },
+  {
+    "id": "L3c",
+    "escena": 3,
+    "texto": "Actívala."
+  },
+  {
+    "id": "L3d",
+    "escena": 3,
+    "texto": "Y elige un método: una app autenticadora o una llave de seguridad."
+  },
+  {
+    "id": "L4a",
+    "escena": 4,
+    "texto": "Una contraseña no siempre es suficiente."
+  },
+  {
+    "id": "L4b",
+    "escena": 4,
+    "texto": "Añade una segunda capa de protección."
+  }
+]

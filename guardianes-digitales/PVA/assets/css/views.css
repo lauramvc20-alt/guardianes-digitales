@@ -1686,3 +1686,17 @@ html[data-theme="light"] .map-node.is-done::after { background: var(--turq-deep)
 html[data-theme="light"] .sim-pause__label { color: #475569; }
 html[data-theme="light"] .sim-pause__item { color: #1e293b; border-color: rgba(15, 23, 42, 0.28); }
 html[data-theme="light"] .sim-pause__item[aria-pressed="true"] { background: rgba(31, 183, 154, 0.16); border-color: var(--turq-deep); color: #0f172a; }
+
+
+/* ---------- Kit · tutorial en video ---------- */
+.kit-video { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 1.6rem; align-items: center; }
+.kit-video__media { border-radius: var(--r-md); overflow: hidden; background: #05070f; border: 1px solid var(--line); box-shadow: var(--shadow-md); }
+.kit-video__player { display: block; width: 100%; aspect-ratio: 16 / 9; background: #05070f; }
+.kit-video__info h2 { margin: 0.35rem 0 0.6rem; font-size: 1.35rem; line-height: 1.25; }
+.kit-video__steps { margin: 0.9rem 0; padding-left: 1.25rem; display: grid; gap: 0.4rem; font-size: 0.92rem; color: var(--ink-soft); }
+.kit-video__steps li::marker { color: var(--turq); font-weight: 700; }
+.kit-video__info a { color: var(--turq); text-underline-offset: 3px; }
+@media (max-width: 900px) { .kit-video { grid-template-columns: 1fr; gap: 1.1rem; } }
+html[data-theme="light"] .kit-video__steps { color: #2b3752; }
+html[data-theme="light"] .kit-video__info a { color: #0b6b5a; }
+html[data-theme="light"] .kit-video__media { border-color: rgba(15, 23, 42, 0.18); }

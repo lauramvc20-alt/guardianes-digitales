@@ -13,6 +13,33 @@
     return KIT.resources.filter(function (r) { return !!opened[r.id]; }).length;
   }
 
+  function videoPanel() {
+    var v = KIT.video;
+    if (!v) return "";
+    var steps = v.steps.map(function (x) { return "<li>" + U.esc(x) + "</li>"; }).join("");
+    return (
+      '<section class="panel pad kit-video" style="margin-top:1.2rem" aria-labelledby="kitVideoTitle">' +
+        '<div class="kit-video__media">' +
+          '<video class="kit-video__player" controls preload="metadata" playsinline ' +
+            'poster="' + U.esc(v.poster) + '" aria-label="' + U.esc(v.title) + '">' +
+            '<source src="' + U.esc(v.src) + '" type="video/mp4" />' +
+            '<track kind="subtitles" srclang="es" label="Español" src="' + U.esc(v.captions) + '" default />' +
+            "Tu navegador no puede reproducir este video. " +
+            '<a href="' + U.esc(v.src) + '">Descárgalo aquí</a>.' +
+          "</video>" +
+        "</div>" +
+        '<div class="kit-video__info">' +
+          '<span class="kicker">' + U.esc(v.kicker) + "</span>" +
+          '<h2 id="kitVideoTitle">' + U.esc(v.title) + "</h2>" +
+          '<p class="muted">' + U.esc(v.description) + "</p>" +
+          '<ol class="kit-video__steps">' + steps + "</ol>" +
+          '<p class="tiny muted">Los subtítulos se activan desde el botón CC del reproductor. ' +
+            '<a href="' + U.esc(v.captioned) + '" download>Descargar versión con subtítulos incrustados</a></p>' +
+        "</div>" +
+      "</section>"
+    );
+  }
+
   function render(root) {
     var act = store.activity("kit");
     var opened = act.opened || {};
@@ -62,6 +89,8 @@
         "Completaste la evaluación. Este Kit es tuyo: descárgalo, guárdalo y compártelo " +
         "con alguien que pueda necesitarlo."
       ) +
+
+      videoPanel() +
 
       '<section class="kit-grid" style="margin-top:1.2rem" aria-label="Recursos del Kit Digital">' +
         cards +
