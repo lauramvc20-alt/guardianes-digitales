@@ -1,70 +1,163 @@
-Quiero replantear integralmente la identidad visual y la experiencia de usuario de PVA Guardián Digital. No estoy satisfecho con la interfaz actual.
+Nuevas mejoras — Inicio, identidad visual, contexto y asistente digital
 
-1. Dirección visual
+No elimines funcionalidades existentes ni modifiques la lógica del recorrido, las actividades, las evaluaciones o el progreso.
 
-Quiero una plataforma educativa con apariencia de producto tecnológico profesional: moderna, limpia, dinámica y visualmente coherente.
+Mejoras:
 
-- Mejora la jerarquía visual, tipografía, colores y distribución.
-- Elimina espacios vacíos innecesarios.
-- Evita las tarjetas repetitivas y las estructuras genéricas.
-- Sustituye los emojis por iconos SVG de Lucide.
-- Mantén coherencia entre modo claro y oscuro.
-- Utiliza animaciones discretas y funcionales.
+1. Panel lateral desplegable y ocultable
 
-2. Navegación y aprendizaje progresivo
+Actualmente, el panel lateral permanece estático y ocupa espacio de la interfaz.
 
-Este es uno de los aspectos más importantes del rediseño.
+Quiero que:
 
-No quiero que la plataforma tenga una estructura lineal, con todos los contenidos, actividades y simulaciones apilados verticalmente.
+- Se pueda ocultar y volver a abrir mediante un control visible e intuitivo.
+- Al ocultarse, el contenido principal aproveche el espacio que queda disponible.
+- Al abrirse, el panel aparezca de forma fluida, sin movimientos bruscos.
+- El estado del panel no debe bloquear botones ni interferir con la navegación.
+- En dispositivos pequeños, debe adaptarse a un comportamiento apropiado, como un menú desplegable.
+- El control para abrirlo debe permanecer accesible incluso cuando esté oculto.
 
-Quiero una experiencia de navegación progresiva, visual e interactiva.
+No quiero que el panel desaparezca definitivamente ni que sea necesario recargar la página para recuperarlo.
 
-Ruta de aprendizaje:
+2. Rediseño del logo de Guardián Digital
 
-- Evita la lista vertical de módulos.
-- Diseña una distribución que aproveche el ancho de la pantalla.
-- Presenta los módulos de forma visual, organizada y dinámica.
-- Utiliza una disposición no lineal que permita visualizar el recorrido sin demasiado scroll.
+No me convence la identidad visual actual porque utiliza un escudo sencillo sobre un fondo degradado. Quiero una propuesta más original y reconocible.
 
-Explicaciones y actividades prácticas:
+Explora una identidad visual que represente:
 
-- Implementa navegación por pasos o bloques independientes.
-- Cada explicación debe mostrarse de manera individual.
-- El estudiante debe completar la lectura de cada bloque para habilitar el botón «Continuar».
-- No muestres las actividades debajo de las explicaciones.
-- No permitas que el estudiante llegue a las preguntas simplemente desplazándose hacia abajo.
-- Al terminar la lectura, habilita el acceso a la actividad correspondiente.
-- La actividad debe presentarse en una interfaz independiente, no como otro bloque apilado.
-- Mantén visible el progreso del estudiante.
+- Protección y confianza digital.
+- Prevención de estafas e ingeniería social.
+- Tecnología y aprendizaje.
+- El concepto de convertirse en un guardián digital.
 
-Simulaciones:
+No te limites a cambiar los colores del escudo actual. Propón un símbolo con personalidad propia, que pueda funcionar tanto en el encabezado como en el certificado y otros recursos del curso.
 
-- Evita las listas verticales tradicionales.
-- Utiliza carruseles, navegación lateral o paneles interactivos.
-- Muestra una simulación a la vez.
-- Permite avanzar a la siguiente después de completar la anterior.
-- Adapta visualmente cada simulación al escenario que representa.
+Evita los diseños genéricos de ciberseguridad. El resultado debe ser moderno, profesional, sencillo de reconocer y coherente con la identidad de toda la plataforma.
 
-No quiero que simplemente cambies una lista vertical por otra lista con tarjetas. Quiero un cambio real en la experiencia de navegación y en la composición visual.
+3. Simplificación de la sección principal de inicio
 
-3. Criterios de diseño
+En la portada, debajo del texto «Sé un guardián digital», aparecen cuatro indicadores:
 
-- Aprovecha el espacio horizontal y vertical.
-- Evita scroll innecesario.
-- No superpongas componentes.
-- Mantén una experiencia responsive.
-- Conserva las funcionalidades y la lógica educativa.
-- Prioriza claridad, accesibilidad y facilidad de uso.
-- Evita diseños excesivamente recargados.
+- 4 módulos.
+- 5 preguntas.
+- 9 etapas.
+- $0 costo.
 
-4. Metodología
+Quiero retirar completamente estos indicadores.
 
-Primero analiza toda la plataforma y detecta por qué las actividades prácticas y la ruta de aprendizaje siguen presentándose de forma lineal.
+El espacio debe aprovecharse para dar mayor protagonismo al mensaje principal, al logo y a los botones de navegación. La portada debe sentirse más limpia, visual y directa, sin información secundaria que no aporte demasiado a la experiencia.
 
-Presenta una propuesta de rediseño que explique cómo cambiarás la estructura de navegación, no solamente su apariencia.
+Conserva los botones para continuar el curso y consultar la ruta completa.
 
-Identifica los componentes y archivos que necesitan modificarse.
+4. Nueva sección independiente: contexto de las estafas digitales
 
-No escribas ni modifiques código todavía. Espera mi aprobación.
+Actualmente, el apartado «¿Por qué este curso?» presenta cuatro tarjetas con porcentajes y, debajo, el texto «Encuesta a 20 personas en Colombia; muestra de conveniencia, no representativa».
 
-Quiero una transformación real de PVA Guardián Digital, tanto en su identidad visual como en su experiencia de aprendizaje.
+Quiero reorganizar esta información.
+
+Primero: retira ese texto que aparece debajo de las tarjetas. No quiero que el contexto de la investigación quede reducido a una nota pequeña junto a la sección «Tu recorrido».
+
+Segundo: crea una sección independiente que explique por qué es importante este curso y de dónde surge la problemática. Debe integrarse naturalmente en la navegación de la página principal, sin competir visualmente con el recorrido de aprendizaje.
+
+Puedes proponer un nombre más atractivo, por ejemplo:
+
+- El problema está más cerca de lo que parece.
+- ¿Por qué debemos aprender a protegernos?
+- Una amenaza presente en nuestra vida digital.
+
+Contenido que debe orientar esta sección:
+
+Utiliza como fuente el documento de investigación del proyecto, especialmente el planteamiento del problema, la encuesta de diagnóstico, las causas y consecuencias y el marco teórico.
+
+La sección puede organizarse en tres partes:
+
+A. Una realidad cotidiana
+
+Explica que utilizamos billeteras digitales, aplicaciones bancarias, redes sociales, plataformas de compraventa y servicios de mensajería para realizar actividades diarias. Estos canales también son utilizados para intentar engañar a las personas mediante mensajes, llamadas, enlaces y suplantaciones.
+
+B. Lo que encontramos en nuestra encuesta
+
+Presenta los resultados del diagnóstico de las 20 personas consultadas:
+
+- 85 % recibió mensajes o llamadas sospechosas.
+- 20 % manifestó haber sido víctima directa de una estafa.
+- 47,6 % identificó el smishing como un canal frecuente.
+- 47,6 % identificó el vishing como un canal frecuente.
+
+Puedes utilizar gráficos, cifras destacadas o una composición visual más interesante que las tarjetas actuales.
+
+Es indispensable conservar la aclaración metodológica: se trata de una encuesta aplicada a una muestra de conveniencia de 20 personas, por lo que sus resultados describen a los participantes y no representan estadísticamente a toda Colombia. No presentes estos porcentajes como cifras nacionales.
+
+C. ¿Por qué es importante aprender a prevenirlas?
+
+Explica brevemente cómo los estafadores pueden aprovechar la urgencia, el miedo, la confianza o la necesidad de conseguir empleo para manipular a las personas. Menciona que las consecuencias pueden afectar el dinero, los datos personales y la tranquilidad de las víctimas.
+
+Cierra conectando esta problemática con el propósito del curso: aprender a reconocer señales de alerta, verificar por canales oficiales y actuar de forma segura mediante el protocolo PAUSA, VERIFICA y ACTÚA.
+
+La sección debe ser educativa, visual y breve. No quiero trasladar todo el documento académico a la página web. Resume y transforma la información en una experiencia fácil de comprender.
+
+5. Integración del robot RO-BIT como asistente del curso
+
+Actualmente, RO-BIT aparece en una zona lateral debajo de «Tu actividad». Su ubicación hace que parezca un elemento secundario y escondido.
+
+Quiero darle un papel más importante: convertirlo en el acompañante digital del participante durante el curso.
+
+Explora la posibilidad de implementar un pequeño chatbot con RO-BIT como personaje principal.
+
+Comportamiento esperado:
+
+- RO-BIT debe tener una ubicación visible y coherente con el diseño.
+- El participante debe poder abrir y cerrar el chat cuando lo necesite.
+- Debe responder preguntas puntuales relacionadas con el contenido del curso.
+- Debe explicar conceptos como smishing, vishing, phishing, ingeniería social y autenticación en dos pasos.
+- Debe orientar sobre el protocolo PAUSA, VERIFICA y ACTÚA.
+- Puede resolver dudas sobre las actividades, las simulaciones y la navegación.
+- Debe utilizar un lenguaje sencillo, educativo y directo.
+- Puede ofrecer preguntas sugeridas para facilitar la interacción.
+- Debe mantener su identidad visual y personalidad como robot acompañante.
+
+Restricción fundamental: el chatbot debe ser gratuito.
+
+No quiero depender de servicios que requieran pagar una suscripción, consumir créditos o contratar una API de inteligencia artificial.
+
+Investiga primero una implementación local y gratuita mediante:
+
+- Una base de preguntas y respuestas predefinidas.
+- Coincidencia de palabras clave e identificación de intenciones.
+- Respuestas organizadas por temas del curso.
+- Preguntas sugeridas y opciones de consulta.
+
+El contenido de las respuestas debe basarse en los materiales del proyecto. Si no conoce la respuesta, RO-BIT debe reconocerlo y orientar al participante hacia la sección correspondiente, sin inventar información.
+
+No simules que es una inteligencia artificial generativa si realmente funciona mediante respuestas programadas.
+
+El chatbot debe funcionar sin enviar las preguntas de los participantes a servicios externos ni requerir cuentas, claves API o suscripciones. No debe recopilar datos personales.
+
+Si consideras que existe otra alternativa gratuita y técnicamente viable, explícala antes de implementarla. No incorpores dependencias de pago.
+
+6. Criterios generales de implementación
+
+- Mantén coherencia entre el nuevo diseño y el resto de la plataforma.
+- Comprueba que todas las secciones funcionen en modo claro y oscuro.
+- Conserva la identidad de RO-BIT y mejora su integración visual.
+- Utiliza iconografía SVG de Lucide cuando corresponda.
+- Evita agregar tarjetas innecesarias, elementos decorativos excesivos o espacios vacíos.
+- Cuida la adaptación a pantallas de computador, tabletas y celulares.
+- No elimines información académica ni funcionalidades existentes.
+- Conserva los resultados originales de la encuesta y sus aclaraciones metodológicas.
+- Evita modificar archivos que no sean necesarios para estos cambios.
+
+7. Antes de modificar el código
+
+Primero analiza las posibilidades de implementación y presenta una propuesta que incluya:
+
+1. Cómo reorganizarías la portada y la navegación.
+2. Cómo diseñarías la nueva sección de contexto.
+3. Qué propuesta visual utilizarías para el logo.
+4. Cómo integrarías el panel lateral desplegable.
+5. Cómo funcionaría RO-BIT como chatbot gratuito y cuáles serían sus limitaciones.
+6. Qué archivos necesitarías modificar.
+
+Espera mi aprobación antes de comenzar a modificar el código.
+
+El objetivo es que Guardián Digital deje de parecer una página con elementos independientes y se convierta en una plataforma educativa coherente, atractiva y con una identidad visual propia.
