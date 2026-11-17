@@ -118,3 +118,22 @@ Identidad coherente; aprovechamiento del ancho; jerarquía tipográfica; espacia
 
 ## 10. Condiciones técnicas
 No eliminar actividades, evaluaciones, puntuaciones ni progreso; no alterar el desbloqueo de etapas; sin dependencias de pago; sin duplicar código; respetar la arquitectura; controles con comportamiento real; no tocar lo no relacionado.
+
+---
+
+# Ronda 4 · Ajustes visuales y funcionales (pendiente de aprobación)
+
+Skills de diseño solicitadas: Figma Design, Emil Kowalski e Impeccable (aplicar sus criterios, no solo mencionarlas).
+
+1. **Bibliografía:** referencias apiladas verticalmente, una por fila, con iconos mucho más pequeños y sin aspecto de tarjetas grandes.
+2. **Módulo 2 · legibilidad en modo claro:** revisar contraste de texto principal, instrucciones, SMS, remitente, fragmentos interactivos, señales, retroalimentaciones, progreso y botones, con jerarquía visual propia (no solo oscurecer).
+   - 2.1. Las explicaciones de las señales no se acumulan hacia abajo: un panel de retroalimentación que cambia según la señal seleccionada. Sin resaltar de antemano ninguna parte del mensaje. Conservar lógica de evaluación y progreso.
+3. **Distribución con el menú oculto:** la composición de cada página se adapta a ambos estados (anchuras máximas, columnas y márgenes), sin vacíos laterales ni líneas de texto excesivamente largas, con transición fluida.
+4. **Simulacro del módulo 4:**
+   - 4.1. No revelar señales antes de la interacción (ni subrayadas ni resaltadas).
+   - 4.2. Mecánica distinta según el caso (no repetir «seleccionar palabras»).
+   - 4.3. Una pregunta o decisión a la vez, retroalimentación en un espacio definido, sin acumulación vertical.
+   - 4.4. Cada decisión con consecuencia pedagógica real.
+   - 4.5. Progresión clara: caso actual, qué hacer, qué se completó, qué falta y cuándo avanzar.
+5. **Dirección visual:** identidad propia, evitar tarjetas genéricas, iconos grandes, columnas estrechas y vacíos; animaciones discretas y útiles; coherencia entre modo claro y oscuro.
+6. **Condiciones técnicas:** reutilizar componentes, no duplicar código, conservar contenidos, referencias, progreso y evaluación; sin dependencias de pago.
