@@ -319,7 +319,7 @@
           '<span class="kicker kicker--violet">Actividad práctica</span>' +
           '<h3 id="actTitle">' + esc(cfg.title) + "</h3>" +
           '<p class="muted tiny">' + esc(cfg.intro) + "</p>" +
-          items +
+          '<div class="practice-grid">' + items + "</div>" +
           '<p class="tiny muted" data-pick-count style="margin-top:.9rem">' +
             count + " de " + total + " seleccionados · elige al menos " + min +
           "</p>" +

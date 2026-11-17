@@ -1724,3 +1724,28 @@ html[data-theme="light"] .stepper__item.is-current .stepper__label { color: #0f1
 .stepper__label { font-size: 0.66rem; overflow-wrap: normal; hyphens: none; }
 .dash-grid--wide { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
 .qc-dots{margin:.8rem 0 1rem}.qc-nav{margin-top:1rem;align-items:center}.worksheet__q[hidden]{display:none}
+
+/* Compromisos: cuadrícula de dos columnas (sin lista larga) */
+.practice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin-top: 0.8rem; }
+.practice-grid .practice { margin-top: 0; height: 100%; align-items: flex-start; flex-wrap: wrap; }
+.practice-grid .practice__flag { order: 3; flex-basis: 100%; width: fit-content; margin-left: 2.1rem; }
+@media (max-width: 720px) { .practice-grid { grid-template-columns: 1fr; } }
+
+/* Kit: recurso destacado + lista compacta */
+.kit-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); grid-auto-flow: row; }
+.kit-grid .kit-card:first-child { grid-row: span 4; padding: 1.6rem; background: linear-gradient(160deg, rgba(139, 108, 246, 0.22), rgba(79, 224, 193, 0.1)); border-color: rgba(139, 108, 246, 0.4); }
+.kit-grid .kit-card:first-child h3 { font-size: 1.5rem; font-family: var(--font-display); }
+.kit-grid .kit-card:first-child p { font-size: 0.95rem; }
+.kit-grid .kit-card:not(:first-child) { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 0.9rem; row-gap: 0.1rem; align-items: center; padding: 0.8rem 1rem; }
+.kit-grid .kit-card:not(:first-child) .kit-card__icon { grid-row: span 3; width: 38px; height: 38px; }
+.kit-grid .kit-card:not(:first-child) .kicker { display: none; }
+.kit-grid .kit-card:not(:first-child) p:not(.tiny) { display: none; }
+.kit-grid .kit-card:not(:first-child) .btn { grid-column: 3; grid-row: 1 / span 3; margin: 0; }
+.kit-grid .kit-card:not(:first-child) [data-opened-note] { grid-column: 2; }
+@media (max-width: 860px) {
+  .kit-grid { grid-template-columns: 1fr; }
+  .kit-grid .kit-card:first-child { grid-row: auto; }
+}
+html[data-theme="light"] .kit-grid .kit-card:first-child { background: linear-gradient(160deg, rgba(91, 33, 182, 0.1), rgba(15, 118, 110, 0.07)); border-color: rgba(91, 33, 182, 0.3); }
+.flow-nav { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+@media (max-width: 640px) { .module-head { grid-template-columns: 1fr; } .module-head .robot, .module-head > .robot-wrap { display: none; } }
