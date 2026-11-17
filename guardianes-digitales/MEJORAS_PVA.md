@@ -68,3 +68,51 @@ Identifica los componentes y archivos que necesitan modificarse.
 No escribas ni modifiques código todavía. Espera mi aprobación.
 
 Quiero una transformación real de PVA Guardián Digital, tanto en su identidad visual como en su experiencia de aprendizaje.
+---
+
+# Ronda 2 · Inicio, identidad visual, contexto y asistente (implementada)
+
+Estado: implementada en la rama de desarrollo.
+
+1. Panel lateral desplegable y ocultable (botón en el panel + botón «Menú» al ocultarlo; estado en `localStorage`).
+2. Nuevo logo «Guardián» (hexágono vigía con ojo y pupila de pausa) en barra lateral, portada, favicon, insignia y certificado.
+3. Portada simplificada: se retiran los cuatro indicadores (4 módulos, 5 preguntas, 9 etapas, $0).
+4. Sección independiente de contexto «El problema está más cerca de lo que parece» (A. realidad cotidiana, B. encuesta con aclaración metodológica, C. por qué prevenir), fundamentada en `Taller_Wiki_Eje3.docx-1.md`.
+5. RO-BIT como chatbot local y gratuito (respuestas programadas; sin IA generativa, sin API, sin datos personales).
+
+---
+
+# Ronda 3 · Nuevos ajustes (pendiente de aprobación)
+
+## 1. Botón del menú sin superposición
+- El botón de reapertura debe tener ubicación propia, sin cubrir el encabezado de la página.
+- El encabezado se adapta cuando el panel está abierto o cerrado.
+- El contenido aprovecha el ancho liberado; transición fluida; correcto en distintos tamaños de pantalla.
+
+## 2. RO-BIT solo como acompañante conversacional
+- Quitar todas las tarjetas y burbujas laterales de RO-BIT (módulos, kit, certificado, encuesta, panel) y el robot decorativo del encabezado de los módulos.
+- RO-BIT: consultar conceptos del curso, resolver dudas de módulos, explicar términos de seguridad digital, orientar cuando algo no se entiende, ofrecer preguntas sugeridas.
+- Mejorar la comprensión de preguntas libres con un sistema local de palabras clave e intenciones: normalización (mayúsculas, tildes, puntuación), sinónimos y expresiones relacionadas, coincidencia aproximada, preguntas relacionadas cuando no hay coincidencia clara y respuesta de orientación sin inventar información.
+- Ejemplo de referencia: «¿cómo hago para que nadie entre a mi cuenta?» debe llevar a contraseñas y autenticación en dos pasos.
+- Sin API de pago ni servicios externos; no presentarlo como IA generativa; respuestas basadas en el contenido del curso.
+
+## 6. Eliminar los espacios laterales de RO-BIT y reorganizar el módulo y la bibliografía
+- Retirar los mensajes de RO-BIT bajo «Tu actividad», las tarjetas de consejos y los espacios reservados; no ocultarlos dejando huecos.
+- Reorganizar la composición: contenido principal con anchura suficiente, actividad con espacio adecuado, bibliografía en sección independiente y ordenada, sin acumular elementos en una columna lateral.
+
+## 7. Nueva actividad práctica de «Protección de datos»
+- Reemplazar por completo «Elige al menos tres compromisos».
+- Actividad interactiva de conocimientos (asociar, clasificar u organizar), distinta del simulacro del módulo 4: sin escenarios de mensajes, llamadas ni correos, sin casillas de compromiso.
+- Temas: contraseñas diferentes y seguras, autenticación en dos pasos, privacidad en redes, alertas bancarias, actualizaciones, reporte de contactos sospechosos.
+- Con objetivo, dinámica, retroalimentación educativa, conclusión y puntuación o progreso si aporta valor.
+
+## 8. Lógica y funcionalidad de las simulaciones del módulo 4
+- Revisar todas las preguntas y decisiones; eliminar o sustituir las decorativas (p. ej. «Pausa: ¿qué revisarías primero?», que hoy solo alterna un botón sin efecto).
+- Las decisiones deben tener consecuencias: modificar la retroalimentación, mostrar información relacionada o afectar el resultado, con explicación de por qué es adecuada o inadecuada y coherencia con el resultado final.
+- Conservar las simulaciones de smishing y vishing.
+
+## 9. Revisión general de diseño y experiencia de usuario
+Identidad coherente; aprovechamiento del ancho; jerarquía tipográfica; espaciados consistentes; responsive; modo claro y oscuro; transiciones discretas; iconos Lucide; sin tarjetas innecesarias, columnas estrechas ni huecos por elementos eliminados.
+
+## 10. Condiciones técnicas
+No eliminar actividades, evaluaciones, puntuaciones ni progreso; no alterar el desbloqueo de etapas; sin dependencias de pago; sin duplicar código; respetar la arquitectura; controles con comportamiento real; no tocar lo no relacionado.
