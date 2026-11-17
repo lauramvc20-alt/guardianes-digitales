@@ -1,7 +1,6 @@
-Lee completamente el archivo MEJORAS_PVA.md.
+Nuevos requerimientos posteriores a la implementación
 
-Analiza cada requerimiento y compáralo con el estado actual del proyecto.
+Los siguientes puntos son mejoras adicionales. Las solicitudes anteriores de "MEJORAS_PVA.md" ya fueron implementadas y no deben tratarse como tareas pendientes ni repetirse.
 
-Prepara un plan de implementación por módulos, indicando los archivos que modificarás y las dependencias entre cambios.
+Trabaja únicamente sobre estos nuevos requerimientos, respetando la estructura, funcionalidades y decisiones de diseño que ya existen. Antes de modificar archivos, analiza el estado actual del proyecto y presenta una propuesta de implementación para aprobación.
 
-No empieces a modificar código hasta que apruebe el plan.
