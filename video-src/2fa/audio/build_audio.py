@@ -136,8 +136,12 @@ def main():
     guion = json.loads((BASE / "guion.json").read_text(encoding="utf-8"))
     lines, t = [], GAPS["start"]
     voice_clips = {}
+    leads = {}
     for l in guion:
-        clip = trim_silence(load_mono(BASE / "lines" / f"{l['id']}.wav"))
+        raw_clip = load_mono(BASE / "lines" / f"{l['id']}.wav")
+        clip = trim_silence(raw_clip)
+        lead = (np.where(np.abs(raw_clip) > 0.01)[0][:1].tolist() or [0])[0] / SR
+        leads[l["id"]] = lead
         t += GAPS.get(l["id"], 0.3) if l["id"] != guion[0]["id"] else 0
         dur = len(clip) / SR
         lines.append({**l, "inicio": round(t, 3), "fin": round(t + dur, 3)})
@@ -184,7 +188,21 @@ def main():
     ev("click-seguridad", L["L3a"]["inicio"] + 1.6, fx_click())
     ev("click-fila", L["L3b"]["inicio"] + 1.95, fx_click())
     ev("toggle-on", L["L3c"]["inicio"] + 0.45, fx_toggle())
-    ev("click-metodo", L["L3d"]["inicio"] + 1.6, fx_click())
+    def word_time(line_id, word, fallback):
+        """Instante (en el video) en que empieza una palabra, según los tiempos de ElevenLabs."""
+        f = BASE / "lines" / f"{line_id}.json"
+        try:
+            al = json.loads(f.read_text(encoding="utf-8"))
+            i = "".join(al["characters"]).find(word)
+            if i >= 0:
+                return L[line_id]["inicio"] + al["character_start_times_seconds"][i] - leads[line_id]
+        except (OSError, KeyError, ValueError):
+            pass
+        return L[line_id]["inicio"] + fallback
+
+    ev("click-metodo", word_time("L3d", "Microsoft", 1.6) + 0.25, fx_click())
+    ev("click-google", word_time("L3d", "Google", 3.2) + 0.25, fx_click())
+    ev("click-llave", word_time("L3d", "llave", 5.0) + 0.2, fx_click())
     ev("whoosh-3", scenes[3]["inicio"] - 0.15, fx_whoosh())
     ev("segunda-capa", L["L4b"]["inicio"] + 0.9, fx_pop())
     ev("logo", L["L4b"]["fin"] + 0.35, fx_ding())

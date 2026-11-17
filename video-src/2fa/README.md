@@ -1,6 +1,6 @@
 # Tutorial 2FA · Guardián Digital (Remotion)
 
-Video de ~26 s (1920×1080, 30 fps, H.264 + AAC) sobre la verificación en dos pasos.
+Video de ~28 s (1920×1080, 30 fps, H.264 + AAC) sobre la verificación en dos pasos.
 Se destina al **Kit Digital** de la plataforma (`PVA/assets/media/2fa/`).
 
 ## Flujo de trabajo

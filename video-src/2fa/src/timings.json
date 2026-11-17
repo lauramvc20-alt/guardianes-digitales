@@ -1,5 +1,5 @@
 {
-  "total": 25.497,
+  "total": 28.417,
   "fps": 30,
   "escenas": [
     {
@@ -18,13 +18,13 @@
       "id": 3,
       "nombre": "¿Cómo activarla?",
       "inicio": 7.656,
-      "fin": 18.881
+      "fin": 21.802
     },
     {
       "id": 4,
       "nombre": "Recomendación final",
-      "inicio": 18.881,
-      "fin": 25.497
+      "inicio": 21.802,
+      "fin": 28.417
     }
   ],
   "lineas": [
@@ -66,23 +66,23 @@
     {
       "id": "L3d",
       "escena": 3,
-      "texto": "Y elige un método: una app autenticadora o una llave de seguridad.",
+      "texto": "Y elige un método: una app como Microsoft Authenticator o Google Authenticator, o una llave de seguridad.",
       "inicio": 13.988,
-      "fin": 18.531
+      "fin": 21.452
     },
     {
       "id": "L4a",
       "escena": 4,
       "texto": "Una contraseña no siempre es suficiente.",
-      "inicio": 19.181,
-      "fin": 21.157
+      "inicio": 22.102,
+      "fin": 24.077
     },
     {
       "id": "L4b",
       "escena": 4,
       "texto": "Añade una segunda capa de protección.",
-      "inicio": 21.457,
-      "fin": 23.297
+      "inicio": 24.377,
+      "fin": 26.217
     }
   ],
   "eventos": [
@@ -176,19 +176,27 @@
     },
     {
       "evento": "click-metodo",
-      "t": 15.588
+      "t": 16.615
+    },
+    {
+      "evento": "click-google",
+      "t": 18.624
+    },
+    {
+      "evento": "click-llave",
+      "t": 20.687
     },
     {
       "evento": "whoosh-3",
-      "t": 18.731
+      "t": 21.652
     },
     {
       "evento": "segunda-capa",
-      "t": 22.357
+      "t": 25.277
     },
     {
       "evento": "logo",
-      "t": 23.647
+      "t": 26.567
     }
   ]
 }

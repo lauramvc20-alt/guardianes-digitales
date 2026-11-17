@@ -19,7 +19,7 @@
       "gratuito y no requieren registro en esta plataforma.",
     video: {
       title: "Tutorial en video: verificación en dos pasos (2FA)",
-      kicker: "Tutorial animado · 26 s",
+      kicker: "Tutorial animado · 28 s",
       description:
         "Qué es la verificación en dos pasos, cómo se activa y por qué protege tus cuentas. " +
         "Incluye narración y subtítulos en español.",
@@ -27,12 +27,12 @@
       captioned: "assets/media/2fa/tutorial-2fa-subtitulado.mp4",
       poster: "assets/media/2fa/tutorial-2fa-poster.jpg",
       captions: "assets/media/2fa/tutorial-2fa.es.vtt",
-      credits: "Narración generada con ElevenLabs. Música y efectos originales del proyecto.",
+      credits: "Narración generada con ElevenLabs. Música y efectos originales del proyecto. Microsoft Authenticator y Google Authenticator son marcas de sus respectivos titulares y se mencionan solo como ejemplos.",
       steps: [
         "Entra a la configuración de seguridad de tu cuenta.",
         "Busca «Verificación en dos pasos» o «Autenticación de dos factores».",
         "Actívala.",
-        "Elige un método: app autenticadora o llave de seguridad."
+        "Elige un método: una app autenticadora (por ejemplo, Microsoft Authenticator o Google Authenticator) o una llave de seguridad."
       ]
     },
     resources: [

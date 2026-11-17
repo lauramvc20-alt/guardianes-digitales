@@ -205,6 +205,8 @@ export const Scene3: React.FC<{ t: number }> = ({ t }) => {
   const cFila = ev("click-fila");
   const cOn = ev("toggle-on");
   const cMet = ev("click-metodo");
+  const cGoo = ev("click-google");
+  const cKey = ev("click-llave");
 
   /* qué pantalla se ve dentro de la ventana */
   const page = t < cSeg + 0.12 ? 0 : t < line("L3b").inicio + 2.2 ? 1 : t < line("L3d").inicio - 0.05 ? 2 : 3;
@@ -220,8 +222,10 @@ export const Scene3: React.FC<{ t: number }> = ({ t }) => {
   const search = typed("verificación en dos pasos", t, line("L3b").inicio + 0.15, 17);
   const rowHi = prog(t, line("L3b").inicio + 1.4, line("L3b").inicio + 1.8);
   const toggle = prog(t, cOn - 0.05, cOn + 0.28, EIO);
-  const pick = prog(t, cMet, cMet + 0.4, BACK);
-  const pulse2 = 0.5 + 0.5 * Math.sin((t - line("L3d").inicio) * 6);
+  const pickMs = prog(t, cMet, cMet + 0.35, BACK) * (1 - prog(t, cGoo, cGoo + 0.25));
+  const pickGo = prog(t, cGoo, cGoo + 0.35, BACK);
+  const pickKey = prog(t, cKey, cKey + 0.35, BACK);
+  const appSel = Math.max(pickMs, pickGo);
 
   return (
     <Layer t={t} from={s.inicio} to={s.fin}>
@@ -368,46 +372,65 @@ export const Scene3: React.FC<{ t: number }> = ({ t }) => {
             </div>
           )}
 
-          {/* PANTALLA 3 · método */}
+          {/* PANTALLA 3 · método (con apps de ejemplo) */}
           {page === 3 && (
             <div style={{ position: "absolute", left: 320, top: 36, right: 40, opacity: pageFade(line("L3d").inicio - 0.05) }}>
               <div style={{ fontSize: 32, fontWeight: 800, marginBottom: 26 }}>Elige un método de verificación</div>
-              <div style={{ display: "flex", gap: 28 }}>
-                {[
-                  { name: "App autenticadora", sub: "Códigos que cambian cada 30 s", I: Phone, chosen: true },
-                  { name: "Llave de seguridad", sub: "Dispositivo físico USB o NFC", I: Key, chosen: false },
-                ].map((m) => {
-                  const sel = m.chosen ? pick : 0;
-                  return (
+              <div style={{ display: "flex", gap: 24 }}>
+                {/* Tarjeta: app autenticadora + ejemplos */}
+                <div style={{ width: 470, height: 360, boxSizing: "border-box", padding: 28, borderRadius: 28, background: `rgba(79,224,193,${0.05 + 0.07 * appSel})`, border: `3px solid ${appSel > 0.05 ? C.turq : C.line}` }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                    <div style={{ width: 64, height: 64, borderRadius: 20, background: "rgba(79,224,193,0.2)", display: "grid", placeItems: "center" }}>
+                      <Phone size={40} color={C.turq} />
+                    </div>
+                    <div style={{ fontSize: 29, fontWeight: 800, lineHeight: 1.1 }}>App autenticadora</div>
+                  </div>
+                  <div style={{ marginTop: 14, fontSize: 19, color: C.muted, letterSpacing: 2 }}>EJEMPLOS</div>
+                  {[
+                    { name: "Microsoft Authenticator", sel: pickMs, c: C.violetSoft },
+                    { name: "Google Authenticator", sel: pickGo, c: C.turq },
+                  ].map((app) => (
                     <div
-                      key={m.name}
+                      key={app.name}
                       style={{
-                        flex: 1,
-                        height: 360,
-                        borderRadius: 28,
-                        padding: 30,
+                        marginTop: 12,
+                        height: 80,
+                        borderRadius: 20,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 16,
+                        padding: "0 18px",
                         boxSizing: "border-box",
-                        background: m.chosen ? `rgba(79,224,193,${0.06 + 0.1 * sel})` : "rgba(148,168,214,0.07)",
-                        border: `3px solid ${m.chosen && sel > 0.05 ? C.turq : m.chosen ? C.line : `rgba(167,139,250,${0.25 + 0.5 * pulse2 * (t > cMet + 0.5 ? 1 : 0)})`}`,
-                        transform: `scale(${1 + 0.03 * sel})`,
-                        position: "relative",
+                        background: `rgba(${app.c === C.turq ? "79,224,193" : "167,139,250"},${0.07 + 0.16 * app.sel})`,
+                        border: `2px solid ${app.sel > 0.05 ? app.c : C.line}`,
+                        transform: `scale(${1 + 0.025 * app.sel})`,
                       }}
                     >
-                      <div style={{ width: 110, height: 110, borderRadius: 32, background: m.chosen ? "rgba(79,224,193,0.2)" : "rgba(139,108,246,0.22)", display: "grid", placeItems: "center" }}>
-                        <m.I size={68} color={m.chosen ? C.turq : C.violetSoft} />
+                      {/* ícono genérico de autenticador: anillo de código (no es el logo de la marca) */}
+                      <svg width="54" height="54" viewBox="0 0 54 54" style={{ flex: "none" }}>
+                        <circle cx="27" cy="27" r="22" fill="rgba(7,11,24,0.7)" stroke={app.c} strokeWidth="3" strokeDasharray="100 38" strokeLinecap="round" transform={`rotate(${-90 + t * 40} 27 27)`} />
+                        <circle cx="27" cy="27" r="4" fill={app.c} />
+                      </svg>
+                      <div style={{ flex: 1, fontSize: 22, fontWeight: 700, lineHeight: 1.1 }}>{app.name}</div>
+                      <div style={{ width: 34, height: 34, borderRadius: "50%", background: app.c, display: "grid", placeItems: "center", transform: `scale(${app.sel})`, flex: "none" }}>
+                        <Check size={22} color="#06131a" stroke={3.4} />
                       </div>
-                      <div style={{ marginTop: 28, fontSize: 32, fontWeight: 800, lineHeight: 1.15 }}>{m.name}</div>
-                      <div style={{ marginTop: 10, fontSize: 22, color: C.muted, lineHeight: 1.3 }}>{m.sub}</div>
-                      {m.chosen && (
-                        <div style={{ position: "absolute", top: 20, right: 20, width: 58, height: 58, borderRadius: "50%", background: C.turq, display: "grid", placeItems: "center", transform: `scale(${sel})` }}>
-                          <Check size={36} color="#06131a" stroke={3.2} />
-                        </div>
-                      )}
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
+                {/* Tarjeta: llave de seguridad */}
+                <div style={{ width: 260, height: 360, boxSizing: "border-box", padding: 28, borderRadius: 28, position: "relative", background: `rgba(167,139,250,${0.07 + 0.12 * pickKey})`, border: `3px solid ${pickKey > 0.05 ? C.violetSoft : C.line}`, transform: `scale(${1 + 0.03 * pickKey})` }}>
+                  <div style={{ width: 90, height: 90, borderRadius: 28, background: "rgba(139,108,246,0.22)", display: "grid", placeItems: "center" }}>
+                    <Key size={56} color={C.violetSoft} />
+                  </div>
+                  <div style={{ marginTop: 24, fontSize: 28, fontWeight: 800, lineHeight: 1.15 }}>Llave de seguridad</div>
+                  <div style={{ marginTop: 10, fontSize: 20, color: C.muted, lineHeight: 1.3 }}>Dispositivo físico USB o NFC</div>
+                  <div style={{ position: "absolute", top: 18, right: 18, width: 46, height: 46, borderRadius: "50%", background: C.violetSoft, display: "grid", placeItems: "center", transform: `scale(${pickKey})` }}>
+                    <Check size={28} color="#10092b" stroke={3.4} />
+                  </div>
+                </div>
               </div>
-              <div style={{ marginTop: 26, fontSize: 24, color: C.muted, textAlign: "center", opacity: prog(t, cMet + 0.8, cMet + 1.3) }}>
+              <div style={{ marginTop: 24, fontSize: 22, color: C.muted, textAlign: "center", opacity: prog(t, cKey + 0.5, cKey + 1.0) }}>
                 Según las opciones disponibles en cada servicio
               </div>
             </div>
@@ -427,8 +450,13 @@ export const Scene3: React.FC<{ t: number }> = ({ t }) => {
           [cFila + 0.25, CX + 700, CY + 420],
           [cOn - 0.05, CX + 330 + 85 + 40, CY + 36 + 440 / 2 + 20],
           [cOn + 0.1, CX + 330 + 85 + 40, CY + 36 + 440 / 2 + 20],
-          [cMet - 0.05, CX + 330 + 250, CY + 36 + 250],
-          [cMet + 0.2, CX + 330 + 250, CY + 36 + 250],
+          [line("L3d").inicio + 1.0, CX + 330 + 250, CY + 36 + 250],
+          [cMet - 0.35, CX + 330 + 250, CY + 36 + 250],
+          [cMet + 0.15, CX + 330 + 250, CY + 36 + 250],
+          [cGoo - 0.3, CX + 330 + 250, CY + 36 + 340],
+          [cGoo + 0.15, CX + 330 + 250, CY + 36 + 340],
+          [cKey - 0.35, CX + 330 + 625, CY + 36 + 250],
+          [cKey + 0.25, CX + 330 + 625, CY + 36 + 250],
         ]}
       />
     </Layer>
