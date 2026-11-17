@@ -2022,3 +2022,52 @@ html[data-theme="light"] .defense__feedback.is-ok { background: rgba(15, 155, 13
 html[data-theme="light"] .defense__feedback.is-no { background: rgba(232, 85, 63, 0.1); border-color: rgba(194, 65, 12, 0.5); color: #0f172a; }
 html[data-theme="light"] .defense__bar { background: rgba(15, 23, 42, 0.12); }
 html[data-theme="light"] .defense__end { color: #0f172a; border-color: rgba(15, 118, 110, 0.45); }
+
+/* ======================= Simulaciones: examinar → decidir → resultado ======================= */
+.sim-steps { list-style: none; display: flex; gap: 0.35rem; margin: 0 0 0 auto; padding: 0; }
+.sim-steps li { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.2rem 0.6rem 0.2rem 0.25rem; border-radius: 999px; font-size: 0.74rem; color: var(--muted); border: 1px solid var(--line); }
+.sim-steps li span { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; font-size: 0.66rem; font-weight: 800; background: rgba(148, 168, 214, 0.16); }
+.sim-steps li.is-current { color: var(--ink); border-color: var(--turq); }
+.sim-steps li.is-current span { background: var(--turq); color: #04241e; }
+.sim-steps li.is-done span { background: rgba(79, 224, 193, 0.3); color: var(--turq); }
+@media (max-width: 640px) { .sim-steps { margin-left: 0; width: 100%; } }
+
+.mk { font: inherit; color: inherit; background: none; border: 0; padding: 0 0.12em; margin: 0; border-radius: 5px; text-align: inherit; cursor: pointer; border-bottom: 2px dashed rgba(255, 209, 102, 0.8); transition: background var(--speed) var(--ease); }
+.mk:hover { background: rgba(255, 209, 102, 0.22); }
+.mk.is-on { background: rgba(255, 209, 102, 0.38); border-bottom-style: solid; }
+mark.mk { cursor: default; color: inherit; border-bottom: 0; }
+mark.mk.is-hit { background: rgba(79, 224, 193, 0.35); }
+mark.mk.is-miss { background: rgba(255, 122, 107, 0.35); text-decoration: underline wavy rgba(255, 122, 107, 0.9); }
+mark.mk.is-false { background: rgba(148, 168, 214, 0.3); text-decoration: line-through; }
+
+.inspect-prompt { display: flex; gap: 0.5rem; align-items: flex-start; margin: 0 0 0.4rem; font-weight: 600; }
+.inspect-prompt svg { flex: none; width: 18px; height: 18px; margin-top: 2px; color: var(--yellow); }
+.inspect-review { margin-bottom: 0.9rem; padding: 0.75rem 0.9rem; border-radius: var(--r-sm); border: 1px solid var(--line); background: rgba(148, 168, 214, 0.06); }
+.inspect-review__sum { margin: 0 0 0.5rem; font-size: 0.9rem; }
+.inspect-review__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+.inspect-review__list li { display: flex; gap: 0.5rem; font-size: 0.8rem; line-height: 1.45; }
+.inspect-review__list svg { flex: none; width: 15px; height: 15px; margin-top: 2px; }
+.inspect-review__list .is-hit svg { color: var(--turq); }
+.inspect-review__list .is-miss svg { color: var(--coral-soft); }
+.inspect-review__list .is-false svg { color: var(--muted); }
+.outcome { display: flex !important; gap: 0.5rem; align-items: flex-start; padding: 0.55rem 0.7rem; border-radius: 10px; background: rgba(148, 168, 214, 0.1); font-size: 0.85rem; }
+.outcome svg { flex: none; width: 16px; height: 16px; margin-top: 2px; }
+.linkline { font-size: 0.84rem; font-style: italic; }
+.sim-result__score { display: inline-flex; align-items: baseline; gap: 0.5rem; margin: 0.2rem 0 0.4rem; }
+.sim-result__score b { font-family: var(--font-display); font-size: 2rem; color: var(--turq); }
+.sim-result__score span { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+html[data-theme="light"] .sim-steps li { color: #475569; border-color: rgba(15, 23, 42, 0.18); }
+html[data-theme="light"] .sim-steps li.is-current { color: #0f172a; border-color: #0f766e; }
+html[data-theme="light"] .sim-steps li.is-current span { background: #0f766e; color: #fff; }
+html[data-theme="light"] .mk { border-bottom-color: #b45309; }
+html[data-theme="light"] .mk.is-on { background: rgba(245, 158, 11, 0.35); }
+html[data-theme="light"] mark.mk { color: #0f172a; }
+html[data-theme="light"] mark.mk.is-hit { background: rgba(15, 155, 132, 0.28); }
+html[data-theme="light"] mark.mk.is-miss { background: rgba(232, 85, 63, 0.25); }
+html[data-theme="light"] .inspect-review { background: #f4f7fc; border-color: rgba(15, 23, 42, 0.14); }
+html[data-theme="light"] .inspect-prompt svg { color: #b45309; }
+html[data-theme="light"] .outcome { background: #eef2f9; }
+html[data-theme="light"] .sim-result__score b { color: #0f766e; }
+.mk { display: inline; line-height: inherit; }
+.sim-result__list { list-style: none; padding-left: 0; }

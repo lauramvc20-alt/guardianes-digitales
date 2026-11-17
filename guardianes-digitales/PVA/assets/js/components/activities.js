@@ -510,12 +510,10 @@
   }
 
   /* Escenario ambientado: la interfaz imita el canal en el que llega el mensaje. */
-  function deviceHtml(sim) {
+  function deviceHtml(sim, insp) {
     var incoming = sim.messages.filter(function (msg) { return msg.from === "them"; });
     if (isCall(sim)) {
-      var line = incoming.map(function (msg) {
-        return "<p>" + esc(msg.text) + "</p>";
-      }).join("");
+      var line = "<p>" + (sim.inspect ? markedText(sim, insp) : esc(incoming[0] ? incoming[0].text : "")) + "</p>";
       return (
         '<div class="device device--call" aria-label="Pantalla de llamada entrante">' +
           '<div class="device__call-head">' +
@@ -531,9 +529,7 @@
     }
 
     var sender = incoming[0] ? incoming[0].name : sim.channel;
-    var bubbles = incoming.map(function (msg) {
-      return '<div class="bubble">' + esc(msg.text) + "</div>";
-    }).join("");
+    var bubbles = '<div class="bubble">' + (sim.inspect ? markedText(sim, insp) : esc(incoming[0] ? incoming[0].text : "")) + "</div>";
     return (
       '<div class="device device--chat" aria-label="Conversación de ' + esc(sim.channel) + '">' +
         '<div class="device__bar">' +
@@ -546,25 +542,89 @@
     );
   }
 
-  /* Acción previa a decidir: el estudiante marca qué revisaría. No puntúa ni bloquea. */
-  var PAUSE_ITEMS = ["Quién lo envía", "Qué me pide", "Qué urgencia me impone"];
-  function pauseHtml() {
+  /* ---- Paso 1 · Examinar: el estudiante marca señales en el propio mensaje.
+         Lo que marque se compara con las señales reales y alimenta la retroalimentación. ---- */
+  function inspectParts(sim) { return (sim.inspect && sim.inspect.parts) || []; }
+  function realSignals(sim) { return inspectParts(sim).filter(function (p) { return p.sig === true; }); }
+
+  /* Texto del mensaje con fragmentos tocables (antes de revisar) o evaluados (después). */
+  function markedText(sim, insp) {
+    return inspectParts(sim).map(function (part, i) {
+      if (typeof part.sig !== "boolean") return esc(part.t);
+      var on = !!(insp && insp.marked && insp.marked[i]);
+      if (!insp || !insp.done) {
+        return '<button type="button" class="mk' + (on ? " is-on" : "") + '" data-mk="' + i + '" aria-pressed="' + (on ? "true" : "false") + '">' + esc(part.t) + "</button>";
+      }
+      var cls = part.sig ? (on ? "is-hit" : "is-miss") : (on ? "is-false" : "");
+      if (!cls) return esc(part.t);
+      return '<mark class="mk ' + cls + '">' + esc(part.t) + "</mark>";
+    }).join("");
+  }
+
+  function evaluateInspect(sim, insp) {
+    var parts = inspectParts(sim), found = [], missed = [], falseAlarms = [];
+    parts.forEach(function (part, i) {
+      if (typeof part.sig !== "boolean") return;
+      var on = !!(insp && insp.marked && insp.marked[i]);
+      if (part.sig && on) found.push(part);
+      else if (part.sig) missed.push(part);
+      else if (on) falseAlarms.push(part);
+    });
+    return { found: found, missed: missed, falseAlarms: falseAlarms, total: found.length + missed.length };
+  }
+
+  function reviewHtml(sim, insp) {
+    var ev = evaluateInspect(sim, insp);
+    var rows = "";
+    ev.found.forEach(function (p) { rows += '<li class="is-hit"><span aria-hidden="true">' + icon("check") + "</span><span><b>Detectada:</b> «" + esc(p.t) + "». " + esc(p.why) + "</span></li>"; });
+    ev.missed.forEach(function (p) { rows += '<li class="is-miss"><span aria-hidden="true">' + icon("warning") + "</span><span><b>Se te pasó:</b> «" + esc(p.t) + "». " + esc(p.why) + "</span></li>"; });
+    ev.falseAlarms.forEach(function (p) { rows += '<li class="is-false"><span aria-hidden="true">' + icon("info") + "</span><span><b>No era una señal:</b> «" + esc(p.t) + "». " + esc(p.why) + "</span></li>"; });
     return (
-      '<div class="sim-pause" role="group" aria-label="Pausa antes de decidir">' +
-        '<span class="sim-pause__label">' + icon("clock") + " Pausa: ¿qué revisarías primero?</span>" +
-        '<div class="sim-pause__items">' +
-          PAUSE_ITEMS.map(function (label) {
-            return '<button class="sim-pause__item" type="button" aria-pressed="false" data-sc-pause>' +
-              icon("check") + "<span>" + esc(label) + "</span></button>";
-          }).join("") +
-        "</div>" +
-      "</div>"
+      '<div class="inspect-review"><p class="inspect-review__sum"><b>' + ev.found.length + " de " + ev.total + "</b> señales detectadas" +
+      (ev.falseAlarms.length ? " · " + ev.falseAlarms.length + " falsa(s) alarma(s)" : "") + "</p>" +
+      '<ul class="inspect-review__list">' + rows + "</ul></div>"
     );
   }
 
-  function caseHtml(sim, index, saved) {
+  /* La decisión se interpreta a la luz de lo que se detectó. */
+  function linkText(sim, chosen, insp) {
+    var ev = evaluateInspect(sim, insp);
+    if (chosen.verdict === "best") {
+      return ev.missed.length === 0
+        ? "Tu decisión se apoyó en una revisión completa: viste todas las señales."
+        : "Decidiste bien, aunque se te pasó alguna señal. Detectarlas todas te da más seguridad para actuar.";
+    }
+    if (ev.missed.length) {
+      return "Esta decisión se relaciona con lo que dejaste pasar: «" + ev.missed[0].t + "». " + ev.missed[0].why;
+    }
+    return "Detectaste las señales, pero la acción elegida no te protege: ver el riesgo no basta, hay que pausar y verificar por un canal oficial.";
+  }
+
+  function caseScore(sim, saved, inspectState) {
     var idx = saved[sim.id];
     var chosen = typeof idx === "number" ? sim.options[idx] : null;
+    var pts = chosen ? (chosen.verdict === "best" ? 2 : chosen.verdict === "risky" ? 1 : 0) : 0;
+    var insp = inspectState[sim.id];
+    if (insp && insp.done) {
+      var ev = evaluateInspect(sim, insp);
+      if (ev.total) pts += ev.found.length / ev.total;
+    }
+    return pts;
+  }
+
+  function caseHtml(sim, index, saved, inspectState) {
+    var idx = saved[sim.id];
+    var chosen = typeof idx === "number" ? sim.options[idx] : null;
+    var insp = inspectState[sim.id] || { marked: {}, done: false };
+    var hasInspect = !!sim.inspect;
+    /* Quien ya había decidido antes de existir el paso de examen conserva su decisión. */
+    var inspected = !hasInspect || insp.done || !!chosen;
+    var markedCount = Object.keys(insp.marked || {}).filter(function (k) { return insp.marked[k]; }).length;
+
+    var step = !inspected ? 1 : chosen ? 3 : 2;
+    var steps = ["Examinar", "Decidir", "Resultado"].map(function (label, i) {
+      return '<li class="' + (i + 1 < step ? "is-done" : i + 1 === step ? "is-current" : "") + '"><span>' + (i + 1) + "</span>" + label + "</li>";
+    }).join("");
 
     var options = sim.options.map(function (opt, oi) {
       var cls = "option";
@@ -585,20 +645,36 @@
       );
     }).join("");
 
-    var result = "";
-    if (chosen) {
-      var kind = chosen.verdict === "best" ? "" : chosen.verdict === "risky" ? " feedback--warn" : " feedback--bad";
-      var signals = chosen.signals.map(function (signal) {
-        return '<li><span aria-hidden="true">' + icon("warning") + "</span><span>" + esc(signal) + "</span></li>";
-      }).join("");
-      result =
-        '<div class="feedback' + kind + '" role="status">' +
-          "<strong>" + VERDICT_LABEL[chosen.verdict] + "</strong>" +
-          "<p>" + esc(chosen.feedback) + "</p>" +
-          '<ul class="signals">' + signals + "</ul>" +
-        "</div>" +
-        '<button class="btn btn--quiet" type="button" data-reset="' + sim.id + '" style="margin-top:.75rem">' +
-          "Probar otra respuesta</button>";
+    var decision = "";
+    if (!inspected) {
+      decision =
+        '<p class="inspect-prompt">' + icon("eye") + "<span>" + esc(sim.inspect.prompt) + "</span></p>" +
+        '<p class="tiny muted" data-inspect-count>' + markedCount + " frase(s) marcada(s)</p>" +
+        '<button class="btn" type="button" data-sc-inspect' + (markedCount ? "" : " disabled") + ">Ya revisé: ver qué señales había " + icon("arrowRight") + "</button>";
+    } else {
+      var review = hasInspect && insp.done ? reviewHtml(sim, insp) : "";
+      var result = "";
+      if (chosen) {
+        var kind = chosen.verdict === "best" ? "" : chosen.verdict === "risky" ? " feedback--warn" : " feedback--bad";
+        var signals = chosen.signals.map(function (signal) {
+          return '<li><span aria-hidden="true">' + icon("warning") + "</span><span>" + esc(signal) + "</span></li>";
+        }).join("");
+        result =
+          '<div class="feedback' + kind + '" role="status">' +
+            "<strong>" + VERDICT_LABEL[chosen.verdict] + "</strong>" +
+            "<p>" + esc(chosen.feedback) + "</p>" +
+            (chosen.outcome ? '<p class="outcome">' + icon("route") + "<span>" + esc(chosen.outcome) + "</span></p>" : "") +
+            (hasInspect && insp.done ? '<p class="linkline">' + esc(linkText(sim, chosen, insp)) + "</p>" : "") +
+            '<ul class="signals">' + signals + "</ul>" +
+          "</div>" +
+          '<button class="btn btn--quiet" type="button" data-reset="' + sim.id + '" style="margin-top:.75rem">' +
+            "Probar otra respuesta</button>";
+      }
+      decision =
+        review +
+        "<p><strong>" + esc(sim.question) + "</strong></p>" +
+        '<div class="option-list">' + options + "</div>" +
+        '<div class="scenario__result" data-result>' + result + "</div>";
     }
 
     return (
@@ -606,40 +682,52 @@
         '<div class="sim-case__head">' +
           '<span class="chip chip--violet">' + caseNumber(index) + "</span>" +
           "<b>" + esc(sim.title) + "</b>" +
+          '<ol class="sim-steps" aria-label="Pasos del caso">' + steps + "</ol>" +
         "</div>" +
         '<p class="muted tiny sim-case__brief">' + esc(sim.brief) + "</p>" +
         '<div class="sim-case__grid">' +
-          deviceHtml(sim) +
-          '<div class="sim-case__decision">' +
-            "<p><strong>" + esc(sim.question) + "</strong></p>" +
-            (chosen ? "" : pauseHtml()) +
-            '<div class="option-list">' + options + "</div>" +
-            '<div class="scenario__result" data-result>' + result + "</div>" +
-          "</div>" +
+          deviceHtml(sim, inspected ? insp : insp) +
+          '<div class="sim-case__decision">' + decision + "</div>" +
         "</div>" +
       "</article>"
     );
   }
 
-  function resultHtml(list, saved) {
-    var best = 0;
+  function resultHtml(list, saved, inspectState) {
+    var best = 0, found = 0, totalSig = 0, pts = 0;
     var rows = list.map(function (sim, index) {
       var idx = saved[sim.id];
       var chosen = typeof idx === "number" ? sim.options[idx] : null;
       if (chosen && chosen.verdict === "best") best += 1;
+      var insp = inspectState[sim.id];
+      var det = "";
+      if (insp && insp.done) {
+        var ev = evaluateInspect(sim, insp);
+        found += ev.found.length; totalSig += ev.total;
+        det = " · " + ev.found.length + " de " + ev.total + " señales detectadas";
+      }
+      pts += caseScore(sim, saved, inspectState);
       return (
         '<li class="review__item ' + (chosen && chosen.verdict === "best" ? "is-ok" : "is-no") + '">' +
           "<b>" + caseNumber(index) + " · " + esc(sim.title) + "</b>" +
           '<p class="tiny" style="margin:.3rem 0 0">' +
-            esc(chosen ? VERDICT_LABEL[chosen.verdict] : "Sin respuesta") + "</p>" +
+            esc(chosen ? VERDICT_LABEL[chosen.verdict] : "Sin respuesta") + esc(det) + "</p>" +
+          (chosen && chosen.outcome ? '<p class="tiny muted" style="margin:.25rem 0 0">' + esc(chosen.outcome) + "</p>" : "") +
         "</li>"
       );
     }).join("");
 
+    var max = list.length * 3;
+    var msg = best === list.length
+      ? "Decidiste con la mayor protección en todos los casos."
+      : best ? "Acertaste en " + best + " de " + list.length + " casos: repasa los demás y compara los resultados." : "Repite los casos y fíjate en cómo cambia el resultado cuando verificas por un canal oficial.";
+
     return (
       '<div class="sim-result">' +
         '<h4 class="sim-result__title">Tu resultado</h4>' +
-        '<p class="lede">Elegiste la opción de mayor protección en ' + best + " de " + list.length + " casos.</p>" +
+        '<div class="sim-result__score"><b>' + (Math.round(pts * 10) / 10) + " / " + max + "</b><span>puntos</span></div>" +
+        '<p class="lede">Elegiste la opción de mayor protección en ' + best + " de " + list.length + " casos" +
+          (totalSig ? " y detectaste " + found + " de " + totalSig + " señales de alerta." : ".") + " " + esc(msg) + "</p>" +
         '<ul class="review sim-result__list">' + rows + "</ul>" +
         '<button class="btn btn--ghost" type="button" data-sc-back>' + icon("chevron") + " Volver a los casos</button>" +
       "</div>"
@@ -677,6 +765,7 @@
 
     bind: function (root, cfg, moduleId, handlers) {
       var saved = activityState(moduleId).scenarios || {};
+      var inspectState = activityState(moduleId).inspect || {};
       var list = PVA.content.simulations || [];
       var total = list.length;
       var index = firstOpen();
@@ -750,7 +839,7 @@
           stage.hidden = true;
           if (nav) nav.hidden = true;
           panel.hidden = false;
-          panel.innerHTML = resultHtml(list, saved);
+          panel.innerHTML = resultHtml(list, saved, inspectState);
           paintDots();
           return;
         }
@@ -758,7 +847,7 @@
         stage.hidden = false;
         if (nav) nav.hidden = false;
         panel.hidden = true;
-        stage.innerHTML = caseHtml(list[index], index, saved);
+        stage.innerHTML = caseHtml(list[index], index, saved, inspectState);
         paintDots();
         paintNav();
       }
@@ -806,9 +895,32 @@
           return;
         }
 
-        var pause = event.target.closest("[data-sc-pause]");
-        if (pause && root.contains(pause)) {
-          pause.setAttribute("aria-pressed", pause.getAttribute("aria-pressed") === "true" ? "false" : "true");
+        var mk = event.target.closest("[data-mk]");
+        if (mk && root.contains(mk)) {
+          var cur = list[index];
+          var st = inspectState[cur.id] || { marked: {}, done: false };
+          if (st.done) return;
+          var key = mk.getAttribute("data-mk");
+          st.marked[key] = !st.marked[key];
+          inspectState[cur.id] = st;
+          mk.classList.toggle("is-on", !!st.marked[key]);
+          mk.setAttribute("aria-pressed", st.marked[key] ? "true" : "false");
+          var n = Object.keys(st.marked).filter(function (k) { return st.marked[k]; }).length;
+          var cnt = root.querySelector("[data-inspect-count]");
+          if (cnt) cnt.textContent = n + " frase(s) marcada(s)";
+          var go = root.querySelector("[data-sc-inspect]");
+          if (go) go.disabled = n === 0;
+          PVA.audio.play("tap");
+          return;
+        }
+
+        if (event.target.closest("[data-sc-inspect]") && root.contains(event.target)) {
+          var c2 = list[index];
+          var s2 = inspectState[c2.id] || { marked: {}, done: false };
+          s2.done = true;
+          inspectState[c2.id] = s2;
+          saveActivity(moduleId, { inspect: inspectState });
+          paintStage();
           return;
         }
 

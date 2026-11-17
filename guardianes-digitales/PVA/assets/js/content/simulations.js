@@ -29,11 +29,28 @@
             "selección."
         }
       ],
+      inspect: {
+        prompt: "Examina el mensaje: toca las frases que te parezcan señales de alerta.",
+        parts: [
+          { t: "Hola, " },
+          { t: "vimos tu perfil y quedaste seleccionado", sig: true, why: "Te «seleccionan» sin que hayas postulado ni exista un proceso de selección." },
+          { t: " para una vacante de " },
+          { t: "medio tiempo", sig: false, why: "Un horario parcial no es una señal de riesgo por sí solo." },
+          { t: ". " },
+          { t: "Pago semanal de $250.000, trabajo desde casa", sig: true, why: "Un salario atractivo y sin proceso formal es el gancho habitual de las falsas ofertas." },
+          { t: ". Para iniciar el lunes, " },
+          { t: "envía foto de tu cédula", sig: true, why: "Un documento de identidad no se entrega por chat a un contacto sin verificar: sirve para suplantarte." },
+          { t: " y " },
+          { t: "consigna $50.000 por el examen de selección", sig: true, why: "Una oferta legítima no cobra pagos anticipados por «exámenes» o «trámites»." },
+          { t: "." }
+        ]
+      },
       question: "¿Qué harías primero?",
       options: [
         {
           label: "Enviar la cédula y pagar el examen: la oferta es buena y el pago es semanal.",
           verdict: "danger",
+          outcome: "Resultado: dos semanas después llega el aviso de un crédito solicitado con tu cédula, y el «reclutador» nunca vuelve a responder.",
           feedback:
             "Es la respuesta de mayor riesgo. Una oferta legítima no debería pedirte " +
             "pagos anticipados ni una foto de tu documento antes de un contrato. " +
@@ -49,6 +66,7 @@
         {
           label: "Buscar la empresa por su sitio oficial y verificar la vacante, sin enviar documentos ni pagar.",
           verdict: "best",
+          outcome: "Resultado: la empresa real no reconoce la vacante. Bloqueas el número y no pierdes dinero ni datos.",
           feedback:
             "Buena decisión. Aplicaste PAUSA y VERIFICA: no entregaste datos ni " +
             "dinero y comprobaste la vacante por un canal oficial que tú elegiste. " +
@@ -61,6 +79,7 @@
         {
           label: "Responder con la foto del documento marcada con la frase «solo para la vacante».",
           verdict: "risky",
+          outcome: "Resultado: el «reclutador» ahora te pide también una selfie con el documento y repite la presión por el pago.",
           feedback:
             "La marca de agua no impide que usen tus datos. Sigue siendo una " +
             "entrega de información personal a un contacto no verificado. Primero " +
@@ -92,11 +111,24 @@
             "o será devuelto: http://envios-express-pago.info/retener"
         }
       ],
+      inspect: {
+        prompt: "Examina el mensaje: toca las frases que te parezcan señales de alerta.",
+        parts: [
+          { t: "TU PAQUETE ESTÁ RETENIDO EN BODEGA", sig: true, why: "No hay una compra previa que explique el envío, y las mayúsculas buscan alarmarte." },
+          { t: ". " },
+          { t: "Paga $3.900", sig: true, why: "El cobro pequeño baja la guardia: parece que no vale la pena desconfiar." },
+          { t: " " },
+          { t: "en las próximas 24 horas o será devuelto", sig: true, why: "Urgencia y amenaza de perder el paquete para que no verifiques." },
+          { t: ": " },
+          { t: "http://envios-express-pago.info/retener", sig: true, why: "El dominio no es el de una transportadora oficial; el enlace es un canal controlado por el estafador." }
+        ]
+      },
       question: "¿Qué haces con el mensaje?",
       options: [
         {
           label: "Pagar el valor: es poco dinero y no quieres perder el paquete.",
           verdict: "danger",
+          outcome: "Resultado: el pago sale de tu cuenta y al día siguiente aparecen otros cobros que no reconoces.",
           feedback:
             "El monto bajo es parte del engaño: reduce la desconfianza. Al pagar en " +
             "el enlace entregas los datos de tu tarjeta o tu cuenta a un sitio que " +
@@ -111,6 +143,7 @@
         {
           label: "Abrir el enlace solo para mirar la página, sin pagar ni escribir datos.",
           verdict: "risky",
+          outcome: "Resultado: la página te pide los datos de tu tarjeta «para verificar» y tu número queda confirmado como activo para nuevos intentos.",
           feedback:
             "Abrir el enlace ya es interactuar y puede cargar una página diseñada " +
             "para capturar datos, instalar algo o confirmar que el número está " +
@@ -124,6 +157,7 @@
         {
           label: "Revisar el estado del envío en la app oficial o en el sitio escrito por mí.",
           verdict: "best",
+          outcome: "Resultado: la app no muestra ningún paquete retenido. Bloqueas el número y guardas una captura.",
           feedback:
             "Correcto. Verificaste por un canal oficial y no usaste el enlace del " +
             "SMS. Si la transportadora no reconoce el envío, bloquea y reporta el " +
@@ -154,11 +188,26 @@
             "6 dígitos que acaba de recibir. No cuelgue, el proceso se cancela."
         }
       ],
+      inspect: {
+        prompt: "Examina lo que dice quien llama: toca las frases que te parezcan señales de alerta.",
+        parts: [
+          { t: "Buenas tardes, ", sig: false, why: "Un saludo cortés no es una señal: quienes engañan suelen ser muy amables." },
+          { t: "le habla el área de seguridad del banco", sig: true, why: "Se presenta como el banco, pero la identidad por voz o por el identificador de llamada no se puede comprobar." },
+          { t: ". " },
+          { t: "Detectamos una compra no autorizada en su tarjeta", sig: true, why: "Miedo a perder dinero: es el pretexto para pedirte datos." },
+          { t: ". Para bloquearla, " },
+          { t: "dígame el código de 6 dígitos que acaba de recibir", sig: true, why: "Ningún banco pide por teléfono un código de verificación: es la segunda llave de tu cuenta." },
+          { t: ". " },
+          { t: "No cuelgue, el proceso se cancela", sig: true, why: "Presión para que no cortes ni verifiques por otro canal." },
+          { t: "." }
+        ]
+      },
       question: "¿Cuál es tu respuesta?",
       options: [
         {
           label: "Dictar el código: quieres bloquear la compra cuanto antes.",
           verdict: "danger",
+          outcome: "Resultado: en minutos se aprueba una compra con tu tarjeta y cambian tus credenciales.",
           feedback:
             "Ese código es la segunda llave de tu cuenta. Al dictarlo, el estafador " +
             "puede completar una operación o cambiar tus credenciales. Ningún banco " +
@@ -172,6 +221,7 @@
         {
           label: "Colgar y llamar al número oficial del banco desde la app o la tarjeta.",
           verdict: "best",
+          outcome: "Resultado: el banco confirma que no hay ninguna alerta y refuerza tu tarjeta por precaución.",
           feedback:
             "Muy bien. Aplicaste PAUSA al no dictar el código y VERIFICA al usar un " +
             "canal oficial elegido por ti. El banco podrá confirmar si existe la " +
@@ -184,6 +234,7 @@
         {
           label: "Pedir el nombre y el número de empleado del asesor y seguir la llamada.",
           verdict: "risky",
+          outcome: "Resultado: te dan un nombre y un número de empleado convincentes, y la presión para dictar el código aumenta.",
           feedback:
             "Un nombre y un número de empleado se pueden inventar. La llamada sigue " +
             "siendo un canal controlado por quien llama. Corta y verifica por el " +

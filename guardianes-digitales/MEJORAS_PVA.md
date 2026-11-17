@@ -82,7 +82,9 @@ Estado: implementada en la rama de desarrollo.
 
 ---
 
-# Ronda 3 · Nuevos ajustes (pendiente de aprobación)
+# Ronda 3 · Nuevos ajustes (implementada)
+
+Estado: implementada. Detalle: botón «Menú» dentro de la cabecera (sin superposición); RO-BIT solo como chat con interpretación local de intenciones (sinónimos, raíces, coincidencia aproximada, preguntas relacionadas); módulos a todo el ancho con bibliografía independiente; actividad «Arma tu defensa» (clasificación) en Protección de datos; simulaciones con pasos Examinar → Decidir → Resultado, consecuencias por decisión y puntuación.
 
 ## 1. Botón del menú sin superposición
 - El botón de reapertura debe tener ubicación propia, sin cubrir el encabezado de la página.
