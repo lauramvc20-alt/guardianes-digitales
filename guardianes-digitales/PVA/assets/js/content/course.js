@@ -326,18 +326,34 @@
         }
       ],
       activity: {
-        type: "commitments",
-        title: "Elige al menos tres compromisos",
-        intro: "Elige al menos tres hábitos que puedas empezar hoy. Marca cada compromiso que quieras asumir: tu selección se guarda solo en este navegador y no se envía a nadie.",
-        min: 3,
+        type: "defense",
+        title: "Arma tu defensa",
+        goal: "Clasifica 12 medidas de protección en la zona donde cumplen su función. Cada intento te explica el porqué.",
+        zones: [
+          { key: "acceso", title: "Acceso", icon: "lock", text: "Quién puede entrar a tus cuentas" },
+          { key: "privacidad", title: "Privacidad", icon: "eyeOff", text: "Qué saben otros de ti" },
+          { key: "alertas", title: "Alertas y mantenimiento", icon: "bolt", text: "Detectar a tiempo y mantener al día" },
+          { key: "respuesta", title: "Respuesta", icon: "flag", text: "Qué haces ante un intento de engaño" }
+        ],
         items: [
-          { key: "claves", flag: "Claves", title: "Usaré una contraseña distinta para cada servicio importante", detail: "Empezaré por el correo y la banca móvil." },
-          { key: "dospasos", flag: "2FA", title: "Activaré la autenticación en dos pasos", detail: "En mi correo y en mis cuentas bancarias." },
-          { key: "privacidad", flag: "Privacidad", title: "Revisaré la privacidad de mis redes y publicaré menos datos", detail: "Limitaré quién puede ver mi información personal." },
-          { key: "alertas", flag: "Alertas", title: "Activaré las alertas de movimientos de mi banco", detail: "Revisaré las transacciones periódicamente." },
-          { key: "actualizaciones", flag: "Updates", title: "Mantendré actualizados el sistema, el navegador y las apps", detail: "Instalaré los parches de seguridad disponibles." },
-          { key: "reporte", flag: "Reporte", title: "Reportaré números, mensajes o llamadas sospechosas", detail: "Bloquearé y conservaré las evidencias." }
-        ]
+          { key: "claves", zone: "acceso", label: "Usar una contraseña distinta para cada servicio importante", why: "Así, si una clave se filtra, no abre tus otras cuentas." },
+          { key: "dospasos", zone: "acceso", label: "Activar la autenticación en dos pasos", why: "Pide una segunda verificación además de la contraseña para poder entrar." },
+          { key: "gestor", zone: "acceso", label: "Proteger el gestor de contraseñas con una clave principal robusta", why: "Esa clave es la llave de todas las demás: debe ser fuerte y solo tuya." },
+          { key: "perfiles", zone: "privacidad", label: "Revisar la privacidad de tus perfiles y limitar quién ve tus datos", why: "Cuanto menos publicas, menos material tienen para personalizar un engaño." },
+          { key: "documento", zone: "privacidad", label: "No enviar fotos de tu documento por chats informales", why: "Una foto del documento sirve para suplantarte y pedir créditos a tu nombre." },
+          { key: "necesarios", zone: "privacidad", label: "Entregar solo los datos necesarios en formularios y encuestas", why: "Los formularios que piden de más pueden ser una forma de recoger datos." },
+          { key: "alertas", zone: "alertas", label: "Activar alertas de compras y transferencias", why: "Te enteras del movimiento en el momento y puedes reaccionar antes." },
+          { key: "movimientos", zone: "alertas", label: "Revisar tus movimientos al menos una vez por semana", why: "Permite detectar cobros que no reconoces sin esperar al extracto." },
+          { key: "actualizar", zone: "alertas", label: "Actualizar el sistema, el navegador y las apps cuando haya parches", why: "Los parches cierran fallos de seguridad que otros pueden aprovechar." },
+          { key: "bloquear", zone: "respuesta", label: "Bloquear y reportar el número o perfil sospechoso", why: "Corta el contacto y avisa a la plataforma o al operador." },
+          { key: "evidencias", zone: "respuesta", label: "Conservar capturas y el registro de la llamada", why: "Son las pruebas que necesitarás para denunciar o reclamar." },
+          { key: "cambiar", zone: "respuesta", label: "Cambiar las contraseñas si entregaste datos", why: "Reduce el daño después de un posible engaño." }
+        ],
+        conclusion: {
+          high: "Defensa sólida: ubicaste casi todas las medidas a la primera. Ahora lleva dos o tres a tu vida real esta semana.",
+          mid: "Buena base. Repasa las medidas que te costaron: ahí está tu mejor margen de mejora.",
+          low: "Vas construyendo tu defensa. Repite el desafío y fíjate en el propósito de cada medida."
+        }
       },
       aside: {
         tip: "La 2FA y una contraseña única no eliminan el riesgo, pero hacen que un dato filtrado no sea suficiente para entrar a tu cuenta.",

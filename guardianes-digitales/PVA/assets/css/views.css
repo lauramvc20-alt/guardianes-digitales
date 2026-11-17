@@ -1953,3 +1953,72 @@ html[data-theme="light"] .module-goals { border-color: rgba(15, 23, 42, 0.12); }
 html[data-theme="light"] .module-goals li { color: #1e293b; }
 html[data-theme="light"] .module-goals svg { color: #0f766e; }
 html[data-theme="light"] .module-progress h2, html[data-theme="light"] .module-sources h2 { color: #0f172a; }
+
+/* ======================= Actividad «Arma tu defensa» ======================= */
+.defense__meter { margin: 1rem 0 0.8rem; }
+.defense__meter-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem; }
+.defense__meter-top b { font-family: var(--font-display); font-size: 1.05rem; color: var(--turq); }
+.defense__bar { height: 10px; border-radius: 99px; background: rgba(148, 168, 214, 0.18); overflow: hidden; }
+.defense__bar span { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--violet), var(--turq)); transition: width 500ms var(--ease); }
+
+.defense__tray-wrap p { margin: 0 0 0.5rem; }
+.defense__tray { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.8rem; border-radius: var(--r-md); border: 1px dashed var(--line-strong); background: rgba(148, 168, 214, 0.05); min-height: 64px; }
+.dchip {
+  padding: 0.5rem 0.8rem; border-radius: 12px; border: 1px solid var(--line-strong);
+  background: rgba(139, 108, 246, 0.16); color: var(--ink); font: inherit; font-size: 0.84rem; line-height: 1.35;
+  text-align: left; cursor: grab; max-width: 100%;
+  transition: transform var(--speed) var(--ease), border-color var(--speed) var(--ease), background var(--speed) var(--ease);
+}
+.dchip:hover { border-color: var(--lavender); transform: translateY(-1px); }
+.dchip[aria-pressed="true"] { border-color: var(--turq); background: rgba(79, 224, 193, 0.2); box-shadow: 0 0 0 3px rgba(79, 224, 193, 0.25); }
+.dchip:active { cursor: grabbing; }
+
+.defense__feedback { margin: 0.8rem 0 0; padding: 0.7rem 0.9rem; border-radius: var(--r-sm); font-size: 0.86rem; line-height: 1.5; border: 1px solid var(--line); }
+.defense__feedback[hidden] { display: none; }
+.defense__feedback.is-ok { border-color: rgba(79, 224, 193, 0.5); background: rgba(79, 224, 193, 0.1); }
+.defense__feedback.is-no { border-color: rgba(255, 122, 107, 0.5); background: rgba(255, 122, 107, 0.1); }
+
+.defense__zones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+.dz { display: flex; flex-direction: column; gap: 0.6rem; padding: 0.8rem; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--panel); transition: border-color var(--speed) var(--ease), background var(--speed) var(--ease); }
+.dz.is-over { border-color: var(--turq); background: rgba(79, 224, 193, 0.08); }
+.dz.is-shake { animation: dzShake 360ms var(--ease); }
+@keyframes dzShake { 0%, 100% { transform: none; } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.dz__head { display: grid; grid-template-columns: auto 1fr auto; gap: 0.55rem; align-items: center; }
+.dz__ico { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: rgba(139, 108, 246, 0.18); color: var(--lavender); }
+.dz__ico svg { width: 17px; height: 17px; }
+.dz__head h4 { margin: 0; font-size: 0.95rem; }
+.dz__head small { display: block; color: var(--muted); font-size: 0.74rem; line-height: 1.3; }
+.dz__count { font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.dz__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; min-height: 24px; }
+.dz-item { display: flex; gap: 0.45rem; align-items: flex-start; padding: 0.45rem 0.55rem; border-radius: 10px; font-size: 0.78rem; line-height: 1.35; background: rgba(79, 224, 193, 0.1); border: 1px solid rgba(79, 224, 193, 0.35); }
+.dz-item svg { flex: none; width: 14px; height: 14px; margin-top: 2px; color: var(--turq); }
+.dz-item.is-new { animation: dzIn 380ms var(--ease) both; }
+@keyframes dzIn { from { opacity: 0; transform: translateY(-6px) scale(0.97); } to { opacity: 1; transform: none; } }
+.dz__drop { margin-top: auto; padding: 0.45rem; border-radius: 10px; border: 1px dashed var(--line-strong); background: none; color: var(--muted); font: inherit; font-size: 0.74rem; cursor: pointer; }
+.dz__drop:not(:disabled):hover { border-color: var(--turq); color: var(--ink); }
+.dz__drop:disabled { opacity: 0.5; cursor: default; }
+
+.defense__end { display: flex; gap: 1.2rem; align-items: center; margin-top: 1.1rem; padding: 1.1rem 1.3rem; border-radius: var(--r-md); border: 1px solid rgba(79, 224, 193, 0.4); background: linear-gradient(120deg, rgba(79, 224, 193, 0.12), rgba(139, 108, 246, 0.12)); }
+.defense__end[hidden] { display: none; }
+.defense__score { text-align: center; flex: none; }
+.defense__score b { display: block; font-family: var(--font-display); font-size: 2.2rem; line-height: 1; color: var(--turq); }
+.defense__score span { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.defense__end-body h4 { margin: 0 0 0.3rem; }
+.defense__end-body p { margin: 0 0 0.5rem; }
+
+@media (max-width: 1080px) { .defense__zones { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .defense__zones { grid-template-columns: 1fr; } .defense__end { flex-direction: column; text-align: center; } }
+@media (prefers-reduced-motion: reduce) { .dz.is-shake, .dz-item.is-new { animation: none; } .defense__bar span { transition: none; } }
+
+html[data-theme="light"] .defense__tray { background: #f4f7fc; border-color: rgba(15, 23, 42, 0.25); }
+html[data-theme="light"] .dchip { background: rgba(139, 108, 246, 0.1); color: #1e1b4b; border-color: rgba(76, 58, 166, 0.35); }
+html[data-theme="light"] .dchip[aria-pressed="true"] { background: rgba(15, 155, 132, 0.16); border-color: #0f766e; box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.2); }
+html[data-theme="light"] .dz { background: #ffffff; border-color: rgba(15, 23, 42, 0.14); }
+html[data-theme="light"] .dz__head small, html[data-theme="light"] .dz__count, html[data-theme="light"] .dz__drop { color: #475569; }
+html[data-theme="light"] .dz__ico { color: #4c3aa6; }
+html[data-theme="light"] .dz-item { background: rgba(15, 155, 132, 0.1); border-color: rgba(15, 118, 110, 0.4); color: #0f172a; }
+html[data-theme="light"] .dz-item svg, html[data-theme="light"] .defense__meter-top b, html[data-theme="light"] .defense__score b { color: #0f766e; }
+html[data-theme="light"] .defense__feedback.is-ok { background: rgba(15, 155, 132, 0.1); border-color: rgba(15, 118, 110, 0.5); color: #0f172a; }
+html[data-theme="light"] .defense__feedback.is-no { background: rgba(232, 85, 63, 0.1); border-color: rgba(194, 65, 12, 0.5); color: #0f172a; }
+html[data-theme="light"] .defense__bar { background: rgba(15, 23, 42, 0.12); }
+html[data-theme="light"] .defense__end { color: #0f172a; border-color: rgba(15, 118, 110, 0.45); }

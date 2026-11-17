@@ -293,74 +293,204 @@
     }
   };
 
-  /* ----------------------------------------------------------- Compromisos */
-  var commitments = {
+  /* ----------------------------------------------- Arma tu defensa (clasificación) */
+  var defense = {
     html: function (cfg, moduleId) {
-      var picked = activityState(moduleId).commitments || {};
-      var total = cfg.items.length;
-      var min = cfg.min || 3;
-      var count = countKeys(picked);
+      var st = activityState(moduleId).defense || {};
+      var placed = st.placed || {};
+      var items = cfg.items;
+      var order = st.order || items.map(function (it) { return it.key; });
 
-      var items = cfg.items.map(function (item) {
-        var on = !!picked[item.key];
+      var zones = cfg.zones.map(function (z) {
+        var inside = items.filter(function (it) { return placed[it.key] === z.key; }).map(function (it) {
+          return '<li class="dz-item"><span aria-hidden="true">' + icon("check") + "</span>" + esc(it.label) + "</li>";
+        }).join("");
         return (
-          '<button class="practice' + (on ? " is-on" : "") + '" type="button" ' +
-            'data-pick="' + item.key + '" aria-pressed="' + (on ? "true" : "false") + '">' +
-            '<span class="practice__check" aria-hidden="true">' + icon("check") + "</span>" +
-            '<span class="practice__text"><b>' + esc(item.title) + "</b>" +
-              "<span>" + esc(item.detail) + "</span></span>" +
-            '<span class="practice__flag">' + esc(item.flag) + "</span>" +
-          "</button>"
+          '<section class="dz" data-zone="' + z.key + '">' +
+            '<header class="dz__head"><span class="dz__ico" aria-hidden="true">' + icon(z.icon) + "</span>" +
+              "<div><h4>" + esc(z.title) + "</h4><small>" + esc(z.text) + "</small></div>" +
+              '<span class="dz__count" data-zcount="' + z.key + '"></span></header>' +
+            '<ul class="dz__list" data-zlist="' + z.key + '">' + inside + "</ul>" +
+            '<button class="dz__drop" type="button" data-drop="' + z.key + '">Colocar aquí la medida elegida</button>' +
+          "</section>"
         );
       }).join("");
 
+      var tray = order.filter(function (k) { return !placed[k]; }).map(function (k) {
+        var it = items.filter(function (x) { return x.key === k; })[0];
+        return '<button class="dchip" type="button" draggable="true" data-chip="' + k + '" aria-pressed="false">' + esc(it.label) + "</button>";
+      }).join("");
+
       return (
-        '<section class="worksheet" id="actividad" aria-labelledby="actTitle">' +
-          '<span class="kicker kicker--violet">Actividad práctica</span>' +
+        '<section class="worksheet defense" id="actividad" aria-labelledby="actTitle">' +
+          '<span class="kicker kicker--violet">Actividad práctica · Desafío de clasificación</span>' +
           '<h3 id="actTitle">' + esc(cfg.title) + "</h3>" +
-          '<p class="muted tiny">' + esc(cfg.intro) + "</p>" +
-          '<div class="practice-grid">' + items + "</div>" +
-          '<p class="tiny muted" data-pick-count style="margin-top:.9rem">' +
-            count + " de " + total + " seleccionados · elige al menos " + min +
-          "</p>" +
+          '<p class="muted tiny">' + esc(cfg.goal) + " Toca una medida y luego su zona, o arrástrala.</p>" +
+          '<div class="defense__meter"><div class="defense__meter-top"><b data-dmeter-label></b><span class="tiny muted" data-dscore></span></div>' +
+            '<div class="defense__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span data-dbar></span></div></div>' +
+          '<div class="defense__tray-wrap"><p class="tiny muted" data-dhint>Elige una medida.</p>' +
+            '<div class="defense__tray" data-tray aria-label="Medidas por clasificar">' + tray + "</div></div>" +
+          '<div class="defense__feedback" data-dfeedback role="status" aria-live="polite" hidden></div>' +
+          '<div class="defense__zones">' + zones + "</div>" +
+          '<div class="defense__end" data-dend hidden></div>' +
         "</section>"
       );
     },
 
     bind: function (root, cfg, moduleId, handlers) {
-      var picked = activityState(moduleId).commitments || {};
-      var total = cfg.items.length;
-      var min = cfg.min || 3;
+      var items = cfg.items;
+      var total = items.length;
+      var state = activityState(moduleId).defense || {};
+      var placed = state.placed || {};
+      var first = state.first || {};
+      var tries = state.tries || {};
+      var order = state.order || null;
+      var selected = null;
+
+      function byKey(k) { return items.filter(function (it) { return it.key === k; })[0]; }
+      function zoneOf(k) { return cfg.zones.filter(function (z) { return z.key === k; })[0]; }
+      function persist() { saveActivity(moduleId, { defense: { placed: placed, first: first, tries: tries, order: order } }); }
+      function placedCount() { return Object.keys(placed).length; }
+      function firstCount() { return Object.keys(first).filter(function (k) { return first[k]; }).length; }
+      function chipHtml(k) {
+        return '<button class="dchip" type="button" draggable="true" data-chip="' + k + '" aria-pressed="false">' + esc(byKey(k).label) + "</button>";
+      }
+
+      if (!order) {
+        order = items.map(function (it) { return it.key; });
+        for (var i = order.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = order[i]; order[i] = order[j]; order[j] = t;
+        }
+        var tray0 = root.querySelector("[data-tray]");
+        if (tray0) tray0.innerHTML = order.filter(function (k) { return !placed[k]; }).map(chipHtml).join("");
+        persist();
+      }
+
+      function level(pct) {
+        return pct >= 100 ? "Defensa completa" : pct >= 66 ? "Defensa sólida" : pct >= 33 ? "Defensa en marcha" : "Defensa por construir";
+      }
+
+      function finish() {
+        var good = firstCount();
+        var C = cfg.conclusion;
+        var msg = good >= 10 ? C.high : good >= 7 ? C.mid : C.low;
+        var weak = items.filter(function (it) { return (tries[it.key] || 0) > 0; });
+        var end = root.querySelector("[data-dend]");
+        end.hidden = false;
+        end.innerHTML =
+          '<div class="defense__score"><b>' + good + " / " + total + "</b><span>a la primera</span></div>" +
+          '<div class="defense__end-body"><h4>' + esc(level(100)) + "</h4><p>" + esc(msg) + "</p>" +
+          (weak.length ? '<p class="tiny muted">Para repasar: ' + weak.map(function (w) { return esc(w.label); }).join(" · ") + "</p>" : "") +
+          '<button class="btn btn--ghost" type="button" data-dreset>' + icon("rotateCcw") + " Repetir el desafío</button></div>";
+      }
 
       function paint() {
-        var count = countKeys(picked);
-        var counter = root.querySelector("[data-pick-count]");
-        if (counter) {
-          counter.textContent = count + " de " + total + " seleccionados · elige al menos " + min;
+        var n = placedCount();
+        var pct = Math.round((n / total) * 100);
+        root.querySelector("[data-dmeter-label]").textContent = level(pct);
+        root.querySelector("[data-dscore]").textContent = n + " de " + total + " medidas colocadas";
+        var bar = root.querySelector("[data-dbar]");
+        bar.style.width = pct + "%";
+        bar.parentNode.setAttribute("aria-valuenow", String(pct));
+        cfg.zones.forEach(function (z) {
+          var c = root.querySelector('[data-zcount="' + z.key + '"]');
+          var cnt = items.filter(function (it) { return it.zone === z.key; }).length;
+          var have = items.filter(function (it) { return placed[it.key] === z.key; }).length;
+          if (c) c.textContent = have + "/" + cnt;
+        });
+        var hint = root.querySelector("[data-dhint]");
+        if (hint) hint.textContent = n >= total ? "No quedan medidas por clasificar." : selected ? "Ahora toca la zona donde cumple su función." : "Elige una medida.";
+        root.querySelectorAll("[data-drop]").forEach(function (b) { b.disabled = !selected; });
+        var trayWrap = root.querySelector(".defense__tray-wrap");
+        announce(handlers, n, total);
+        if (n >= total) {
+          trayWrap.hidden = true;
+          finish();
+          completeIfReady(handlers, true);
+        } else {
+          trayWrap.hidden = false;
+          root.querySelector("[data-dend]").hidden = true;
         }
-        announce(handlers, count, total);
-        completeIfReady(handlers, count >= min);
+      }
+
+      function say(kind, html) {
+        var f = root.querySelector("[data-dfeedback]");
+        f.hidden = false;
+        f.className = "defense__feedback is-" + kind;
+        f.innerHTML = html;
+      }
+
+      function select(key) {
+        selected = selected === key ? null : key;
+        root.querySelectorAll("[data-chip]").forEach(function (c) {
+          c.setAttribute("aria-pressed", c.getAttribute("data-chip") === selected ? "true" : "false");
+        });
+        paint();
+      }
+
+      function place(key, zoneKey) {
+        var it = byKey(key);
+        if (!it || placed[key]) return;
+        var chip = root.querySelector('[data-chip="' + key + '"]');
+        if (it.zone === zoneKey) {
+          placed[key] = zoneKey;
+          if (!tries[key]) first[key] = true;
+          selected = null;
+          if (chip) chip.remove();
+          var li = document.createElement("li");
+          li.className = "dz-item is-new";
+          li.innerHTML = '<span aria-hidden="true">' + icon("check") + "</span>" + esc(it.label);
+          root.querySelector('[data-zlist="' + zoneKey + '"]').appendChild(li);
+          say("ok", "<b>Correcto.</b> " + esc(it.why));
+        } else {
+          tries[key] = (tries[key] || 0) + 1;
+          var z = root.querySelector('[data-zone="' + zoneKey + '"]');
+          if (z) { z.classList.remove("is-shake"); void z.offsetWidth; z.classList.add("is-shake"); }
+          say("no", "<b>Esa no va en «" + esc(zoneOf(zoneKey).title) + "».</b> Piensa en su propósito: " + esc(it.why));
+        }
+        PVA.audio.play("tap");
+        persist();
+        paint();
       }
 
       root.addEventListener("click", function (event) {
-        var btn = event.target.closest("[data-pick]");
-        if (!btn || !root.contains(btn)) return;
-        var key = btn.getAttribute("data-pick");
-
-        if (picked[key]) {
-          delete picked[key];
-          btn.classList.remove("is-on");
-          btn.setAttribute("aria-pressed", "false");
-        } else {
-          picked[key] = true;
-          btn.classList.add("is-on");
-          btn.setAttribute("aria-pressed", "true");
-          PVA.audio.play("tap");
+        var chip = event.target.closest("[data-chip]");
+        if (chip && root.contains(chip)) { select(chip.getAttribute("data-chip")); return; }
+        if (event.target.closest("[data-dreset]")) {
+          saveActivity(moduleId, { defense: { placed: {}, first: {}, tries: {}, order: null } });
+          PVA.router.refresh();
+          return;
         }
-
-        saveActivity(moduleId, { commitments: picked });
-        paint();
+        var zone = event.target.closest("[data-zone]");
+        if (zone && root.contains(zone) && selected) place(selected, zone.getAttribute("data-zone"));
       });
+
+      /* Arrastrar y soltar (además del toque) */
+      root.addEventListener("dragstart", function (event) {
+        var chip = event.target.closest && event.target.closest("[data-chip]");
+        if (!chip) return;
+        event.dataTransfer.setData("text/plain", chip.getAttribute("data-chip"));
+        event.dataTransfer.effectAllowed = "move";
+      });
+      root.addEventListener("dragover", function (event) {
+        var zone = event.target.closest && event.target.closest("[data-zone]");
+        if (zone) { event.preventDefault(); zone.classList.add("is-over"); }
+      });
+      root.addEventListener("dragleave", function (event) {
+        var zone = event.target.closest && event.target.closest("[data-zone]");
+        if (zone) zone.classList.remove("is-over");
+      });
+      root.addEventListener("drop", function (event) {
+        var zone = event.target.closest && event.target.closest("[data-zone]");
+        if (!zone) return;
+        event.preventDefault();
+        zone.classList.remove("is-over");
+        var key = event.dataTransfer.getData("text/plain");
+        if (key) place(key, zone.getAttribute("data-zone"));
+      });
+
+      paint();
     }
   };
 
@@ -740,7 +870,7 @@
   var registry = {
     quickcheck: quickcheck,
     flagHunt: flagHunt,
-    commitments: commitments,
+    defense: defense,
     scenarios: scenarios
   };
 

@@ -40,13 +40,13 @@
       };
     }
 
-    if (cfg.type === "commitments") {
-      var picked = keyCount(act.commitments);
-      var min = cfg.min || 3;
+    if (cfg.type === "defense") {
+      var d = act.defense || {};
+      var n = keyCount(d.placed);
       return {
-        done: picked >= min,
-        ratio: Math.min(1, picked / min),
-        text: picked + " de " + cfg.items.length + " compromisos · mínimo " + min
+        done: n >= cfg.items.length,
+        ratio: n / cfg.items.length,
+        text: n + " de " + cfg.items.length + " medidas clasificadas"
       };
     }
 
