@@ -1,216 +1,268 @@
-Actualización de MEJORAS_PVA.md — Nuevos ajustes
+Nueva actualización de MEJORAS_PVA.md — Ajustes visuales y funcionales de Guardián Digital
 
-1.  Actualmente, al ocultar el menú, el botón que permite abrirlo nuevamente se superpone con el encabezado de la página.
+Quiero incorporar los siguientes requerimientos a la versión actual de Guardián Digital.
 
-Necesito corregir este comportamiento:
+También quiero que utilices las skills de diseño disponibles en el proyecto, especialmente:
 
-- El botón para abrir el menú debe tener una ubicación propia y no superponerse con el encabezado.
-- El encabezado debe adaptarse correctamente cuando el panel esté abierto o cerrado.
-- El contenido principal debe aprovechar el espacio disponible cuando el panel esté oculto.
-- La transición entre ambos estados debe ser fluida.
-- Debe funcionar correctamente en diferentes tamaños de pantalla.
+- Figma Design: para aplicar criterios sólidos de diseño de interfaces, composición, jerarquía visual y consistencia.
+- Emil Kowalski: para mejorar las interacciones, transiciones y detalles de experiencia de usuario.
+- Impeccable: para evaluar y perfeccionar la calidad visual, tipografía, distribución, espaciado y presentación general.
 
-No quiero que el botón del menú interfiera con otros elementos ni que se produzcan desplazamientos visuales extraños.
+Si alguna skill tiene instrucciones o archivos específicos, léelos antes de utilizarla. No te limites a mencionar que las usaste: aplica sus criterios en las decisiones de diseño.
 
+Mi objetivo es que Guardián Digital tenga una identidad visual propia, con apariencia de un producto educativo profesional y cuidadosamente diseñado. Quiero evitar que la interfaz parezca generada automáticamente mediante patrones genéricos de tarjetas, columnas y botones.
 
-2. Actualmente RO-BIT aparece en diferentes espacios laterales, mediante tarjetas con mensajes. No me convence esta integración porque ocupa espacio y hace que los contenidos se vean más estrechos, quítalos y deja que el robot sea acompañamiento conversacional. RO-BIT debe permitir:
+1. Reorganizar las referencias bibliográficas
 
-- Consultar conceptos explicados en el curso.
-- Resolver dudas sobre los módulos.
-- Explicar términos de seguridad digital.
-- Orientar al participante cuando no comprenda algún contenido.
-- Ofrecer preguntas sugeridas para facilitar las consultas.
+Actualmente, las referencias bibliográficas aparecen distribuidas horizontalmente, una al lado de otra. Esta disposición hace que el contenido se vea desordenado y que algunas referencias queden demasiado separadas.
 
-Mejorar la comprensión de las preguntas
+Quiero cambiar completamente esta presentación:
 
-Actualmente, si escribo una pregunta diferente a las opciones sugeridas, RO-BIT no sabe responder, pero al inicio se indica que puedo seleccionar una pregunta o escribirla.
+- Mostrar las referencias apiladas verticalmente, una debajo de otra.
+- Cada referencia debe ocupar una fila independiente.
+- Mantener una separación equilibrada entre ellas.
+- Mejorar la alineación de los textos y los elementos gráficos.
+- Reducir considerablemente el tamaño de los iconos, ya que actualmente son demasiado grandes en relación con el texto.
+- Mantener una iconografía discreta y coherente con el resto de la plataforma.
+- Evitar que las referencias se vean como tarjetas grandes e innecesarias.
 
-Quiero mejorar este comportamiento.
+La sección debe ser sencilla, ordenada y fácil de consultar, sin ocupar más espacio del necesario.
 
-Como el proyecto debe mantenerse gratuito y no quiero depender de API de pago, propongo implementar un sistema local de preguntas y respuestas basado en palabras clave e intenciones.
+2. Corregir la legibilidad de la actividad práctica del módulo 2
 
-Puedes explorar estas posibilidades:
+En el modo claro, la actividad práctica del módulo 2 presenta un problema de contraste: algunos textos se ven demasiado claros y se pierden sobre el fondo.
 
-- Identificar palabras clave aunque el usuario escriba una pregunta con una redacción diferente.
-- Reconocer sinónimos y expresiones relacionadas.
-- Normalizar mayúsculas, minúsculas, tildes y signos de puntuación.
-- Relacionar las consultas con los contenidos y respuestas correspondientes.
-- Ofrecer preguntas relacionadas cuando no encuentre una coincidencia suficientemente clara.
-- Mostrar una respuesta de orientación cuando no comprenda la consulta, sin inventar información.
+Quiero que revises todos los elementos de esta actividad:
 
-Por ejemplo, si el usuario pregunta «¿cómo hago para que nadie entre a mi cuenta?», debería poder relacionarlo con contenidos sobre contraseñas y autenticación en dos pasos, aunque esa frase no esté registrada literalmente.
+- Texto principal.
+- Instrucciones.
+- Mensaje SMS.
+- Remitente.
+- Fragmentos interactivos.
+- Señales identificadas.
+- Retroalimentaciones.
+- Indicadores de progreso.
+- Botones y controles.
 
-Quiero que analices cuál sería la mejor solución técnica gratuita para conseguirlo.
+Todos deben tener un contraste adecuado en modo claro y oscuro.
 
-Importante:
+No quiero que simplemente oscurezcas todos los textos. Revisa los colores de cada componente y establece una jerarquía visual que permita distinguir claramente el contenido, las instrucciones, las interacciones y la retroalimentación.
 
-- No utilizar API de pago.
-- No incorporar suscripciones ni servicios externos que generen costos.
-- No presentar el sistema como inteligencia artificial generativa si realmente funciona mediante respuestas programadas.
-- Las respuestas deben basarse en el contenido del curso.
-- Evitar respuestas incorrectas cuando no exista una coincidencia clara.
+2.1. Mejorar la presentación de las señales identificadas
 
-Puedes mantener preguntas sugeridas dentro del chatbot, pero escribir una pregunta también debe ser útil y tener un procesamiento real.
+Actualmente, cuando el participante selecciona una señal sospechosa del mensaje, la explicación correspondiente se va agregando debajo de las anteriores.
 
-6. Eliminar los espacios laterales de RO-BIT en todos los módulos
+Esto provoca que el contenido se acumule verticalmente y que la actividad se vuelva cada vez más extensa.
 
-Actualmente aparecen espacios o tarjetas de RO-BIT dentro de las páginas de los módulos.
+Quiero una presentación más organizada e interactiva.
 
-Quiero eliminar estas integraciones laterales de todos los módulos, ya que el acompañamiento del robot se realizará exclusivamente mediante el chatbot.
+Analiza alternativas como:
 
-Esto incluye:
+- Mostrar la explicación de la señal seleccionada en un panel independiente.
+- Utilizar un espacio de retroalimentación que cambie según la selección.
+- Presentar la explicación en un panel lateral solo si existe suficiente espacio, sin estrechar el contenido principal.
+- Utilizar una ventana emergente o un panel desplegable controlado, si resulta más apropiado.
 
-- Los mensajes de RO-BIT que aparecen debajo de «Tu actividad».
-- Las tarjetas con consejos del robot.
-- Los espacios reservados para mostrar mensajes del asistente.
-- Cualquier otro bloque lateral permanente destinado a RO-BIT.
+La selección de una señal debe actualizar la explicación correspondiente, sin acumular bloques de retroalimentación hacia abajo.
 
-No quiero que simplemente se oculten visualmente dejando espacios vacíos. Debes reorganizar la distribución del contenido para aprovechar el espacio liberado.
+Requisito: El participante debe poder identificar las señales por sí mismo. No debes resaltar previamente las partes sospechosas ni revelar las respuestas antes de que interactúe.
 
-Reorganización del módulo 5 y la bibliografía
+Mantén el objetivo pedagógico de la actividad y conserva su lógica de evaluación y progreso.
 
-En particular, el contenido del módulo 5 y la bibliografía necesitan una mejor distribución.
+3. Optimizar la distribución del contenido cuando el menú lateral está oculto
 
-Actualmente, ubicar el contenido y otros elementos en columnas laterales hace que todo se vea apretado.
+Actualmente, cuando se oculta el panel lateral, los cuadros y bloques de contenido no aprovechan correctamente el espacio disponible.
 
-Quiero que:
+Se genera demasiado espacio vacío a la derecha y algunos componentes mantienen una distribución que parece pensada para cuando el menú está abierto.
 
-- El contenido principal tenga suficiente anchura.
-- La actividad práctica tenga un espacio adecuado.
-- La bibliografía se presente en una sección independiente y bien organizada.
-- No se acumulen demasiados elementos en una misma columna.
-- Se aproveche mejor el ancho de la pantalla.
+Quiero que la interfaz se adapte realmente a ambos estados del menú.
 
-No quiero que la solución sea simplemente mover las tarjetas de un lateral a otro. Necesito una reorganización real de la composición de la página.
+Requisitos:
 
-7. Rediseño completo de la actividad práctica del módulo 5: Protección de datos
+- Cuando el menú esté abierto, el contenido debe mantener una distribución equilibrada.
+- Cuando esté cerrado, el contenido debe ampliar y redistribuir su espacio de manera inteligente.
+- Los cuadros no deben conservar anchuras innecesariamente pequeñas.
+- Evitar grandes espacios vacíos a los lados.
+- Ajustar las columnas, los márgenes y las anchuras máximas según el espacio disponible.
+- Mantener una lectura cómoda, sin crear líneas de texto excesivamente largas.
+- Evitar que los componentes se estiren de forma desproporcionada.
+- Garantizar que las transiciones entre ambos estados sean fluidas.
 
-La actividad actual se titula «Elige al menos tres compromisos» y consiste en seleccionar hábitos de seguridad mediante tarjetas con casillas de verificación.
+No quiero que la solución consista únicamente en aumentar el ancho de todos los cuadros. Necesito que se revise la composición general de cada página y que la distribución se adapte al espacio disponible.
 
-No me convence esta dinámica. Se siente como una lista de tareas o compromisos y no como una actividad práctica de aprendizaje.
+La interfaz debe verse diseñada intencionalmente, no como un contenido que simplemente se estira al ocultar el menú.
 
-Quiero reemplazarla por completo.
+4. Rediseñar la experiencia del simulacro del módulo 4
 
-Condición fundamental: NO debe parecerse al simulacro de smishing y vishing del módulo 4.
+Este es uno de los cambios más importantes.
 
-El simulacro ya utiliza situaciones ficticias, mensajes, llamadas y decisiones sobre cómo reaccionar ante posibles engaños. No quiero repetir esa mecánica.
+Actualmente, los casos del simulacro presentan una mecánica demasiado repetitiva y poco natural.
 
-Nueva dirección
+En algunos casos, las palabras o fragmentos sospechosos aparecen subrayados desde el principio. Esto revela las respuestas y no permite que el participante investigue por su cuenta.
 
-Quiero una actividad interactiva de conocimientos sobre protección de datos, cuentas y dispositivos.
+Además, después de interactuar con el caso, aparecen preguntas y opciones que se van desplegando verticalmente. Esto hace que la actividad crezca hacia abajo, mientras queda mucho espacio vacío en otras partes de la pantalla.
 
-Puedes explorar dinámicas como:
+Quiero que revises la experiencia completa del simulacro y no solamente su apariencia.
 
-- Relacionar conceptos con sus funciones.
-- Clasificar medidas de protección por categorías.
-- Organizar acciones según su propósito.
-- Resolver pequeños desafíos de asociación.
-- Completar actividades interactivas de conocimientos.
+4.1. No revelar las señales antes de la interacción
 
-Los contenidos pueden incluir:
+Las señales sospechosas no deben aparecer subrayadas, resaltadas ni identificadas de antemano.
 
-- Uso de contraseñas diferentes y seguras.
-- Autenticación en dos pasos.
-- Protección de la privacidad en redes sociales.
-- Alertas de movimientos bancarios.
-- Actualización de dispositivos y aplicaciones.
-- Reporte de contactos sospechosos.
+El participante debe poder examinar el contenido sin pistas visuales que le indiquen directamente dónde están los problemas.
 
-Características necesarias
+Cuando la actividad requiera identificar elementos sospechosos, la selección debe realizarla el propio participante.
 
-- Debe tener una mecánica diferente a las simulaciones anteriores.
-- No debe utilizar escenarios ficticios de mensajes, llamadas o correos.
-- No debe consistir en marcar casillas de compromiso.
-- Debe permitir que el participante interactúe activamente.
-- Debe incluir retroalimentación educativa.
-- Debe tener un objetivo, una dinámica y una conclusión.
-- Puede incorporar puntuación o progreso si aporta valor.
-- Debe ser visualmente atractiva e intuitiva.
+Después de su respuesta, puedes mostrar la retroalimentación correspondiente y explicar qué señales debía reconocer.
 
-No quiero que simplemente cambies los colores o la distribución de las tarjetas actuales. Necesito una actividad nueva.
+4.2. Evitar que todas las actividades sean iguales
 
-8. Mejorar la funcionalidad y la lógica de las simulaciones del módulo 4
+Actualmente, los casos repiten prácticamente la misma dinámica: mostrar un contenido, seleccionar palabras sospechosas y recibir una explicación.
 
-Quiero revisar las simulaciones porque he encontrado preguntas que parecen no tener una función real dentro de la actividad.
+No quiero que todos los casos del simulacro tengan exactamente la misma mecánica.
 
-Por ejemplo, en una simulación aparece la pregunta:
+Cada caso debe tener una interacción adecuada al tipo de situación que presenta y al aprendizaje que busca desarrollar.
 
-«Pausa: ¿qué revisarías primero?»
+Por ejemplo:
 
-Y presenta opciones como:
+- Un caso de smishing puede permitir examinar un mensaje y decidir cómo actuar.
+- Un caso de vishing puede plantear una interacción basada en una llamada y permitir evaluar las decisiones tomadas durante la conversación.
+- Otros casos pueden utilizar decisiones, identificación de señales, selección de medidas de protección o evaluación de consecuencias, siempre que la dinámica tenga sentido para el contenido.
 
-- Quién lo envía.
-- Qué me pide.
-- Qué urgencia me impone.
+Estos son ejemplos de posibilidades, no una obligación de utilizar exactamente esas mecánicas.
 
-El problema es que, al seleccionar una de estas opciones, la respuesta no parece aportar nada ni influir en el desarrollo de la actividad.
+La regla principal es que la interacción debe corresponder al escenario. No fuerces la misma dinámica en todos los casos solamente para mantener una estructura uniforme.
 
-No quiero preguntas decorativas o interacciones que no tengan consecuencias.
+Cada actividad debe conservar coherencia con su objetivo pedagógico.
 
-Cambios solicitados
+4.3. Reorganizar las preguntas y decisiones
 
-- Revisar todas las preguntas y decisiones de las simulaciones.
-- Comprobar qué ocurre realmente después de seleccionar cada respuesta.
-- Hacer que las decisiones tengan una función pedagógica.
-- Si una elección debe influir en la actividad, debe modificar la retroalimentación, mostrar información relacionada o afectar el resultado de la simulación.
-- Si una pregunta no aporta valor, eliminarla o sustituirla.
-- Evitar preguntas repetitivas que no contribuyan al aprendizaje.
-- Explicar por qué una decisión es adecuada o inadecuada.
-- Mantener la coherencia entre las respuestas, la retroalimentación y el resultado final.
+Actualmente, después de examinar el caso, se despliegan preguntas de opciones hacia abajo.
 
-Quiero que el participante sienta que sus decisiones importan y que está aprendiendo algo con cada interacción.
+No quiero que cada respuesta genere nuevos bloques que se acumulen verticalmente.
 
-No basta con que los botones respondan al clic: la lógica de la actividad debe tener sentido.
+Quiero una experiencia más controlada y organizada:
 
-Conserva las simulaciones de smishing y vishing, pero mejora su calidad pedagógica y funcional.
+- Mostrar una pregunta o decisión a la vez.
+- Mantener el caso y la interacción dentro de una composición equilibrada.
+- Actualizar el contenido de la actividad según la respuesta.
+- Presentar la retroalimentación en un espacio definido.
+- Permitir avanzar cuando se haya completado la interacción correspondiente.
+- Evitar que el participante tenga que desplazarse continuamente hacia abajo para encontrar la siguiente pregunta.
+- Aprovechar el espacio horizontal sin crear columnas demasiado estrechas.
+- Evitar que una parte de la pantalla quede vacía mientras toda la actividad se concentra en el otro extremo.
 
----
+Puedes utilizar paneles dinámicos, pasos secuenciales, transiciones o una composición de dos áreas cuando realmente aporte valor.
 
-9. Revisión general de diseño y experiencia de usuario
+No quiero una interfaz que simplemente muestre todas las preguntas dentro de tarjetas apiladas.
 
-Todos estos cambios deben mantener una identidad visual coherente con Guardián Digital.
+4.4. Darle sentido a cada decisión
 
-Quiero una plataforma moderna, profesional, educativa e interactiva.
+Revisa la lógica de todas las preguntas y opciones.
 
-Presta especial atención a:
+Cada interacción debe tener una consecuencia pedagógica real.
 
-- Aprovechamiento del espacio horizontal.
-- Jerarquía visual y tipográfica.
-- Distribución equilibrada del contenido.
-- Espaciados consistentes.
-- Adaptación a pantallas de diferentes tamaños.
+Por ejemplo:
+
+- Una respuesta puede mostrar una explicación específica.
+- Una decisión puede permitir avanzar a una etapa diferente.
+- Una elección puede modificar el resultado o la evaluación del caso.
+- Una respuesta incorrecta puede explicar el riesgo y permitir corregir el criterio.
+
+No quiero botones que solamente cambien de color o preguntas que no influyan en nada.
+
+Si una pregunta no aporta al aprendizaje, elimínala o reemplázala.
+
+La retroalimentación debe explicar el motivo de la respuesta adecuada y qué riesgo implica una decisión equivocada.
+
+4.5. Mantener la progresión del simulacro
+
+El simulacro debe conservar una secuencia comprensible.
+
+El participante debe saber:
+
+- En qué caso se encuentra.
+- Qué debe hacer.
+- Qué ha completado.
+- Qué le falta por resolver.
+- Cuándo puede avanzar.
+
+Evita mostrar todos los pasos simultáneamente.
+
+La actividad debe sentirse como una experiencia interactiva y no como un formulario extenso.
+
+Importante: No conviertas el simulacro en una actividad de selección de palabras repetida con diferentes textos. Quiero variedad real en las mecánicas, sin perder el enfoque educativo de smishing, vishing y protección digital.
+
+5. Dirección visual: evitar una interfaz genérica
+
+Quiero una revisión visual más exigente de los componentes afectados.
+
+La plataforma debe transmitir una identidad propia y una sensación de producto terminado.
+
+Utiliza las skills de Figma Design, Emil Kowalski e Impeccable para evaluar y mejorar:
+
+- Jerarquía visual.
+- Tipografía y legibilidad.
+- Composición de los espacios.
+- Proporción entre textos, iconos y controles.
+- Distribución horizontal y vertical.
+- Estados de interacción.
+- Retroalimentaciones.
+- Transiciones y microinteracciones.
 - Coherencia entre modo claro y oscuro.
-- Transiciones discretas y funcionales.
-- Uso adecuado de iconografía SVG, preferiblemente Lucide.
-- Evitar tarjetas innecesarias y columnas demasiado estrechas.
-- Evitar espacios vacíos provocados por elementos que ya no existen.
+- Adaptación a diferentes resoluciones.
 
-No quiero una interfaz recargada ni que cada sección parezca diseñada de manera independiente.
+Evita especialmente:
 
-10. Condiciones técnicas y de implementación
+- Tarjetas genéricas repetidas sin una función clara.
+- Iconos excesivamente grandes.
+- Columnas que comprimen el contenido.
+- Espacios vacíos innecesarios.
+- Preguntas y retroalimentaciones acumuladas verticalmente.
+- Elementos que parecen decorativos, pero no aportan a la experiencia.
+- Diseños que se sienten como una plantilla generada por IA.
 
-- Conserva las funcionalidades existentes que no estén relacionadas con estos cambios.
-- No elimines actividades, evaluaciones, puntuaciones ni el seguimiento del progreso.
-- No alteres la lógica de desbloqueo de las etapas, salvo que sea estrictamente necesario y esté justificado.
-- No introduzcas dependencias o servicios que generen costos.
-- No dupliques componentes ni código innecesariamente.
-- Respeta la arquitectura actual del proyecto.
-- Revisa los archivos existentes antes de proponer nuevos.
-- Comprueba que los controles y botones tengan un comportamiento real.
-- Evita modificar partes que no estén relacionadas con estos requerimientos.
+No quiero que todos los componentes tengan la misma apariencia. Cada sección puede tener una composición diferente si su función lo requiere, pero debe conservar una identidad visual coherente.
 
-11. Fase de análisis: no implementar todavía
+Las animaciones deben ser discretas, útiles y no interferir con la lectura o la interacción.
 
-Antes de tocar el código, realiza lo siguiente:
+6. Condiciones técnicas
 
-1. Revisa "CLAUDE.md", "MEJORAS_PVA.md" y la estructura actual del proyecto.
-2. Consulta el documento de investigación para fundamentar la nueva sección de contexto.
-3. Analiza cómo están implementados actualmente el menú lateral, RO-BIT, las simulaciones y la actividad del módulo 5.
-4. Actualiza "MEJORAS_PVA.md" incorporando todos los requerimientos anteriores.
-5. Identifica los archivos y componentes que tendrían que modificarse.
-6. Presenta una propuesta técnica y visual para cada cambio.
-7. Explica especialmente cómo implementarías el chatbot gratuito y cómo harías que las decisiones de las simulaciones tengan consecuencias reales.
+- Revisa los componentes existentes antes de crear otros nuevos.
+- Reutiliza la arquitectura actual cuando sea apropiado.
+- Evita duplicar código.
+- No elimines funcionalidades que no estén relacionadas con estos cambios.
+- Conserva los contenidos educativos y las referencias bibliográficas.
+- No alteres el seguimiento del progreso ni los mecanismos de evaluación.
+- Mantén la compatibilidad entre modo claro y oscuro.
+- Verifica que los botones y controles tengan una función real.
+- Comprueba que las actividades respondan correctamente a las selecciones.
+- Asegúrate de que la interfaz funcione en diferentes tamaños de pantalla.
+- No agregues servicios externos ni dependencias que generen costos innecesarios.
 
-No comiences a modificar el código todavía. Primero quiero revisar tu análisis y aprobar la propuesta.
+7. Fase inicial: analizar y proponer antes de implementar
 
-Cuando llegue el momento de implementar, hazlo de manera organizada, sin rehacer las mejoras que ya están terminadas y verificando cada funcionalidad.
+Antes de modificar el código:
+
+1. Lee "CLAUDE.md" y "MEJORAS_PVA.md".
+2. Revisa las skills de Figma Design, Emil Kowalski e Impeccable y sus instrucciones.
+3. Analiza la implementación actual de las referencias bibliográficas.
+4. Revisa los estilos de la actividad práctica del módulo 2, especialmente los colores y estados del modo claro.
+5. Examina cómo se muestran actualmente las señales y sus retroalimentaciones.
+6. Revisa la distribución del contenido cuando el menú lateral está abierto y cerrado.
+7. Analiza todos los casos del simulacro del módulo 4 y sus respectivas mecánicas.
+8. Identifica las preguntas que no tienen consecuencias funcionales o pedagógicas.
+9. Identifica los componentes y archivos que sería necesario modificar.
+10. Actualiza "MEJORAS_PVA.md" con estos nuevos requerimientos, sin eliminar las mejoras anteriores.
+
+Después, presenta una propuesta que explique:
+
+- Qué cambios visuales realizarías.
+- Cómo reorganizarías cada actividad.
+- Qué mecánicas propones para los distintos casos del simulacro.
+- Cómo evitarías que las retroalimentaciones y preguntas se acumulen verticalmente.
+- Qué archivos y componentes modificarías.
+- Cómo verificarías que las interacciones y evaluaciones sigan funcionando.
+
+No modifiques todavía el código. Primero presenta el análisis y la propuesta para que pueda revisarlos y aprobarlos.
+
+Una vez aprobada la propuesta, implementa los cambios de forma organizada y comprueba el funcionamiento de cada actividad.
