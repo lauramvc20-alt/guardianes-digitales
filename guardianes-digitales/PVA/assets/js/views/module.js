@@ -53,7 +53,7 @@
     if (cfg.type === "scenarios") {
       var list = PVA.content.simulations || [];
       var answered = list.filter(function (sim) {
-        return typeof (act.scenarios || {})[sim.id] === "number";
+        return !!(act.sim2 || {})[sim.id];
       }).length;
       return {
         done: answered === list.length,
@@ -298,6 +298,7 @@
       if (index === ACT && !activityOpen()) return;
       if (index < ACT && index > firstUnread()) return;
       current = index;
+      root.classList.toggle("is-activity", current === ACT);
 
       for (var i = 0; i <= ACT; i++) {
         var node = blockNode(i);

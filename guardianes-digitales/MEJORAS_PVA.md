@@ -121,7 +121,7 @@ No eliminar actividades, evaluaciones, puntuaciones ni progreso; no alterar el d
 
 ---
 
-# Ronda 4 · Ajustes visuales y funcionales (pendiente de aprobación)
+# Ronda 4 · Ajustes visuales y funcionales (implementada)
 
 Skills de diseño solicitadas: Figma Design, Emil Kowalski e Impeccable (aplicar sus criterios, no solo mencionarlas).
 

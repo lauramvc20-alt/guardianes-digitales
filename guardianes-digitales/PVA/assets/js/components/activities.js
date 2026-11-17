@@ -180,9 +180,8 @@
       function flagButton(key, text) {
         var isFound = !!found[key];
         return (
-          '<span class="flag' + (isFound ? " is-found" : "") + '" role="button" ' +
-            (isFound ? 'tabindex="-1" aria-pressed="true"' : 'tabindex="0" aria-pressed="false"') +
-            ' data-flag="' + key + '">' + esc(text) + "</span>"
+          '<span class="flag' + (isFound ? " is-found" : "") + '" role="button" tabindex="0" ' +
+            'aria-pressed="' + (isFound ? "true" : "false") + '" data-flag="' + key + '">' + esc(text) + "</span>"
         );
       }
 
@@ -191,42 +190,28 @@
         function (match, key, text) { return flagButton(key, text); }
       );
 
-      var from = cfg.fromValue;
-      if (cfg.headerFlag) {
-        from = flagButton(cfg.headerFlag, cfg.fromValue);
-      }
-
-      var foundCount = total - cfg.signals.filter(function (s) { return !found[s.key]; }).length;
-      var pct = Math.round((foundCount / total) * 100);
-
-      var list = cfg.signals.filter(function (s) { return found[s.key]; }).map(function (s) {
-        return (
-          '<li><span aria-hidden="true">' + icon("warning") + "</span>" +
-            "<span><strong>" + esc(s.label) + ".</strong> " + esc(s.explain) + "</span></li>"
-        );
-      }).join("");
+      var from = cfg.headerFlag ? flagButton(cfg.headerFlag, cfg.fromValue) : esc(cfg.fromValue);
+      var foundCount = cfg.signals.filter(function (s) { return found[s.key]; }).length;
 
       return (
-        '<section class="worksheet" id="actividad" aria-labelledby="actTitle">' +
-          '<span class="kicker kicker--coral">Actividad práctica</span>' +
+        '<section class="worksheet act flaghunt" id="actividad" aria-labelledby="actTitle">' +
           '<h3 id="actTitle">' + esc(cfg.title) + "</h3>" +
-          '<p class="muted tiny">' + esc(cfg.intro) + "</p>" +
-          '<div class="case-file" style="margin-top:.9rem">' +
-            '<div class="case-file__head">' +
-              '<span class="chip chip--coral">SMS</span>' +
-              '<span class="case-file__from">' + esc(cfg.fromLabel) + " " + from + "</span>" +
+          '<p class="act__intro">' + esc(cfg.intro) + "</p>" +
+          '<div class="flaghunt__grid">' +
+            '<div class="flaghunt__msg">' +
+              '<div class="case-file__head">' +
+                '<span class="chip chip--coral">SMS</span>' +
+                '<span class="case-file__from">' + esc(cfg.fromLabel) + " " + from + "</span>" +
+              "</div>" +
+              '<p class="case-file__body">' + body + "</p>" +
             "</div>" +
-            '<p class="case-file__body">' + body + "</p>" +
+            '<div class="flaghunt__panel" aria-live="polite">' +
+              '<div class="flaghunt__meter"><span data-flag-count></span>' +
+                '<div class="bar" role="progressbar" aria-label="Señales encontradas" aria-valuemin="0" aria-valuemax="' + total + '"><div class="bar__fill" data-flag-bar></div></div></div>' +
+              '<div class="sig-chips" data-flag-chips></div>' +
+              '<div class="sig-explain sig-explain--panel" data-flag-explain></div>' +
+            "</div>" +
           "</div>" +
-          '<div class="flag-meter">' +
-            '<span data-flag-count>' + foundCount + " de " + total + " señales</span>" +
-            '<div class="bar" role="progressbar" aria-label="Señales encontradas" aria-valuemin="0" aria-valuemax="' + total +
-              '" aria-valuenow="' + foundCount + '"><div class="bar__fill" data-flag-bar style="width:' + pct + '%"></div></div>' +
-          "</div>" +
-          '<ul class="signals" data-signal-list' + (list ? "" : " hidden") + ">" + list + "</ul>" +
-          '<p class="tiny muted" data-flag-hint' + (foundCount === total ? " hidden" : "") + ">" +
-            "Toca cada parte sospechosa del mensaje para ver la explicación." +
-          "</p>" +
         "</section>"
       );
     },
@@ -236,60 +221,61 @@
       var total = cfg.signals.length;
       var byKey = {};
       cfg.signals.forEach(function (s) { byKey[s.key] = s; });
+      var selected = null;
 
-      function paint() {
-        var count = total - cfg.signals.filter(function (s) { return !found[s.key]; }).length;
-        var counter = root.querySelector("[data-flag-count]");
-        var bar = root.querySelector("[data-flag-bar]");
-        var hint = root.querySelector("[data-flag-hint]");
-        var meter = root.querySelector(".flag-meter .bar");
-        if (counter) counter.textContent = count + " de " + total + " señales";
-        if (bar) bar.style.width = Math.round((count / total) * 100) + "%";
-        if (meter) meter.setAttribute("aria-valuenow", String(count));
-        if (hint) hint.hidden = count === total;
-        announce(handlers, count, total);
-        completeIfReady(handlers, count === total);
+      function count() { return cfg.signals.filter(function (s) { return found[s.key]; }).length; }
+
+      function paint(animate) {
+        var n = count();
+        root.querySelector("[data-flag-count]").textContent = n + " de " + total + " señales encontradas";
+        root.querySelector("[data-flag-bar]").style.width = Math.round((n / total) * 100) + "%";
+        root.querySelector(".flaghunt__meter .bar").setAttribute("aria-valuenow", String(n));
+
+        root.querySelector("[data-flag-chips]").innerHTML = cfg.signals.filter(function (s) { return found[s.key]; }).map(function (s) {
+          return '<button type="button" class="sig-chip sig-chip--hit' + (selected === s.key ? " is-selected" : "") + '" data-flag-chip="' + s.key + '" aria-pressed="' + (selected === s.key ? "true" : "false") + '">' + icon("check") + esc(s.label) + "</button>";
+        }).join("");
+
+        var box = root.querySelector("[data-flag-explain]");
+        if (selected) {
+          box.innerHTML = "<b>" + esc(byKey[selected].label) + ".</b> " + esc(byKey[selected].explain);
+        } else if (n === total) {
+          box.innerHTML = "<b>Encontraste todas las señales.</b> Toca una de ellas arriba para repasar por qué importa.";
+        } else {
+          box.innerHTML = '<span class="muted">Toca las partes del mensaje que te parezcan sospechosas. Aquí verás por qué cada señal importa.</span>';
+        }
+        if (animate) { box.classList.remove("is-enter"); void box.offsetWidth; box.classList.add("is-enter"); }
+        announce(handlers, n, total);
+        completeIfReady(handlers, n === total);
       }
 
-      function reveal(node) {
+      function pick(node) {
         var key = node.getAttribute("data-flag");
-        if (!byKey[key] || found[key]) return;
-
-        found[key] = true;
-        saveActivity(moduleId, { flags: found });
-
-        node.classList.add("is-found");
-        node.setAttribute("aria-pressed", "true");
-        node.setAttribute("tabindex", "-1");
-
-        var list = root.querySelector("[data-signal-list]");
-        if (list) {
-          list.hidden = false;
-          var li = document.createElement("li");
-          li.innerHTML =
-            '<span aria-hidden="true">' + icon("warning") + "</span>" +
-            "<span><strong>" + esc(byKey[key].label) + ".</strong> " +
-            esc(byKey[key].explain) + "</span>";
-          list.appendChild(li);
+        if (!byKey[key]) return;
+        if (!found[key]) {
+          found[key] = true;
+          saveActivity(moduleId, { flags: found });
+          node.classList.add("is-found");
+          node.setAttribute("aria-pressed", "true");
+          PVA.audio.play("tap");
         }
-
-        PVA.audio.play("tap");
-        paint();
+        selected = key;
+        paint(true);
       }
 
       root.addEventListener("click", function (event) {
         var node = event.target.closest("[data-flag]");
-        if (node && root.contains(node)) reveal(node);
+        if (node && root.contains(node)) { pick(node); return; }
+        var chip = event.target.closest("[data-flag-chip]");
+        if (chip && root.contains(chip)) { selected = chip.getAttribute("data-flag-chip"); paint(true); }
       });
 
       root.addEventListener("keydown", function (event) {
         if (event.key !== "Enter" && event.key !== " ") return;
         var node = event.target.closest("[data-flag]");
-        if (node && root.contains(node)) {
-          event.preventDefault();
-          reveal(node);
-        }
+        if (node && root.contains(node)) { event.preventDefault(); pick(node); }
       });
+
+      paint(false);
     }
   };
 
@@ -322,10 +308,9 @@
       }).join("");
 
       return (
-        '<section class="worksheet defense" id="actividad" aria-labelledby="actTitle">' +
-          '<span class="kicker kicker--violet">Actividad práctica · Desafío de clasificación</span>' +
+        '<section class="worksheet act defense" id="actividad" aria-labelledby="actTitle">' +
           '<h3 id="actTitle">' + esc(cfg.title) + "</h3>" +
-          '<p class="muted tiny">' + esc(cfg.goal) + " Toca una medida y luego su zona, o arrástrala.</p>" +
+          '<p class="act__intro">' + esc(cfg.goal) + " Toca una medida y luego su zona, o arrástrala.</p>" +
           '<div class="defense__meter"><div class="defense__meter-top"><b data-dmeter-label></b><span class="tiny muted" data-dscore></span></div>' +
             '<div class="defense__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span data-dbar></span></div></div>' +
           '<div class="defense__tray-wrap"><p class="tiny muted" data-dhint>Elige una medida.</p>' +
@@ -500,484 +485,493 @@
     risky: "Decisión de riesgo medio",
     danger: "Decisión de alto riesgo"
   };
+  var POINTS = { best: 2, risky: 1, danger: 0 };
+  var VERDICT_ICON = { best: "check", risky: "warning", danger: "warning" };
 
-  function isCall(sim) {
-    return sim.channel === "Llamada";
+  function caseNumber(index) { return "Caso " + (index + 1); }
+  function sum(list) { return list.reduce(function (a, b) { return a + b; }, 0); }
+
+  /* Veredicto final de un camino de decisiones. */
+  function pathVerdict(points, count) {
+    var ratio = count ? sum(points) / (2 * count) : 0;
+    return ratio >= 0.8 ? "best" : ratio >= 0.45 ? "risky" : "danger";
+  }
+  function pathPoints(points, count) {
+    return count ? Math.round((sum(points) / (2 * count)) * 3 * 10) / 10 : 0;
   }
 
-  function caseNumber(index) {
-    return "Caso " + (index + 1);
+  /* ---- Mecánica «examinar»: el texto se divide en palabras tocables, sin ninguna pista visual. ---- */
+  function tokenize(parts) {
+    var tokens = [];
+    parts.forEach(function (part, p) {
+      part.t.split(/(\s+)/).forEach(function (piece) {
+        if (!piece) return;
+        if (/^\s+$/.test(piece)) tokens.push({ space: piece, part: p });
+        else tokens.push({ w: piece, part: p, idx: tokens.length });
+      });
+    });
+    return tokens;
   }
 
-  /* Escenario ambientado: la interfaz imita el canal en el que llega el mensaje. */
-  function deviceHtml(sim, insp) {
-    var incoming = sim.messages.filter(function (msg) { return msg.from === "them"; });
-    if (isCall(sim)) {
-      var line = "<p>" + (sim.inspect ? markedText(sim, insp) : esc(incoming[0] ? incoming[0].text : "")) + "</p>";
-      return (
-        '<div class="device device--call" aria-label="Pantalla de llamada entrante">' +
-          '<div class="device__call-head">' +
-            '<span class="device__avatar" aria-hidden="true">' + icon("phone") + "</span>" +
-            '<b class="device__name">' + esc(incoming[0] ? incoming[0].name : sim.channel) + "</b>" +
-            '<span class="device__state">Llamada entrante</span>' +
-          "</div>" +
-          '<div class="device__transcript" role="region" aria-label="Lo que dice quien llama">' +
-            '<span class="device__label">Transcripción</span>' + line +
-          "</div>" +
-        "</div>"
-      );
+  function tokenHtml(sim, marks, reveal) {
+    var parts = sim.parts;
+    var found = {}, missed = {}, falseA = {};
+    if (reveal === true) {
+      var ev = evaluateExam(sim, marks);
+      ev.found.forEach(function (p) { found[p] = 1; });
+      ev.missed.forEach(function (p) { missed[p] = 1; });
+      ev.falseAlarms.forEach(function (p) { falseA[p] = 1; });
     }
-
-    var sender = incoming[0] ? incoming[0].name : sim.channel;
-    var bubbles = '<div class="bubble">' + (sim.inspect ? markedText(sim, insp) : esc(incoming[0] ? incoming[0].text : "")) + "</div>";
-    return (
-      '<div class="device device--chat" aria-label="Conversación de ' + esc(sim.channel) + '">' +
-        '<div class="device__bar">' +
-          '<span class="device__avatar" aria-hidden="true">' + esc(sender.charAt(0)) + "</span>" +
-          '<div><b class="device__name">' + esc(sender) + "</b>" +
-          '<span class="device__state">' + esc(sim.channel) + "</span></div>" +
-        "</div>" +
-        '<div class="chat device__chat">' + bubbles + "</div>" +
-      "</div>"
-    );
-  }
-
-  /* ---- Paso 1 · Examinar: el estudiante marca señales en el propio mensaje.
-         Lo que marque se compara con las señales reales y alimenta la retroalimentación. ---- */
-  function inspectParts(sim) { return (sim.inspect && sim.inspect.parts) || []; }
-  function realSignals(sim) { return inspectParts(sim).filter(function (p) { return p.sig === true; }); }
-
-  /* Texto del mensaje con fragmentos tocables (antes de revisar) o evaluados (después). */
-  function markedText(sim, insp) {
-    return inspectParts(sim).map(function (part, i) {
-      if (typeof part.sig !== "boolean") return esc(part.t);
-      var on = !!(insp && insp.marked && insp.marked[i]);
-      if (!insp || !insp.done) {
-        return '<button type="button" class="mk' + (on ? " is-on" : "") + '" data-mk="' + i + '" aria-pressed="' + (on ? "true" : "false") + '">' + esc(part.t) + "</button>";
+    return tokenize(parts).map(function (tk) {
+      if (tk.space) return tk.space;
+      var on = !!marks[tk.idx];
+      if (reveal === "plain") return '<span class="tok tok--static">' + esc(tk.w) + "</span>";
+      if (!reveal) {
+        return '<button type="button" class="tok' + (on ? " is-on" : "") + '" data-tok="' + tk.idx + '" aria-pressed="' + (on ? "true" : "false") + '">' + esc(tk.w) + "</button>";
       }
-      var cls = part.sig ? (on ? "is-hit" : "is-miss") : (on ? "is-false" : "");
-      if (!cls) return esc(part.t);
-      return '<mark class="mk ' + cls + '">' + esc(part.t) + "</mark>";
+      var cls = found[tk.part] ? "is-hit" : missed[tk.part] ? "is-miss" : falseA[tk.part] && on ? "is-false" : on ? "is-on" : "";
+      return '<span class="tok tok--static ' + cls + '">' + esc(tk.w) + "</span>";
     }).join("");
   }
 
-  function evaluateInspect(sim, insp) {
-    var parts = inspectParts(sim), found = [], missed = [], falseAlarms = [];
-    parts.forEach(function (part, i) {
+  /* Una señal se considera detectada si el estudiante tocó al menos una de sus palabras. */
+  function evaluateExam(sim, marks) {
+    var touched = {};
+    tokenize(sim.parts).forEach(function (tk) { if (!tk.space && marks[tk.idx]) touched[tk.part] = true; });
+    var found = [], missed = [], falseAlarms = [];
+    sim.parts.forEach(function (part, p) {
       if (typeof part.sig !== "boolean") return;
-      var on = !!(insp && insp.marked && insp.marked[i]);
-      if (part.sig && on) found.push(part);
-      else if (part.sig) missed.push(part);
-      else if (on) falseAlarms.push(part);
+      if (part.sig && touched[p]) found.push(p);
+      else if (part.sig) missed.push(p);
+      else if (touched[p]) falseAlarms.push(p);
     });
     return { found: found, missed: missed, falseAlarms: falseAlarms, total: found.length + missed.length };
   }
 
-  function reviewHtml(sim, insp) {
-    var ev = evaluateInspect(sim, insp);
-    var rows = "";
-    ev.found.forEach(function (p) { rows += '<li class="is-hit"><span aria-hidden="true">' + icon("check") + "</span><span><b>Detectada:</b> «" + esc(p.t) + "». " + esc(p.why) + "</span></li>"; });
-    ev.missed.forEach(function (p) { rows += '<li class="is-miss"><span aria-hidden="true">' + icon("warning") + "</span><span><b>Se te pasó:</b> «" + esc(p.t) + "». " + esc(p.why) + "</span></li>"; });
-    ev.falseAlarms.forEach(function (p) { rows += '<li class="is-false"><span aria-hidden="true">' + icon("info") + "</span><span><b>No era una señal:</b> «" + esc(p.t) + "». " + esc(p.why) + "</span></li>"; });
-    return (
-      '<div class="inspect-review"><p class="inspect-review__sum"><b>' + ev.found.length + " de " + ev.total + "</b> señales detectadas" +
-      (ev.falseAlarms.length ? " · " + ev.falseAlarms.length + " falsa(s) alarma(s)" : "") + "</p>" +
-      '<ul class="inspect-review__list">' + rows + "</ul></div>"
-    );
-  }
-
-  /* La decisión se interpreta a la luz de lo que se detectó. */
-  function linkText(sim, chosen, insp) {
-    var ev = evaluateInspect(sim, insp);
+  function examLink(sim, chosen, ev) {
     if (chosen.verdict === "best") {
       return ev.missed.length === 0
         ? "Tu decisión se apoyó en una revisión completa: viste todas las señales."
         : "Decidiste bien, aunque se te pasó alguna señal. Detectarlas todas te da más seguridad para actuar.";
     }
     if (ev.missed.length) {
-      return "Esta decisión se relaciona con lo que dejaste pasar: «" + ev.missed[0].t + "». " + ev.missed[0].why;
+      var m = sim.parts[ev.missed[0]];
+      return "Esto se relaciona con lo que dejaste pasar: «" + m.t.trim() + "». " + m.why;
     }
     return "Detectaste las señales, pero la acción elegida no te protege: ver el riesgo no basta, hay que pausar y verificar por un canal oficial.";
   }
 
-  function caseScore(sim, saved, inspectState) {
-    var idx = saved[sim.id];
-    var chosen = typeof idx === "number" ? sim.options[idx] : null;
-    var pts = chosen ? (chosen.verdict === "best" ? 2 : chosen.verdict === "risky" ? 1 : 0) : 0;
-    var insp = inspectState[sim.id];
-    if (insp && insp.done) {
-      var ev = evaluateInspect(sim, insp);
-      if (ev.total) pts += ev.found.length / ev.total;
-    }
-    return pts;
-  }
-
-  function caseHtml(sim, index, saved, inspectState) {
-    var idx = saved[sim.id];
-    var chosen = typeof idx === "number" ? sim.options[idx] : null;
-    var insp = inspectState[sim.id] || { marked: {}, done: false };
-    var hasInspect = !!sim.inspect;
-    /* Quien ya había decidido antes de existir el paso de examen conserva su decisión. */
-    var inspected = !hasInspect || insp.done || !!chosen;
-    var markedCount = Object.keys(insp.marked || {}).filter(function (k) { return insp.marked[k]; }).length;
-
-    var step = !inspected ? 1 : chosen ? 3 : 2;
-    var steps = ["Examinar", "Decidir", "Resultado"].map(function (label, i) {
-      return '<li class="' + (i + 1 < step ? "is-done" : i + 1 === step ? "is-current" : "") + '"><span>' + (i + 1) + "</span>" + label + "</li>";
-    }).join("");
-
-    var options = sim.options.map(function (opt, oi) {
-      var cls = "option";
-      if (chosen) {
-        if (opt.verdict === "best") cls += " is-correct";
-        if (oi === idx) {
-          if (chosen.verdict === "danger") cls += " is-wrong";
-          else if (chosen.verdict === "risky") cls += " is-risky";
-          else cls += " is-correct";
-        }
-      }
-      return (
-        '<button class="' + cls + '" type="button" data-sc="' + sim.id + '" data-opt="' + oi + '"' +
-          (chosen ? " disabled" : "") + ">" +
-          '<span class="option__mark" aria-hidden="true">' + U.icon("check", "ico", 12) + '</span>' +
-          "<span>" + esc(opt.label) + "</span>" +
-        "</button>"
-      );
-    }).join("");
-
-    var decision = "";
-    if (!inspected) {
-      decision =
-        '<p class="inspect-prompt">' + icon("eye") + "<span>" + esc(sim.inspect.prompt) + "</span></p>" +
-        '<p class="tiny muted" data-inspect-count>' + markedCount + " frase(s) marcada(s)</p>" +
-        '<button class="btn" type="button" data-sc-inspect' + (markedCount ? "" : " disabled") + ">Ya revisé: ver qué señales había " + icon("arrowRight") + "</button>";
-    } else {
-      var review = hasInspect && insp.done ? reviewHtml(sim, insp) : "";
-      var result = "";
-      if (chosen) {
-        var kind = chosen.verdict === "best" ? "" : chosen.verdict === "risky" ? " feedback--warn" : " feedback--bad";
-        var signals = chosen.signals.map(function (signal) {
-          return '<li><span aria-hidden="true">' + icon("warning") + "</span><span>" + esc(signal) + "</span></li>";
-        }).join("");
-        result =
-          '<div class="feedback' + kind + '" role="status">' +
-            "<strong>" + VERDICT_LABEL[chosen.verdict] + "</strong>" +
-            "<p>" + esc(chosen.feedback) + "</p>" +
-            (chosen.outcome ? '<p class="outcome">' + icon("route") + "<span>" + esc(chosen.outcome) + "</span></p>" : "") +
-            (hasInspect && insp.done ? '<p class="linkline">' + esc(linkText(sim, chosen, insp)) + "</p>" : "") +
-            '<ul class="signals">' + signals + "</ul>" +
-          "</div>" +
-          '<button class="btn btn--quiet" type="button" data-reset="' + sim.id + '" style="margin-top:.75rem">' +
-            "Probar otra respuesta</button>";
-      }
-      decision =
-        review +
-        "<p><strong>" + esc(sim.question) + "</strong></p>" +
-        '<div class="option-list">' + options + "</div>" +
-        '<div class="scenario__result" data-result>' + result + "</div>";
-    }
-
-    return (
-      '<article class="sim-case" data-scenario="' + sim.id + '">' +
-        '<div class="sim-case__head">' +
-          '<span class="chip chip--violet">' + caseNumber(index) + "</span>" +
-          "<b>" + esc(sim.title) + "</b>" +
-          '<ol class="sim-steps" aria-label="Pasos del caso">' + steps + "</ol>" +
-        "</div>" +
-        '<p class="muted tiny sim-case__brief">' + esc(sim.brief) + "</p>" +
-        '<div class="sim-case__grid">' +
-          deviceHtml(sim, inspected ? insp : insp) +
-          '<div class="sim-case__decision">' + decision + "</div>" +
-        "</div>" +
-      "</article>"
-    );
-  }
-
-  function resultHtml(list, saved, inspectState) {
-    var best = 0, found = 0, totalSig = 0, pts = 0;
-    var rows = list.map(function (sim, index) {
-      var idx = saved[sim.id];
-      var chosen = typeof idx === "number" ? sim.options[idx] : null;
-      if (chosen && chosen.verdict === "best") best += 1;
-      var insp = inspectState[sim.id];
-      var det = "";
-      if (insp && insp.done) {
-        var ev = evaluateInspect(sim, insp);
-        found += ev.found.length; totalSig += ev.total;
-        det = " · " + ev.found.length + " de " + ev.total + " señales detectadas";
-      }
-      pts += caseScore(sim, saved, inspectState);
-      return (
-        '<li class="review__item ' + (chosen && chosen.verdict === "best" ? "is-ok" : "is-no") + '">' +
-          "<b>" + caseNumber(index) + " · " + esc(sim.title) + "</b>" +
-          '<p class="tiny" style="margin:.3rem 0 0">' +
-            esc(chosen ? VERDICT_LABEL[chosen.verdict] : "Sin respuesta") + esc(det) + "</p>" +
-          (chosen && chosen.outcome ? '<p class="tiny muted" style="margin:.25rem 0 0">' + esc(chosen.outcome) + "</p>" : "") +
-        "</li>"
-      );
-    }).join("");
-
-    var max = list.length * 3;
-    var msg = best === list.length
-      ? "Decidiste con la mayor protección en todos los casos."
-      : best ? "Acertaste en " + best + " de " + list.length + " casos: repasa los demás y compara los resultados." : "Repite los casos y fíjate en cómo cambia el resultado cuando verificas por un canal oficial.";
-
-    return (
-      '<div class="sim-result">' +
-        '<h4 class="sim-result__title">Tu resultado</h4>' +
-        '<div class="sim-result__score"><b>' + (Math.round(pts * 10) / 10) + " / " + max + "</b><span>puntos</span></div>" +
-        '<p class="lede">Elegiste la opción de mayor protección en ' + best + " de " + list.length + " casos" +
-          (totalSig ? " y detectaste " + found + " de " + totalSig + " señales de alerta." : ".") + " " + esc(msg) + "</p>" +
-        '<ul class="review sim-result__list">' + rows + "</ul>" +
-        '<button class="btn btn--ghost" type="button" data-sc-back>' + icon("chevron") + " Volver a los casos</button>" +
-      "</div>"
-    );
-  }
+  function stateOf(moduleId) { return activityState(moduleId).sim2 || {}; }
 
   var scenarios = {
     html: function (cfg, moduleId) {
-      var saved = activityState(moduleId).scenarios || {};
-      var list = PVA.content.simulations || [];
-      var answered = list.filter(function (sim) { return typeof saved[sim.id] === "number"; }).length;
-
-      var dots = list.map(function (sim, index) {
-        var cls = "segment";
-        if (typeof saved[sim.id] === "number") cls += " is-done";
-        return '<li class="' + cls + '" title="' + esc(caseNumber(index)) + '"><span class="sr-only">' + esc(caseNumber(index)) + "</span></li>";
-      }).join("");
-
       return (
-        '<section class="worksheet sim" id="actividad" aria-labelledby="actTitle">' +
-          '<span class="kicker kicker--coral">Simulacro interactivo</span>' +
-          '<h3 id="actTitle">' + esc(cfg.title) + "</h3>" +
-          '<p class="muted tiny">' + esc(cfg.intro) + "</p>" +
-          '<div class="sim-progress">' +
-            '<ol class="segments sim-progress__dots" aria-label="Casos respondidos">' + dots + "</ol>" +
-            '<span class="tiny muted" data-sc-count>' + answered + " de " + list.length + " casos</span>" +
-          "</div>" +
-          '<div class="sim-stage" data-sc-stage aria-live="polite"></div>' +
-          '<div class="sim-nav" data-sc-nav></div>' +
-          '<div data-sc-result-panel hidden></div>' +
-          '<p class="tiny muted" data-sc-summary>' + summaryText(list, saved) + "</p>" +
+        '<section class="worksheet act sim" id="actividad" aria-labelledby="actTitle">' +
+          '<div class="sim__head"><div><h3 id="actTitle">' + esc(cfg.title) + "</h3>" +
+          '<p class="sim__task tiny" data-sim-task></p></div>' +
+          '<span class="tiny muted" data-sim-count></span></div>' +
+          '<ol class="sim-rail" data-sim-rail aria-label="Casos del simulacro"></ol>' +
+          '<div class="sim-stage" data-sim-stage aria-live="polite"></div>' +
         "</section>"
       );
     },
 
     bind: function (root, cfg, moduleId, handlers) {
-      var saved = activityState(moduleId).scenarios || {};
-      var inspectState = activityState(moduleId).inspect || {};
       var list = PVA.content.simulations || [];
       var total = list.length;
-      var index = firstOpen();
-      var showResult = false;
+      var done = stateOf(moduleId);
+      var view = "case";
+      var idx = firstOpen();
+      var cs = null;
 
       function firstOpen() {
-        for (var i = 0; i < total; i++) {
-          if (typeof saved[list[i].id] !== "number") return i;
+        for (var i = 0; i < total; i++) if (!done[list[i].id]) return i;
+        return -1;
+      }
+      function doneCount() { return list.filter(function (s) { return !!done[s.id]; }).length; }
+      function bestCount() { return list.filter(function (s) { return done[s.id] && done[s.id].verdict === "best"; }).length; }
+      function sim() { return list[idx]; }
+
+      /* ---------- Estado de un caso en curso ---------- */
+      function newState(i) {
+        var s = list[i];
+        if (done[s.id]) return { phase: "final" };
+        if (s.kind === "exam") return { phase: "exam", marks: {}, sel: null };
+        var node = s.nodes[s.start];
+        return { phase: "decide", node: s.start, hist: [], retried: false, pending: null, lines: node.say.map(function (t) { return { from: "them", text: t }; }) };
+      }
+      function enter(i) {
+        idx = i; view = "case";
+        cs = newState(i);
+        paint();
+      }
+
+      /* ---------- Cabecera y progreso ---------- */
+      function paintRail() {
+        var rail = root.querySelector("[data-sim-rail]");
+        rail.innerHTML = list.map(function (s, i) {
+          var isDone = !!done[s.id];
+          var current = view === "case" && i === idx;
+          var enabled = isDone || i === firstOpen() || current;
+          return '<li><button type="button" class="sim-rail__item' + (isDone ? " is-done" : "") + (current ? " is-current" : "") + '" data-sim-go="' + i + '"' +
+            (enabled ? "" : " disabled") + (current ? ' aria-current="step"' : "") + ">" +
+            '<span class="sim-rail__n" aria-hidden="true">' + (isDone ? icon("check") : (i + 1)) + "</span>" +
+            '<span class="sim-rail__t"><b>' + esc(caseNumber(i)) + "</b><small>" + esc(s.tag) + "</small></span></button></li>";
+        }).join("");
+        var task = root.querySelector("[data-sim-task]");
+        task.textContent = view === "result"
+          ? "Revisa tu resultado y compara cómo cambió cada caso."
+          : sim().task;
+        root.querySelector("[data-sim-count]").textContent = doneCount() + " de " + total + " casos completados";
+      }
+
+      /* ---------- Escena (izquierda) ---------- */
+      function sceneHtml() {
+        var s = sim();
+        if (s.kind === "exam") {
+          var reveal = cs.phase !== "exam";
+          return (
+            '<div class="device device--chat" aria-label="Mensaje SMS recibido">' +
+              '<div class="device__bar"><span class="device__avatar" aria-hidden="true">E</span>' +
+              '<div><b class="device__name">' + esc(s.contact.name) + '</b><span class="device__state">' + esc(s.contact.sub) + " · SMS</span></div></div>" +
+              '<div class="chat device__chat"><div class="bubble bubble--exam">' + tokenHtml(s, cs.marks || {}, cs.phase === "final" ? "plain" : reveal) + "</div></div>" +
+            "</div>"
+          );
         }
-        return Math.max(0, total - 1);
+        var lines = (cs.lines || []).map(function (l) {
+          if (l.from === "sys") return '<p class="call-sys">' + esc(l.text) + "</p>";
+          if (s.kind === "call") {
+            return '<p class="call-line call-line--' + l.from + '"><span>' + (l.from === "me" ? "Tú" : "Quien llama") + "</span>" + esc(l.text) + "</p>";
+          }
+          return '<div class="bubble' + (l.from === "me" ? " bubble--mine" : "") + '">' + esc(l.text) + "</div>";
+        }).join("");
+        if (s.kind === "call") {
+          var hang = cs.phase === "decide" ? hangOption() : null;
+          return (
+            '<div class="device device--call" aria-label="Llamada en curso">' +
+              '<div class="device__call-head"><span class="device__avatar" aria-hidden="true">' + icon("phone") + "</span>" +
+              '<b class="device__name">' + esc(s.contact.name) + '</b><span class="device__state">' + (cs.phase === "end" || cs.phase === "final" || (cs.hungUp) ? "Llamada finalizada" : "Llamada en curso") + "</span></div>" +
+              '<div class="call-log" data-sim-log role="log">' + lines + "</div>" +
+              (hang ? '<button type="button" class="call-hang" data-sim-hang>' + icon("phone") + " Colgar</button>" : "") +
+            "</div>"
+          );
+        }
+        return (
+          '<div class="device device--chat" aria-label="Conversación de ' + esc(s.channel) + '">' +
+            '<div class="device__bar"><span class="device__avatar" aria-hidden="true">' + esc(s.contact.name.charAt(0)) + "</span>" +
+            '<div><b class="device__name">' + esc(s.contact.name) + '</b><span class="device__state">' + esc(s.contact.sub) + " · " + esc(s.channel) + "</span></div></div>" +
+            '<div class="chat device__chat" data-sim-log role="log">' + lines + "</div>" +
+          "</div>"
+        );
       }
 
-      function countBest() {
-        return list.filter(function (sim) {
-          var idx = saved[sim.id];
-          return typeof idx === "number" && sim.options[idx] && sim.options[idx].verdict === "best";
-        }).length;
+      function hangOption() {
+        var node = sim().nodes[cs.node];
+        for (var i = 0; i < node.options.length; i++) if (node.options[i].hangup) return node.options[i];
+        return null;
       }
 
-      function answeredCount() {
-        return list.filter(function (sim) { return typeof saved[sim.id] === "number"; }).length;
+      /* ---------- Panel (derecha): un solo paso a la vez ---------- */
+      function verdictBadge(v) {
+        return '<span class="vbadge vbadge--' + v + '">' + icon(VERDICT_ICON[v]) + esc(VERDICT_LABEL[v]) + "</span>";
       }
 
-      function paintDots() {
-        U.qsa(".sim-progress__dots .segment", root).forEach(function (node, i) {
-          var answered = typeof saved[list[i].id] === "number";
-          node.classList.toggle("is-done", answered);
-          node.classList.toggle("is-current", i === index && !showResult);
-        });
-        var count = root.querySelector("[data-sc-count]");
-        if (count) count.textContent = answeredCount() + " de " + total + " casos";
+      function panelHtml() {
+        var s = sim();
+        if (cs.phase === "final") return finalPanel(done[s.id], s);
+
+        if (s.kind === "exam") {
+          if (cs.phase === "exam") {
+            var n = Object.keys(cs.marks).filter(function (k) { return cs.marks[k]; }).length;
+            return (
+              '<h4 class="sim-panel__q">Paso 1 · Examina</h4>' +
+              '<p class="sim-panel__p">' + esc(s.examPrompt) + "</p>" +
+              '<p class="tiny muted" data-sim-marked>' + n + " palabra(s) marcada(s)</p>" +
+              '<div class="sim-panel__actions"><button class="btn" type="button" data-sim-check' + (n ? "" : " disabled") + ">Comprobar " + icon("arrowRight") + "</button></div>"
+            );
+          }
+          if (cs.phase === "review") return reviewPanel(s);
+        }
+
+        if (cs.phase === "decide") {
+          var node = s.kind === "exam" ? { prompt: s.question, options: s.options } : s.nodes[cs.node];
+          var opts = node.options.map(function (o, k) { return o.hangup ? "" : '<button type="button" class="opt" data-sim-opt="' + k + '"><span class="opt__k" aria-hidden="true">' + String.fromCharCode(65 + k) + "</span><span>" + esc(o.label) + "</span></button>"; }).join("");
+          return (
+            '<h4 class="sim-panel__q">' + esc(s.kind === "exam" ? "Paso 2 · Decide" : "Turno " + (cs.hist.length + 1)) + "</h4>" +
+            '<p class="sim-panel__p"><strong>' + esc(node.prompt) + "</strong></p>" +
+            '<div class="opt-list">' + opts + "</div>" +
+            (s.kind === "call" && hangOption() ? '<p class="tiny muted">También puedes colgar con el botón del teléfono.</p>' : "")
+          );
+        }
+
+        if (cs.phase === "feedback") {
+          var o = cs.pending;
+          var extra = s.kind === "exam" ? '<p class="sim-panel__link">' + esc(examLink(s, o, evaluateExam(s, cs.marks))) + "</p>" : "";
+          var okPath = o.verdict === "best";
+          var tail = s.kind === "exam" || o.end
+            ? '<button class="btn" type="button" data-sim-next>' + (s.kind === "exam" ? "Ver el desenlace" : "Ver el desenlace") + " " + icon("arrowRight") + "</button>"
+            : '<button class="btn" type="button" data-sim-next>Continuar ' + icon("arrowRight") + "</button>";
+          return (
+            verdictBadge(o.verdict) +
+            '<p class="sim-panel__p">' + esc(o.why) + "</p>" + extra +
+            '<div class="sim-panel__actions">' + tail +
+              (!okPath ? '<button class="btn btn--ghost" type="button" data-sim-fix>Corregir mi respuesta</button>' : "") +
+            "</div>" +
+            (!okPath ? '<p class="tiny muted">Si corriges, esa decisión vale menos puntos, pero puedes aprender de ella.</p>' : "")
+          );
+        }
+
+        if (cs.phase === "end") {
+          var eo = cs.ending;
+          return (
+            verdictBadge(eo.verdict) +
+            '<p class="sim-panel__p"><strong>Qué pasó después</strong></p>' +
+            '<p class="sim-panel__p">' + esc(eo.outcome) + "</p>" +
+            (eo.corrected ? '<p class="tiny muted">Corregiste tu criterio durante el caso; eso se refleja en la puntuación.</p>' : "") +
+            '<div class="sim-panel__actions">' + nextButton() + "</div>"
+          );
+        }
+        return "";
       }
 
-      function paintNav() {
-        var nav = root.querySelector("[data-sc-nav]");
-        if (!nav) return;
-        var sim = list[index];
-        var isLast = index === total - 1;
-        var hasAnswer = sim && typeof saved[sim.id] === "number";
-        var allDone = answeredCount() === total;
-        var canNext = !isLast && hasAnswer;
-        var canResult = isLast && allDone;
-
-        nav.innerHTML =
-          '<div class="flow-controls__row">' +
-            '<button class="btn btn--ghost" type="button" data-sc-prev' + (index === 0 ? " disabled" : "") + ">" +
-              icon("chevron") + " Caso anterior" +
-            "</button>" +
-            (isLast
-              ? '<button class="btn" type="button" data-sc-result' + (canResult ? "" : " disabled") + ">" +
-                  "Ver resultado " + icon("arrowRight") +
-                "</button>"
-              : '<button class="btn" type="button" data-sc-next' + (canNext ? "" : " disabled") + ">" +
-                  "Siguiente caso " + icon("arrowRight") +
-                "</button>") +
-          "</div>" +
-          (!hasAnswer
-            ? '<p class="tiny muted">Elige una respuesta para poder avanzar.</p>'
-            : isLast && !allDone
-              ? '<p class="tiny muted">Responde todos los casos para ver el resultado.</p>'
-              : "");
+      function nextButton() {
+        var last = idx === total - 1 || list.every(function (x, i) { return i === idx || !!done[x.id]; });
+        return '<button class="btn" type="button" data-sim-endnext>' + (last ? "Ver resultado" : "Siguiente caso") + " " + icon("arrowRight") + "</button>";
       }
 
-      function paintStage() {
-        var stage = root.querySelector("[data-sc-stage]");
-        var panel = root.querySelector("[data-sc-result-panel]");
-        var nav = root.querySelector("[data-sc-nav]");
-        if (!stage || !panel) return;
+      function reviewPanel(s) {
+        var ev = evaluateExam(s, cs.marks);
+        var chips = [];
+        ev.found.forEach(function (p) { chips.push({ p: p, k: "hit", icon: "check" }); });
+        ev.missed.forEach(function (p) { chips.push({ p: p, k: "miss", icon: "warning" }); });
+        ev.falseAlarms.forEach(function (p) { chips.push({ p: p, k: "false", icon: "info" }); });
+        var sel = cs.sel == null ? null : cs.sel;
+        var part = sel == null ? null : s.parts[sel];
+        var kind = sel == null ? "" : ev.found.indexOf(sel) >= 0 ? "Detectada" : ev.missed.indexOf(sel) >= 0 ? "Se te pasó" : "No era una señal";
+        return (
+          '<h4 class="sim-panel__q">Tu revisión</h4>' +
+          '<p class="sim-panel__p"><strong>' + ev.found.length + " de " + ev.total + "</strong> señales detectadas" +
+            (ev.falseAlarms.length ? " · " + ev.falseAlarms.length + " falsa(s) alarma(s)" : "") + ".</p>" +
+          '<div class="sig-chips" role="group" aria-label="Señales">' + chips.map(function (c) {
+            return '<button type="button" class="sig-chip sig-chip--' + c.k + (sel === c.p ? " is-selected" : "") + '" data-sim-sig="' + c.p + '" aria-pressed="' + (sel === c.p ? "true" : "false") + '">' +
+              icon(c.icon) + esc(s.parts[c.p].t.trim().slice(0, 34)) + (s.parts[c.p].t.trim().length > 34 ? "…" : "") + "</button>";
+          }).join("") + "</div>" +
+          '<div class="sig-explain" data-sim-explain>' + (part
+            ? "<b>" + kind + ".</b> " + esc(part.why)
+            : '<span class="muted">Toca una señal para ver por qué importa.</span>') + "</div>" +
+          '<div class="sim-panel__actions"><button class="btn" type="button" data-sim-decide>Decidir qué hacer ' + icon("arrowRight") + "</button></div>"
+        );
+      }
 
-        if (showResult) {
-          stage.hidden = true;
-          if (nav) nav.hidden = true;
-          panel.hidden = false;
-          panel.innerHTML = resultHtml(list, saved, inspectState);
-          paintDots();
+      function finalPanel(entry, s) {
+        return (
+          verdictBadge(entry.verdict) +
+          '<p class="sim-panel__p"><strong>Qué pasó después</strong></p>' +
+          '<p class="sim-panel__p">' + esc(entry.outcome) + "</p>" +
+          '<p class="tiny muted">' + (Math.round(entry.points * 10) / 10) + " de 3 puntos en este caso.</p>" +
+          '<div class="sim-panel__actions">' + nextButton() +
+            '<button class="btn btn--ghost" type="button" data-sim-replay>Repetir el caso</button></div>'
+        );
+      }
+
+      /* ---------- Resultado final ---------- */
+      function resultHtml() {
+        var pts = 0;
+        var rows = list.map(function (s, i) {
+          var e = done[s.id];
+          pts += e ? e.points : 0;
+          return '<li class="sim-result__row sim-result__row--' + (e ? e.verdict : "danger") + '">' +
+            '<div><b>' + esc(caseNumber(i)) + " · " + esc(s.title) + "</b>" +
+            "<p>" + esc(e ? e.outcome : "Sin completar") + "</p></div>" +
+            '<span class="vbadge vbadge--' + (e ? e.verdict : "danger") + '">' + esc(e ? VERDICT_LABEL[e.verdict] : "Pendiente") + "</span></li>";
+        }).join("");
+        var best = bestCount();
+        var msg = best === total
+          ? "Decidiste con la mayor protección en todos los casos."
+          : best ? "Acertaste en " + best + " de " + total + " casos. Repite los demás y compara cómo cambia el resultado cuando verificas por un canal oficial."
+                 : "Repite los casos y fíjate en cómo cambia el resultado cuando pausas y verificas por un canal oficial.";
+        return (
+          '<div class="sim-result">' +
+            '<div class="sim-result__top"><div class="sim-result__score"><b>' + (Math.round(pts * 10) / 10) + " / " + total * 3 + "</b><span>puntos</span></div>" +
+            '<p class="sim-result__msg">' + esc(msg) + "</p></div>" +
+            '<ul class="sim-result__list">' + rows + "</ul>" +
+            '<div class="sim-panel__actions"><button class="btn btn--ghost" type="button" data-sim-back>Revisar los casos</button></div>' +
+          "</div>"
+        );
+      }
+
+      /* ---------- Pintado ---------- */
+      function paint(keepScroll) {
+        paintRail();
+        var stage = root.querySelector("[data-sim-stage]");
+        if (view === "result") {
+          stage.innerHTML = resultHtml();
+          animateIn(stage);
           return;
         }
-
-        stage.hidden = false;
-        if (nav) nav.hidden = false;
-        panel.hidden = true;
-        stage.innerHTML = caseHtml(list[index], index, saved, inspectState);
-        paintDots();
-        paintNav();
+        var log = root.querySelector("[data-sim-log]");
+        var prev = log ? log.scrollTop : 0;
+        stage.innerHTML =
+          '<div class="sim-case"><div class="sim-scene">' + sceneHtml() + "</div>" +
+          '<div class="sim-panel" data-sim-panel>' + panelHtml() + "</div></div>";
+        var newLog = root.querySelector("[data-sim-log]");
+        if (newLog) newLog.scrollTop = keepScroll ? prev : newLog.scrollHeight;
+        if (!keepScroll) animateIn(root.querySelector("[data-sim-panel]"));
       }
 
-      function summary() {
-        var node = root.querySelector("[data-sc-summary]");
-        if (node) node.textContent = summaryText(list, saved);
-        var answered = answeredCount();
-        announce(handlers, answered, total, countBest());
-        completeIfReady(handlers, answered === total);
+      function paintPanelOnly() {
+        var panel = root.querySelector("[data-sim-panel]");
+        if (!panel) return paint();
+        panel.innerHTML = panelHtml();
+        animateIn(panel);
       }
 
-      function choose(sim, optionIndex) {
-        saved[sim.id] = optionIndex;
-        saveActivity(moduleId, { scenarios: saved });
+      function animateIn(el) {
+        if (!el) return;
+        el.classList.remove("is-enter");
+        void el.offsetWidth;
+        el.classList.add("is-enter");
+      }
+
+      /* ---------- Acciones ---------- */
+      function chooseOption(k) {
+        var s = sim();
+        var node = s.kind === "exam" ? { options: s.options } : s.nodes[cs.node];
+        var o = node.options[k];
+        if (!o) return;
         PVA.audio.play("tap");
-        summary();
-        paintStage();
+        cs.pending = o;
+        cs.pendingIndex = k;
+        if (s.kind !== "exam") {
+          if (o.hangup) {
+            cs.lines.push({ from: "sys", text: "Cuelgas la llamada." });
+            cs.hungUp = true;
+          } else if (o.reply) {
+            cs.lines.push({ from: "me", text: o.reply });
+          }
+        }
+        cs.phase = "feedback";
+        paint(true);
       }
 
-      function resetCase(sim) {
-        delete saved[sim.id];
-        saveActivity(moduleId, { scenarios: saved });
-        summary();
-        paintStage();
+      function recordDecision() {
+        cs.hist.push({ verdict: cs.pending.verdict, retried: cs.retried });
+        cs.retried = false;
       }
 
-      function goTo(next) {
-        if (next < 0 || next > total - 1) return;
-        index = next;
-        showResult = false;
-        paintStage();
+      function finishCase(outcome) {
+        var s = sim();
+        var points, verdict, found = 0, totalSig = 0;
+        if (s.kind === "exam") {
+          var ev = evaluateExam(s, cs.marks);
+          found = ev.found.length; totalSig = ev.total;
+          points = POINTS[cs.pending.verdict] - (cs.retried ? 1 : 0);
+          points = Math.max(0, points) + (ev.total ? ev.found.length / ev.total : 0);
+          verdict = cs.pending.verdict;
+        } else {
+          var pts = cs.hist.map(function (h) { return Math.max(0, POINTS[h.verdict] - (h.retried ? 1 : 0)); });
+          points = pathPoints(pts, pts.length);
+          verdict = pathVerdict(pts, pts.length);
+        }
+        var corrected = cs.hist && cs.hist.some(function (h) { return h.retried; });
+        cs.ending = { verdict: verdict, outcome: outcome, corrected: corrected };
+        done[s.id] = { verdict: verdict, points: points, outcome: outcome, found: found, total: totalSig };
+        saveActivity(moduleId, { sim2: done });
+        announce(handlers, doneCount(), total, bestCount());
+        completeIfReady(handlers, doneCount() === total);
+        cs.phase = "end";
       }
-
-      paintStage();
 
       root.addEventListener("click", function (event) {
-        var option = event.target.closest("[data-sc][data-opt]");
-        if (option && root.contains(option) && !option.disabled) {
-          var sim = null;
-          var simId = option.getAttribute("data-sc");
-          list.forEach(function (item) { if (item.id === simId) sim = item; });
-          if (!sim) return;
-          choose(sim, Number(option.getAttribute("data-opt")));
+        var t = event.target;
+        if (!root.contains(t)) return;
+        var el;
+
+        if ((el = t.closest("[data-sim-go]")) && !el.disabled) { enter(Number(el.getAttribute("data-sim-go"))); return; }
+
+        if ((el = t.closest("[data-tok]"))) {
+          var key = el.getAttribute("data-tok");
+          cs.marks[key] = !cs.marks[key];
+          el.classList.toggle("is-on", !!cs.marks[key]);
+          el.setAttribute("aria-pressed", cs.marks[key] ? "true" : "false");
+          var n = Object.keys(cs.marks).filter(function (k) { return cs.marks[k]; }).length;
+          var label = root.querySelector("[data-sim-marked]");
+          if (label) label.textContent = n + " palabra(s) marcada(s)";
+          var chk = root.querySelector("[data-sim-check]");
+          if (chk) chk.disabled = n === 0;
           return;
         }
 
-        var mk = event.target.closest("[data-mk]");
-        if (mk && root.contains(mk)) {
-          var cur = list[index];
-          var st = inspectState[cur.id] || { marked: {}, done: false };
-          if (st.done) return;
-          var key = mk.getAttribute("data-mk");
-          st.marked[key] = !st.marked[key];
-          inspectState[cur.id] = st;
-          mk.classList.toggle("is-on", !!st.marked[key]);
-          mk.setAttribute("aria-pressed", st.marked[key] ? "true" : "false");
-          var n = Object.keys(st.marked).filter(function (k) { return st.marked[k]; }).length;
-          var cnt = root.querySelector("[data-inspect-count]");
-          if (cnt) cnt.textContent = n + " frase(s) marcada(s)";
-          var go = root.querySelector("[data-sc-inspect]");
-          if (go) go.disabled = n === 0;
-          PVA.audio.play("tap");
+        if (t.closest("[data-sim-check]")) { cs.phase = "review"; cs.sel = null; paint(true); animateIn(root.querySelector("[data-sim-panel]")); return; }
+        if ((el = t.closest("[data-sim-sig]"))) {
+          cs.sel = Number(el.getAttribute("data-sim-sig"));
+          paintPanelOnly();
+          return;
+        }
+        if (t.closest("[data-sim-decide]")) { cs.phase = "decide"; paint(true); animateIn(root.querySelector("[data-sim-panel]")); return; }
+
+        if ((el = t.closest("[data-sim-opt]"))) { chooseOption(Number(el.getAttribute("data-sim-opt"))); return; }
+        if (t.closest("[data-sim-hang]")) {
+          var h = hangOption();
+          if (h) chooseOption(sim().nodes[cs.node].options.indexOf(h));
           return;
         }
 
-        if (event.target.closest("[data-sc-inspect]") && root.contains(event.target)) {
-          var c2 = list[index];
-          var s2 = inspectState[c2.id] || { marked: {}, done: false };
-          s2.done = true;
-          inspectState[c2.id] = s2;
-          saveActivity(moduleId, { inspect: inspectState });
-          paintStage();
+        if (t.closest("[data-sim-fix]")) {
+          var s0 = sim();
+          if (s0.kind !== "exam" && cs.pending.hangup) { cs.lines.pop(); cs.hungUp = false; }
+          else if (s0.kind !== "exam" && cs.pending.reply) cs.lines.pop();
+          cs.retried = true;
+          cs.pending = null;
+          cs.phase = "decide";
+          paint(true);
+          animateIn(root.querySelector("[data-sim-panel]"));
           return;
         }
 
-        var reset = event.target.closest("[data-reset]");
-        if (reset && root.contains(reset)) {
-          var id = reset.getAttribute("data-reset");
-          var target = null;
-          list.forEach(function (item) { if (item.id === id) target = item; });
-          if (target) {
-            index = list.indexOf(target);
-            resetCase(target);
+        if (t.closest("[data-sim-next]")) {
+          var s1 = sim();
+          var o = cs.pending;
+          if (s1.kind === "exam") {
+            finishCase(o.outcome);
+          } else {
+            recordDecision();
+            if (o.end) finishCase(o.end.outcome);
+            else {
+              cs.node = o.next;
+              s1.nodes[o.next].say.forEach(function (tx) { cs.lines.push({ from: "them", text: tx }); });
+              cs.phase = "decide";
+              cs.pending = null;
+            }
           }
+          paint(true);
+          animateIn(root.querySelector("[data-sim-panel]"));
           return;
         }
 
-        if (event.target.closest("[data-sc-prev]") && root.contains(event.target)) {
-          goTo(index - 1);
-          return;
-        }
-
-        if (event.target.closest("[data-sc-next]") && root.contains(event.target)) {
-          goTo(index + 1);
-          return;
-        }
-
-        if (event.target.closest("[data-sc-result]") && root.contains(event.target)) {
-          if (answeredCount() === total) {
-            showResult = true;
-            paintStage();
+        if (t.closest("[data-sim-endnext]")) {
+          var nxt = -1;
+          for (var i = 1; i <= total; i++) {
+            var cand = (idx + i) % total;
+            if (!done[list[cand].id]) { nxt = cand; break; }
           }
+          if (nxt === -1) { view = "result"; paint(); } else enter(nxt);
           return;
         }
 
-        if (event.target.closest("[data-sc-back]") && root.contains(event.target)) {
-          showResult = false;
-          index = total - 1;
-          paintStage();
+        if (t.closest("[data-sim-replay]")) {
+          delete done[sim().id];
+          saveActivity(moduleId, { sim2: done });
+          enter(idx);
+          return;
         }
+        if (t.closest("[data-sim-back]")) { enter(0); return; }
       });
+
+      if (idx === -1) { idx = 0; view = "result"; paint(); }
+      else enter(idx);
     }
   };
-
-  function summaryText(list, saved) {
-    var answered = list.filter(function (sim) { return typeof saved[sim.id] === "number"; }).length;
-    var best = list.filter(function (sim) {
-      var idx = saved[sim.id];
-      return typeof idx === "number" && sim.options[idx] && sim.options[idx].verdict === "best";
-    }).length;
-    if (!answered) return "Aún no has respondido ningún caso. Empieza por el primero.";
-    if (answered < list.length) {
-      return answered + " de " + list.length + " casos respondidos · " +
-        best + " decisión(es) de mayor protección.";
-    }
-    return "Casos respondidos: " + answered + " de " + list.length +
-      " · decisiones de mayor protección: " + best + " de " + list.length +
-      ". Puedes repetir un caso para comparar la retroalimentación.";
-  }
 
   var registry = {
     quickcheck: quickcheck,
