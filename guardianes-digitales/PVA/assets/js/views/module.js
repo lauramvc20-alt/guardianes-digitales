@@ -162,10 +162,22 @@
             (done ? '<span class="chip chip--turq">' + U.icon("check") + " Módulo completado</span>" : "") +
           "</div>" +
         "</div>" +
-        PVA.robot.svg(module.robot, { float: true }) +
+        '<ul class="module-goals" aria-label="Lo que vas a lograr">' + objectives + "</ul>" +
       "</section>" +
 
-      '<div class="module-layout">' +
+      '<section class="module-progress" aria-label="Avance de la actividad">' +
+        '<div class="module-progress__row">' +
+          '<h2>Tu actividad</h2>' +
+          '<p class="tiny" data-act-status>' + U.esc(info.text) + "</p>" +
+        "</div>" +
+        PVA.ui.progressBar(Math.round(info.ratio * 100), "bar--thin", "Avance de la actividad") +
+        '<p class="tiny muted" data-act-note>' +
+          (done ? "Módulo completado. Puedes repetir la actividad cuando quieras." :
+            "La actividad es obligatoria para desbloquear la siguiente etapa.") +
+        "</p>" +
+      "</section>" +
+
+      '<div class="module-layout module-layout--wide">' +
         '<div class="flow">' +
           '<ol class="flow-nav" aria-label="Pasos del módulo" data-flow-nav></ol>' +
           '<div class="flow-stage">' +
@@ -178,28 +190,12 @@
           '<div id="moduleFoot"></div>' +
         "</div>" +
 
-        '<aside aria-label="Información del módulo">' +
-          '<section class="aside-card">' +
-            '<span class="kicker kicker--violet">En este módulo</span>' +
-            '<h2 style="font-size:1.05rem;margin-top:.3rem">Lo que vas a lograr</h2>' +
-            '<ul class="aside-list">' + objectives + "</ul>" +
-            '<div style="margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line)">' +
-              "<h3 style='font-size:.9rem'>Tu actividad</h3>" +
-              '<p class="tiny" data-act-status style="margin-bottom:.45rem">' + U.esc(info.text) + "</p>" +
-              PVA.ui.progressBar(Math.round(info.ratio * 100), "bar--thin", "Avance de la actividad") +
-              '<p class="tiny muted" style="margin-top:.7rem" data-act-note>' +
-                (done ? "Módulo completado. Puedes repetir la actividad cuando quieras." :
-                  "La actividad es obligatoria para desbloquear la siguiente etapa.") +
-              "</p>" +
-            "</div>" +
-          "</section>" +
-          PVA.robot.bubble(module.robot, U.esc(module.aside.tip), module.robot === "warning" ? "warn" : "") +
-          '<section class="aside-card">' +
-            '<h2 class="sources-title">Bibliografía</h2>' +
-            '<ul class="aside-list aside-list--sources">' + sources + "</ul>" +
-          "</section>" +
-        "</aside>" +
-      "</div>";
+      "</div>" +
+
+      '<section class="module-sources" aria-labelledby="srcTitle">' +
+        '<h2 class="sources-title" id="srcTitle">' + U.icon("book") + " Bibliografía y fuentes</h2>" +
+        '<ul class="aside-list aside-list--sources">' + sources + "</ul>" +
+      "</section>";
 
     var foot = root.querySelector("#moduleFoot");
     var navEl = root.querySelector("[data-flow-nav]");
@@ -212,7 +208,7 @@
     function updateStatus() {
       var status = root.querySelector("[data-act-status]");
       var note = root.querySelector("[data-act-note]");
-      var bar = root.querySelector(".aside-card .bar__fill");
+      var bar = root.querySelector(".module-progress .bar__fill");
       var fresh = progressInfo(module.id, module.activity);
       if (status) status.textContent = fresh.text;
       if (bar) bar.style.width = Math.round(fresh.ratio * 100) + "%";

@@ -60,15 +60,9 @@
         '<div class="stat"><b>100 %</b><span>del recorrido al completar esta etapa</span></div>' +
         '<div class="stat"><b>9 / 9</b><span>etapas del curso</span></div>' +
         '<div class="stat"><b>Anónima</b><span>desde esta plataforma</span></div>' +
-      "</div>" +
-
-      '<div style="margin-top:1.4rem">' +
-        PVA.robot.bubble(
-          "celebration",
-          "Gracias por llegar hasta aquí. Tu experiencia ayuda a mejorar esta propuesta " +
-          "educativa para otras personas."
-        ) +
       "</div>";
+
+
 
     root.addEventListener("click", function (event) {
       var link = event.target.closest("[data-survey]");

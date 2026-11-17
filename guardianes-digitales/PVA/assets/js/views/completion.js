@@ -111,13 +111,6 @@
         "</div>" +
       "</section>" +
 
-      '<div class="print-hide" style="margin-top:1.2rem">' +
-        PVA.robot.bubble(
-          "celebration",
-          "Lo lograste. Comparte el Kit con una persona de confianza y ayúdala a " +
-          "activar sus propias medidas de protección."
-        ) +
-      "</div>" +
 
       '<div class="certificate-wrap" data-cert-wrap' + (done ? "" : " hidden") + ">" +
         revealMarkup(name, dateLabel, score, total) +

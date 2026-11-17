@@ -365,10 +365,8 @@ body.nav-open { overflow: hidden; }
 @media (min-width: 941px) {
   #rail { transform: none !important; }
   /* En el panel no hace falta una barra vacía: el título ya está en la vista. */
-  body[data-view="dashboard"] .topbar { display: none; }
 }
 
-body[data-view="dashboard"] .topbar__where { visibility: hidden; }
 
 @media (max-width: 480px) {
   .topbar__where { font-size: 0.72rem; }
@@ -402,25 +400,21 @@ body[data-view="dashboard"] .topbar__where { visibility: hidden; }
 .rail__collapse svg { width: 18px; height: 18px; }
 
 .rail-open {
-  position: fixed;
-  top: 14px; left: 14px;
-  z-index: 70;
+  flex: none;
   display: inline-flex; align-items: center; gap: 0.45rem;
-  padding: 0.5rem 0.85rem 0.5rem 0.65rem;
+  padding: 0.38rem 0.8rem 0.38rem 0.6rem;
   border-radius: 999px;
   border: 1px solid var(--line-strong);
   background: rgba(18, 29, 58, 0.94);
   color: #f4f7ff;
   font: inherit; font-size: 0.8rem; font-weight: 600;
-  box-shadow: var(--shadow-md);
   cursor: pointer;
-  backdrop-filter: blur(10px);
   animation: railOpenIn 320ms var(--ease) both;
 }
 .rail-open[hidden] { display: none; }
 .rail-open svg { width: 18px; height: 18px; }
 .rail-open:hover { border-color: var(--turq); }
-html[data-theme="light"] .rail-open { background: #ffffff; color: #0f172a; border-color: rgba(15, 23, 42, 0.25); box-shadow: 0 8px 22px -8px rgba(15, 23, 42, 0.25); }
+html[data-theme="light"] .rail-open { background: #ffffff; color: #0f172a; border-color: rgba(15, 23, 42, 0.25); }
 html[data-theme="light"] .rail__collapse { color: #0f172a; border-color: rgba(15, 23, 42, 0.2); background: rgba(15, 23, 42, 0.04); }
 @keyframes railOpenIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
 
@@ -435,8 +429,6 @@ html[data-theme="light"] .rail__collapse { color: #0f172a; border-color: rgba(15
     pointer-events: none;
     transition: transform 380ms var(--ease), opacity 220ms ease, visibility 0s linear 380ms;
   }
-  /* El botón flotante necesita sitio sobre la cabecera de cada vista */
-  body.rail-collapsed #view { padding-top: clamp(3.4rem, 5vw, 4rem); }
 }
 @media (max-width: 940px) {
   .rail-open { display: none !important; }

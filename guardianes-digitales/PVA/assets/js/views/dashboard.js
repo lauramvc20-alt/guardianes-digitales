@@ -51,12 +51,6 @@
         ? "Comenzar la bienvenida"
         : "Continuar: " + current.navLabel;
 
-    var robotLine = allDone
-      ? "Completaste los nueve pasos. Tu Kit Digital sigue disponible y la encuesta nos ayuda a mejorar."
-      : completed === 0
-        ? "Hola, soy <b>RO-BIT</b>. Te acompaño por nueve etapas cortas. Empieza por la bienvenida: allí está el mapa completo."
-        : "Vas por <b>" + U.esc(current ? current.navLabel : "el cierre") + "</b>. Recuerda: cada etapa se abre cuando completas la anterior.";
-
     root.innerHTML =
       '<section class="hero enter">' +
         '<div class="hero__body">' +

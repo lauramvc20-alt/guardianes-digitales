@@ -25,6 +25,7 @@
     fallback:
       "No tengo una respuesta segura para eso, y prefiero no inventarla. Puedes revisar los módulos del curso o probar con " +
       "uno de estos temas.",
+    ambiguous: "No estoy seguro de haber entendido tu pregunta. ¿Se parece a alguno de estos temas? Elige uno y te explico.",
     fallbackLinks: [M1, M2, M3],
     thanks: "¡Con gusto! Si te surge otra duda, aquí estoy.",
 
@@ -404,12 +405,57 @@
         follow: ["voz", "verifica"]
       },
       {
+        id: "actualizaciones",
+        title: "Actualizaciones",
+        keywords: ["actualizar", "actualizacion", "actualizaciones", "parche", "parches", "sistema operativo", "antivirus", "desactualizado"],
+        answer: [
+          "Mantén actualizados el sistema operativo, el navegador y las aplicaciones: las actualizaciones instalan parches de seguridad y reducen la superficie de ataque.",
+          "Es una de las prácticas de prevención del curso, junto con las claves únicas, la autenticación en dos pasos y las alertas bancarias."
+        ],
+        links: [M3],
+        follow: ["claves", "dospasos"]
+      },
+      {
+        id: "spoofing",
+        title: "Identificador falsificado (spoofing)",
+        keywords: ["spoofing", "identificador de llamada", "numero falsificado", "numero clonado", "remitente falso", "numero del banco", "aparece el nombre del banco"],
+        answer: [
+          "El identificador de llamada o el remitente de un SMS puede ser falsificado (spoofing): que aparezca el nombre o el número de tu banco no prueba que sea real.",
+          "Por eso se verifica por un canal que tú elijas: la app oficial o el número que aparece al respaldo de tu tarjeta."
+        ],
+        links: [M2],
+        follow: ["verifica", "vishing"]
+      },
+      {
         id: "gracias",
         title: "Agradecimiento",
         keywords: ["gracias", "muchas gracias", "ok gracias", "listo gracias", "perfecto", "genial", "chao", "adios", "hasta luego"],
         answer: ["¡Con gusto! Si te surge otra duda, aquí estoy. Recuerda: PAUSA, VERIFICA y ACTÚA."],
         follow: []
       }
+    ],
+
+    /* Expresiones coloquiales y sinónimos que se relacionan con uno o varios temas.
+       Permiten entender preguntas que no coinciden literalmente con una palabra clave. */
+    synonyms: [
+      { w: 6, topics: ["claves", "dospasos"], triggers: ["nadie entre a mi cuenta", "que no entren a mi cuenta", "entren a mi cuenta", "entre a mi cuenta", "entre en mi cuenta", "entrar a mi cuenta", "hackeen", "hackear", "hackeo", "me hackearon", "roben mi cuenta", "robar mi cuenta", "proteger mi cuenta", "proteger mis cuentas", "cuenta segura", "asegurar mi cuenta", "acceso no autorizado", "que nadie use mi cuenta", "que no me roben la cuenta"] },
+      { w: 5, topics: ["senales", "smishing"], triggers: ["mensaje raro", "mensaje extrano", "mensaje sospechoso", "texto raro", "me llego un mensaje", "me llego un sms", "me mandaron un mensaje", "me escribieron", "me enviaron un mensaje"] },
+      { w: 5, topics: ["vishing", "senales"], triggers: ["me llamaron", "llamada rara", "llamada sospechosa", "numero desconocido", "llamada del banco", "dicen que son del banco", "dicen ser del banco", "supuesto banco", "me llamo alguien"] },
+      { w: 5, topics: ["senales", "verifica"], triggers: ["es real", "es falso", "es verdad", "es fraude", "es seguro", "es legitimo", "sera estafa", "como se si es real", "como saber si es real", "como se que es verdad", "es confiable", "puedo confiar"] },
+      { w: 5, topics: ["otp"], triggers: ["me pidieron un codigo", "me piden un codigo", "piden el codigo", "codigo que llega al celular", "codigo que llega", "clave dinamica", "token", "codigo de seguridad", "codigos que llegan", "codigo que llegan", "codigos por sms", "codigo por sms", "codigos de verificacion"] },
+      { w: 5, topics: ["victima", "enlaces"], triggers: ["di clic", "di click", "hice clic", "abri el enlace", "abri un link", "toque el enlace", "entre al link", "pinche el enlace", "abri el mensaje"] },
+      { w: 6, topics: ["victima", "alertas"], triggers: ["me quitaron plata", "me sacaron plata", "me robaron plata", "me sacaron dinero", "me quitaron dinero", "falta plata", "desaparecio dinero", "cobro que no hice", "me cobraron", "me robaron dinero", "movimiento que no reconozco"] },
+      { w: 5, topics: ["actua"], triggers: ["donde denuncio", "como denuncio", "a quien reporto", "donde reporto", "quien me ayuda", "fiscalia", "denuncia"] },
+      { w: 4, topics: ["privacidad"], triggers: ["facebook", "instagram", "tiktok", "whatsapp", "mis redes", "perfil publico", "que publico", "mi foto", "mi cedula"] },
+      { w: 5, topics: ["empleo"], triggers: ["me ofrecen trabajo", "oferta de trabajo", "buscar trabajo", "busco empleo", "buscando empleo", "piden mi cedula", "piden documentos", "piden dinero para trabajar", "trabajo desde casa"] },
+      { w: 5, topics: ["navegacion", "actividades"], triggers: ["como funciona esta pagina", "como uso esto", "no entiendo la plataforma", "que sigue", "siguiente paso", "que hago ahora", "no me deja entrar", "modulo bloqueado", "no puedo entrar al modulo", "como avanzo", "no avanza"] },
+      { w: 5, topics: ["claves"], triggers: ["mi clave es facil", "clave debil", "olvide mi clave", "misma clave", "misma contrasena", "guardar claves", "guardar contrasenas", "administrador de claves", "que clave uso", "crear una clave"] },
+      { w: 5, topics: ["progreso"], triggers: ["reinicio", "reiniciar", "reinicia", "empezar de cero", "borrar todo", "volver a empezar", "borrar mi progreso"] },
+      { w: 5, topics: ["hola"], triggers: ["que haces", "que sabes hacer", "en que me ayudas", "para que sirves", "que puedes hacer", "que haces tu"] },
+      { w: 5, topics: ["dospasos"], triggers: ["doble verificacion", "verificacion doble", "segundo paso", "segundo factor", "codigo extra", "google authenticator", "authenticator", "autenticador"] },
+      { w: 4, topics: ["modalidades", "senales"], triggers: ["compre algo", "vendedor", "comprador", "mercado libre", "pagina falsa", "tienda falsa", "comprar por internet", "venta por internet", "pago por adelantado"] },
+      { w: 4, topics: ["actualizaciones"], triggers: ["celular viejo", "actualizar el celular", "sistema desactualizado", "app desactualizada"] },
+      { w: 4, topics: ["social", "pva"], triggers: ["me presionan", "me apuran", "me dicen que es urgente", "me asustaron", "me amenazan", "me amenazaron"] }
     ]
   };
 })(window);

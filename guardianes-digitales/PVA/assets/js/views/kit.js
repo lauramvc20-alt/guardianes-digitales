@@ -57,12 +57,6 @@
         "</div>" +
       "</div>" +
 
-      PVA.robot.bubble(
-        "celebration",
-        "Completaste la evaluación. Este Kit es tuyo: descárgalo, guárdalo y compártelo " +
-        "con alguien que pueda necesitarlo."
-      ) +
-
       '<section class="kit-grid" style="margin-top:1.2rem" aria-label="Recursos del Kit Digital">' +
         cards +
       "</section>" +

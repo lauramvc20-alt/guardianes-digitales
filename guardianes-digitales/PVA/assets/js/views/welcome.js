@@ -49,13 +49,7 @@
             "pantalla cuando quieras." +
           "</p>" +
         "</div>" +
-        '<div class="companion companion--welcome">' +
-          '<p class="companion__bubble" role="status">' +
-            "Te acompaño por todo el curso. No necesitas registrarte: tu avance se " +
-            "guarda solo en este navegador." +
-          "</p>" +
-          '<div class="companion__robot">' + PVA.robot.svg("welcome", { float: true }) + "</div>" +
-        "</div>" +
+        '<div class="welcome-hero__logo" aria-hidden="true">' + PVA.logo.svg() + "</div>" +
       "</section>" +
 
       '<div class="welcome-grid enter-2">' +
