@@ -19,45 +19,59 @@
     return "";
   }
 
-  var COLS = 3;
+  /* Tres fases que aprovechan el ancho: cada una es un carril con sus etapas. */
+  var PHASES = [
+    { title: "Aprende", sub: "Base y conceptos", from: 0, to: 3, icon: "book" },
+    { title: "Practica", sub: "Aplica y demuestra", from: 3, to: 6, icon: "target" },
+    { title: "Cierra", sub: "Lleva y comparte", from: 6, to: 9, icon: "trophy" }
+  ];
 
   function node(stage, index) {
     var done = store.isDone(stage.id);
     var unlocked = store.isUnlocked(stage.id);
     var cur = store.currentStage();
     var isCurrent = !done && unlocked && cur && cur.id === stage.id;
-    var row = Math.floor(index / COLS);
-    var pos = index % COLS;
-    var rtl = row % 2 === 1;
-    var col = rtl ? COLS - pos : pos + 1;
-    var last = index === store.STAGES.length - 1;
-    var atEdge = pos === COLS - 1;
-    var cls = "map-node";
+    var cls = "lane-node";
     var state;
     var glyph;
 
     if (done) { cls += " is-done"; state = "Completada"; glyph = U.icon("check"); }
-    else if (isCurrent) { cls += " is-current"; state = "Tu siguiente paso"; glyph = U.icon(stage.icon); }
+    else if (isCurrent) { cls += " is-current"; state = "Siguiente paso"; glyph = U.icon(stage.icon); }
     else if (unlocked) { state = "Disponible"; glyph = U.icon(stage.icon); }
     else { cls += " is-locked"; state = "Bloqueada"; glyph = U.icon("lock"); }
 
-    if (!last) cls += atEdge ? " to-down" : (rtl ? " to-left" : " to-right");
-
     var inner =
-      '<span class="map-node__dot" aria-hidden="true">' + glyph + "</span>" +
-      '<span class="map-node__text">' +
-        '<span class="map-node__step">Etapa ' + (index + 1) + " · " + state + "</span>" +
+      '<span class="lane-node__dot" aria-hidden="true">' + glyph + "</span>" +
+      '<span class="lane-node__text">' +
+        '<span class="lane-node__step">Etapa ' + (index + 1) + " · " + state + "</span>" +
         "<b>" + U.esc(stage.label) + "</b>" +
-        "<span class=\"map-node__blurb\">" + U.esc(stage.blurb) + "</span>" +
+        '<span class="lane-node__blurb">' + U.esc(stage.blurb) + "</span>" +
+        (isCurrent ? '<span class="lane-node__cta">Continuar ' + U.icon("arrowRight") + "</span>" : "") +
       "</span>";
 
-    var style = ' style="grid-column:' + col + ";grid-row:" + (row + 1) + '"';
     if (!done && !unlocked) {
-      return '<li class="' + cls + '"' + style + '><div class="map-node__link" aria-disabled="true">' + inner +
+      return '<li class="' + cls + '"><div class="lane-node__link" aria-disabled="true">' + inner +
         '<span class="sr-only">. Etapa bloqueada. Se abre al completar ' + U.esc(missingLabel(stage)) + ".</span></div></li>";
     }
-    return '<li class="' + cls + '"' + style + '><a class="map-node__link" href="' + stage.route + '"' +
+    return '<li class="' + cls + '"><a class="lane-node__link" href="' + stage.route + '"' +
       (isCurrent ? ' aria-current="step"' : "") + ">" + inner + "</a></li>";
+  }
+
+  function lane(phase, pi) {
+    var stages = store.STAGES.slice(phase.from, phase.to);
+    var doneN = stages.filter(function (st) { return store.isDone(st.id); }).length;
+    return (
+      '<section class="lane enter-' + (pi + 1) + '" aria-labelledby="lane-' + pi + '">' +
+        '<header class="lane__head">' +
+          '<span class="lane__ico" aria-hidden="true">' + U.icon(phase.icon) + "</span>" +
+          '<div><h2 id="lane-' + pi + '">' + phase.title + "</h2><span>" + phase.sub + "</span></div>" +
+          '<span class="lane__count">' + doneN + "/" + stages.length + "</span>" +
+        "</header>" +
+        '<ol class="lane__list">' +
+          stages.map(function (st, i) { return node(st, phase.from + i); }).join("") +
+        "</ol>" +
+      "</section>"
+    );
   }
 
   function render(root) {
@@ -66,38 +80,32 @@
     var total = store.STAGES.length;
     var current = store.currentStage();
 
-    var groups = '<ol class="map" aria-label="Recorrido del curso">' +
-      store.STAGES.map(node).join("") + "</ol>";
     root.innerHTML =
-      '<div class="page-head enter">' +
-        '<span class="kicker">Mapa del curso</span>' +
+      '<div class="page-head page-head--tight enter">' +
         '<div class="page-head__row">' +
-          "<h1>Ruta de módulos</h1>" +
-          '<span class="chip chip--violet">' + completed + " de " + total + " etapas completadas</span>" +
+          "<div>" +
+            '<span class="kicker">Mapa del curso</span>' +
+            "<h1>Ruta de módulos</h1>" +
+          "</div>" +
+          '<div class="route-meter">' +
+            '<span class="chip chip--violet">' + completed + " de " + total + " etapas</span>" +
+            ui.progressBar(percent, "bar--thin", "Avance del curso") +
+            "<b>" + percent + " %</b>" +
+          "</div>" +
         "</div>" +
-        '<p class="lede">Nueve etapas en orden obligatorio. Cada una se desbloquea al completar ' +
-        "la anterior: no se puede saltar a un módulo, a la evaluación ni al certificado.</p>" +
-        '<div class="course-card__progress" style="margin-top:1.1rem;max-width:560px">' +
-          ui.progressBar(percent, "", "Avance del curso") + "<b>" + percent + " %</b>" +
-        "</div>" +
+        '<p class="lede">Nueve etapas en tres fases. Cada una se abre al completar la anterior.</p>' +
       "</div>" +
 
-      groups +
+      '<div class="lanes" aria-label="Recorrido del curso">' +
+        PHASES.map(lane).join("") +
+      "</div>" +
 
-      '<section class="panel pad" style="margin-top:1.6rem" aria-labelledby="legendTitle">' +
-        '<h2 id="legendTitle" style="font-size:1.05rem">Cómo leer la ruta</h2>' +
-        '<div class="grid grid--3" style="margin-top:.8rem">' +
-          '<div class="fact"><b>' + U.icon("play") + " Disponible</b><span>Puedes entrar ahora</span></div>" +
-          '<div class="fact"><b>' + U.icon("check") + " Completada</b><span>Ya cumpliste la etapa</span></div>" +
-          '<div class="fact"><b>' + U.icon("lock") + " Bloqueada</b><span>Falta completar una etapa previa</span></div>" +
-        "</div>" +
+      '<p class="tiny muted route-foot">' +
+        U.icon("lock") + " Las etapas bloqueadas se abren en orden. " +
         (current
-          ? '<p class="tiny muted" style="margin-top:1rem">Tu siguiente etapa es <strong>' +
-            U.esc(current.label) + "</strong>. " +
-            '<a href="' + current.route + '">Continuar ahora</a>.</p>'
-          : '<p class="tiny muted" style="margin-top:1rem">Completaste todas las etapas. ' +
-            '<a href="#/certificado">Revisa tu certificado</a> o <a href="#/encuesta">responde la encuesta</a>.</p>') +
-      "</section>";
+          ? 'Tu siguiente etapa es <strong>' + U.esc(current.label) + '</strong>. <a href="' + current.route + '">Continuar ahora</a>.'
+          : 'Completaste todo. <a href="#/certificado">Revisa tu certificado</a> o <a href="#/encuesta">responde la encuesta</a>.') +
+      "</p>";
   }
 
   PVA.views = PVA.views || {};

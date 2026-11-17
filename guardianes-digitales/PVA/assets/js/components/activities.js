@@ -71,10 +71,15 @@
           '<span class="kicker kicker--violet">Actividad práctica</span>' +
           '<h3 id="actTitle">' + esc(cfg.title) + "</h3>" +
           '<p class="muted tiny">' + esc(cfg.intro) + "</p>" +
+          '<ol class="segments qc-dots" aria-label="Preguntas">' +
+            cfg.questions.map(function (_, i) { return '<li class="segment" data-qdot="' + i + '"></li>'; }).join("") +
+          "</ol>" +
           questions +
-          '<p class="tiny muted" data-qcount style="margin-top:1rem">' +
-            countKeys(saved) + " de " + total + " comprobaciones correctas" +
-          "</p>" +
+          '<div class="flow-controls__row qc-nav">' +
+            '<button class="btn btn--ghost" type="button" data-qprev>' + icon("chevron") + " Anterior</button>" +
+            '<p class="tiny muted" data-qcount>' + countKeys(saved) + " de " + total + " comprobaciones correctas</p>" +
+            '<button class="btn" type="button" data-qnext>Siguiente ' + icon("arrowRight") + "</button>" +
+          "</div>" +
         "</section>"
       );
     },
@@ -82,8 +87,36 @@
     bind: function (root, cfg, moduleId, handlers) {
       var saved = activityState(moduleId).quickcheck || {};
       var total = cfg.questions.length;
+      var qi0 = 0;
+      while (qi0 < total - 1 && saved[qi0]) qi0++;
+      var cur = qi0;
+
+      /* Una pregunta por pantalla: solo se avanza al resolver la actual. */
+      function paintQ() {
+        U.qsa("[data-qwrap]", root).forEach(function (w) {
+          w.hidden = Number(w.getAttribute("data-qwrap")) !== cur;
+        });
+        U.qsa("[data-qdot]", root).forEach(function (d, i) {
+          d.classList.toggle("is-done", !!saved[i]);
+          d.classList.toggle("is-current", i === cur);
+        });
+        var prev = root.querySelector("[data-qprev]");
+        var next = root.querySelector("[data-qnext]");
+        if (prev) prev.disabled = cur === 0;
+        if (next) {
+          next.hidden = cur === total - 1;
+          next.disabled = !saved[cur];
+        }
+      }
+      paintQ();
 
       root.addEventListener("click", function (event) {
+        var go = event.target.closest("[data-qprev],[data-qnext]");
+        if (go && root.contains(go) && !go.disabled) {
+          cur = U.clamp(cur + (go.hasAttribute("data-qnext") ? 1 : -1), 0, total - 1);
+          paintQ();
+          return;
+        }
         var btn = event.target.closest("[data-q][data-opt]");
         if (!btn || btn.disabled) return;
 
@@ -117,6 +150,7 @@
           var done = countKeys(saved);
           var counter = root.querySelector("[data-qcount]");
           if (counter) counter.textContent = done + " de " + total + " comprobaciones correctas";
+          paintQ();
           announce(handlers, done, total);
           completeIfReady(handlers, done === total);
         } else {
