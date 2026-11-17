@@ -1,163 +1,216 @@
-Nuevas mejoras — Inicio, identidad visual, contexto y asistente digital
+Actualización de MEJORAS_PVA.md — Nuevos ajustes
 
-No elimines funcionalidades existentes ni modifiques la lógica del recorrido, las actividades, las evaluaciones o el progreso.
+1.  Actualmente, al ocultar el menú, el botón que permite abrirlo nuevamente se superpone con el encabezado de la página.
 
-Mejoras:
+Necesito corregir este comportamiento:
 
-1. Panel lateral desplegable y ocultable
+- El botón para abrir el menú debe tener una ubicación propia y no superponerse con el encabezado.
+- El encabezado debe adaptarse correctamente cuando el panel esté abierto o cerrado.
+- El contenido principal debe aprovechar el espacio disponible cuando el panel esté oculto.
+- La transición entre ambos estados debe ser fluida.
+- Debe funcionar correctamente en diferentes tamaños de pantalla.
 
-Actualmente, el panel lateral permanece estático y ocupa espacio de la interfaz.
+No quiero que el botón del menú interfiera con otros elementos ni que se produzcan desplazamientos visuales extraños.
+
+
+2. Actualmente RO-BIT aparece en diferentes espacios laterales, mediante tarjetas con mensajes. No me convence esta integración porque ocupa espacio y hace que los contenidos se vean más estrechos, quítalos y deja que el robot sea acompañamiento conversacional. RO-BIT debe permitir:
+
+- Consultar conceptos explicados en el curso.
+- Resolver dudas sobre los módulos.
+- Explicar términos de seguridad digital.
+- Orientar al participante cuando no comprenda algún contenido.
+- Ofrecer preguntas sugeridas para facilitar las consultas.
+
+Mejorar la comprensión de las preguntas
+
+Actualmente, si escribo una pregunta diferente a las opciones sugeridas, RO-BIT no sabe responder, pero al inicio se indica que puedo seleccionar una pregunta o escribirla.
+
+Quiero mejorar este comportamiento.
+
+Como el proyecto debe mantenerse gratuito y no quiero depender de API de pago, propongo implementar un sistema local de preguntas y respuestas basado en palabras clave e intenciones.
+
+Puedes explorar estas posibilidades:
+
+- Identificar palabras clave aunque el usuario escriba una pregunta con una redacción diferente.
+- Reconocer sinónimos y expresiones relacionadas.
+- Normalizar mayúsculas, minúsculas, tildes y signos de puntuación.
+- Relacionar las consultas con los contenidos y respuestas correspondientes.
+- Ofrecer preguntas relacionadas cuando no encuentre una coincidencia suficientemente clara.
+- Mostrar una respuesta de orientación cuando no comprenda la consulta, sin inventar información.
+
+Por ejemplo, si el usuario pregunta «¿cómo hago para que nadie entre a mi cuenta?», debería poder relacionarlo con contenidos sobre contraseñas y autenticación en dos pasos, aunque esa frase no esté registrada literalmente.
+
+Quiero que analices cuál sería la mejor solución técnica gratuita para conseguirlo.
+
+Importante:
+
+- No utilizar API de pago.
+- No incorporar suscripciones ni servicios externos que generen costos.
+- No presentar el sistema como inteligencia artificial generativa si realmente funciona mediante respuestas programadas.
+- Las respuestas deben basarse en el contenido del curso.
+- Evitar respuestas incorrectas cuando no exista una coincidencia clara.
+
+Puedes mantener preguntas sugeridas dentro del chatbot, pero escribir una pregunta también debe ser útil y tener un procesamiento real.
+
+6. Eliminar los espacios laterales de RO-BIT en todos los módulos
+
+Actualmente aparecen espacios o tarjetas de RO-BIT dentro de las páginas de los módulos.
+
+Quiero eliminar estas integraciones laterales de todos los módulos, ya que el acompañamiento del robot se realizará exclusivamente mediante el chatbot.
+
+Esto incluye:
+
+- Los mensajes de RO-BIT que aparecen debajo de «Tu actividad».
+- Las tarjetas con consejos del robot.
+- Los espacios reservados para mostrar mensajes del asistente.
+- Cualquier otro bloque lateral permanente destinado a RO-BIT.
+
+No quiero que simplemente se oculten visualmente dejando espacios vacíos. Debes reorganizar la distribución del contenido para aprovechar el espacio liberado.
+
+Reorganización del módulo 5 y la bibliografía
+
+En particular, el contenido del módulo 5 y la bibliografía necesitan una mejor distribución.
+
+Actualmente, ubicar el contenido y otros elementos en columnas laterales hace que todo se vea apretado.
 
 Quiero que:
 
-- Se pueda ocultar y volver a abrir mediante un control visible e intuitivo.
-- Al ocultarse, el contenido principal aproveche el espacio que queda disponible.
-- Al abrirse, el panel aparezca de forma fluida, sin movimientos bruscos.
-- El estado del panel no debe bloquear botones ni interferir con la navegación.
-- En dispositivos pequeños, debe adaptarse a un comportamiento apropiado, como un menú desplegable.
-- El control para abrirlo debe permanecer accesible incluso cuando esté oculto.
+- El contenido principal tenga suficiente anchura.
+- La actividad práctica tenga un espacio adecuado.
+- La bibliografía se presente en una sección independiente y bien organizada.
+- No se acumulen demasiados elementos en una misma columna.
+- Se aproveche mejor el ancho de la pantalla.
 
-No quiero que el panel desaparezca definitivamente ni que sea necesario recargar la página para recuperarlo.
+No quiero que la solución sea simplemente mover las tarjetas de un lateral a otro. Necesito una reorganización real de la composición de la página.
 
-2. Rediseño del logo de Guardián Digital
+7. Rediseño completo de la actividad práctica del módulo 5: Protección de datos
 
-No me convence la identidad visual actual porque utiliza un escudo sencillo sobre un fondo degradado. Quiero una propuesta más original y reconocible.
+La actividad actual se titula «Elige al menos tres compromisos» y consiste en seleccionar hábitos de seguridad mediante tarjetas con casillas de verificación.
 
-Explora una identidad visual que represente:
+No me convence esta dinámica. Se siente como una lista de tareas o compromisos y no como una actividad práctica de aprendizaje.
 
-- Protección y confianza digital.
-- Prevención de estafas e ingeniería social.
-- Tecnología y aprendizaje.
-- El concepto de convertirse en un guardián digital.
+Quiero reemplazarla por completo.
 
-No te limites a cambiar los colores del escudo actual. Propón un símbolo con personalidad propia, que pueda funcionar tanto en el encabezado como en el certificado y otros recursos del curso.
+Condición fundamental: NO debe parecerse al simulacro de smishing y vishing del módulo 4.
 
-Evita los diseños genéricos de ciberseguridad. El resultado debe ser moderno, profesional, sencillo de reconocer y coherente con la identidad de toda la plataforma.
+El simulacro ya utiliza situaciones ficticias, mensajes, llamadas y decisiones sobre cómo reaccionar ante posibles engaños. No quiero repetir esa mecánica.
 
-3. Simplificación de la sección principal de inicio
+Nueva dirección
 
-En la portada, debajo del texto «Sé un guardián digital», aparecen cuatro indicadores:
+Quiero una actividad interactiva de conocimientos sobre protección de datos, cuentas y dispositivos.
 
-- 4 módulos.
-- 5 preguntas.
-- 9 etapas.
-- $0 costo.
+Puedes explorar dinámicas como:
 
-Quiero retirar completamente estos indicadores.
+- Relacionar conceptos con sus funciones.
+- Clasificar medidas de protección por categorías.
+- Organizar acciones según su propósito.
+- Resolver pequeños desafíos de asociación.
+- Completar actividades interactivas de conocimientos.
 
-El espacio debe aprovecharse para dar mayor protagonismo al mensaje principal, al logo y a los botones de navegación. La portada debe sentirse más limpia, visual y directa, sin información secundaria que no aporte demasiado a la experiencia.
+Los contenidos pueden incluir:
 
-Conserva los botones para continuar el curso y consultar la ruta completa.
+- Uso de contraseñas diferentes y seguras.
+- Autenticación en dos pasos.
+- Protección de la privacidad en redes sociales.
+- Alertas de movimientos bancarios.
+- Actualización de dispositivos y aplicaciones.
+- Reporte de contactos sospechosos.
 
-4. Nueva sección independiente: contexto de las estafas digitales
+Características necesarias
 
-Actualmente, el apartado «¿Por qué este curso?» presenta cuatro tarjetas con porcentajes y, debajo, el texto «Encuesta a 20 personas en Colombia; muestra de conveniencia, no representativa».
+- Debe tener una mecánica diferente a las simulaciones anteriores.
+- No debe utilizar escenarios ficticios de mensajes, llamadas o correos.
+- No debe consistir en marcar casillas de compromiso.
+- Debe permitir que el participante interactúe activamente.
+- Debe incluir retroalimentación educativa.
+- Debe tener un objetivo, una dinámica y una conclusión.
+- Puede incorporar puntuación o progreso si aporta valor.
+- Debe ser visualmente atractiva e intuitiva.
 
-Quiero reorganizar esta información.
+No quiero que simplemente cambies los colores o la distribución de las tarjetas actuales. Necesito una actividad nueva.
 
-Primero: retira ese texto que aparece debajo de las tarjetas. No quiero que el contexto de la investigación quede reducido a una nota pequeña junto a la sección «Tu recorrido».
+8. Mejorar la funcionalidad y la lógica de las simulaciones del módulo 4
 
-Segundo: crea una sección independiente que explique por qué es importante este curso y de dónde surge la problemática. Debe integrarse naturalmente en la navegación de la página principal, sin competir visualmente con el recorrido de aprendizaje.
+Quiero revisar las simulaciones porque he encontrado preguntas que parecen no tener una función real dentro de la actividad.
 
-Puedes proponer un nombre más atractivo, por ejemplo:
+Por ejemplo, en una simulación aparece la pregunta:
 
-- El problema está más cerca de lo que parece.
-- ¿Por qué debemos aprender a protegernos?
-- Una amenaza presente en nuestra vida digital.
+«Pausa: ¿qué revisarías primero?»
 
-Contenido que debe orientar esta sección:
+Y presenta opciones como:
 
-Utiliza como fuente el documento de investigación del proyecto, especialmente el planteamiento del problema, la encuesta de diagnóstico, las causas y consecuencias y el marco teórico.
+- Quién lo envía.
+- Qué me pide.
+- Qué urgencia me impone.
 
-La sección puede organizarse en tres partes:
+El problema es que, al seleccionar una de estas opciones, la respuesta no parece aportar nada ni influir en el desarrollo de la actividad.
 
-A. Una realidad cotidiana
+No quiero preguntas decorativas o interacciones que no tengan consecuencias.
 
-Explica que utilizamos billeteras digitales, aplicaciones bancarias, redes sociales, plataformas de compraventa y servicios de mensajería para realizar actividades diarias. Estos canales también son utilizados para intentar engañar a las personas mediante mensajes, llamadas, enlaces y suplantaciones.
+Cambios solicitados
 
-B. Lo que encontramos en nuestra encuesta
+- Revisar todas las preguntas y decisiones de las simulaciones.
+- Comprobar qué ocurre realmente después de seleccionar cada respuesta.
+- Hacer que las decisiones tengan una función pedagógica.
+- Si una elección debe influir en la actividad, debe modificar la retroalimentación, mostrar información relacionada o afectar el resultado de la simulación.
+- Si una pregunta no aporta valor, eliminarla o sustituirla.
+- Evitar preguntas repetitivas que no contribuyan al aprendizaje.
+- Explicar por qué una decisión es adecuada o inadecuada.
+- Mantener la coherencia entre las respuestas, la retroalimentación y el resultado final.
 
-Presenta los resultados del diagnóstico de las 20 personas consultadas:
+Quiero que el participante sienta que sus decisiones importan y que está aprendiendo algo con cada interacción.
 
-- 85 % recibió mensajes o llamadas sospechosas.
-- 20 % manifestó haber sido víctima directa de una estafa.
-- 47,6 % identificó el smishing como un canal frecuente.
-- 47,6 % identificó el vishing como un canal frecuente.
+No basta con que los botones respondan al clic: la lógica de la actividad debe tener sentido.
 
-Puedes utilizar gráficos, cifras destacadas o una composición visual más interesante que las tarjetas actuales.
+Conserva las simulaciones de smishing y vishing, pero mejora su calidad pedagógica y funcional.
 
-Es indispensable conservar la aclaración metodológica: se trata de una encuesta aplicada a una muestra de conveniencia de 20 personas, por lo que sus resultados describen a los participantes y no representan estadísticamente a toda Colombia. No presentes estos porcentajes como cifras nacionales.
+---
 
-C. ¿Por qué es importante aprender a prevenirlas?
+9. Revisión general de diseño y experiencia de usuario
 
-Explica brevemente cómo los estafadores pueden aprovechar la urgencia, el miedo, la confianza o la necesidad de conseguir empleo para manipular a las personas. Menciona que las consecuencias pueden afectar el dinero, los datos personales y la tranquilidad de las víctimas.
+Todos estos cambios deben mantener una identidad visual coherente con Guardián Digital.
 
-Cierra conectando esta problemática con el propósito del curso: aprender a reconocer señales de alerta, verificar por canales oficiales y actuar de forma segura mediante el protocolo PAUSA, VERIFICA y ACTÚA.
+Quiero una plataforma moderna, profesional, educativa e interactiva.
 
-La sección debe ser educativa, visual y breve. No quiero trasladar todo el documento académico a la página web. Resume y transforma la información en una experiencia fácil de comprender.
+Presta especial atención a:
 
-5. Integración del robot RO-BIT como asistente del curso
+- Aprovechamiento del espacio horizontal.
+- Jerarquía visual y tipográfica.
+- Distribución equilibrada del contenido.
+- Espaciados consistentes.
+- Adaptación a pantallas de diferentes tamaños.
+- Coherencia entre modo claro y oscuro.
+- Transiciones discretas y funcionales.
+- Uso adecuado de iconografía SVG, preferiblemente Lucide.
+- Evitar tarjetas innecesarias y columnas demasiado estrechas.
+- Evitar espacios vacíos provocados por elementos que ya no existen.
 
-Actualmente, RO-BIT aparece en una zona lateral debajo de «Tu actividad». Su ubicación hace que parezca un elemento secundario y escondido.
+No quiero una interfaz recargada ni que cada sección parezca diseñada de manera independiente.
 
-Quiero darle un papel más importante: convertirlo en el acompañante digital del participante durante el curso.
+10. Condiciones técnicas y de implementación
 
-Explora la posibilidad de implementar un pequeño chatbot con RO-BIT como personaje principal.
+- Conserva las funcionalidades existentes que no estén relacionadas con estos cambios.
+- No elimines actividades, evaluaciones, puntuaciones ni el seguimiento del progreso.
+- No alteres la lógica de desbloqueo de las etapas, salvo que sea estrictamente necesario y esté justificado.
+- No introduzcas dependencias o servicios que generen costos.
+- No dupliques componentes ni código innecesariamente.
+- Respeta la arquitectura actual del proyecto.
+- Revisa los archivos existentes antes de proponer nuevos.
+- Comprueba que los controles y botones tengan un comportamiento real.
+- Evita modificar partes que no estén relacionadas con estos requerimientos.
 
-Comportamiento esperado:
+11. Fase de análisis: no implementar todavía
 
-- RO-BIT debe tener una ubicación visible y coherente con el diseño.
-- El participante debe poder abrir y cerrar el chat cuando lo necesite.
-- Debe responder preguntas puntuales relacionadas con el contenido del curso.
-- Debe explicar conceptos como smishing, vishing, phishing, ingeniería social y autenticación en dos pasos.
-- Debe orientar sobre el protocolo PAUSA, VERIFICA y ACTÚA.
-- Puede resolver dudas sobre las actividades, las simulaciones y la navegación.
-- Debe utilizar un lenguaje sencillo, educativo y directo.
-- Puede ofrecer preguntas sugeridas para facilitar la interacción.
-- Debe mantener su identidad visual y personalidad como robot acompañante.
+Antes de tocar el código, realiza lo siguiente:
 
-Restricción fundamental: el chatbot debe ser gratuito.
+1. Revisa "CLAUDE.md", "MEJORAS_PVA.md" y la estructura actual del proyecto.
+2. Consulta el documento de investigación para fundamentar la nueva sección de contexto.
+3. Analiza cómo están implementados actualmente el menú lateral, RO-BIT, las simulaciones y la actividad del módulo 5.
+4. Actualiza "MEJORAS_PVA.md" incorporando todos los requerimientos anteriores.
+5. Identifica los archivos y componentes que tendrían que modificarse.
+6. Presenta una propuesta técnica y visual para cada cambio.
+7. Explica especialmente cómo implementarías el chatbot gratuito y cómo harías que las decisiones de las simulaciones tengan consecuencias reales.
 
-No quiero depender de servicios que requieran pagar una suscripción, consumir créditos o contratar una API de inteligencia artificial.
+No comiences a modificar el código todavía. Primero quiero revisar tu análisis y aprobar la propuesta.
 
-Investiga primero una implementación local y gratuita mediante:
-
-- Una base de preguntas y respuestas predefinidas.
-- Coincidencia de palabras clave e identificación de intenciones.
-- Respuestas organizadas por temas del curso.
-- Preguntas sugeridas y opciones de consulta.
-
-El contenido de las respuestas debe basarse en los materiales del proyecto. Si no conoce la respuesta, RO-BIT debe reconocerlo y orientar al participante hacia la sección correspondiente, sin inventar información.
-
-No simules que es una inteligencia artificial generativa si realmente funciona mediante respuestas programadas.
-
-El chatbot debe funcionar sin enviar las preguntas de los participantes a servicios externos ni requerir cuentas, claves API o suscripciones. No debe recopilar datos personales.
-
-Si consideras que existe otra alternativa gratuita y técnicamente viable, explícala antes de implementarla. No incorpores dependencias de pago.
-
-6. Criterios generales de implementación
-
-- Mantén coherencia entre el nuevo diseño y el resto de la plataforma.
-- Comprueba que todas las secciones funcionen en modo claro y oscuro.
-- Conserva la identidad de RO-BIT y mejora su integración visual.
-- Utiliza iconografía SVG de Lucide cuando corresponda.
-- Evita agregar tarjetas innecesarias, elementos decorativos excesivos o espacios vacíos.
-- Cuida la adaptación a pantallas de computador, tabletas y celulares.
-- No elimines información académica ni funcionalidades existentes.
-- Conserva los resultados originales de la encuesta y sus aclaraciones metodológicas.
-- Evita modificar archivos que no sean necesarios para estos cambios.
-
-7. Antes de modificar el código
-
-Primero analiza las posibilidades de implementación y presenta una propuesta que incluya:
-
-1. Cómo reorganizarías la portada y la navegación.
-2. Cómo diseñarías la nueva sección de contexto.
-3. Qué propuesta visual utilizarías para el logo.
-4. Cómo integrarías el panel lateral desplegable.
-5. Cómo funcionaría RO-BIT como chatbot gratuito y cuáles serían sus limitaciones.
-6. Qué archivos necesitarías modificar.
-
-Espera mi aprobación antes de comenzar a modificar el código.
-
-El objetivo es que Guardián Digital deje de parecer una página con elementos independientes y se convierta en una plataforma educativa coherente, atractiva y con una identidad visual propia.
+Cuando llegue el momento de implementar, hazlo de manera organizada, sin rehacer las mejoras que ya están terminadas y verificando cada funcionalidad.
