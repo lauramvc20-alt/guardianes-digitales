@@ -1,0 +1,257 @@
+{
+  "total": 53.178,
+  "fps": 30,
+  "escenas": [
+    {
+      "id": 1,
+      "nombre": "Gancho",
+      "inicio": 0.0,
+      "fin": 7.962
+    },
+    {
+      "id": 2,
+      "nombre": "Vendes algo",
+      "inicio": 7.962,
+      "fin": 19.01
+    },
+    {
+      "id": 3,
+      "nombre": "Una encuesta",
+      "inicio": 19.01,
+      "fin": 30.344
+    },
+    {
+      "id": 4,
+      "nombre": "Un familiar",
+      "inicio": 30.344,
+      "fin": 42.556
+    },
+    {
+      "id": 5,
+      "nombre": "Cierre",
+      "inicio": 42.556,
+      "fin": 53.178
+    }
+  ],
+  "lineas": [
+    {
+      "id": "L1a",
+      "escena": 1,
+      "texto": "Una captura, un formulario, una voz conocida.",
+      "inicio": 0.4,
+      "fin": 3.333
+    },
+    {
+      "id": "L1b",
+      "escena": 1,
+      "texto": "Hoy todo eso se puede falsificar.",
+      "inicio": 3.613,
+      "fin": 5.456
+    },
+    {
+      "id": "L1c",
+      "escena": 1,
+      "texto": "Veamos tres momentos de tu día digital.",
+      "inicio": 5.736,
+      "fin": 7.712
+    },
+    {
+      "id": "L2a",
+      "escena": 2,
+      "texto": "Vendiste algo y el comprador te envía el comprobante de pago.",
+      "inicio": 8.312,
+      "fin": 11.988
+    },
+    {
+      "id": "L2b",
+      "escena": 2,
+      "texto": "Pero una imagen no prueba nada.",
+      "inicio": 12.268,
+      "fin": 13.998
+    },
+    {
+      "id": "L2c",
+      "escena": 2,
+      "texto": "Confirma en tu propia app que el dinero ya llegó, antes de entregar el producto.",
+      "inicio": 14.278,
+      "fin": 18.76
+    },
+    {
+      "id": "L3a",
+      "escena": 3,
+      "texto": "Te piden llenar una encuesta con tus datos.",
+      "inicio": 19.36,
+      "fin": 21.331
+    },
+    {
+      "id": "L3b",
+      "escena": 3,
+      "texto": "Pregúntate: ¿para qué necesitan cada uno?",
+      "inicio": 21.611,
+      "fin": 23.895
+    },
+    {
+      "id": "L3c",
+      "escena": 3,
+      "texto": "Si piden contraseñas, códigos o datos bancarios, no es una encuesta: es un engaño.",
+      "inicio": 24.175,
+      "fin": 30.094
+    },
+    {
+      "id": "L4a",
+      "escena": 4,
+      "texto": "Un familiar te llama pidiendo dinero con urgencia.",
+      "inicio": 30.694,
+      "fin": 33.562
+    },
+    {
+      "id": "L4b",
+      "escena": 4,
+      "texto": "Con inteligencia artificial, una voz se puede clonar.",
+      "inicio": 33.842,
+      "fin": 37.014
+    },
+    {
+      "id": "L4c",
+      "escena": 4,
+      "texto": "Cuelga y llámalo tú, a su número de siempre.",
+      "inicio": 37.294,
+      "fin": 39.934
+    },
+    {
+      "id": "L4d",
+      "escena": 4,
+      "texto": "Y acuerden en familia una palabra clave.",
+      "inicio": 40.214,
+      "fin": 42.306
+    },
+    {
+      "id": "L5a",
+      "escena": 5,
+      "texto": "En los tres casos, el reflejo es el mismo: pausa, verifica por tu cuenta y actúa.",
+      "inicio": 42.906,
+      "fin": 49.251
+    },
+    {
+      "id": "L5b",
+      "escena": 5,
+      "texto": "Sé un guardián digital.",
+      "inicio": 49.531,
+      "fin": 50.778
+    }
+  ],
+  "eventos": [
+    {
+      "evento": "pop-captura",
+      "t": 0.548
+    },
+    {
+      "evento": "pop-form",
+      "t": 1.5
+    },
+    {
+      "evento": "pop-voz",
+      "t": 2.649
+    },
+    {
+      "evento": "glitch",
+      "t": 4.432
+    },
+    {
+      "evento": "comprobante",
+      "t": 10.946
+    },
+    {
+      "evento": "imagen",
+      "t": 12.59
+    },
+    {
+      "evento": "app",
+      "t": 14.834
+    },
+    {
+      "evento": "llego",
+      "t": 16.471
+    },
+    {
+      "evento": "encuesta",
+      "t": 20.141
+    },
+    {
+      "evento": "para-que",
+      "t": 22.595
+    },
+    {
+      "evento": "contrasenas",
+      "t": 24.669
+    },
+    {
+      "evento": "codigos",
+      "t": 25.702
+    },
+    {
+      "evento": "bancarios",
+      "t": 26.712
+    },
+    {
+      "evento": "engano",
+      "t": 29.638
+    },
+    {
+      "evento": "llamada",
+      "t": 30.794
+    },
+    {
+      "evento": "llamada2",
+      "t": 31.494
+    },
+    {
+      "evento": "clonar",
+      "t": 36.582
+    },
+    {
+      "evento": "cuelga",
+      "t": 37.381
+    },
+    {
+      "evento": "llamalo",
+      "t": 38.197
+    },
+    {
+      "evento": "palabra",
+      "t": 41.7
+    },
+    {
+      "evento": "pausa",
+      "t": 45.677
+    },
+    {
+      "evento": "verifica",
+      "t": 46.536
+    },
+    {
+      "evento": "actua",
+      "t": 48.208
+    },
+    {
+      "evento": "whoosh-1",
+      "t": 7.812
+    },
+    {
+      "evento": "whoosh-2",
+      "t": 18.86
+    },
+    {
+      "evento": "whoosh-3",
+      "t": 30.194
+    },
+    {
+      "evento": "whoosh-4",
+      "t": 42.406
+    },
+    {
+      "evento": "logo",
+      "t": 51.078
+    }
+  ]
+}

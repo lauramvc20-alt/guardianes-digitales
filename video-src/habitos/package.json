@@ -1,0 +1,23 @@
+{
+  "name": "pva-tutorial-habitos",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Tutorial en motion graphics: lo que ves y oyes se puede falsificar · Guardián Digital",
+  "scripts": {
+    "estudio": "remotion studio src/index.ts",
+    "audio": "python3 audio/build_audio.py",
+    "render": "remotion render src/index.ts Habitos out/tutorial-habitos.mp4 --codec=h264 --crf=18 --audio-codec=aac --audio-bitrate=192k",
+    "render:subtitulos": "remotion render src/index.ts HabitosConSubtitulos out/tutorial-habitos-subtitulado.mp4 --codec=h264 --crf=18 --audio-codec=aac --audio-bitrate=192k",
+    "poster": "remotion still src/index.ts Habitos out/poster.png --frame=75"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.544",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.544"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}

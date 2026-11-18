@@ -18,21 +18,22 @@
       "Los recursos abren en Google Drive, en una pestaña nueva. Son de acceso " +
       "gratuito y no requieren registro en esta plataforma.",
     video: {
-      title: "Tutorial en video: verificación en dos pasos (2FA)",
-      kicker: "Tutorial animado · 28 s",
+      title: "Tutorial en video: lo que ves y oyes se puede falsificar",
+      kicker: "Tutorial animado · 53 s",
       description:
-        "Qué es la verificación en dos pasos, cómo se activa y por qué protege tus cuentas. " +
+        "Tres situaciones cotidianas y un hábito sencillo para cada una, con RO-BIT como guía. " +
         "Incluye narración y subtítulos en español.",
-      src: "assets/media/2fa/tutorial-2fa.mp4",
-      captioned: "assets/media/2fa/tutorial-2fa-subtitulado.mp4",
-      poster: "assets/media/2fa/tutorial-2fa-poster.jpg",
-      captions: "assets/media/2fa/tutorial-2fa.es.vtt",
-      credits: "Narración generada con ElevenLabs. Música y efectos originales del proyecto. Microsoft Authenticator y Google Authenticator son marcas de sus respectivos titulares y se mencionan solo como ejemplos.",
+      src: "assets/media/habitos/tutorial-habitos.mp4",
+      captioned: "assets/media/habitos/tutorial-habitos-subtitulado.mp4",
+      poster: "assets/media/habitos/tutorial-habitos-poster.jpg",
+      captions: "assets/media/habitos/tutorial-habitos.es.vtt",
+      credits:
+        "Narración generada con ElevenLabs. Música y efectos originales del proyecto. " +
+        "Prácticas basadas en el documento del proyecto y en recomendaciones de la FTC y del FBI (IC3).",
       steps: [
-        "Entra a la configuración de seguridad de tu cuenta.",
-        "Busca «Verificación en dos pasos» o «Autenticación de dos factores».",
-        "Actívala.",
-        "Elige un método: una app autenticadora (por ejemplo, Microsoft Authenticator o Google Authenticator) o una llave de seguridad."
+        "Vendes algo: una captura no es un pago. Confirma en tu propia app que el dinero llegó antes de entregar.",
+        "Te piden llenar una encuesta: pregúntate para qué necesitan cada dato. Una encuesta no necesita contraseñas, códigos ni datos bancarios.",
+        "Un familiar te llama pidiendo dinero: cuelga, llámalo a su número de siempre y acuerden una palabra clave."
       ]
     },
     resources: [
@@ -88,8 +89,8 @@
         icon: "play",
         tone: "lavender",
         description:
-          "Paso a paso de acciones preventivas concretas, por ejemplo la activación " +
-          "de la autenticación en dos pasos (2FA).",
+          "Hábitos concretos para el día a día: confirmar un pago antes de entregar, " +
+          "cuidar tus datos en encuestas y verificar la llamada de un supuesto familiar.",
         url: "https://drive.google.com/drive/folders/1pPNm8w8X2cNsgAGGd7lWhCmtLL8jrB-6?usp=drive_link"
       }
     ]

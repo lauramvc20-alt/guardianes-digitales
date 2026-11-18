@@ -1,0 +1,17 @@
+[
+  {"id": "L1a", "escena": 1, "texto": "Una captura, un formulario, una voz conocida."},
+  {"id": "L1b", "escena": 1, "texto": "Hoy todo eso se puede falsificar."},
+  {"id": "L1c", "escena": 1, "texto": "Veamos tres momentos de tu día digital."},
+  {"id": "L2a", "escena": 2, "texto": "Vendiste algo y el comprador te envía el comprobante de pago."},
+  {"id": "L2b", "escena": 2, "texto": "Pero una imagen no prueba nada."},
+  {"id": "L2c", "escena": 2, "texto": "Confirma en tu propia app que el dinero ya llegó, antes de entregar el producto."},
+  {"id": "L3a", "escena": 3, "texto": "Te piden llenar una encuesta con tus datos."},
+  {"id": "L3b", "escena": 3, "texto": "Pregúntate: ¿para qué necesitan cada uno?"},
+  {"id": "L3c", "escena": 3, "texto": "Si piden contraseñas, códigos o datos bancarios, no es una encuesta: es un engaño."},
+  {"id": "L4a", "escena": 4, "texto": "Un familiar te llama pidiendo dinero con urgencia."},
+  {"id": "L4b", "escena": 4, "texto": "Con inteligencia artificial, una voz se puede clonar."},
+  {"id": "L4c", "escena": 4, "texto": "Cuelga y llámalo tú, a su número de siempre."},
+  {"id": "L4d", "escena": 4, "texto": "Y acuerden en familia una palabra clave."},
+  {"id": "L5a", "escena": 5, "texto": "En los tres casos, el reflejo es el mismo: pausa, verifica por tu cuenta y actúa."},
+  {"id": "L5b", "escena": 5, "texto": "Sé un guardián digital."}
+]
