@@ -277,7 +277,7 @@
           summary: "Una segunda verificación además de la contraseña.",
           body: [
             "La autenticación de dos factores añade una verificación adicional para proteger las cuentas. Solo el 47,4 % de las personas encuestadas la mantiene activada.",
-            "Actívala primero en el correo electrónico y en las cuentas bancarias. El correo suele ser la llave para recuperar el resto de tus servicios."
+            "Actívala primero en el correo electrónico, ya que suele ser la llave para recuperar el resto de tus servicios si llegas a ser víctima."
           ],
           tips: [
             "Prefiere una aplicación de autenticación cuando esté disponible.",

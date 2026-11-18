@@ -1,0 +1,90 @@
+/* ==========================================================================
+   PVA · Visor integrado de recursos (documentos PDF y videos) + acciones de las tarjetas del Kit
+   ========================================================================== */
+
+/* ---- Tarjetas del Kit: ver y descargar ---- */
+.kit-card__file { font-size: 0.76rem !important; color: var(--muted-2) !important; margin: -0.15rem 0 0 !important; flex: 0 0 auto !important; }
+.kit-card__actions { display: flex; gap: 0.5rem; margin-top: auto; }
+.kit-card__actions .btn { flex: 1 1 0; max-width: none; min-height: 44px; justify-content: center; white-space: nowrap; }
+.kit-grid .kit-card .kit-card__actions .btn { align-self: auto; margin-top: 0; }
+.kit-card__seen { color: var(--turq); display: inline-flex; align-items: center; gap: 0.3rem; }
+.kit-card__seen[hidden] { display: none; }
+.kit-card__seen svg { width: 13px; height: 13px; }
+@media (max-width: 360px) { .kit-card__actions { flex-wrap: wrap; } .kit-card__actions .btn { flex: 1 1 100%; } }
+
+/* ---- Visor ---- */
+html.viewer-open, html.viewer-open body { overflow: hidden; }
+.viewer {
+  position: fixed; inset: 0; z-index: 250;
+  display: flex; flex-direction: column;
+  background: var(--night-900);
+  animation: viewerIn 220ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+@keyframes viewerIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.viewer__bar {
+  flex: none;
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.6rem clamp(0.75rem, 2.4vw, 1.6rem);
+  padding-top: max(0.6rem, env(safe-area-inset-top));
+  background: rgba(14, 22, 44, 0.96);
+  border-bottom: 1px solid var(--line);
+}
+.viewer__head { min-width: 0; flex: 1; display: grid; }
+.viewer__title { margin: 0; font-size: 1rem; line-height: 1.25; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
+.viewer__meta { font-size: 0.76rem; color: var(--muted); }
+.viewer__dl { flex: none; min-height: 40px; max-width: none; }
+.viewer__dl svg { width: 15px; height: 15px; }
+.viewer__close { flex: none; width: 40px; height: 40px; }
+.viewer__close svg { width: 18px; height: 18px; }
+.viewer__body {
+  flex: 1; min-height: 0;
+  overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  padding: clamp(0.6rem, 2vw, 1.4rem) clamp(0.5rem, 2vw, 1.4rem);
+  padding-bottom: max(1.4rem, env(safe-area-inset-bottom));
+  outline: none;
+}
+.viewer__body:focus-visible { box-shadow: inset 0 0 0 2px var(--lavender); }
+
+/* Páginas del documento */
+.viewer__pages { display: grid; gap: clamp(0.6rem, 2vw, 1rem); justify-items: center; }
+.viewer__page {
+  position: relative;
+  width: min(100%, var(--pw, 860px));
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+}
+.viewer__page canvas { display: block; width: 100%; height: 100%; }
+.viewer__loading, .viewer__msg { margin: 3rem auto; max-width: 42ch; text-align: center; color: var(--ink-soft); }
+
+/* Video */
+.viewer__stage { display: grid; place-items: center; min-height: 100%; }
+.viewer__video {
+  display: block;
+  width: min(100%, 1120px);
+  height: auto;
+  max-height: calc(100vh - 7.5rem); max-height: calc(100dvh - 7.5rem);
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 10px;
+  box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.8);
+  object-fit: contain;
+}
+@media (max-height: 520px) { .viewer__video { max-height: calc(100dvh - 5.2rem); } .viewer__bar { padding-block: 0.35rem; } }
+@media (max-width: 520px) {
+  .viewer__dl span { display: none; }
+  .viewer__dl { width: 40px; max-width: none; height: 40px; padding: 0; border-radius: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .viewer { animation: none; } }
+
+/* Modo claro */
+html[data-theme="light"] .viewer { background: var(--lt-bg); }
+html[data-theme="light"] .viewer__bar { background: var(--lt-rail); border-color: var(--lt-line); }
+html[data-theme="light"] .viewer__page { box-shadow: var(--lt-shadow); border: 1px solid var(--lt-line); }
+html[data-theme="light"] .viewer__title { color: var(--lt-ink); }
+html[data-theme="light"] .viewer__meta { color: var(--lt-muted-2); }
+html[data-theme="light"] .kit-card__file { color: var(--lt-muted-2) !important; }
+html[data-theme="light"] .kit-card__seen { color: var(--lt-ok); }
+html[data-theme="light"] .viewer__loading, html[data-theme="light"] .viewer__msg { color: var(--lt-ink-2); }

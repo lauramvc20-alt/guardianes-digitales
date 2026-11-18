@@ -75,3 +75,12 @@ Utiliza los archivos originales para implementar la visualización integrada y l
 No inventes recursos, no sustituyas los archivos originales ni utilices enlaces de Google Drive. Si falta algún archivo necesario, indícame exactamente cuál es antes de reemplazarlo por otra alternativa.
 
 Cambia las descripciones de cada recurso acorde a los contenidos porque eso también debe cambiar, cada recurso que está en la carpeta de recursos está nombrado con el mismo nombre como está nombrada en la plataforma.
+
+---
+
+## Ronda 8 (implementada)
+
+1. **Textos:** «el 75 % de la muestra utiliza billeteras digitales y el 35 % banca móvil»; eliminada la frase de «19 respuestas y 20»; 2FA: «…ya que suele ser la llave para recuperar el resto de tus servicios si llegas a ser víctima» (también en las respuestas de RO-BIT).
+2. **«Ir al certificado»:** la vista marca su destino (`data-scroll-target`) y el enrutador lo respeta: sin certificado emitido lleva a la cabecera de finalización; con certificado emitido, a la hoja del certificado, en cualquier tamaño de pantalla.
+3. **Kit sin Google Drive:** los archivos de `public/recursos/` se movieron a `PVA/recursos/` (Vercel solo publica `PVA/`) sin modificarlos. Cada tarjeta tiene «Ver» (visor integrado con PDF.js, incluido en `assets/vendor/pdfjs/`, cargado solo al abrir un documento) o «Reproducir» (reproductor HTML5 nativo) y «Descargar». Descripciones nuevas según el contenido real de cada archivo.
+4. **Certificado en pantalla:** tamaños que escalan con el ancho (container queries), bloque central centrado (a quién · nombre · reconocimiento · descripción), datos en tres columnas o apilados, sin cambios en el PDF ni en las condiciones de emisión.

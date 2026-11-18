@@ -16,9 +16,7 @@
           '</div>' +
           '<span class="cert-sheet__seal cert-sheet__seal--logo" aria-hidden="true">' + PVA.logo.svg() + "</span>" +
         "</div>" +
-        '<p style="margin-top:.8rem;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;color:#433299;font-weight:800">' +
-          "Se otorga a" +
-        "</p>" +
+        '<p class="cert-sheet__to">Se otorga a</p>' +
         '<div class="cert-sheet__name" data-cert-name>' + (name ? U.esc(name) : "&nbsp;") + "</div>" +
         '<p class="cert-sheet__caption">Nombre del participante</p>' +
         '<h2 id="certTitle">Guardián Digital</h2>' +
@@ -73,7 +71,7 @@
     var dateLabel = U.formatLongDate(issued);
 
     root.innerHTML =
-      '<section class="completion-hero enter print-hide">' +
+      '<section class="completion-hero enter print-hide" id="certSection"' + (done ? "" : " data-scroll-target") + ">" +
         '<div class="badge-seal badge-seal--logo" aria-hidden="true">' + PVA.logo.svg() + "</div>" +
         '<p class="completion-hero__status">' + U.icon("check") + " Recorrido completo</p>" +
         '<h1>Guardián Digital</h1>' +
@@ -112,7 +110,7 @@
       "</section>" +
 
 
-      '<div class="certificate-wrap" data-cert-wrap' + (done ? "" : " hidden") + ">" +
+      '<div class="certificate-wrap" data-cert-wrap' + (done ? " data-scroll-target" : " hidden") + ">" +
         revealMarkup(name, dateLabel, score, total) +
       "</div>" +
 

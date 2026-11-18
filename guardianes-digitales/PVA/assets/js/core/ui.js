@@ -128,7 +128,10 @@
   function scrollToTop() {
     var view = document.getElementById("view");
     if (!view) return;
-    var top = view.getBoundingClientRect().top + global.scrollY - 80;
+    /* Si la vista marca un destino propio (data-scroll-target), se llega a él; si no, al inicio de la vista.
+       Así «Ir al certificado» lleva a la sección del certificado y no al inicio de toda la página. */
+    var target = view.querySelector("[data-scroll-target]:not([hidden])") || view;
+    var top = target.getBoundingClientRect().top + global.scrollY - 76;
     global.scrollTo({ top: Math.max(0, top), behavior: U.reduceMotion() ? "auto" : "smooth" });
   }
 
