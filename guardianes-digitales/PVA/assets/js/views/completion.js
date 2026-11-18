@@ -88,7 +88,7 @@
         '<div class="summary-grid">' +
           '<div class="summary-cell"><b>4 / 4</b><span>Módulos</span></div>' +
           '<div class="summary-cell"><b>' + score + " / " + total + "</b><span>Evaluación</span></div>" +
-          '<div class="summary-cell"><b>5</b><span>Recursos del Kit</span></div>' +
+          '<div class="summary-cell"><b>' + PVA.content.kit.resources.length + "</b><span>Recursos del Kit</span></div>" +
           '<div class="summary-cell"><b data-cert-date>' + U.esc(dateLabel) + "</b><span>Finalización</span></div>" +
         "</div>" +
         '<div class="name-field">' +
