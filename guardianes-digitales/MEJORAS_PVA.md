@@ -73,3 +73,5 @@ Identifica los documentos, videos e imágenes existentes y relaciónalos con las
 Utiliza los archivos originales para implementar la visualización integrada y las opciones de descarga. Para los videos, implementa un reproductor HTML5 nativo y responsivo.
 
 No inventes recursos, no sustituyas los archivos originales ni utilices enlaces de Google Drive. Si falta algún archivo necesario, indícame exactamente cuál es antes de reemplazarlo por otra alternativa.
+
+Cambia las descripciones de cada recurso acorde a los contenidos porque eso también debe cambiar, cada recurso que está en la carpeta de recursos está nombrado con el mismo nombre como está nombrada en la plataforma.
