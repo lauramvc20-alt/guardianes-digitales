@@ -67,39 +67,42 @@
           title: "PAUSA: detén la interacción",
           summary: "No respondas, no hagas clic, no dictes códigos.",
           body: [
-            "El protocolo empieza por no interactuar. Cuando un mensaje SMS, un chat o una llamada te pide datos personales, códigos de verificación, contraseñas o dinero, el primer movimiento es detener la conversación.",
-            "Los estafadores necesitan que actúes rápido. La urgencia, el miedo a perder una cuenta, la curiosidad o la necesidad de empleo reducen el tiempo que dedicamos a verificar. Vishwanath et al. (2011) encontraron que las señales de urgencia influyen directamente en cómo se procesan los mensajes fraudulentos de ingeniería social."
+            "Una estafa digital rara vez depende de que seas descuidado; depende de que no tengas tiempo. Un mensaje que anuncia un bloqueo, una llamada que pide un código «para protegerte» o una oferta de empleo que «cierra hoy» están pensados para que reacciones antes de pensar.",
+            "Pausar es decidir que todavía no interactúas: no contestas, no pulsas el enlace, no dictas nada. No significa desconfiar de todo, sino separar el momento en que recibes el mensaje del momento en que decides qué hacer con él. Mientras no respondas ni toques nada, el engaño no ha conseguido su objetivo.",
+            "Imagina que estás en la fila de una tienda y llega un SMS: «Tu cuenta será bloqueada en 2 horas». El contexto empuja a resolverlo ya. Guardar el celular y terminar lo que hacías es, en sí mismo, una defensa."
           ],
           tips: [
-            "No respondas ni pulses enlaces del mensaje SMS.",
-            "No dictes códigos de verificación, contraseñas ni datos bancarios en llamadas.",
-            "Si sientes presión para decidir «ya», trátalo como una señal de alerta."
+            "Guarda el celular y termina lo que estabas haciendo antes de decidir.",
+            "Colgar una llamada sin dar explicaciones no es mala educación: es una forma de pausar.",
+            "Un mensaje que fija un plazo muy corto merece más cuidado, no menos."
           ]
         },
         {
           title: "VERIFICA: corroborar por canales oficiales",
           summary: "Comprueba por tu cuenta, no por el canal que te contactó.",
           body: [
-            "Verificar no es responder al mismo mensaje ni devolver la llamada al mismo número para preguntar si es real. Consiste en comprobar la información por un canal que tú elijas y que sepas que es oficial: la aplicación del banco, el sitio web escrito por ti o el número que aparece al respaldo de tu tarjeta.",
-            "En resumen: PAUSA es detener la interacción; VERIFICA es comprobar solo por canales oficiales; ACTÚA es aplicar prácticas seguras."
+            "Verificar es comprobar si lo que te dicen es cierto sin usar el camino que el propio mensaje te ofrece. El enlace, el número para «devolver la llamada» y el supuesto asesor pertenecen a quien te contactó; si los usas para comprobar, la respuesta la controla justo quien podría estar engañándote.",
+            "Un canal oficial es uno al que llegas por tu cuenta y que ya conocías antes del mensaje: la aplicación descargada de la tienda oficial, la página escrita por ti en el navegador o el número impreso en tu tarjeta.",
+            "Si una empresa de mensajería te escribe porque «tu paquete está retenido», no abras el enlace: entra a la aplicación de la tienda donde compraste y revisa el estado del pedido. Si el aviso es real, estará ahí."
           ],
           tips: [
-            "Abre la aplicación oficial y revisa si el aviso existe de verdad.",
-            "Llama al número oficial de la entidad, no al que aparece en el SMS o identificador.",
-            "Escribe el dominio manualmente y desconfía de enlaces acortados."
+            "Abre tú la aplicación o el sitio de la entidad y busca allí el aviso.",
+            "Llama al número del reverso de tu tarjeta, no al del SMS ni al que aparece en pantalla.",
+            "Escribe la dirección web a mano en lugar de pulsar un enlace."
           ]
         },
         {
           title: "ACTÚA: aplica prácticas seguras y reporta",
           summary: "Bloquea, conserva evidencias y protege tus cuentas.",
           body: [
-            "Después de verificar, actúa. Bloquea y reporta el número o contacto, conserva las evidencias (capturas de pantalla, número telefónico), cambia las contraseñas si entregaste datos y activa la autenticación en dos pasos.",
-            "Si fuiste víctima, acude a los canales oficiales de tu banco y realiza el reporte formal al CAI Virtual de la Policía Nacional."
+            "Verificar termina de una de dos maneras: el aviso era real y lo resuelves en el canal oficial, o no existe y ya sabes que fue un intento de estafa. En el segundo caso, actuar es cerrar el episodio de forma segura.",
+            "Bloquea el número o el contacto y denúncialo en la aplicación de mensajería o ante tu operador. Guarda las capturas y el número, porque son la evidencia para cualquier reporte. Si entregaste algún dato, cambia tus contraseñas y avisa a tu banco por su canal oficial.",
+            "Si fuiste víctima, el reporte formal se hace ante el CAI Virtual de la Policía Nacional. Reportar pronto ayuda a que el banco y las autoridades puedan actuar. Cómo dejar tus cuentas mejor protegidas lo verás en el módulo 3."
           ],
           tips: [
-            "Bloquea y reporta el número sospechoso.",
-            "Conserva capturas y no borres la conversación o registro de llamada.",
-            "Cambia contraseñas y revisa los movimientos de tus cuentas."
+            "Bloquea y reporta el número o perfil sospechoso.",
+            "Conserva capturas y no borres la conversación ni el registro de llamadas.",
+            "Si compartiste datos, avisa a tu banco por su canal oficial y revisa tus movimientos."
           ]
         }
       ],
@@ -149,7 +152,7 @@
           "Vishwanath et al. (2011), sobre urgencia en engaños digitales."
         ]
       },
-      close: "Ya tienes el mapa. En el siguiente módulo lo usarás para analizar mensajes SMS y llamadas telefónicas que intentan suplantar a una entidad."
+      close: "Ya tienes el método. Falta conocer al adversario: en el siguiente módulo verás cómo se disfrazan los mensajes y las llamadas, y por qué suenan creíbles."
     },
 
     2: {
@@ -171,40 +174,44 @@
           title: "Smishing y vishing: el engaño por texto y por voz",
           summary: "Dos modalidades de suplantación que atacan tu teléfono.",
           body: [
-            "Dentro de las estafas de suplantación (conocidas en general como phishing), las dos modalidades más frecuentes en dispositivos móviles son el smishing y el vishing. El smishing ocurre cuando los delincuentes envían mensajes de texto (SMS o mensajería instantánea) haciéndose pasar por bancos o empresas con enlaces falsos.",
-            "El vishing usa llamadas o mensajes de voz en los que un supuesto asesor finge una emergencia financiera para sacarte claves o códigos. En la encuesta, ambos canales fueron los más reportados: 47,6 % cada uno."
+            "Phishing es el nombre general de los engaños que imitan a una entidad para obtener tus datos. Cuando llegan por mensaje de texto (SMS o mensajería instantánea) se llaman smishing; cuando llegan por llamada o mensaje de voz, vishing.",
+            "En el smishing, el enlace lleva a una página falsa que copia a la verdadera y recoge lo que escribas. En el vishing, un supuesto asesor finge una emergencia financiera y te guía paso a paso para que le entregues claves o códigos. La voz genera confianza y permite al delincuente adaptarse a tus reacciones en el momento.",
+            "Tampoco el nombre que ves en pantalla es una garantía: el remitente de un SMS y el número de una llamada pueden falsificarse (spoofing), de modo que un mensaje puede aparecer junto a los de tu banco sin venir de él."
           ],
           tips: [
-            "Smishing (SMS): desconfía de enlaces cortos o dominios raros que piden confirmar datos.",
-            "Vishing (Llamadas): ningún banco te pide dictar códigos OTP ni claves por teléfono.",
-            "El identificador de llamada o remitente SMS puede ser falsificado (spoofing)."
+            "Smishing: un SMS que te manda a «confirmar datos» en un enlace no es la forma en que una entidad te atiende.",
+            "Vishing: ninguna entidad legítima te pide por teléfono el código que acaba de llegar a tu celular.",
+            "El remitente y el identificador de llamada pueden falsificarse: no los tomes como prueba."
           ]
         },
         {
           title: "Señales de alerta en SMS y llamadas",
           summary: "Urgencia, amenazas de bloqueo, enlaces raros y petición de códigos.",
           body: [
-            "Los casos más frecuentes siguen patrones parecidos: alertas SMS de bloqueo de cuentas, llamadas sobre compras no reconocidas, paquetes retenidos, falsas ofertas de empleo por chat y suplantación de plataformas como Rappi o de entidades como Bancolombia.",
-            "Alsharnouby et al. (2015) mostraron que incluso usuarios advertidos no identifican todos los engaños. Por eso conviene revisar varias señales a la vez y nunca confiar únicamente en la apariencia del mensaje o el tono de voz."
+            "Los engaños cambian de disfraz, pero sus pedidos se parecen: que entregues un dato, un código, un pago o un documento. Los casos más frecuentes incluyen alertas de bloqueo de cuentas, llamadas sobre compras no reconocidas, paquetes retenidos y suplantación de empresas como Rappi o de entidades como Bancolombia.",
+            "También hay falsas ofertas de empleo, que piden fotos del documento de identidad o pagos por exámenes y trámites, y publicaciones fraudulentas en plataformas de compraventa, donde un supuesto vendedor cobra y no entrega, o un comprador muestra comprobantes falsos.",
+            "Alsharnouby et al. (2015) encontraron que incluso usuarios advertidos no identificaron todos los sitios fraudulentos. Por eso conviene mirar varias señales a la vez y no apoyarse en una sola, como la apariencia del mensaje o el tono de voz."
           ],
           tips: [
-            "Urgencia o amenaza: «tienes 2 horas antes del bloqueo» o «no cuelgue la llamada».",
-            "Solicitud de códigos de 6 dígitos (OTP), contraseñas o números de tarjeta.",
-            "En smishing: enlaces con dominios alterados, acortados o con terminaciones atípicas.",
-            "En vishing: ruido de call center de fondo y presión psicológica para decidir rápido."
+            "Plazos y amenazas: «tienes 2 horas antes del bloqueo» o «no cuelgue la llamada».",
+            "Piden códigos de 6 dígitos, contraseñas, números de tarjeta, documentos o un pago por adelantado.",
+            "Saludo genérico, como «Estimado cliente», en un mensaje que dice venir de tu banco.",
+            "Enlaces con dominios alterados, acortados o con terminaciones atípicas.",
+            "En llamadas: ruido de call center de fondo y presión para decidir sin colgar."
           ]
         },
         {
           title: "Ingeniería social y clonación de voz con IA",
           summary: "El engaño explota confianza, miedo, prisa y tecnología.",
           body: [
-            "La ingeniería social manipula psicológicamente a las personas para conseguir información confidencial. Los delincuentes aprovechan emociones reales: el afán diario, el temor a perder dinero o la necesidad de empleo.",
-            "La inteligencia artificial añade un riesgo crítico en smishing y vishing: permite redactar textos sin errores ortográficos y clonar voces reales con apenas unos segundos de audio (Jabir et al., 2025). Por ello, verificar por un canal oficial independiente es indispensable."
+            "La ingeniería social consiste en manipular a las personas, no a los sistemas, para obtener información. Los delincuentes aprovechan emociones reales: la confianza en una voz conocida, el miedo a perder dinero, la curiosidad o la necesidad de empleo. Algunas encuestas o formularios falsos están diseñados solo para recoger datos personales.",
+            "La inteligencia artificial hace estos engaños más creíbles. Los modelos de lenguaje redactan mensajes sin errores y con tu nombre, de modo que ya no basta con buscar faltas de ortografía. Los bots pueden enviar mensajes o hacer llamadas masivas con variaciones mínimas, y analizar datos de redes sociales para dirigirse a cada persona con un mensaje a su medida (Jabir et al., 2025).",
+            "La IA también puede clonar una voz con pocas muestras de audio. En 2024, unos delincuentes imitaron la voz de un directivo para engañar a un empleado y desviar 25 millones de dólares. Es un caso extremo, pero muestra que oír una voz conocida ya no prueba que la persona esté al otro lado."
           ],
           tips: [
-            "La confianza se verifica por canales oficiales, nunca por la voz al teléfono.",
-            "Si el operador telefónico te pide no colgar, cuelga de inmediato.",
-            "Verifica siempre desde la app oficial del banco o llamando al número de tu tarjeta."
+            "Un mensaje bien redactado no es prueba de que sea legítimo.",
+            "Si un familiar o un jefe te pide dinero con urgencia por llamada o audio, contáctalo por otro medio que ya uses antes de actuar.",
+            "Una encuesta o formulario que pide datos personales sin explicar para qué puede ser una forma de ingeniería social."
           ]
         }
       ],
@@ -235,13 +242,13 @@
         ]
       },
       aside: {
-        tip: "Si un SMS o llamada te apura, te asusta o te ofrece algo demasiado bueno, detente: esos son los tres ganchos más frecuentes.",
+        tip: "Un mensaje bien escrito o una voz conocida ya no son prueba de autenticidad: la IA permite imitar ambos.",
         sources: [
-          "Encuesta diagnóstica: 47,6 % smishing y 47,6 % vishing.",
-          "Alsharnouby et al. (2015); Jabir et al. (2025)."
+          "Alsharnouby et al. (2015); Jabir et al. (2025).",
+          "Documento del proyecto: modalidades de estafa y uso de la IA en los fraudes digitales."
         ]
       },
-      close: "Ya sabes leer las señales en SMS y llamadas. El siguiente paso es reducir la superficie de riesgo en tus cuentas."
+      close: "Ya sabes cómo se disfraza el engaño. Ahora toca lo que depende de ti antes de que llegue: qué puede obtener alguien de tus cuentas y de tu información."
     },
 
     3: {
@@ -263,12 +270,13 @@
           title: "Contraseñas únicas y un gestor confiable",
           summary: "Una clave distinta para cada servicio importante.",
           body: [
-            "En la encuesta, el 57,9 % usa contraseñas diferentes para cada aplicación, pero un 5,3 % se limita a claves básicas. Reutilizar la misma contraseña significa que una filtración puede abrir varias cuentas a la vez.",
-            "Lo recomendable es una clave distinta por servicio y, si te ayuda, un gestor de contraseñas confiable."
+            "Cuando un servicio sufre una filtración, las contraseñas robadas se prueban en otros sitios. Si usas la misma clave en varios, un solo descuido ajeno abre todas esas puertas a la vez.",
+            "Un caso típico: usas para una tienda en línea pequeña la misma clave que para tu correo. Si esa tienda es vulnerada, quien obtiene la clave puede entrar a tu correo y, desde allí, a lo demás.",
+            "Lo recomendable es una clave distinta para cada servicio. Como es imposible memorizar tantas, un gestor de contraseñas confiable las guarda por ti y solo necesitas recordar una principal."
           ],
           tips: [
-            "Usa frases largas y fáciles de recordar solo para ti.",
-            "No repitas la contraseña del correo o del banco en otros servicios.",
+            "Usa frases largas y fáciles de recordar solo para ti, mejor que palabras cortas con símbolos.",
+            "Empieza por cambiar la clave del correo y la del banco si se repiten en otros servicios.",
             "Si usas un gestor, protégelo con una clave principal robusta."
           ]
         },
@@ -276,25 +284,27 @@
           title: "Autenticación en dos pasos (2FA)",
           summary: "Una segunda verificación además de la contraseña.",
           body: [
-            "La autenticación de dos factores añade una verificación adicional para proteger las cuentas. Solo el 47,4 % de las personas encuestadas la mantiene activada.",
-            "Actívala primero en el correo electrónico, ya que suele ser la llave para recuperar el resto de tus servicios si llegas a ser víctima."
+            "La autenticación de dos pasos pide, además de la contraseña (algo que sabes), una segunda prueba que solo tú tienes, como un código generado en tu teléfono. Así, una clave robada deja de ser suficiente para entrar.",
+            "Actívala primero en el correo electrónico: casi todos los servicios envían allí los enlaces para restablecer la contraseña, de modo que quien controla tu correo puede apoderarse de lo demás.",
+            "Entre las opciones, una aplicación de autenticación suele ser más segura que el SMS, porque el código se genera en tu propio dispositivo. Ese código existe para que entres tú; si alguien más lo conoce, la protección desaparece."
           ],
           tips: [
-            "Prefiere una aplicación de autenticación cuando esté disponible.",
-            "Nunca compartas el código de 2FA con nadie por SMS ni por llamada.",
-            "Revisa los dispositivos conectados a tus cuentas."
+            "Elige una aplicación de autenticación cuando el servicio lo permita.",
+            "Revisa qué dispositivos tienen sesión abierta y cierra los que no reconozcas.",
+            "Activa también los avisos de inicio de sesión desde un dispositivo nuevo."
           ]
         },
         {
           title: "Datos personales y privacidad",
           summary: "Publica menos y entrega solo lo necesario.",
           body: [
-            "La publicación excesiva de información personal facilita la personalización de los ataques de smishing y vishing. Los estafadores usan tu nombre, tus contactos o tu actividad para que el engaño parezca auténtico.",
-            "Publica poco en redes y entrega solo los datos necesarios. Una foto de tu documento de identidad sirve para suplantarte, como ocurre en las falsas ofertas laborales."
+            "Cada dato que publicas es una pieza que un estafador puede usar. Tu nombre, tu lugar de trabajo, tus contactos o lo que compartes en redes sirven para que el mensaje o la llamada parezcan auténticos y para dirigirse a ti de forma personalizada.",
+            "Un ejemplo cotidiano: si tu perfil es público y muestra dónde trabajas, una llamada de alguien que dice ser de tu empresa y conoce tu nombre y tu cargo suena creíble sin serlo.",
+            "El riesgo es mayor con los documentos. Una persona envió la foto de su cédula a una falsa oferta de empleo y después descubrió que habían solicitado un crédito a su nombre. Entrega solo los datos necesarios y por canales que puedas comprobar."
           ],
           tips: [
-            "Revisa la privacidad de tus perfiles y limita quién ve tus datos.",
-            "No envíes fotos de documentos por canales informales.",
+            "Revisa la privacidad de tus perfiles y limita quién ve tu información.",
+            "No envíes fotos de documentos por chats informales; pregunta para qué los necesitan y quién los recibe.",
             "Desconfía de formularios y encuestas que piden más datos de los necesarios."
           ]
         },
@@ -302,7 +312,9 @@
           title: "Alertas bancarias y revisión de movimientos",
           summary: "Enterarte a tiempo cambia la respuesta.",
           body: [
-            "Activar notificaciones de movimientos y revisar periódicamente las transacciones permite detectar cobros extraños y reaccionar antes. Si ves un movimiento que no reconoces, contacta a tu banco por su canal oficial y conserva la evidencia."
+            "Muchas veces el daño no está en el engaño, sino en el tiempo que pasa sin que te des cuenta. Activar las notificaciones de compras y transferencias hace que cada movimiento llegue a tu celular en el momento en que ocurre.",
+            "Revisa además tus movimientos con regularidad. Un cobro pequeño que no reconoces puede ser una señal de que alguien tiene datos de tu tarjeta o cuenta, aunque el monto parezca irrelevante.",
+            "Si ves un cargo desconocido, actúa en este orden: bloquea la tarjeta desde la aplicación del banco, contacta a la entidad por su canal oficial y guarda capturas del movimiento como evidencia."
           ],
           tips: [
             "Activa alertas para compras y transferencias.",
@@ -314,12 +326,14 @@
           title: "Enlaces, actualizaciones y reporte",
           summary: "Menos superficie de ataque, más capacidad de respuesta.",
           body: [
-            "Solo un 5,3 % de las personas encuestadas realiza una verificación técnica de los enlaces URL antes de interactuar con ellos. Verificar el dominio, mantener actualizados el sistema, el navegador y las aplicaciones, y reportar números o páginas sospechosas reduce el riesgo y protege a otras personas."
+            "Para leer un enlace, fíjate en el dominio: lo que va justo antes de la primera barra. «bancolombia-seguridad.xyz» no es el sitio del banco aunque contenga su nombre, porque cualquiera puede registrar un dominio con esas palabras.",
+            "Mantener actualizados el sistema, el navegador y las aplicaciones cierra fallas de seguridad ya conocidas, que de otro modo los atacantes pueden aprovechar.",
+            "Reportar números, perfiles o páginas sospechosas a la plataforma, al operador y a las autoridades también protege a otras personas: ayuda a que esos canales se bloqueen antes de que lleguen a más gente."
           ],
           tips: [
-            "Mantén pulsado el enlace del SMS para inspeccionar el destino real sin abrirlo.",
-            "Actualiza el sistema y las aplicaciones cuando haya parches.",
-            "Reporta el número o perfil sospechoso a tu operador y al CAI Virtual."
+            "Mantén pulsado el enlace del SMS para ver el destino real sin abrirlo.",
+            "Activa las actualizaciones automáticas del sistema y de las aplicaciones.",
+            "Reporta el número o perfil sospechoso a tu operador, a la plataforma y al CAI Virtual."
           ]
         }
       ],
@@ -353,7 +367,7 @@
       aside: {
         tip: "La 2FA y una contraseña única no eliminan el riesgo, pero hacen que un dato filtrado no sea suficiente para entrar a tu cuenta.",
         sources: [
-          "Encuesta diagnóstica: 57,9 % claves distintas; 47,4 % 2FA; 5,3 % verifica URL."
+          "Documento del proyecto: soluciones generales de prevención y ejemplo de falsa oferta de empleo."
         ]
       },
       close: "Con el protocolo y los hábitos claros, llega el simulacro: tres escenarios prácticos para ponerlo todo a prueba."
@@ -378,6 +392,7 @@
           title: "Cómo funciona el simulacro",
           summary: "Elige, lee la retroalimentación y compara.",
           body: [
+            "Saber qué hacer no es lo mismo que hacerlo cuando llega el mensaje. Con prisa se lee peor y se decide peor; por eso conviene ensayar antes, con casos ficticios donde equivocarse no cuesta nada.",
             "Cada escenario presenta un caso ficticio: una oferta de empleo por WhatsApp, un SMS de paquete retenido (smishing) y una llamada de un supuesto asesor bancario (vishing). Debes seleccionar una acción de respuesta y luego recibirás retroalimentación sobre los riesgos y las señales de alerta.",
             "No hay datos reales ni se envía información a terceros. Puedes repetir un caso para comparar respuestas: el objetivo es aprender, no acertar a la primera."
           ],
