@@ -1,44 +1,75 @@
-1. Kit Digital: corregir nombres y contenido de los recursos
+Realiza los siguientes ajustes en la plataforma Guardián Digital: PAUSA, VERIFICA Y ACTÚA. Antes de modificar, revisa la estructura actual del proyecto y utiliza las skills instaladas que sean pertinentes para mantener la calidad del diseño y la implementación.
 
-Realiza los siguientes ajustes en la sección Kit Digital:
+1. Corrección de contenido
 
-2.  Tutorial visual → Videotutorial
+Realiza los siguientes cambios de texto:
 
-- Cambia el nombre «Tutorial visual» por «Videotutorial».
-- Conserva el propósito educativo del recurso, pero asegúrate de que su presentación corresponda a un videotutorial.
+- Cambiar: «En nuestra encuesta, el 75 % de la muestra utiliza billeteras digitales y el 35 % banca móvil».
+- Quitar por completo: «En algunas preguntas hubo 19 respuestas y en otras 20, y las preguntas sobre canales podían tener varias selecciones».
+- Cambiar: «Actívala primero en el correo electrónico, ya que suele ser la llave para recuperar el resto de tus servicios si llegas a ser víctima».
 
-3. Recomendaciones → Tips
+Conserva el sentido de los textos y verifica que los cambios se reflejen en todos los lugares donde aparezcan.
 
-- Cambia el nombre «Recomendaciones» por «Tips».
-- Este recurso debe contener acciones preventivas concretas para evitar estafas digitales y proteger los datos personales.
-- Incluye consejos breves, claros y aplicables en situaciones cotidianas.
-- Utiliza las acciones preventivas que ya hacen parte del contenido educativo de Guardián Digital.
-- No lo presentes como una tarjeta digital de invitación, una invitación a compartir el curso ni un mensaje promocional.
-- Su finalidad es que el participante consulte y aplique los tips para fortalecer su seguridad digital.
+2. Corregir navegación hacia el certificado desde el Kit Digital
 
-4. Coherencia del Kit Digital
+En la vista de escritorio visualizada desde un celular, al ingresar al Kit Digital y pulsar el botón «Ir al certificado», la plataforma desplaza al usuario hasta el inicio de toda la página en lugar de llevarlo a la sección del certificado.
 
-- Revisa los títulos, descripciones, iconos y contenido de las tarjetas para que correspondan realmente con cada recurso.
-- Asegúrate de que no queden referencias al nombre anterior ni contenido que confunda los Tips con una invitación digital.
-- Conserva la distribución visual equilibrada de las tarjetas solicitada anteriormente.
+Revisa el comportamiento de navegación y corrige el destino del botón. Debe dirigir correctamente a la sección del certificado, independientemente del dispositivo o tamaño de pantalla.
 
-5. Revisa y corrige el espaciado entre el globo de texto que aparece encima del botón flotante de RO-BIT y el propio botón.
+Verifica que funcione tanto en la vista de escritorio como en la versión móvil.
 
-Actualmente, ambos elementos están demasiado juntos, lo que hace que la interfaz se vea poco equilibrada. Ajusta la separación para que exista un espacio visual adecuado entre el globo de texto y el botón.
+3. Visualización nativa de los recursos del Kit Digital
+
+Ya no quiero que los recursos del Kit Digital dependan de Google Drive para su visualización.
+
+Modifica la implementación para que los recursos puedan visualizarse directamente dentro de la plataforma, sin tener que abrir Google Drive ni salir del curso.
 
 Requisitos:
 
-- Aplica la corrección tanto en la versión de escritorio como en la versión móvil.
-- Mantén una separación proporcional y visualmente equilibrada entre ambos elementos.
-- Evita que el globo de texto se superponga con el botón o quede demasiado pegado.
-- Conserva la posición y el funcionamiento del botón flotante de RO-BIT.
-- Asegúrate de que el ajuste sea responsivo y se mantenga en diferentes tamaños de pantalla.
+- Los documentos deben contar con un visor integrado en la plataforma.
+- Debe existir una opción para descargar cada recurso.
+- Los videos deben reproducirse mediante un reproductor nativo integrado en la plataforma.
+- El reproductor debe tener un diseño responsivo y adaptarse correctamente a celulares, tabletas y computadores.
+- Mantén una experiencia de navegación sencilla y coherente con la identidad visual del proyecto.
+- Evita que los documentos o videos se corten, desborden sus contenedores o generen problemas de desplazamiento.
+- Revisa cómo están almacenados actualmente los archivos y adapta la solución para que los recursos se sirvan desde la propia plataforma o desde una ubicación compatible con su visualización integrada. No mantengas Google Drive como requisito para acceder a ellos.
 
-Antes de modificar, revisa cómo están posicionados actualmente ambos elementos y corrige el espaciado desde los estilos o contenedores correspondientes. No modifiques otros elementos de la interfaz.
+Importante: conserva los recursos existentes y sus contenidos. No sustituyas los archivos por versiones de ejemplo ni elimines materiales.
 
----
+4. Mejorar el diseño responsivo del certificado emitido
 
-## Ronda 7 (implementada)
+Mejora la presentación del certificado que aparece en pantalla después de completar el curso.
 
-- Kit: «Recomendaciones» pasó a «Tips» (acciones preventivas concretas, sin tono de invitación ni de tarjeta promocional) y «Tutorial visual» a «Videotutorial». Nuevos iconos (bombilla, cámara), descripciones, README, chat de RO-BIT y avance. Se conservan los enlaces, los identificadores internos (el progreso guardado sigue válido) y la distribución equilibrada 3 + 2.
-- RO-BIT: el globo se posiciona a partir del botón mediante variables (`--rb-bottom`, `--rb-fab-h`, `--rb-gap`). Antes quedaba a 2 px en escritorio y se superponía 2 px en móvil; ahora hay 14 px (12 px en móvil) en todos los tamaños.
+Importante: me refiero al certificado que se muestra dentro de la plataforma antes de descargarlo, no al diseño del archivo descargable.
+
+Ajusta su presentación para que:
+
+- Se adapte correctamente a celulares, tabletas y computadores.
+- Mantenga una distribución equilibrada de los elementos.
+- Los textos sean legibles y no queden cortados.
+- El nombre del participante, la fecha, el reconocimiento y los demás elementos tengan una jerarquía visual clara.
+- No se generen desbordamientos horizontales ni espacios innecesarios.
+- Mantenga la identidad visual del proyecto y su apariencia de certificado.
+
+No alteres la información ni las condiciones de emisión del certificado.
+
+5. Verificación final
+
+Una vez implementados los cambios:
+
+- Comprueba que los textos se hayan actualizado correctamente.
+- Prueba el botón «Ir al certificado» desde el Kit Digital en diferentes tamaños de pantalla.
+- Verifica la visualización y descarga de los documentos.
+- Comprueba la reproducción de los videos en el reproductor integrado.
+- Revisa el diseño del certificado emitido en celular, tableta y computador.
+- Asegúrate de que no se hayan afectado otras secciones ni funcionalidades existentes.
+
+Realiza los cambios directamente en el proyecto. No te limites a presentar recomendaciones o fragmentos de código. Conserva la arquitectura y las funcionalidades que ya funcionan, evita introducir dependencias o servicios de pago y, al finalizar, informa qué archivos modificaste, qué ajustes implementaste y qué pruebas realizaste.
+
+Antes de implementar los cambios del Kit Digital, inspecciona los recursos disponibles en la carpeta "public/recursos/" del proyecto.
+
+Identifica los documentos, videos e imágenes existentes y relaciónalos con las tarjetas correspondientes del Kit Digital.
+
+Utiliza los archivos originales para implementar la visualización integrada y las opciones de descarga. Para los videos, implementa un reproductor HTML5 nativo y responsivo.
+
+No inventes recursos, no sustituyas los archivos originales ni utilices enlaces de Google Drive. Si falta algún archivo necesario, indícame exactamente cuál es antes de reemplazarlo por otra alternativa.
