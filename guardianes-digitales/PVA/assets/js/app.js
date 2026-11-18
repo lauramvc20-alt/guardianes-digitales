@@ -16,6 +16,12 @@
   var soundBtn = document.getElementById("soundBtn");
   var soundIcon = document.getElementById("soundIcon");
   var resetBtn = document.getElementById("resetBtn");
+  var railToggle = document.getElementById("railToggle");
+  var railToggleIcon = document.getElementById("railToggleIcon");
+  var railOpen = document.getElementById("railOpen");
+  var railOpenIcon = document.getElementById("railOpenIcon");
+  var RAIL_KEY = "pva.rail.collapsed";
+  var brandMark = document.querySelector(".brand__mark");
 
   var NAV_GROUPS = [
     {
@@ -148,7 +154,39 @@
     if (wasOpen && returnFocus) menuBtn.focus();
   }
 
+  function isDesktop() { return global.innerWidth > 940; }
+
+  function setCollapsed(collapsed, focusTarget) {
+    document.body.classList.toggle("rail-collapsed", collapsed);
+    if (railOpen) {
+      railOpen.hidden = !collapsed;
+      railOpen.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+    if (railToggle) railToggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    try { global.localStorage.setItem(RAIL_KEY, collapsed ? "1" : "0"); } catch (e) {}
+    if (focusTarget === "open" && railOpen) railOpen.focus();
+    if (focusTarget === "rail" && railToggle) railToggle.focus();
+  }
+
+  function initRail() {
+    if (brandMark) brandMark.innerHTML = PVA.logo.svg();
+    if (railToggleIcon) railToggleIcon.innerHTML = U.icon("panelClose");
+    if (railOpenIcon) railOpenIcon.innerHTML = U.icon("panelOpen");
+    var saved = false;
+    try { saved = global.localStorage.getItem(RAIL_KEY) === "1"; } catch (e) {}
+    setCollapsed(saved);
+
+    if (railToggle) {
+      railToggle.addEventListener("click", function () {
+        if (isDesktop()) setCollapsed(true, "open");
+        else closeMenu(true);
+      });
+    }
+    if (railOpen) railOpen.addEventListener("click", function () { setCollapsed(false, "rail"); });
+  }
+
   function bindUi() {
+    initRail();
     if (menuBtn) {
       menuBtn.addEventListener("click", function () {
         if (rail.classList.contains("is-open")) closeMenu(true);

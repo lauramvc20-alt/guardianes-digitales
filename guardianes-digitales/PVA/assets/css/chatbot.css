@@ -1,0 +1,120 @@
+/* ==========================================================================
+   PVA · Chat de RO-BIT
+   ========================================================================== */
+.rb-fab {
+  position: fixed; right: 16px; bottom: 64px; z-index: 95;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.3rem 1rem 0.3rem 0.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(79, 224, 193, 0.5);
+  background: linear-gradient(135deg, #12304a, #0e1c3a);
+  color: #f4f7ff; font: inherit; font-size: 0.85rem; font-weight: 700;
+  box-shadow: 0 14px 34px -12px rgba(79, 224, 193, 0.5), var(--shadow-md);
+  cursor: pointer;
+  transition: transform var(--speed) var(--ease), opacity var(--speed) var(--ease), border-color var(--speed) var(--ease);
+}
+.rb-fab:hover { transform: translateY(-2px); border-color: var(--turq); }
+.rb-fab:active { transform: scale(0.97); }
+.rb-fab.is-hidden { opacity: 0; pointer-events: none; }
+.rb-fab__robot {
+  width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex: none;
+  background: radial-gradient(circle at 50% 30%, rgba(79, 224, 193, 0.35), rgba(139, 108, 246, 0.25));
+  display: grid; place-items: center;
+}
+.rb-fab__robot .robot, .rb-head__robot .robot, .rb-avatar .robot { width: 100%; height: 100%; animation: none; }
+.rb-fab__robot svg { width: 120%; height: 120%; margin-top: 12%; }
+html[data-theme="light"] .rb-fab { background: #ffffff; color: #0f172a; border-color: rgba(15, 118, 110, 0.55); box-shadow: 0 12px 30px -12px rgba(15, 23, 42, 0.35); }
+html[data-theme="light"] .rb-fab__robot { background: rgba(15, 155, 132, 0.14); }
+
+.rb-tip {
+  position: fixed; right: 20px; bottom: 124px; z-index: 94; max-width: 220px;
+  padding: 0.55rem 0.8rem; border-radius: 14px 14px 4px 14px;
+  background: #ffffff; color: #0f172a; font-size: 0.8rem; font-weight: 600;
+  box-shadow: var(--shadow-md); opacity: 0; transform: translateY(6px);
+  transition: opacity 400ms var(--ease), transform 400ms var(--ease); pointer-events: none;
+}
+.rb-tip.is-in { opacity: 1; transform: none; }
+body.robit-open .rb-tip { display: none; }
+
+.rb-panel {
+  position: fixed; right: 16px; bottom: 64px; z-index: 96;
+  width: min(390px, calc(100vw - 32px));
+  height: min(560px, calc(100vh - 96px));
+  display: flex; flex-direction: column;
+  border-radius: 22px; overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(170deg, #121d3a, #0b1226 75%);
+  box-shadow: var(--shadow-lg);
+  animation: rbIn 320ms var(--ease) both;
+  transform-origin: bottom right;
+}
+.rb-panel[hidden] { display: none; }
+@keyframes rbIn { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+.rb-head { display: flex; align-items: center; gap: 0.7rem; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--line); background: rgba(79, 224, 193, 0.08); }
+.rb-head__robot { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: rgba(79, 224, 193, 0.18); flex: none; display: grid; place-items: center; }
+.rb-head__robot svg { width: 120%; height: 120%; margin-top: 12%; }
+.rb-head__t { flex: 1; display: flex; flex-direction: column; line-height: 1.15; }
+.rb-head__t strong { font-family: var(--font-display); letter-spacing: 0.08em; color: #fff; }
+.rb-head__t small { color: var(--muted); font-size: 0.72rem; }
+.rb-icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: none; color: var(--ink-soft); cursor: pointer; }
+.rb-icon:hover { border-color: var(--turq); }
+.rb-icon svg { width: 18px; height: 18px; }
+
+.rb-log { flex: 1; overflow-y: auto; padding: 0.9rem; display: flex; flex-direction: column; gap: 0.7rem; scroll-behavior: smooth; }
+.rb-msg { display: flex; gap: 0.5rem; max-width: 100%; animation: rbMsg 260ms var(--ease) both; }
+@keyframes rbMsg { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.rb-msg--user { align-self: flex-end; max-width: 85%; padding: 0.55rem 0.8rem; border-radius: 16px 16px 4px 16px; background: linear-gradient(135deg, var(--violet), #6f56d8); color: #fff; font-size: 0.88rem; overflow-wrap: anywhere; }
+.rb-avatar { width: 30px; height: 30px; flex: none; border-radius: 50%; overflow: hidden; background: rgba(79, 224, 193, 0.16); display: grid; place-items: center; }
+.rb-avatar svg { width: 120%; height: 120%; margin-top: 12%; }
+.rb-bubble { min-width: 0; padding: 0.65rem 0.8rem; border-radius: 16px 16px 16px 4px; background: rgba(148, 168, 214, 0.1); border: 1px solid var(--line); font-size: 0.86rem; line-height: 1.5; color: var(--ink-soft); }
+.rb-bubble p { margin: 0; }
+.rb-bubble p + p { margin-top: 0.5rem; }
+.rb-links, .rb-chips, .rb-sugg { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.rb-links { margin-top: 0.6rem; }
+.rb-chips { margin-top: 0.6rem; }
+.rb-link { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid rgba(79, 224, 193, 0.5); background: rgba(79, 224, 193, 0.12); color: #b9ffee; font: inherit; font-size: 0.78rem; font-weight: 600; cursor: pointer; }
+.rb-link svg { width: 13px; height: 13px; }
+.rb-link:hover { background: rgba(79, 224, 193, 0.22); }
+.rb-chip { padding: 0.35rem 0.7rem; border-radius: 999px; border: 1px solid var(--line-strong); background: rgba(139, 108, 246, 0.14); color: var(--ink); font: inherit; font-size: 0.78rem; cursor: pointer; text-align: left; }
+.rb-chip:hover { border-color: var(--lavender); background: rgba(139, 108, 246, 0.24); }
+.rb-sugg { padding: 0 0.9rem 0.6rem; }
+.rb-sugg:empty { display: none; }
+
+.rb-dots { display: inline-flex; gap: 4px; padding: 0.25rem 0; }
+.rb-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--turq); animation: rbDot 1s ease-in-out infinite; }
+.rb-dots i:nth-child(2) { animation-delay: 0.15s; }
+.rb-dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes rbDot { 0%, 80%, 100% { opacity: 0.25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+
+.rb-form { display: flex; gap: 0.5rem; padding: 0.6rem 0.8rem; border-top: 1px solid var(--line); }
+.rb-form input { flex: 1; min-width: 0; padding: 0.6rem 0.8rem; border-radius: 12px; border: 1px solid var(--line-strong); background: rgba(5, 7, 15, 0.45); color: var(--ink); font: inherit; font-size: 0.9rem; }
+.rb-form input:focus-visible { outline: none; box-shadow: var(--ring); }
+.rb-send { display: grid; place-items: center; width: 42px; border-radius: 12px; border: 0; background: linear-gradient(135deg, var(--turq), #7ef0d8); color: #04241e; cursor: pointer; }
+.rb-send svg { width: 18px; height: 18px; }
+.rb-note { display: flex; gap: 0.4rem; margin: 0; padding: 0 0.9rem 0.7rem; font-size: 0.68rem; line-height: 1.4; color: var(--muted-2); }
+.rb-note svg { flex: none; width: 12px; height: 12px; margin-top: 2px; }
+
+html[data-theme="light"] .rb-panel { background: #ffffff; border-color: rgba(15, 23, 42, 0.18); }
+html[data-theme="light"] .rb-head { background: rgba(15, 155, 132, 0.1); border-color: rgba(15, 23, 42, 0.1); }
+html[data-theme="light"] .rb-head__t strong { color: #0f172a; }
+html[data-theme="light"] .rb-head__t small, html[data-theme="light"] .rb-note { color: #475569; }
+html[data-theme="light"] .rb-icon { color: #0f172a; border-color: rgba(15, 23, 42, 0.2); }
+html[data-theme="light"] .rb-bubble { background: #f1f5fb; border-color: rgba(15, 23, 42, 0.12); color: #1e293b; }
+html[data-theme="light"] .rb-link { color: #0f5f56; border-color: rgba(15, 118, 110, 0.5); background: rgba(15, 155, 132, 0.1); }
+html[data-theme="light"] .rb-chip { color: #2e2480; background: rgba(139, 108, 246, 0.1); border-color: rgba(76, 58, 166, 0.35); }
+html[data-theme="light"] .rb-form { border-color: rgba(15, 23, 42, 0.1); }
+html[data-theme="light"] .rb-form input { background: #ffffff; color: #0f172a; border-color: rgba(15, 23, 42, 0.25); }
+
+@media (max-width: 640px) {
+  .rb-fab { bottom: 60px; padding-right: 0.35rem; }
+  .rb-tip { bottom: 116px; }
+  .rb-panel { right: 0; left: 0; bottom: 0; width: 100%; height: min(78vh, 600px); border-radius: 22px 22px 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rb-panel, .rb-msg, .rb-dots i, .rb-fab, .rb-tip { animation: none !important; transition: none !important; }
+}
+@media print { .rb-fab, .rb-panel, .rb-tip { display: none !important; } }
+
+/* Pantallas bajas o pequeñas: el globo de ayuda no tapa el contenido */
+@media (max-height: 520px) { .rb-tip { display: none !important; } }

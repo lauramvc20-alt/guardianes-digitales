@@ -11,10 +11,10 @@
       '<article class="cert-sheet" id="certSheet" aria-labelledby="certTitle">' +
         '<div class="cert-sheet__top">' +
           '<div>' +
-            '<span class="cert-sheet__kicker">Reconocimiento simbólico · RO-BIT</span>' +
+            '<span class="cert-sheet__kicker">Reconocimiento simbólico</span>' +
             '<h3 class="cert-sheet__main-title">PAUSA, VERIFICA Y ACTÚA</h3>' +
           '</div>' +
-          '<span class="cert-sheet__seal" aria-hidden="true">' + U.icon("seal") + "</span>" +
+          '<span class="cert-sheet__seal cert-sheet__seal--logo" aria-hidden="true">' + PVA.logo.svg() + "</span>" +
         "</div>" +
         '<p style="margin-top:.8rem;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;color:#433299;font-weight:800">' +
           "Se otorga a" +
@@ -31,7 +31,7 @@
           "<div><span>Resultado de evaluación</span><b>" + score + " de " + total + " correctas</b></div>" +
         "</div>" +
         '<p class="cert-sheet__note">' +
-          "El certificado emitido es un reconocimiento simbólico y no constituye una acreditación educativa." +
+          "La emisión de este certificado es estrictamente simbólica y no confiere una acreditación formal ni tiene validez académica o profesional." +
         "</p>" +
       "</article>"
     );
@@ -74,8 +74,8 @@
 
     root.innerHTML =
       '<section class="completion-hero enter print-hide">' +
-        '<span class="kicker kicker--yellow">Recorrido completo</span>' +
-        '<div class="badge-seal" aria-hidden="true">' + U.icon("seal") + "</div>" +
+        '<div class="badge-seal badge-seal--logo" aria-hidden="true">' + PVA.logo.svg() + "</div>" +
+        '<p class="completion-hero__status">' + U.icon("check") + " Recorrido completo</p>" +
         '<h1>Guardián Digital</h1>' +
         '<p class="lede" style="max-width:56ch;margin:0 auto .8rem">' +
           "Completaste el protocolo PVA, los módulos de smishing y vishing, el simulacro, " +
@@ -111,13 +111,6 @@
         "</div>" +
       "</section>" +
 
-      '<div class="print-hide" style="margin-top:1.2rem">' +
-        PVA.robot.bubble(
-          "celebration",
-          "Lo lograste. Comparte el Kit con una persona de confianza y ayúdala a " +
-          "activar sus propias medidas de protección."
-        ) +
-      "</div>" +
 
       '<div class="certificate-wrap" data-cert-wrap' + (done ? "" : " hidden") + ">" +
         revealMarkup(name, dateLabel, score, total) +

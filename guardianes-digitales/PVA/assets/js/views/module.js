@@ -10,8 +10,8 @@
 
   var TICK_MS = 250;
   /* Tiempo mínimo de lectura por bloque: ~250 ms por palabra (unas 240 ppm), con piso de 8 s. */
-  var MS_PER_WORD = 250;
-  var MIN_READ_MS = 8000;
+  var MS_PER_WORD = 110;
+  var MIN_READ_MS = 3000;
 
   function keyCount(obj) {
     return Object.keys(obj || {}).filter(function (k) { return !!obj[k]; }).length;
@@ -40,20 +40,22 @@
       };
     }
 
-    if (cfg.type === "commitments") {
-      var picked = keyCount(act.commitments);
-      var min = cfg.min || 3;
+    if (cfg.type === "privacy") {
+      var pv = (act.privacy || {}).vals || {};
+      var safe = cfg.items.filter(function (it) {
+        return (pv[it.key] == null ? it.start : pv[it.key]) === it.safe;
+      }).length;
       return {
-        done: picked >= min,
-        ratio: Math.min(1, picked / min),
-        text: picked + " de " + cfg.items.length + " compromisos · mínimo " + min
+        done: safe >= cfg.items.length,
+        ratio: safe / cfg.items.length,
+        text: safe + " de " + cfg.items.length + " ajustes protegidos"
       };
     }
 
     if (cfg.type === "scenarios") {
       var list = PVA.content.simulations || [];
       var answered = list.filter(function (sim) {
-        return typeof (act.scenarios || {})[sim.id] === "number";
+        return !!(act.sim2 || {})[sim.id];
       }).length;
       return {
         done: answered === list.length,
@@ -77,7 +79,7 @@
   }
 
   function requiredReadMs(step) {
-    return Math.max(MIN_READ_MS, wordCount(step) * MS_PER_WORD);
+    return Math.min(9000, Math.max(MIN_READ_MS, wordCount(step) * MS_PER_WORD));
   }
 
   function blockHtml(step, index, total) {
@@ -162,10 +164,22 @@
             (done ? '<span class="chip chip--turq">' + U.icon("check") + " Módulo completado</span>" : "") +
           "</div>" +
         "</div>" +
-        PVA.robot.svg(module.robot, { float: true }) +
+        '<ul class="module-goals" aria-label="Lo que vas a lograr">' + objectives + "</ul>" +
       "</section>" +
 
-      '<div class="module-layout">' +
+      '<section class="module-progress" aria-label="Avance de la actividad">' +
+        '<div class="module-progress__row">' +
+          '<h2>Tu actividad</h2>' +
+          '<p class="tiny" data-act-status>' + U.esc(info.text) + "</p>" +
+        "</div>" +
+        PVA.ui.progressBar(Math.round(info.ratio * 100), "bar--thin", "Avance de la actividad") +
+        '<p class="tiny muted" data-act-note>' +
+          (done ? "Módulo completado. Puedes repetir la actividad cuando quieras." :
+            "La actividad es obligatoria para desbloquear la siguiente etapa.") +
+        "</p>" +
+      "</section>" +
+
+      '<div class="module-layout module-layout--wide">' +
         '<div class="flow">' +
           '<ol class="flow-nav" aria-label="Pasos del módulo" data-flow-nav></ol>' +
           '<div class="flow-stage">' +
@@ -178,28 +192,12 @@
           '<div id="moduleFoot"></div>' +
         "</div>" +
 
-        '<aside aria-label="Información del módulo">' +
-          '<section class="aside-card">' +
-            '<span class="kicker kicker--violet">En este módulo</span>' +
-            '<h2 style="font-size:1.05rem;margin-top:.3rem">Lo que vas a lograr</h2>' +
-            '<ul class="aside-list">' + objectives + "</ul>" +
-            '<div style="margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line)">' +
-              "<h3 style='font-size:.9rem'>Tu actividad</h3>" +
-              '<p class="tiny" data-act-status style="margin-bottom:.45rem">' + U.esc(info.text) + "</p>" +
-              PVA.ui.progressBar(Math.round(info.ratio * 100), "bar--thin", "Avance de la actividad") +
-              '<p class="tiny muted" style="margin-top:.7rem" data-act-note>' +
-                (done ? "Módulo completado. Puedes repetir la actividad cuando quieras." :
-                  "La actividad es obligatoria para desbloquear la siguiente etapa.") +
-              "</p>" +
-            "</div>" +
-          "</section>" +
-          PVA.robot.bubble(module.robot, U.esc(module.aside.tip), module.robot === "warning" ? "warn" : "") +
-          '<section class="aside-card">' +
-            '<h2 class="sources-title">Bibliografía</h2>' +
-            '<ul class="aside-list aside-list--sources">' + sources + "</ul>" +
-          "</section>" +
-        "</aside>" +
-      "</div>";
+      "</div>" +
+
+      '<section class="module-sources" aria-labelledby="srcTitle">' +
+        '<h2 class="sources-title" id="srcTitle">' + U.icon("book") + " Bibliografía y fuentes</h2>" +
+        '<ul class="aside-list aside-list--sources">' + sources + "</ul>" +
+      "</section>";
 
     var foot = root.querySelector("#moduleFoot");
     var navEl = root.querySelector("[data-flow-nav]");
@@ -212,7 +210,7 @@
     function updateStatus() {
       var status = root.querySelector("[data-act-status]");
       var note = root.querySelector("[data-act-note]");
-      var bar = root.querySelector(".aside-card .bar__fill");
+      var bar = root.querySelector(".module-progress .bar__fill");
       var fresh = progressInfo(module.id, module.activity);
       if (status) status.textContent = fresh.text;
       if (bar) bar.style.width = Math.round(fresh.ratio * 100) + "%";
@@ -302,6 +300,7 @@
       if (index === ACT && !activityOpen()) return;
       if (index < ACT && index > firstUnread()) return;
       current = index;
+      root.classList.toggle("is-activity", current === ACT);
 
       for (var i = 0; i <= ACT; i++) {
         var node = blockNode(i);

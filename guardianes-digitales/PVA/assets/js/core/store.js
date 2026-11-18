@@ -11,7 +11,7 @@
       navLabel: "Bienvenida",
       short: "Objetivo y recorrido",
       route: "#/bienvenida",
-      minutes: 2,
+      minutes: 1,
       requires: [],
       icon: "compass",
       blurb: "Qué vas a aprender y cómo funciona la experiencia."
@@ -22,7 +22,7 @@
       navLabel: "Protocolo PVA",
       short: "Pausa, Verifica y Actúa",
       route: "#/modulo/1",
-      minutes: 3,
+      minutes: 2,
       requires: [],
       icon: "shieldCheck",
       blurb: "Los tres pasos que ordenan cualquier decisión digital."
@@ -33,7 +33,7 @@
       navLabel: "Smishing y vishing",
       short: "Mensajes y llamadas engañosas",
       route: "#/modulo/2",
-      minutes: 3,
+      minutes: 2,
       requires: ["m1"],
       icon: "mail",
       blurb: "Cómo reconocer mensajes SMS y llamadas de voz que suplantan entidades."
@@ -44,7 +44,7 @@
       navLabel: "Protección de datos",
       short: "Cuentas, claves y datos",
       route: "#/modulo/3",
-      minutes: 3,
+      minutes: 2,
       requires: ["m2"],
       icon: "lock",
       blurb: "Prácticas concretas para cuidar tus cuentas y tu información."
@@ -55,7 +55,7 @@
       navLabel: "Simulaciones",
       short: "Tres escenarios prácticos",
       route: "#/modulo/4",
-      minutes: 4,
+      minutes: 3,
       requires: ["m3"],
       icon: "puzzle",
       blurb: "Decide qué harías en tres situaciones basadas en casos reales."
@@ -66,7 +66,7 @@
       navLabel: "Evaluación",
       short: "Cinco preguntas",
       route: "#/evaluacion",
-      minutes: 3,
+      minutes: 2,
       requires: ["m4"],
       icon: "target",
       blurb: "Comprueba lo aprendido antes de recibir el Kit Digital."
@@ -77,7 +77,7 @@
       navLabel: "Kit Digital",
       short: "Recursos para llevar contigo",
       route: "#/kit",
-      minutes: 2,
+      minutes: 1,
       requires: ["evaluacion"],
       icon: "card",
       blurb: "Guía, infografía, ruta, recomendaciones y tutorial."
@@ -95,7 +95,7 @@
     },
     {
       id: "encuesta",
-      label: "Encuesta de satisfacción",
+      label: "Encuesta de percepción",
       navLabel: "Encuesta",
       short: "Cuéntanos tu experiencia",
       route: "#/encuesta",

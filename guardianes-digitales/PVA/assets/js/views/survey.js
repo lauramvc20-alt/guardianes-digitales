@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PVA · Encuesta de satisfacción (etapa independiente de la evaluación)
+   PVA · Encuesta de percepción (etapa independiente de la evaluación)
    ========================================================================== */
 (function (global) {
   "use strict";
@@ -39,8 +39,7 @@
       "</div>" +
 
       '<section class="survey-card enter-2" aria-labelledby="surveyTitle">' +
-        '<span class="kicker kicker--yellow">Tu opinión cuenta</span>' +
-        '<h2 id="surveyTitle" style="margin-top:.4rem;max-width:30ch">' + U.esc(S.lede) + "</h2>" +
+        '<h2 id="surveyTitle" style="max-width:34ch">' + U.esc(S.lede) + "</h2>" +
         '<p style="color:var(--ink-soft);max-width:62ch;margin-top:.8rem">' + U.esc(S.text) + "</p>" +
         '<div class="hero__cta" style="margin-top:1.4rem">' +
           '<a class="btn" href="' + U.esc(S.url) + '" target="_blank" rel="noopener noreferrer" data-survey>' +
@@ -60,15 +59,9 @@
         '<div class="stat"><b>100 %</b><span>del recorrido al completar esta etapa</span></div>' +
         '<div class="stat"><b>9 / 9</b><span>etapas del curso</span></div>' +
         '<div class="stat"><b>Anónima</b><span>desde esta plataforma</span></div>' +
-      "</div>" +
-
-      '<div style="margin-top:1.4rem">' +
-        PVA.robot.bubble(
-          "celebration",
-          "Gracias por llegar hasta aquí. Tu experiencia ayuda a mejorar esta propuesta " +
-          "educativa para otras personas."
-        ) +
       "</div>";
+
+
 
     root.addEventListener("click", function (event) {
       var link = event.target.closest("[data-survey]");
@@ -76,7 +69,7 @@
 
       if (store.markDone("encuesta")) {
         PVA.audio.play("win");
-        PVA.ui.toast("¡Recorrido completo! Gracias por responder la encuesta.", "ok", 5200);
+        PVA.ui.toast("¡Recorrido completo! Gracias por tu percepción.", "ok", 5200);
       }
 
       var state = root.querySelector("[data-survey-state]");
