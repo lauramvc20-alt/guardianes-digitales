@@ -1,268 +1,198 @@
-Nueva actualización de MEJORAS_PVA.md — Ajustes visuales y funcionales de Guardián Digital
+Quiero que realices una revisión y mejora integral de Guardián Digital (PVA). Analiza primero la estructura, los componentes, los estilos y la lógica actual. Después, implementa los siguientes cambios directamente en el código.
 
-Quiero incorporar los siguientes requerimientos a la versión actual de Guardián Digital.
+Utiliza las skills Emil Kowalski e Impeccable que tienes instaladas. Lee sus instrucciones y aplica sus principios durante el trabajo. No te limites a mencionarlas.
 
-También quiero que utilices las skills de diseño disponibles en el proyecto, especialmente:
+1. Redacción y contenido general
 
-- Figma Design: para aplicar criterios sólidos de diseño de interfaces, composición, jerarquía visual y consistencia.
-- Emil Kowalski: para mejorar las interacciones, transiciones y detalles de experiencia de usuario.
-- Impeccable: para evaluar y perfeccionar la calidad visual, tipografía, distribución, espaciado y presentación general.
+Revisa los textos de toda la plataforma para hacerlos más directos, naturales y concisos.
 
-Si alguna skill tiene instrucciones o archivos específicos, léelos antes de utilizarla. No te limites a mencionar que las usaste: aplica sus criterios en las decisiones de diseño.
+Evita expresiones redundantes como:
 
-Mi objetivo es que Guardián Digital tenga una identidad visual propia, con apariencia de un producto educativo profesional y cuidadosamente diseñado. Quiero evitar que la interfaz parezca generada automáticamente mediante patrones genéricos de tarjetas, columnas y botones.
+- «El documento del proyecto lo resume así…»
+- «El documento…»
+- «El proyecto…»
 
-1. Reorganizar las referencias bibliográficas
+No menciones constantemente documentos de referencia ni expliques de dónde proviene la información. Presenta directamente los conceptos y contenidos educativos.
 
-Actualmente, las referencias bibliográficas aparecen distribuidas horizontalmente, una al lado de otra. Esta disposición hace que el contenido se vea desordenado y que algunas referencias queden demasiado separadas.
+Elimina introducciones repetitivas y frases que no aporten valor. Conserva la información importante y el sentido académico.
 
-Quiero cambiar completamente esta presentación:
+2. Tiempos de lectura
 
-- Mostrar las referencias apiladas verticalmente, una debajo de otra.
-- Cada referencia debe ocupar una fila independiente.
-- Mantener una separación equilibrada entre ellas.
-- Mejorar la alineación de los textos y los elementos gráficos.
-- Reducir considerablemente el tamaño de los iconos, ya que actualmente son demasiado grandes en relación con el texto.
-- Mantener una iconografía discreta y coherente con el resto de la plataforma.
-- Evitar que las referencias se vean como tarjetas grandes e innecesarias.
+Reduce los tiempos estimados de lectura de los módulos.
 
-La sección debe ser sencilla, ordenada y fácil de consultar, sin ocupar más espacio del necesario.
+Actualmente son demasiado largos. Ajusta las estimaciones según la extensión real de cada contenido. Quiero tiempos breves y realistas, no duraciones exageradas ni tiempos iguales para todas las secciones.
 
-2. Corregir la legibilidad de la actividad práctica del módulo 2
+Los tiempos deben orientar al participante, no convertirse en una barrera para avanzar.
 
-En el modo claro, la actividad práctica del módulo 2 presenta un problema de contraste: algunos textos se ven demasiado claros y se pierden sobre el fondo.
+3. Módulo 3: nueva actividad práctica
 
-Quiero que revises todos los elementos de esta actividad:
-
-- Texto principal.
-- Instrucciones.
-- Mensaje SMS.
-- Remitente.
-- Fragmentos interactivos.
-- Señales identificadas.
-- Retroalimentaciones.
-- Indicadores de progreso.
-- Botones y controles.
-
-Todos deben tener un contraste adecuado en modo claro y oscuro.
-
-No quiero que simplemente oscurezcas todos los textos. Revisa los colores de cada componente y establece una jerarquía visual que permita distinguir claramente el contenido, las instrucciones, las interacciones y la retroalimentación.
-
-2.1. Mejorar la presentación de las señales identificadas
-
-Actualmente, cuando el participante selecciona una señal sospechosa del mensaje, la explicación correspondiente se va agregando debajo de las anteriores.
-
-Esto provoca que el contenido se acumule verticalmente y que la actividad se vuelva cada vez más extensa.
-
-Quiero una presentación más organizada e interactiva.
-
-Analiza alternativas como:
-
-- Mostrar la explicación de la señal seleccionada en un panel independiente.
-- Utilizar un espacio de retroalimentación que cambie según la selección.
-- Presentar la explicación en un panel lateral solo si existe suficiente espacio, sin estrechar el contenido principal.
-- Utilizar una ventana emergente o un panel desplegable controlado, si resulta más apropiado.
-
-La selección de una señal debe actualizar la explicación correspondiente, sin acumular bloques de retroalimentación hacia abajo.
-
-Requisito: El participante debe poder identificar las señales por sí mismo. No debes resaltar previamente las partes sospechosas ni revelar las respuestas antes de que interactúe.
-
-Mantén el objetivo pedagógico de la actividad y conserva su lógica de evaluación y progreso.
-
-3. Optimizar la distribución del contenido cuando el menú lateral está oculto
-
-Actualmente, cuando se oculta el panel lateral, los cuadros y bloques de contenido no aprovechan correctamente el espacio disponible.
-
-Se genera demasiado espacio vacío a la derecha y algunos componentes mantienen una distribución que parece pensada para cuando el menú está abierto.
-
-Quiero que la interfaz se adapte realmente a ambos estados del menú.
+La actividad práctica actual es demasiado larga. Reemplázala por una actividad más corta, dinámica y enfocada en la protección de datos personales mediante acciones que cualquier persona pueda aplicar en su vida cotidiana.
 
 Requisitos:
 
-- Cuando el menú esté abierto, el contenido debe mantener una distribución equilibrada.
-- Cuando esté cerrado, el contenido debe ampliar y redistribuir su espacio de manera inteligente.
-- Los cuadros no deben conservar anchuras innecesariamente pequeñas.
-- Evitar grandes espacios vacíos a los lados.
-- Ajustar las columnas, los márgenes y las anchuras máximas según el espacio disponible.
-- Mantener una lectura cómoda, sin crear líneas de texto excesivamente largas.
-- Evitar que los componentes se estiren de forma desproporcionada.
-- Garantizar que las transiciones entre ambos estados sean fluidas.
+- Una interacción sencilla y rápida.
+- Situaciones cotidianas relacionadas con la privacidad y los datos personales.
+- Acciones prácticas que puedan aplicarse inmediatamente.
+- Retroalimentación breve y útil.
+- Pocos pasos y sin explicaciones extensas.
 
-No quiero que la solución consista únicamente en aumentar el ancho de todos los cuadros. Necesito que se revise la composición general de cada página y que la distribución se adapte al espacio disponible.
+Diseña una mecánica diferente a las actividades de los demás módulos. No quiero que sea simplemente otro cuestionario convencional.
 
-La interfaz debe verse diseñada intencionalmente, no como un contenido que simplemente se estira al ocultar el menú.
+4. Módulo 4: mejorar las simulaciones
 
-4. Rediseñar la experiencia del simulacro del módulo 4
+Caso 2
 
-Este es uno de los cambios más importantes.
+No me gusta la actividad actual de seleccionar tantas palabras dentro del contenido.
 
-Actualmente, los casos del simulacro presentan una mecánica demasiado repetitiva y poco natural.
+Reemplázala por otra mecánica que permita analizar la situación y tomar una decisión. Puede ser una selección de respuesta, una decisión por etapas o una interacción contextual, siempre que tenga sentido para el escenario.
 
-En algunos casos, las palabras o fragmentos sospechosos aparecen subrayados desde el principio. Esto revela las respuestas y no permite que el participante investigue por su cuenta.
+No quiero que el participante tenga que marcar numerosas palabras para completar el caso.
 
-Además, después de interactuar con el caso, aparecen preguntas y opciones que se van desplegando verticalmente. Esto hace que la actividad crezca hacia abajo, mientras queda mucho espacio vacío en otras partes de la pantalla.
+Mantén el objetivo educativo y proporciona retroalimentación según la decisión tomada.
 
-Quiero que revises la experiencia completa del simulacro y no solamente su apariencia.
+Diseño general del módulo
 
-4.1. No revelar las señales antes de la interacción
+Me gusta el enfoque de las simulaciones actuales, así que conserva su esencia y los escenarios existentes.
 
-Las señales sospechosas no deben aparecer subrayadas, resaltadas ni identificadas de antemano.
+Sin embargo, hay demasiado espacio sobrante en la interfaz. Quiero reorganizar este módulo tomando como referencia la evaluación, que presenta el contenido en una sola página y concentra la atención en una actividad a la vez.
 
-El participante debe poder examinar el contenido sin pistas visuales que le indiquen directamente dónde están los problemas.
+Implementa una presentación más compacta:
 
-Cuando la actividad requiera identificar elementos sospechosos, la selección debe realizarla el propio participante.
+- Un escenario o decisión a la vez.
+- Mejor aprovechamiento del ancho disponible.
+- Distribución equilibrada entre texto, opciones y elementos visuales.
+- Menos espacios vacíos y separaciones innecesarias.
+- Retroalimentación clara después de cada decisión.
+- Navegación sencilla entre los casos.
 
-Después de su respuesta, puedes mostrar la retroalimentación correspondiente y explicar qué señales debía reconocer.
+No copies literalmente el diseño de la evaluación. Utiliza su aprovechamiento del espacio como referencia.
 
-4.2. Evitar que todas las actividades sean iguales
+5. Kit Digital: corregir el desequilibrio visual
 
-Actualmente, los casos repiten prácticamente la misma dinámica: mostrar un contenido, seleccionar palabras sospechosas y recibir una explicación.
+Actualmente hay una tarjeta mucho más grande que las demás, lo que genera una composición desbalanceada.
 
-No quiero que todos los casos del simulacro tengan exactamente la misma mecánica.
+Rediseña la distribución para que los recursos tengan dimensiones y jerarquías visuales equilibradas.
 
-Cada caso debe tener una interacción adecuada al tipo de situación que presenta y al aprendizaje que busca desarrollar.
+Revisa:
 
-Por ejemplo:
+- Tamaño de las tarjetas.
+- Distribución y alineación.
+- Proporción de iconos.
+- Espaciado interno.
+- Jerarquía entre títulos, descripciones y acciones.
 
-- Un caso de smishing puede permitir examinar un mensaje y decidir cómo actuar.
-- Un caso de vishing puede plantear una interacción basada en una llamada y permitir evaluar las decisiones tomadas durante la conversación.
-- Otros casos pueden utilizar decisiones, identificación de señales, selección de medidas de protección o evaluación de consecuencias, siempre que la dinámica tenga sentido para el contenido.
+Evita destacar un recurso mediante un tamaño excesivo. La sección debe verse organizada y consistente tanto en escritorio como en móvil.
 
-Estos son ejemplos de posibilidades, no una obligación de utilizar exactamente esas mecánicas.
+6. Finalización y certificado
 
-La regla principal es que la interacción debe corresponder al escenario. No fuerces la misma dinámica en todos los casos solamente para mantener una estructura uniforme.
+Pantalla de finalización
 
-Cada actividad debe conservar coherencia con su objetivo pedagógico.
+Corrige el problema visual por el que el logo se superpone con el texto «Recorrido completo».
 
-4.3. Reorganizar las preguntas y decisiones
+Reorganiza los elementos para que no existan superposiciones y se mantenga una jerarquía visual clara.
 
-Actualmente, después de examinar el caso, se despliegan preguntas de opciones hacia abajo.
+Certificado
 
-No quiero que cada respuesta genere nuevos bloques que se acumulen verticalmente.
+Realiza estos cambios:
 
-Quiero una experiencia más controlada y organizada:
+- Elimina a RO-BIT del certificado.
+- Deja únicamente el reconocimiento simbólico.
+- Incluye debajo el siguiente texto exacto:
 
-- Mostrar una pregunta o decisión a la vez.
-- Mantener el caso y la interacción dentro de una composición equilibrada.
-- Actualizar el contenido de la actividad según la respuesta.
-- Presentar la retroalimentación en un espacio definido.
-- Permitir avanzar cuando se haya completado la interacción correspondiente.
-- Evitar que el participante tenga que desplazarse continuamente hacia abajo para encontrar la siguiente pregunta.
-- Aprovechar el espacio horizontal sin crear columnas demasiado estrechas.
-- Evitar que una parte de la pantalla quede vacía mientras toda la actividad se concentra en el otro extremo.
+«La emisión de este certificado es estrictamente simbólica y no confiere una acreditación formal ni tiene validez académica o profesional».
 
-Puedes utilizar paneles dinámicos, pasos secuenciales, transiciones o una composición de dos áreas cuando realmente aporte valor.
+Asegúrate de que el texto sea legible y no se corte ni se superponga en la vista previa o al descargar el certificado.
 
-No quiero una interfaz que simplemente muestre todas las preguntas dentro de tarjetas apiladas.
+7. Encuesta final
 
-4.4. Darle sentido a cada decisión
+Modifica la sección de la encuesta:
 
-Revisa la lógica de todas las preguntas y opciones.
+- Cambia el nombre «Satisfacción» por «Percepción».
+- Sustituye «Gracias por participar» por:
 
-Cada interacción debe tener una consecuencia pedagógica real.
+«Ayúdanos a evaluar este proyecto educativo».
 
-Por ejemplo:
+- Añade esta aclaración:
 
-- Una respuesta puede mostrar una explicación específica.
-- Una decisión puede permitir avanzar a una etapa diferente.
-- Una elección puede modificar el resultado o la evaluación del caso.
-- Una respuesta incorrecta puede explicar el riesgo y permitir corregir el criterio.
+«La encuesta se responde en Google Forms, no necesitas registro previo o inicio de sesión».
 
-No quiero botones que solamente cambien de color o preguntas que no influyan en nada.
+Conserva la funcionalidad y la ubicación actual de la encuesta, después del certificado.
 
-Si una pregunta no aporta al aprendizaje, elimínala o reemplázala.
+No modifiques el funcionamiento del enlace de Google Forms.
 
-La retroalimentación debe explicar el motivo de la respuesta adecuada y qué riesgo implica una decisión equivocada.
+8. Corregir bug del menú lateral
 
-4.5. Mantener la progresión del simulacro
+Existe un error al ocultar y volver a mostrar el menú lateral: queda un espacio vacío en medio de la pantalla y el contenido no recupera correctamente su distribución.
 
-El simulacro debe conservar una secuencia comprensible.
+Investiga la causa real del problema y corrígelo.
 
-El participante debe saber:
+Verifica que:
 
-- En qué caso se encuentra.
-- Qué debe hacer.
-- Qué ha completado.
-- Qué le falta por resolver.
-- Cuándo puede avanzar.
+- Al ocultar el menú, el contenido aproveche correctamente todo el espacio disponible.
+- Al mostrarlo nuevamente, la distribución se restablezca sin saltos ni espacios vacíos.
+- No queden márgenes, columnas o contenedores reservados para un menú que está oculto.
+- Las transiciones sean fluidas y no provoquen desplazamientos extraños.
+- El comportamiento funcione en todas las secciones, no solamente en la pantalla de inicio.
 
-Evita mostrar todos los pasos simultáneamente.
+No soluciones el problema con ajustes visuales aislados. Revisa la lógica del estado del menú y la estructura del layout.
 
-La actividad debe sentirse como una experiencia interactiva y no como un formulario extenso.
+9. Responsividad y corrección de bugs
 
-Importante: No conviertas el simulacro en una actividad de selección de palabras repetida con diferentes textos. Quiero variedad real en las mecánicas, sin perder el enfoque educativo de smishing, vishing y protección digital.
+Realiza una revisión general de toda la plataforma para garantizar que funcione correctamente en distintos dispositivos.
 
-5. Dirección visual: evitar una interfaz genérica
+Prioriza especialmente los teléfonos móviles.
 
-Quiero una revisión visual más exigente de los componentes afectados.
+Revisa:
 
-La plataforma debe transmitir una identidad propia y una sensación de producto terminado.
+- Escritorio.
+- Tablets.
+- Móviles de diferentes tamaños.
+- Orientación vertical y horizontal.
 
-Utiliza las skills de Figma Design, Emil Kowalski e Impeccable para evaluar y mejorar:
+Corrige problemas como:
 
-- Jerarquía visual.
-- Tipografía y legibilidad.
-- Composición de los espacios.
-- Proporción entre textos, iconos y controles.
-- Distribución horizontal y vertical.
-- Estados de interacción.
-- Retroalimentaciones.
-- Transiciones y microinteracciones.
-- Coherencia entre modo claro y oscuro.
-- Adaptación a diferentes resoluciones.
-
-Evita especialmente:
-
-- Tarjetas genéricas repetidas sin una función clara.
-- Iconos excesivamente grandes.
-- Columnas que comprimen el contenido.
+- Elementos que se salen de la pantalla.
+- Textos cortados o superpuestos.
+- Botones demasiado pequeños o difíciles de pulsar.
+- Tarjetas con dimensiones inadecuadas.
 - Espacios vacíos innecesarios.
-- Preguntas y retroalimentaciones acumuladas verticalmente.
-- Elementos que parecen decorativos, pero no aportan a la experiencia.
-- Diseños que se sienten como una plantilla generada por IA.
+- Desbordamiento horizontal.
+- Modales, menús y paneles que no se adaptan.
+- Problemas de navegación y distribución.
+- Elementos interactivos que dejan de funcionar en pantallas pequeñas.
 
-No quiero que todos los componentes tengan la misma apariencia. Cada sección puede tener una composición diferente si su función lo requiere, pero debe conservar una identidad visual coherente.
+Adapta las composiciones según el tamaño de pantalla. No basta con reducir proporcionalmente todos los elementos: reorganiza las estructuras cuando sea necesario.
 
-Las animaciones deben ser discretas, útiles y no interferir con la lectura o la interacción.
+10. Criterios de implementación
 
-6. Condiciones técnicas
+Durante todo el trabajo:
 
-- Revisa los componentes existentes antes de crear otros nuevos.
-- Reutiliza la arquitectura actual cuando sea apropiado.
-- Evita duplicar código.
-- No elimines funcionalidades que no estén relacionadas con estos cambios.
-- Conserva los contenidos educativos y las referencias bibliográficas.
-- No alteres el seguimiento del progreso ni los mecanismos de evaluación.
-- Mantén la compatibilidad entre modo claro y oscuro.
-- Verifica que los botones y controles tengan una función real.
-- Comprueba que las actividades respondan correctamente a las selecciones.
-- Asegúrate de que la interfaz funcione en diferentes tamaños de pantalla.
-- No agregues servicios externos ni dependencias que generen costos innecesarios.
+- Conserva la identidad visual de Guardián Digital.
+- Mantén la coherencia entre módulos.
+- Prioriza la claridad, la usabilidad y la accesibilidad.
+- Evita textos innecesariamente extensos.
+- No agregues funcionalidades que no aporten valor.
+- No elimines contenidos educativos importantes.
+- No introduzcas servicios de pago ni dependencias innecesarias.
+- Conserva las funcionalidades que actualmente funcionan correctamente.
 
-7. Fase inicial: analizar y proponer antes de implementar
+11. Verificación final
 
-Antes de modificar el código:
+No te limites a realizar cambios visuales. Comprueba también el funcionamiento real.
 
-1. Lee "CLAUDE.md" y "MEJORAS_PVA.md".
-2. Revisa las skills de Figma Design, Emil Kowalski e Impeccable y sus instrucciones.
-3. Analiza la implementación actual de las referencias bibliográficas.
-4. Revisa los estilos de la actividad práctica del módulo 2, especialmente los colores y estados del modo claro.
-5. Examina cómo se muestran actualmente las señales y sus retroalimentaciones.
-6. Revisa la distribución del contenido cuando el menú lateral está abierto y cerrado.
-7. Analiza todos los casos del simulacro del módulo 4 y sus respectivas mecánicas.
-8. Identifica las preguntas que no tienen consecuencias funcionales o pedagógicas.
-9. Identifica los componentes y archivos que sería necesario modificar.
-10. Actualiza "MEJORAS_PVA.md" con estos nuevos requerimientos, sin eliminar las mejoras anteriores.
+Al terminar:
 
-Después, presenta una propuesta que explique:
+1. Ejecuta las verificaciones y pruebas disponibles.
+2. Comprueba la navegación entre módulos.
+3. Prueba ocultar y mostrar el menú varias veces.
+4. Verifica las nuevas actividades prácticas.
+5. Comprueba la generación y descarga del certificado.
+6. Verifica el acceso a Google Forms.
+7. Revisa las vistas móviles y de escritorio.
+8. Corrige los errores que aparezcan durante las pruebas.
 
-- Qué cambios visuales realizarías.
-- Cómo reorganizarías cada actividad.
-- Qué mecánicas propones para los distintos casos del simulacro.
-- Cómo evitarías que las retroalimentaciones y preguntas se acumulen verticalmente.
-- Qué archivos y componentes modificarías.
-- Cómo verificarías que las interacciones y evaluaciones sigan funcionando.
+No marques como completado algo que no hayas comprobado.
 
-No modifiques todavía el código. Primero presenta el análisis y la propuesta para que pueda revisarlos y aprobarlos.
+Al finalizar, presenta un resumen de los cambios realizados, los archivos modificados, las pruebas ejecutadas y cualquier problema que haya quedado pendiente.
 
-Una vez aprobada la propuesta, implementa los cambios de forma organizada y comprueba el funcionamiento de cada actividad.
+Importante: tienes autorización para implementar los cambios directamente. Antes de modificar, analiza cómo funciona el código existente y evita sobrescribir funcionalidades que ya están bien implementadas. Trabaja sobre la arquitectura actual en lugar de reconstruir innecesariamente la plataforma.
