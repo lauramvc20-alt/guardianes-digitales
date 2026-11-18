@@ -273,9 +273,9 @@
       {
         id: "kit",
         title: "Kit Digital",
-        keywords: ["kit", "kit digital", "recursos", "descargar", "guia pva", "infografia", "ruta de emergencia", "tutorial"],
+        keywords: ["kit", "kit digital", "recursos", "descargar", "guia pva", "infografia", "ruta de emergencia", "tips", "videotutorial", "tutorial"],
         answer: [
-          "El Kit Digital reúne cinco recursos para llevar contigo: Guía PVA, Infografía, Ruta de emergencia, Recomendaciones y Tutorial. Se abre al completar la evaluación y los enlaces llevan a las carpetas oficiales del proyecto."
+          "El Kit Digital reúne cinco recursos para llevar contigo: Guía PVA, Infografía, Ruta de emergencia, Tips y Videotutorial. Se abre al completar la evaluación y los enlaces llevan a las carpetas oficiales del proyecto."
         ],
         links: [{ label: "Kit Digital", to: "/kit" }],
         follow: ["certificado"]

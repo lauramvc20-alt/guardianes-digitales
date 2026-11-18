@@ -80,7 +80,7 @@
       minutes: 1,
       requires: ["evaluacion"],
       icon: "card",
-      blurb: "Guía, infografía, ruta, recomendaciones y tutorial."
+      blurb: "Guía, infografía, ruta, tips y videotutorial."
     },
     {
       id: "certificado",

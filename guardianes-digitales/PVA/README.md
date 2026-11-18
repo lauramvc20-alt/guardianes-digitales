@@ -177,8 +177,8 @@ alternativas:
 | Guía PVA | <https://drive.google.com/drive/folders/1auwRH2jWUAvJfmi-Dj7t2llkqyS4D1JB?usp=sharing> |
 | Infografía | <https://drive.google.com/drive/folders/1Y0H55qVHzQF54IAoJ8_aWVrWhGgQT44R?usp=drive_link> |
 | Ruta de emergencia | <https://drive.google.com/drive/folders/1H5rwjqXke1v2U0RQLbcZjVcXO2sQrawp?usp=drive_link> |
-| Recomendaciones | <https://drive.google.com/drive/folders/12uMG-vlo0c2nvoEGR6buyry8s-7_UbI2?usp=drive_link> |
-| Tutorial | <https://drive.google.com/drive/folders/1pPNm8w8X2cNsgAGGd7lWhCmtLL8jrB-6?usp=drive_link> |
+| Tips | <https://drive.google.com/drive/folders/12uMG-vlo0c2nvoEGR6buyry8s-7_UbI2?usp=drive_link> |
+| Videotutorial | <https://drive.google.com/drive/folders/1pPNm8w8X2cNsgAGGd7lWhCmtLL8jrB-6?usp=drive_link> |
 
 La plataforma no descarga ni copia archivos: solo enlaza a las carpetas oficiales
 en Google Drive, que se abren en una pestaña nueva.
