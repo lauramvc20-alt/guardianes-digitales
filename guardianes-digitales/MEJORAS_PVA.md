@@ -1,4 +1,4 @@
-1. xperiencia en dispositivos móviles: desplazamiento de la página
+1. Experiencia en dispositivos móviles: desplazamiento de la página
 
 Existe un problema en la versión móvil: al deslizar hacia arriba o hacia abajo, la página completa se desplaza y el contenido termina moviéndose hacia abajo, generando una experiencia de navegación incómoda.
 
