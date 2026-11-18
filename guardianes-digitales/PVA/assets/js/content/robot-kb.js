@@ -332,9 +332,9 @@
       {
         id: "encuesta-datos",
         title: "Encuesta de diagnóstico",
-        keywords: ["85", "20 personas", "cifras", "porcentaje", "resultados de la encuesta", "muestra", "colombia", "estadistica", "por que este curso", "encuesta de diagnostico", "diagnostico", "datos del proyecto", "estadisticas"],
+        keywords: ["20 personas", "cifras", "porcentaje", "resultados de la encuesta", "muestra", "colombia", "estadistica", "por que este curso", "encuesta de diagnostico", "diagnostico", "datos del proyecto", "estadisticas"],
         answer: [
-          "En la encuesta de diagnóstico (20 personas, Google Forms): el 85 % recibió mensajes o llamadas sospechosas (55 % de forma ocasional y 30 % frecuente), el 20 % fue víctima directa de una estafa y el 50 % conoce a un familiar o amigo cercano que lo fue. El smishing y el vishing concentran cada uno el 47,6 % de las elecciones de canal.",
+          "En la encuesta de diagnóstico (20 personas, Google Forms): el 20 % fue víctima directa de una estafa y el 50 % conoce a un familiar o amigo cercano que lo fue. El smishing y el vishing concentran cada uno el 47,6 % de las elecciones de canal.",
           "Ojo: es una muestra de conveniencia de 20 personas. Describe a quienes participaron y no representa estadísticamente a toda Colombia."
         ],
         follow: ["habitos", "origen"]
