@@ -1,91 +1,74 @@
-MODIFICACIÓN DE LA PLATAFORMA: AÑADIR LANDING PAGE SIN REDISEÑAR LA INTERFAZ ACTUAL
+PROMPT: MEJORAR LAS EXPLICACIONES Y EL CONTENIDO EDUCATIVO DE LOS MÓDULOS
 
-Quiero realizar una modificación puntual en mi proyecto PAUSA, VERIFICA Y ACTÚA: Sé un guardián digital.
+Necesito que revises y mejores las explicaciones de contenido de los módulos del curso “PAUSA, VERIFICA Y ACTÚA: Sé un guardián digital”.
 
-La instrucción más importante es que debes conservar la interfaz actual de la plataforma. NO quiero un rediseño, NO quiero una nueva propuesta visual y NO quiero que reemplaces el diseño que ya tengo.
+Actualmente, algunas explicaciones son repetitivas y se centran demasiado en mencionar o anticipar aspectos que después aparecen en la encuesta o evaluación. Quiero corregir esto para que el contenido educativo tenga mayor valor y realmente contribuya al aprendizaje del participante.
 
-Me gusta cómo está construida actualmente la interfaz y quiero mantenerla.
+1. Mejorar el enfoque de las explicaciones
 
-1. Incorporar una landing page
+Cada módulo debe desarrollar su temática de manera educativa, clara y útil.
 
-Añade una landing page que funcione como página de entrada al proyecto.
+Las explicaciones deben:
 
-Esta página debe presentar:
+- Aportar información nueva y relevante sobre el tema.
+- Profundizar en los conceptos necesarios para comprender cada contenido.
+- Explicar por qué ocurren determinadas situaciones y cuáles son sus riesgos.
+- Utilizar ejemplos cotidianos que faciliten la comprensión.
+- Enseñar a reconocer situaciones sospechosas y comprender cómo actuar.
+- Complementar los conocimientos de los módulos anteriores, sin repetirlos innecesariamente.
+- Mantener una conexión lógica entre los contenidos.
 
-- El nombre y la identidad de PAUSA, VERIFICA Y ACTÚA.
-- Una explicación breve del propósito del proyecto.
-- Una presentación visual atractiva de la prevención de estafas digitales.
-- El método PVA: PAUSA, VERIFICA y ACTÚA.
-- Una breve explicación de lo que encontrará el participante en el recorrido educativo.
-- Un botón destacado para comenzar la experiencia.
+2. Evitar las repeticiones relacionadas con la encuesta
 
-El botón debe dirigir al participante al panel principal que ya existe.
+No quiero que las explicaciones se conviertan en una preparación repetitiva para responder la encuesta o la evaluación.
 
-2. Incorporar una cinta horizontal animada
+Por tanto:
 
-Quiero añadir en el landing page una franja horizontal de extremo a extremo, tipo marquee o cinta de desplazamiento continuo.
+- No repetir constantemente frases como «esto te ayudará a responder la evaluación».
+- No anticipar las preguntas de la encuesta dentro de las explicaciones.
+- No convertir cada bloque de contenido en una pregunta.
+- No repetir la misma recomendación con diferentes palabras en varios módulos.
+- No incluir explicaciones cuyo único propósito sea recordar algo que ya se dijo.
+- No confundir el contenido educativo con las preguntas de evaluación.
 
-Debe:
+La encuesta debe servir para conocer la percepción del participante sobre el curso, mientras que la evaluación debe comprobar los conocimientos adquiridos. Ninguna de las dos debe determinar ni limitar la profundidad de las explicaciones.
 
-- Ocupar todo el ancho de la pantalla.
-- Desplazarse horizontalmente de manera continua y fluida.
-- Mantener una altura moderada.
-- Utilizar la paleta de colores que ya tiene la identidad visual del proyecto.
-- Integrarse con el diseño actual, sin parecer un elemento añadido de otra página.
+3. Mantener una estructura pedagógica
 
-Contenido sugerido:
+Cada módulo debe tener:
 
-«PAUSA ANTES DE RESPONDER» · «VERIFICA ANTES DE CONFIAR» · «ACTÚA PARA PROTEGERTE» · «TU SEGURIDAD DIGITAL IMPORTA».
+1. Una introducción breve que presente el tema.
+2. Una explicación clara y suficiente del contenido.
+3. Ejemplos o situaciones prácticas relacionadas con la vida cotidiana.
+4. Recomendaciones o aprendizajes concretos que aporten valor.
+5. Una transición natural hacia el siguiente contenido.
 
-La animación debe ser sutil, adaptarse a móviles y respetar la configuración de movimiento reducido del dispositivo.
+No es necesario que todos los módulos tengan exactamente la misma estructura si su temática requiere un tratamiento diferente.
 
-3. Conservar la interfaz existente
+4. Conservar el enfoque académico del proyecto
 
-Esta condición es obligatoria:
+El contenido debe mantener coherencia con el proyecto y con su propósito de prevención de estafas digitales, especialmente frente al smishing y el vishing.
 
-- No cambies el diseño del panel principal.
-- No cambies la estructura de los módulos.
-- No cambies la tipografía ni la paleta cromática actuales.
-- No cambies los botones, tarjetas, encabezados ni componentes existentes.
-- No reorganices las pantallas.
-- No sustituyas ilustraciones ni elementos gráficos.
-- No modifiques el diseño del Kit Digital, las actividades, las evaluaciones ni el certificado.
+El protocolo PVA debe conservar su significado:
 
-La landing page debe tomar como referencia el lenguaje visual de la interfaz actual para que parezca parte del mismo proyecto.
+- PAUSA: detener la interacción.
+- VERIFICA: corroborar únicamente por canales oficiales.
+- ACTÚA: aplicar prácticas seguras.
 
-No utilices la landing page como excusa para rediseñar las demás pantallas.
+No inventes conceptos, objetivos ni contenidos que contradigan el documento académico del proyecto. Tampoco agregues información por llenar espacio.
 
-4. Navegación y funcionamiento
+5. Condiciones para realizar los cambios
 
-La navegación debe quedar así:
+- Primero revisa todos los módulos y sus explicaciones actuales.
+- Identifica repeticiones, contenido superficial y explicaciones que no aportan valor.
+- Mejora la redacción y el desarrollo pedagógico.
+- Conserva las actividades prácticas y su funcionamiento.
+- No cambies las preguntas ni las respuestas de la evaluación.
+- No modifiques la encuesta de percepción.
+- No alteres el sistema de progreso ni los desbloqueos.
+- Conserva el diseño visual, la identidad gráfica y la mascota RO-BIT.
+- Mantén la navegación actual entre los bloques de contenido.
 
-1. La persona abre el enlace y encuentra la nueva landing page.
-2. Puede conocer brevemente el proyecto.
-3. Presiona «COMENZAR EXPERIENCIA».
-4. Ingresa al panel principal que ya existe.
-5. Continúa con el recorrido educativo habitual.
+IMPORTANTE: No quiero que simplemente cambies las palabras de las explicaciones existentes. Quiero que mejores su contenido para que cada módulo enseñe algo útil, tenga un propósito claro y aporte al aprendizaje.
 
-La landing page no debe interferir con el progreso, el almacenamiento local, los bloqueos de módulos ni ninguna funcionalidad existente.
-
-Si el participante ya tiene progreso guardado, debe conservarlo al ingresar.
-
-5. Implementación
-
-Antes de modificar archivos, revisa cómo está organizada la aplicación y cómo funciona actualmente la navegación.
-
-Reutiliza los componentes y estilos existentes siempre que sea posible.
-
-No dupliques componentes innecesariamente ni alteres la arquitectura del proyecto para introducir esta página.
-
-Verifica que:
-
-- La landing page sea la nueva entrada inicial.
-- El botón lleve al panel principal correcto.
-- Las rutas internas sigan funcionando.
-- El progreso guardado se conserve.
-- La cinta animada funcione correctamente.
-- La página se vea bien en escritorio y móviles.
-
-RESULTADO ESPERADO: la misma plataforma que tengo actualmente, con el mismo diseño y funcionalidades, pero con una landing page nueva y una cinta horizontal animada integrada en ella.
-
-No quiero que propongas otra interfaz. Implementa únicamente estos cambios.
+Antes de finalizar, verifica que no existan explicaciones repetidas entre módulos y que el contenido educativo no se limite a preparar al participante para contestar la encuesta.
