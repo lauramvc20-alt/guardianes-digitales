@@ -1,7 +1,6 @@
 /* ==========================================================================
    PVA · Kit Digital y encuesta
-   Los enlaces externos no se modifican
-   ni se generan direcciones alternativas.
+   Los recursos se sirven desde la propia plataforma (carpeta recursos/).
    ========================================================================== */
 (function (global) {
   "use strict";
@@ -11,12 +10,13 @@
   PVA.content.kit = {
     title: "Kit Digital «PAUSA, VERIFICA Y ACTÚA»",
     lede:
-      "Un paquete de recursos para llevar contigo y compartir. Puedes abrirlos " +
-      "cuando quieras: quedan disponibles en este navegador y en los enlaces " +
-      "oficiales.",
+      "Cinco recursos para consultar aquí mismo y llevar contigo: míralos sin salir " +
+      "del curso o descárgalos cuando quieras.",
     note:
-      "Los recursos abren en Google Drive, en una pestaña nueva. Son de acceso " +
-      "gratuito y no requieren registro en esta plataforma.",
+      "Los recursos se abren dentro de la plataforma y se pueden descargar. Son de " +
+      "acceso gratuito y no requieren registro.",
+    /* Los archivos viven en recursos/ (se sirven desde la propia plataforma). `id` es la clave del
+       progreso guardado: no se renombra aunque cambie el nombre visible. */
     resources: [
       {
         id: "guia",
@@ -24,11 +24,12 @@
         kind: "Guía preventiva y protocolo",
         icon: "guide",
         tone: "violet",
+        type: "pdf",
+        file: "recursos/Guía PVA.pdf",
+        meta: "PDF · 8 páginas · 1,4 MB",
         description:
-          "Documento descargable que profundiza el protocolo PAUSA (detener la " +
-          "interacción), VERIFICA (corroborar por canales oficiales) y ACTÚA " +
-          "(aplicar prácticas seguras).",
-        url: "https://drive.google.com/drive/folders/1auwRH2jWUAvJfmi-Dj7t2llkqyS4D1JB?usp=sharing"
+          "Protocolo PAUSA, VERIFICA Y ACTÚA paso a paso, con ejemplos de SMS y " +
+          "llamadas sospechosas y los hábitos que fortalecen tu seguridad."
       },
       {
         id: "infografia",
@@ -36,10 +37,12 @@
         kind: "Pieza visual de prevención",
         icon: "image",
         tone: "turq",
+        type: "pdf",
+        file: "recursos/Infografía.pdf",
+        meta: "PDF · 1 página · 1,5 MB",
         description:
-          "Resumen visual de las señales de alerta y las medidas preventivas frente " +
-          "a mensajes y llamadas fraudulentas.",
-        url: "https://drive.google.com/drive/folders/1Y0H55qVHzQF54IAoJ8_aWVrWhGgQT44R?usp=drive_link"
+          "Cómo activar la verificación en dos pasos (2FA) en cuatro pasos y qué " +
+          "tener en cuenta para que proteja de verdad tus cuentas."
       },
       {
         id: "ruta",
@@ -47,10 +50,12 @@
         kind: "Ficha de actuación inmediata",
         icon: "map",
         tone: "coral",
+        type: "pdf",
+        file: "recursos/Ruta de emergencia.pdf",
+        meta: "PDF · 1 página · 3,3 MB",
         description:
-          "Guía de tres pasos para actuar tras sufrir un engaño y cómo realizar una " +
-          "denuncia formal al CAI virtual de la Policía Nacional.",
-        url: "https://drive.google.com/drive/folders/1H5rwjqXke1v2U0RQLbcZjVcXO2sQrawp?usp=drive_link"
+          "Qué hacer si fuiste víctima de una estafa digital: detenerte y protegerte, " +
+          "conservar evidencias y denunciar ante el CAI Virtual de la Policía Nacional."
       },
       {
         id: "recomendaciones",
@@ -58,10 +63,12 @@
         kind: "Acciones preventivas",
         icon: "lightbulb",
         tone: "yellow",
+        type: "pdf",
+        file: "recursos/Recomendaciones.pdf",
+        meta: "PDF · 1 página · 3,4 MB",
         description:
-          "Consejos breves y concretos para evitar estafas digitales y proteger tus " +
-          "datos personales, listos para aplicar en tu día a día.",
-        url: "https://drive.google.com/drive/folders/12uMG-vlo0c2nvoEGR6buyry8s-7_UbI2?usp=drive_link"
+          "Ocho tips para protegerte de las estafas digitales: verificación en dos " +
+          "pasos, claves únicas, señales de alerta, datos personales y más."
       },
       {
         id: "tutorial",
@@ -69,10 +76,13 @@
         kind: "Video paso a paso",
         icon: "video",
         tone: "lavender",
+        type: "video",
+        file: "recursos/Tutorial.mp4",
+        duration: "Video · 0:28",
+        meta: "Video MP4 · 0:28 · 9,3 MB",
         description:
-          "Video que muestra paso a paso acciones preventivas concretas, como activar " +
-          "la autenticación en dos pasos (2FA).",
-        url: "https://drive.google.com/drive/folders/1pPNm8w8X2cNsgAGGd7lWhCmtLL8jrB-6?usp=drive_link"
+          "Video de menos de 30 segundos que muestra en cuatro pasos cómo activar " +
+          "la verificación en dos pasos en tus cuentas."
       }
     ]
   };

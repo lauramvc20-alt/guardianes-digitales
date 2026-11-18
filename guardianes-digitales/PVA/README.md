@@ -49,13 +49,15 @@ También sirve cualquier servidor estático (IIS, Live Server, Nginx, etc.).
 ```text
 PVA/
 ├─ index.html                 Shell: rail de navegación, topbar, avisos, modales
+├─ recursos/                  PDF y video del Kit Digital (originales)
 ├─ servir.ps1                 Servidor estático opcional para desarrollo
 ├─ README.md
 └─ assets/
    ├─ css/
    │  ├─ base.css             Tokens de color, tipografía, botones y utilidades
    │  ├─ shell.css            Estructura, rail, topbar, toasts, modales, responsive
-   │  └─ views.css            Estilos de cada vista, actividades y certificado
+   │  ├─ views.css            Estilos de cada vista, actividades y certificado
+   │  └─ viewer.css           Visor integrado de documentos y videos
    └─ js/
       ├─ core/
       │  ├─ utils.js          Escape HTML, iconos SVG, fechas, helpers de DOM
@@ -70,7 +72,8 @@ PVA/
       │  └─ kit.js            5 recursos del Kit y datos de la encuesta
       ├─ components/
       │  ├─ robot.js          RO-BIT con 6 poses SVG
-      │  └─ activities.js     Renderizado y validación de actividades
+      │  ├─ activities.js     Renderizado y validación de actividades
+      │  └─ viewer.js         Visor integrado de PDF y video del Kit
       ├─ views/
       │  ├─ dashboard.js      Panel del estudiante
       │  ├─ welcome.js        Bienvenida
@@ -169,19 +172,20 @@ se guarda y puede repetirse; el puntaje se muestra como «X de 5 correctas».
 
 ## 5. Kit Digital
 
-Los cinco enlaces son los definidos por el proyecto y no se generan direcciones
-alternativas:
+Los recursos se sirven desde la propia plataforma (carpeta `recursos/`). Cada tarjeta
+permite **verlos dentro del curso** y **descargarlos**; no se depende de Google Drive.
 
-| Recurso | Enlace |
-|---------|--------|
-| Guía PVA | <https://drive.google.com/drive/folders/1auwRH2jWUAvJfmi-Dj7t2llkqyS4D1JB?usp=sharing> |
-| Infografía | <https://drive.google.com/drive/folders/1Y0H55qVHzQF54IAoJ8_aWVrWhGgQT44R?usp=drive_link> |
-| Ruta de emergencia | <https://drive.google.com/drive/folders/1H5rwjqXke1v2U0RQLbcZjVcXO2sQrawp?usp=drive_link> |
-| Tips | <https://drive.google.com/drive/folders/12uMG-vlo0c2nvoEGR6buyry8s-7_UbI2?usp=drive_link> |
-| Videotutorial | <https://drive.google.com/drive/folders/1pPNm8w8X2cNsgAGGd7lWhCmtLL8jrB-6?usp=drive_link> |
+| Recurso | Archivo | Visualización |
+|---------|---------|---------------|
+| Guía PVA | `recursos/Guía PVA.pdf` | Visor integrado (8 páginas) |
+| Infografía | `recursos/Infografía.pdf` | Visor integrado |
+| Ruta de emergencia | `recursos/Ruta de emergencia.pdf` | Visor integrado |
+| Tips | `recursos/Recomendaciones.pdf` | Visor integrado |
+| Videotutorial | `recursos/Tutorial.mp4` | Reproductor HTML5 nativo y responsivo |
 
-La plataforma no descarga ni copia archivos: solo enlaza a las carpetas oficiales
-en Google Drive, que se abren en una pestaña nueva.
+Los documentos se dibujan con PDF.js (Mozilla, Apache-2.0), incluido en
+`assets/vendor/pdfjs/` y cargado solo al abrir un documento. Los archivos originales
+no se modifican.
 
 ## 6. Encuesta final
 
@@ -316,7 +320,7 @@ Puedes repetir estas pruebas desde una ventana privada o tras «Reiniciar recorr
   progreso si se borran los datos del navegador.
 - La encuesta se marca como completada al abrir el enlace; Google Forms no devuelve
   confirmación de envío a la plataforma.
-- La disponibilidad del Kit depende de los permisos de las carpetas de Google Drive.
+- Los recursos del Kit se sirven desde `recursos/`: si se quita un archivo, su tarjeta deja de funcionar.
 - El certificado es simbólico y no tiene validez oficial.
 - La plataforma es formativa: no analiza correos, SMS ni llamadas reales.
 - Las cifras provienen de una muestra de 20 personas y no son generalizables.

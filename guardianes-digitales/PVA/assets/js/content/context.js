@@ -18,7 +18,7 @@
         "de compraventa y coordinamos todo por mensajería. Esos mismos canales sirven para intentar engañarnos con " +
         "mensajes, llamadas, enlaces y suplantaciones de entidades conocidas, como falsas ofertas de empleo, ventas " +
         "fraudulentas o supuestos asesores de bancos y empresas de domicilios.",
-      stat: "En nuestra encuesta, el 75 % de las 20 personas usa billeteras digitales y el 35 % banca móvil.",
+      stat: "En nuestra encuesta, el 75 % de la muestra utiliza billeteras digitales y el 35 % banca móvil.",
       channels: [
         { icon: "wallet", label: "Billeteras digitales" },
         { icon: "bank", label: "Apps bancarias" },
@@ -42,8 +42,7 @@
       extra: "Además, el 50 % conoce a un familiar o amigo cercano que fue víctima: el 90 % de la muestra tiene alguna cercanía con las consecuencias del cibercrimen.",
       method:
         "Aclaración metodológica: es una encuesta aplicada a una muestra de conveniencia de 20 personas. " +
-        "Sus resultados describen a quienes participaron y no representan estadísticamente a toda Colombia. " +
-        "En algunas preguntas hubo 19 respuestas y en otras 20, y las preguntas sobre canales podían tener varias selecciones."
+        "Sus resultados describen a quienes participaron y no representan estadísticamente a toda Colombia."
     },
 
     why: {

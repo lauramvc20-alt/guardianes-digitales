@@ -177,7 +177,7 @@
         title: "Autenticación en dos pasos (2FA)",
         keywords: ["autenticacion en dos pasos", "dos pasos", "2fa", "doble factor", "dos factores", "autenticacion de dos factores", "verificacion en dos pasos", "autenticacion"],
         answer: [
-          "La autenticación en dos pasos (2FA) agrega una segunda verificación además de la contraseña. Actívala primero en tu correo y en tus cuentas bancarias: el correo suele ser la llave para recuperar el resto de tus servicios.",
+          "La autenticación en dos pasos (2FA) agrega una segunda verificación además de la contraseña. Actívala primero en el correo electrónico, ya que suele ser la llave para recuperar el resto de tus servicios si llegas a ser víctima.",
           "Prefiere una aplicación de autenticación cuando esté disponible y nunca compartas el código con nadie."
         ],
         links: [M3],
@@ -275,7 +275,7 @@
         title: "Kit Digital",
         keywords: ["kit", "kit digital", "recursos", "descargar", "guia pva", "infografia", "ruta de emergencia", "tips", "videotutorial", "tutorial"],
         answer: [
-          "El Kit Digital reúne cinco recursos para llevar contigo: Guía PVA, Infografía, Ruta de emergencia, Tips y Videotutorial. Se abre al completar la evaluación y los enlaces llevan a las carpetas oficiales del proyecto."
+          "El Kit Digital reúne cinco recursos para llevar contigo: Guía PVA, Infografía, Ruta de emergencia, Tips y Videotutorial. Se abre al completar la evaluación: puedes verlos dentro de la plataforma y descargarlos."
         ],
         links: [{ label: "Kit Digital", to: "/kit" }],
         follow: ["certificado"]
