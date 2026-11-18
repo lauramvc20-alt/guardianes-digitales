@@ -54,24 +54,24 @@
       },
       {
         id: "recomendaciones",
-        name: "Recomendaciones",
-        kind: "Llamado a la acción",
-        icon: "star",
+        name: "Tips",
+        kind: "Acciones preventivas",
+        icon: "lightbulb",
         tone: "yellow",
         description:
-          "Tarjeta digital con recomendaciones y una invitación a asumir un rol " +
-          "activo para ayudar a otras personas a proteger su información.",
+          "Consejos breves y concretos para evitar estafas digitales y proteger tus " +
+          "datos personales, listos para aplicar en tu día a día.",
         url: "https://drive.google.com/drive/folders/12uMG-vlo0c2nvoEGR6buyry8s-7_UbI2?usp=drive_link"
       },
       {
         id: "tutorial",
-        name: "Tutorial",
-        kind: "Tutorial visual",
-        icon: "play",
+        name: "Videotutorial",
+        kind: "Video paso a paso",
+        icon: "video",
         tone: "lavender",
         description:
-          "Paso a paso de acciones preventivas concretas, por ejemplo la activación " +
-          "de la autenticación en dos pasos (2FA).",
+          "Video que muestra paso a paso acciones preventivas concretas, como activar " +
+          "la autenticación en dos pasos (2FA).",
         url: "https://drive.google.com/drive/folders/1pPNm8w8X2cNsgAGGd7lWhCmtLL8jrB-6?usp=drive_link"
       }
     ]

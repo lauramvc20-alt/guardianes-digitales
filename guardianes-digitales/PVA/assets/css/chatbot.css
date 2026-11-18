@@ -1,8 +1,11 @@
 /* ==========================================================================
    PVA · Chat de RO-BIT
    ========================================================================== */
+/* El globo se posiciona a partir del botón (misma base + altura + separación): así el espacio
+   entre ambos se mantiene igual en escritorio, tablet y móvil. */
+:root { --rb-bottom: 64px; --rb-fab-h: 58px; --rb-gap: 14px; }
 .rb-fab {
-  position: fixed; right: 16px; bottom: 64px; z-index: 95;
+  position: fixed; right: 16px; bottom: var(--rb-bottom); z-index: 95; min-height: var(--rb-fab-h);
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.3rem 1rem 0.3rem 0.35rem;
   border-radius: 999px;
@@ -27,7 +30,7 @@ html[data-theme="light"] .rb-fab { background: var(--lt-card); color: var(--lt-i
 html[data-theme="light"] .rb-fab__robot { background: rgba(15, 155, 132, 0.14); }
 
 .rb-tip {
-  position: fixed; right: 20px; bottom: 124px; z-index: 94; max-width: 220px;
+  position: fixed; right: 22px; bottom: calc(var(--rb-bottom) + var(--rb-fab-h) + var(--rb-gap)); z-index: 94; max-width: 220px;
   padding: 0.55rem 0.8rem; border-radius: 14px 14px 4px 14px;
   background: #ffffff; color: #0f172a; font-size: 0.8rem; font-weight: 600;
   box-shadow: var(--shadow-md); opacity: 0; transform: translateY(6px);
@@ -107,8 +110,8 @@ html[data-theme="light"] .rb-form { border-color: rgba(27, 36, 56, 0.1); }
 html[data-theme="light"] .rb-form input { background: var(--lt-card); color: var(--lt-ink); border-color: rgba(27, 36, 56, 0.25); }
 
 @media (max-width: 640px) {
-  .rb-fab { bottom: 60px; padding-right: 0.35rem; }
-  .rb-tip { bottom: 116px; }
+  :root { --rb-bottom: 60px; --rb-gap: 12px; }
+  .rb-fab { padding-right: 0.35rem; }
   .rb-panel { right: 0; left: 0; bottom: 0; width: 100%; height: min(78vh, 600px); border-radius: 22px 22px 0 0; }
 }
 @media (prefers-reduced-motion: reduce) {

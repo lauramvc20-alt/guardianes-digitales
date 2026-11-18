@@ -35,3 +35,10 @@ Requisitos:
 - Asegúrate de que el ajuste sea responsivo y se mantenga en diferentes tamaños de pantalla.
 
 Antes de modificar, revisa cómo están posicionados actualmente ambos elementos y corrige el espaciado desde los estilos o contenedores correspondientes. No modifiques otros elementos de la interfaz.
+
+---
+
+## Ronda 7 (implementada)
+
+- Kit: «Recomendaciones» pasó a «Tips» (acciones preventivas concretas, sin tono de invitación ni de tarjeta promocional) y «Tutorial visual» a «Videotutorial». Nuevos iconos (bombilla, cámara), descripciones, README, chat de RO-BIT y avance. Se conservan los enlaces, los identificadores internos (el progreso guardado sigue válido) y la distribución equilibrada 3 + 2.
+- RO-BIT: el globo se posiciona a partir del botón mediante variables (`--rb-bottom`, `--rb-fab-h`, `--rb-gap`). Antes quedaba a 2 px en escritorio y se superponía 2 px en móvil; ahora hay 14 px (12 px en móvil) en todos los tamaños.
