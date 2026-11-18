@@ -93,14 +93,14 @@
         tone: "turq",
         type: "image",
         file: "recursos/Tarjeta.jpg",
-        meta: "Imagen JPG · 1,9 MB",
+        meta: "Imagen JPG · 1,8 MB",
         shareable: true,
         alt:
-          "Tarjeta «La seguridad digital también está en tus manos»: invita a compartir " +
-          "el curso con familiares, amigos y conocidos, con un código QR para escanear.",
+          "Tarjeta «La seguridad digital también está en tus manos»: invita a informarse, " +
+          "verificar antes de actuar y proteger los datos personales, con un código QR para escanear.",
         description:
-          "Comparte lo que aprendiste y ayuda a familiares, amigos y conocidos a " +
-          "reconocer posibles estafas digitales y proteger su información personal."
+          "Comparte este mensaje con familiares, amigos y conocidos, entre todos " +
+          "podemos construir una comunidad digital más segura."
       }
     ]
   };
