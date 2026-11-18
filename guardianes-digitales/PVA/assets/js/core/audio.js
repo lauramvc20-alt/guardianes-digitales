@@ -1,13 +1,15 @@
 /* ==========================================================================
    PVA · Sonidos opcionales (sintetizados, sin archivos externos)
-   Nunca se reproduce audio automáticamente: requiere acción del usuario.
+   El sonido está activo por defecto, pero el navegador solo permite reproducir tras una
+   interacción: el contexto de audio se prepara en el primer toque o tecla (sin emitir nada)
+   y los efectos suenan únicamente como respuesta a una acción. No hay sonidos continuos.
    ========================================================================== */
 (function (global) {
   "use strict";
 
   var PVA = global.PVA;
   var ctx = null;
-  var enabled = false;
+  var enabled = true;
 
   function ensureContext() {
     if (ctx) return ctx;
@@ -49,8 +51,22 @@
     scores[name].forEach(function (t) { tone(t[0], t[1], t[2], t[3], t[4]); });
   }
 
+  /* Prepara el audio en la primera interacción real; no emite ningún sonido. */
+  function unlock() {
+    if (!enabled) return;
+    var audio = ensureContext();
+    if (audio && audio.state === "suspended" && audio.resume) { try { audio.resume(); } catch (e) {} }
+  }
+  ["pointerdown", "touchend", "keydown", "click"].forEach(function (evt) {
+    global.addEventListener(evt, function once() {
+      unlock();
+      if (ctx && ctx.state === "running") global.removeEventListener(evt, once, true);
+    }, true);
+  });
+
   function setEnabled(value) {
     enabled = !!value;
+    if (enabled) unlock();
   }
 
   function isEnabled() { return enabled; }

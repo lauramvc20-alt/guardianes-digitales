@@ -116,7 +116,8 @@
       activity: { m1: {}, m2: {}, m3: {}, m4: {} },
       quiz: { answers: [], score: null, total: null, completedAt: null, attempts: 0 },
       participant: { name: "" },
-      sound: false,
+      sound: true,
+      soundChosen: false,
       createdAt: null,
       updatedAt: null
     };
@@ -131,7 +132,10 @@
     base.activity = Object.assign(base.activity, raw.activity || {});
     base.quiz = Object.assign(base.quiz, raw.quiz || {});
     base.participant = Object.assign(base.participant, raw.participant || {});
-    base.sound = !!raw.sound;
+    /* Una preferencia solo cuenta si el participante la eligió; un «false» heredado del antiguo
+       valor por defecto no debe silenciar la plataforma. */
+    base.soundChosen = !!raw.soundChosen;
+    base.sound = base.soundChosen ? !!raw.sound : true;
     base.createdAt = raw.createdAt || null;
     base.updatedAt = raw.updatedAt || null;
 
@@ -250,9 +254,10 @@
   }
 
   function reset() {
-    var sound = state.sound;
+    var sound = state.sound, chosen = state.soundChosen;
     state = emptyState();
     state.sound = sound;
+    state.soundChosen = chosen;
     state.createdAt = new Date().toISOString();
     save("reset");
     return state;
@@ -265,6 +270,7 @@
 
   function setSound(enabled) {
     state.sound = !!enabled;
+    state.soundChosen = true;
     save("sound");
   }
 

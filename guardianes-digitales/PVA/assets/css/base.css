@@ -310,7 +310,9 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 1.75rem 0; }
 ::-webkit-scrollbar-thumb { background: rgba(148, 168, 214, 0.22); border-radius: 999px; border: 3px solid var(--night-900); }
 ::-webkit-scrollbar-thumb:hover { background: rgba(148, 168, 214, 0.34); }
 html { scrollbar-color: rgba(148, 168, 214, 0.3) var(--night-900); }
-html[data-theme="light"] { scrollbar-color: rgba(15, 23, 42, 0.3) #e7eef8; }
-html[data-theme="light"] ::-webkit-scrollbar-track { background: #e7eef8; }
-html[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(15, 23, 42, 0.26); border-color: #e7eef8; }
-html[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(15, 23, 42, 0.4); }
+html[data-theme="light"] { scrollbar-color: rgba(27, 36, 56, 0.3) #e7eef8; }
+html[data-theme="light"] ::-webkit-scrollbar-track { background: var(--lt-bg-2); }
+html[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(27, 36, 56, 0.26); border-color: #e7eef8; }
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(27, 36, 56, 0.4); }
+/* Los destinos de foco programático (título de vista, panel) no son controles: sin anillo. */
+[tabindex="-1"]:focus, [tabindex="-1"]:focus-visible { outline: none; }

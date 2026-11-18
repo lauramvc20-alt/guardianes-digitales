@@ -13,8 +13,7 @@
   var railProgress = document.getElementById("railProgress");
   var menuBtn = document.getElementById("menuBtn");
   var scrim = document.getElementById("scrim");
-  var soundBtn = document.getElementById("soundBtn");
-  var soundIcon = document.getElementById("soundIcon");
+  var soundBtns = Array.prototype.slice.call(document.querySelectorAll("[data-sound-toggle]"));
   var resetBtn = document.getElementById("resetBtn");
   var railToggle = document.getElementById("railToggle");
   var railToggleIcon = document.getElementById("railToggleIcon");
@@ -126,12 +125,14 @@
   }
 
   function renderSound() {
-    if (!soundBtn || !soundIcon) return;
     var on = !!store.state().sound;
-    soundIcon.innerHTML = U.icon(on ? "soundOn" : "soundOff");
-    soundBtn.setAttribute("aria-pressed", on ? "true" : "false");
-    soundBtn.setAttribute("aria-label", on ? "Silenciar sonidos" : "Activar sonidos");
-    soundBtn.setAttribute("title", on ? "Sonido activado: pulsa para silenciar" : "Sonido desactivado: pulsa para activar");
+    soundBtns.forEach(function (btn) {
+      var icon = btn.querySelector("[data-sound-icon]");
+      if (icon) icon.innerHTML = U.icon(on ? "soundOn" : "soundOff");
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.setAttribute("aria-label", on ? "Silenciar sonidos" : "Activar sonidos");
+      btn.setAttribute("title", on ? "Sonido activado: pulsa para silenciar" : "Sonido desactivado: pulsa para activar");
+    });
   }
 
   function openMenu() {
@@ -212,15 +213,15 @@
       if (global.innerWidth > 940) closeMenu(false);
     });
 
-    if (soundBtn) {
-      soundBtn.addEventListener("click", function () {
+    soundBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
         var next = !store.state().sound;
         store.setSound(next);
         PVA.audio.setEnabled(next);
         renderSound();
         if (next) PVA.audio.play("tap");
       });
-    }
+    });
 
     if (resetBtn) {
       resetBtn.addEventListener("click", function () {
