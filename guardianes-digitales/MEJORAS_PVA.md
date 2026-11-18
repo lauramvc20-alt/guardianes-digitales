@@ -65,3 +65,11 @@ Después de implementar:
 6. Confirma que el modo oscuro no haya sufrido cambios visuales no deseados.
 
 No simules pruebas que no hayas ejecutado. Informa qué dispositivos o tamaños de pantalla utilizaste y qué aspectos no pudiste verificar.
+
+---
+
+## Ronda 6 (implementada)
+
+1. **Desplazamiento en móvil.** Causa: una regla del menú lateral (`position: sticky; width: 292px`, declarada después del bloque responsive) pisaba el panel fijo. En móvil el menú quedaba dentro del flujo, de 100vh, y empujaba el contenido más de una pantalla; además `scrollToTop` bajaba la página sola. Corregido en `shell.css`: el panel móvil vuelve a ser fijo (z-index sobre el telón), con scroll interno propio y sin `overflow: hidden` global. En horizontal y pantallas bajas el panel entero se desplaza como una columna.
+2. **Sonido activo por defecto.** `store.js` guarda `soundChosen`: solo una elección del participante cuenta; el antiguo `false` heredado ya no silencia. El audio se prepara en el primer toque y solo suena como respuesta a acciones. Botón de sonido también en la barra superior; ambos sincronizados.
+3. **Modo claro «Bruma».** Tokens `--lt-*` centralizados en `views.css` (fondos grises azulados, tinta marino, violeta principal, verde azulado secundario, estados éxito/advertencia/error/información) y 228 declaraciones antiguas remapeadas a esos tokens. Estados hover, focus, active y disabled definidos. Modo oscuro sin cambios.

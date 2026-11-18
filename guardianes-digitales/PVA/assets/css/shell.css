@@ -382,7 +382,7 @@ body.nav-open { overflow: hidden; }
 
 /* ---------------- Panel lateral ocultable (escritorio) ---------------- */
 .rail__brand { padding-right: 2.6rem; }
-.rail { position: sticky; width: 292px; justify-self: start; }
+@media (min-width: 941px) { .rail { position: sticky; width: 292px; justify-self: start; } }
 .rail__collapse {
   position: absolute;
   top: 1.45rem; right: 0.9rem;
@@ -414,8 +414,8 @@ body.nav-open { overflow: hidden; }
 .rail-open[hidden] { display: none; }
 .rail-open svg { width: 18px; height: 18px; }
 .rail-open:hover { border-color: var(--turq); }
-html[data-theme="light"] .rail-open { background: #ffffff; color: #0f172a; border-color: rgba(15, 23, 42, 0.25); }
-html[data-theme="light"] .rail__collapse { color: #0f172a; border-color: rgba(15, 23, 42, 0.2); background: rgba(15, 23, 42, 0.04); }
+html[data-theme="light"] .rail-open { background: var(--lt-card); color: var(--lt-ink); border-color: rgba(27, 36, 56, 0.25); }
+html[data-theme="light"] .rail__collapse { color: var(--lt-ink); border-color: rgba(27, 36, 56, 0.2); background: rgba(27, 36, 56, 0.04); }
 @keyframes railOpenIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
 
 @media (min-width: 941px) {
@@ -436,4 +436,29 @@ html[data-theme="light"] .rail__collapse { color: #0f172a; border-color: rgba(15
 }
 @media (prefers-reduced-motion: reduce) {
   .app, .rail, .rail-open { transition: none !important; animation: none !important; }
+}
+
+/* ---------------- Desplazamiento en móvil ----------------
+   En móvil el menú es un panel fijo fuera del flujo: no ocupa una fila del grid ni empuja el contenido.
+   La página se desplaza como un solo documento (sin contenedores con scroll propio); el panel del menú,
+   los diálogos y los registros de chat tienen su propio scroll interno. */
+@media (max-width: 940px) {
+  .rail { position: fixed; inset: 0 auto 0 0; z-index: 205; width: min(320px, 86vw); height: 100vh; height: 100dvh; overscroll-behavior: contain; }
+  .app { display: block; min-height: 0; }
+  .shell { min-height: 100vh; min-height: 100dvh; }
+  body { background-attachment: scroll; }
+  .modal { overscroll-behavior: contain; }
+}
+html { overscroll-behavior-y: none; }
+
+.topbar__sound { margin: -7px 0 -7px auto; width: 34px; height: 34px; flex: none; position: relative; }
+.topbar__sound::after { content: ""; position: absolute; inset: -6px; }
+.topbar__sound svg { width: 15px; height: 15px; }
+
+/* Móvil en horizontal o pantallas bajas: todo el panel del menú se desplaza como una sola columna,
+   para que los enlaces no queden en una franja diminuta entre la cabecera y el pie. */
+@media (max-width: 940px) and (max-height: 600px) {
+  .rail { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .rail__nav { flex: none; overflow: visible; }
+  .rail__foot { flex: none; }
 }
