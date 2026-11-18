@@ -136,6 +136,31 @@
     });
   }
 
+  /* ---------- Imagen ---------- */
+  function renderImage(state, res) {
+    state.meta.textContent = "Imagen";
+    state.body.innerHTML =
+      '<div class="viewer__stage"><img class="viewer__img" src="' + U.esc(fileUrl(res.file)) + '" alt="' + U.esc(res.alt || res.name) + '" /></div>';
+    var img = state.body.querySelector("img");
+    img.addEventListener("error", function () { if (active === state) state.body.innerHTML = failureHtml(res); });
+  }
+
+  /* Compartir: solo se ofrece si el dispositivo permite compartir archivos (Web Share API). */
+  function canShareFile(res) {
+    if (!res.shareable || !global.navigator || !navigator.share || !navigator.canShare) return false;
+    try {
+      return navigator.canShare({ files: [new File([""], "tarjeta.jpg", { type: "image/jpeg" })] });
+    } catch (e) { return false; }
+  }
+
+  function shareFile(res) {
+    return fetch(fileUrl(res.file)).then(function (r) { return r.blob(); }).then(function (blob) {
+      var ext = (res.file.match(/\.(\w+)$/) || [])[1] || "jpg";
+      var file = new File([blob], res.name + "." + ext, { type: blob.type || "image/jpeg" });
+      return navigator.share({ files: [file], title: res.name });
+    }).catch(function (e) { if (!e || e.name !== "AbortError") PVA.ui.toast("No se pudo compartir. Puedes descargar la tarjeta.", "info", 4200); });
+  }
+
   /* ---------- Video ---------- */
   function renderVideo(state, res) {
     state.meta.textContent = res.duration || "Video";
@@ -164,6 +189,7 @@
       '<div class="viewer__bar">' +
         '<div class="viewer__head"><h2 id="viewerTitle" class="viewer__title">' + U.esc(res.name) + "</h2>" +
         '<span class="viewer__meta" data-viewer-meta></span></div>' +
+        (canShareFile(res) ? '<button class="btn btn--ghost viewer__share" type="button" data-viewer-share>' + U.icon("share") + "<span>Compartir</span></button>" : "") +
         '<a class="btn viewer__dl" href="' + U.esc(fileUrl(res.file)) + '" download data-viewer-download>' + U.icon("download") + "<span>Descargar</span></a>" +
         '<button class="icon-btn viewer__close" type="button" data-viewer-close aria-label="Cerrar visor">' + U.icon("x") + "</button>" +
       "</div>" +
@@ -184,13 +210,16 @@
     document.addEventListener("keydown", state.onKey, true);
     root.addEventListener("click", function (e) {
       if (e.target.closest("[data-viewer-close]")) close();
+      if (e.target.closest("[data-viewer-share]")) shareFile(res);
       var dl = e.target.closest("[data-viewer-download]");
       if (dl && res.onDownload) res.onDownload();
     });
     active = state;
     root.querySelector("[data-viewer-close]").focus({ preventScroll: true });
 
-    if (res.type === "video") renderVideo(state, res); else renderPdf(state, res);
+    if (res.type === "video") renderVideo(state, res);
+    else if (res.type === "image") renderImage(state, res);
+    else renderPdf(state, res);
   }
 
   PVA.viewer = { open: open, close: close };

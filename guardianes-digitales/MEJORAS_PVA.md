@@ -93,3 +93,11 @@ Antes de terminar, comprueba que:
 - La plataforma continúa funcionando correctamente en computador y celular.
 
 Realiza únicamente estos cambios. No aproveches esta actualización para rediseñar, reorganizar o modificar otras partes de la plataforma.
+
+---
+
+## Ronda 9 (implementada)
+
+- **Llamado a la acción:** sexto recurso del Kit con `recursos/Tarjeta.jpg`, título exacto «Llamado a la acción» y la descripción indicada. Visor de imagen, descarga y «Compartir» solo en dispositivos que admiten compartir archivos (sin botones sin función).
+- **Video:** `recursos/Video.mp4` reemplaza por completo al anterior (`Tutorial.mp4` se eliminó). Título «Video»; descripción según su contenido real (comprobante de pago, encuesta que pide datos, llamada urgente de un familiar; pausa, verifica y actúa). Se conserva el reproductor.
+- **Kit:** seis recursos en el orden pedido, tarjetas idénticas (3 columnas en escritorio, 2 en tablet, 1 en móvil). Se conservó la clave interna `tutorial` para no alterar el progreso guardado. Textos de «cinco recursos» actualizados (RO-BIT, pantalla final, README).

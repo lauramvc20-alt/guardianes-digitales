@@ -3,8 +3,9 @@
    ========================================================================== */
 
 /* ---- Tarjetas del Kit: ver y descargar ---- */
-.kit-card__file { font-size: 0.76rem !important; color: var(--muted-2) !important; margin: -0.15rem 0 0 !important; flex: 0 0 auto !important; }
-.kit-card__actions { display: flex; gap: 0.5rem; margin-top: auto; }
+.kit-card__file { font-size: 0.76rem !important; color: var(--muted-2) !important; margin: auto 0 0 !important; padding-top: 0.5rem; flex: 0 0 auto !important; }
+.kit-card__actions { display: flex; gap: 0.5rem; margin-top: 0; }
+.kit-grid .kit-card p:not(.kit-card__kind):not(.kit-card__file) { flex: 0 0 auto; }
 .kit-card__actions .btn { flex: 1 1 0; max-width: none; min-height: 44px; justify-content: center; white-space: nowrap; }
 .kit-grid .kit-card .kit-card__actions .btn { align-self: auto; margin-top: 0; }
 .kit-card__seen { color: var(--turq); display: inline-flex; align-items: center; gap: 0.3rem; }
@@ -88,3 +89,25 @@ html[data-theme="light"] .viewer__meta { color: var(--lt-muted-2); }
 html[data-theme="light"] .kit-card__file { color: var(--lt-muted-2) !important; }
 html[data-theme="light"] .kit-card__seen { color: var(--lt-ok); }
 html[data-theme="light"] .viewer__loading, html[data-theme="light"] .viewer__msg { color: var(--lt-ink-2); }
+
+/* Imagen (tarjeta) */
+.viewer__img {
+  display: block;
+  max-width: min(100%, 1100px);
+  max-height: calc(100vh - 7.5rem); max-height: calc(100dvh - 7.5rem);
+  width: auto; height: auto;
+  border-radius: 10px;
+  box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.65);
+  background: #fff;
+}
+.viewer__share { flex: none; min-height: 40px; max-width: none; }
+.viewer__share svg { width: 15px; height: 15px; }
+@media (max-height: 520px) { .viewer__img { max-height: calc(100dvh - 5.2rem); } }
+@media (max-width: 520px) {
+  .viewer__share span { display: none; }
+  .viewer__share { width: 40px; height: 40px; padding: 0; border-radius: 12px; }
+}
+html[data-theme="light"] .viewer__img { box-shadow: var(--lt-shadow); border: 1px solid var(--lt-line); }
+
+/* El espacio sobrante de la tarjeta queda entre la descripción y el pie (formato + botones), no bajo el título. */
+.kit-grid .kit-card .kit-card__kind { flex: 0 0 auto; }

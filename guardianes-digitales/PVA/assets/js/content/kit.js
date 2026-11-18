@@ -10,7 +10,7 @@
   PVA.content.kit = {
     title: "Kit Digital «PAUSA, VERIFICA Y ACTÚA»",
     lede:
-      "Cinco recursos para consultar aquí mismo y llevar contigo: míralos sin salir " +
+      "Seis recursos para consultar aquí mismo y llevar contigo: míralos sin salir " +
       "del curso o descárgalos cuando quieras.",
     note:
       "Los recursos se abren dentro de la plataforma y se pueden descargar. Son de " +
@@ -45,6 +45,21 @@
           "tener en cuenta para que proteja de verdad tus cuentas."
       },
       {
+        id: "tutorial", /* clave interna del progreso guardado: no se renombra aunque cambie el nombre visible */
+        name: "Video",
+        kind: "Prácticas seguras",
+        icon: "video",
+        tone: "lavender",
+        type: "video",
+        file: "recursos/Video.mp4",
+        meta: "Video MP4 · 0:53 · 16,0 MB",
+        duration: "Video · 0:53",
+        description:
+          "Todo se puede falsificar: un comprobante de pago, una encuesta que pide " +
+          "tus datos y una llamada urgente de un familiar, con el mismo reflejo ante " +
+          "todas: pausa, verifica por tu cuenta y actúa."
+      },
+      {
         id: "ruta",
         name: "Ruta de emergencia",
         kind: "Ficha de actuación inmediata",
@@ -71,18 +86,21 @@
           "pasos, claves únicas, señales de alerta, datos personales y más."
       },
       {
-        id: "tutorial",
-        name: "Videotutorial",
-        kind: "Video paso a paso",
-        icon: "video",
-        tone: "lavender",
-        type: "video",
-        file: "recursos/Tutorial.mp4",
-        duration: "Video · 0:28",
-        meta: "Video MP4 · 0:28 · 9,3 MB",
+        id: "llamado",
+        name: "Llamado a la acción",
+        kind: "Tarjeta para compartir",
+        icon: "share",
+        tone: "turq",
+        type: "image",
+        file: "recursos/Tarjeta.jpg",
+        meta: "Imagen JPG · 1,9 MB",
+        shareable: true,
+        alt:
+          "Tarjeta «La seguridad digital también está en tus manos»: invita a compartir " +
+          "el curso con familiares, amigos y conocidos, con un código QR para escanear.",
         description:
-          "Video de menos de 30 segundos que muestra en cuatro pasos cómo activar " +
-          "la verificación en dos pasos en tus cuentas."
+          "Comparte lo que aprendiste y ayuda a familiares, amigos y conocidos a " +
+          "reconocer posibles estafas digitales y proteger su información personal."
       }
     ]
   };

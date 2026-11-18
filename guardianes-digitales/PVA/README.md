@@ -69,7 +69,7 @@ PVA/
       │  ├─ course.js         Bienvenida, módulos 1–3 y metadatos del curso
       │  ├─ simulations.js    Tres escenarios del módulo 4
       │  ├─ quiz.js           Exactamente 5 preguntas de evaluación
-      │  └─ kit.js            5 recursos del Kit y datos de la encuesta
+      │  └─ kit.js            6 recursos del Kit y datos de la encuesta
       ├─ components/
       │  ├─ robot.js          RO-BIT con 6 poses SVG
       │  ├─ activities.js     Renderizado y validación de actividades
@@ -145,7 +145,7 @@ persistido y, cuando corresponde, desbloquea la siguiente etapa.
   y sus retroalimentaciones se redactaron desde los conceptos del documento.
 - **Sin nota mínima:** la evaluación se completa al responder las cinco preguntas.
   El objetivo es formativo; el Kit se desbloquea con cualquier puntaje.
-- **Kit:** se marca revisado al pulsar el botón de continuar, sin obligar a abrir los 5 recursos.
+- **Kit:** se marca revisado al pulsar el botón de continuar, sin obligar a abrir los 6 recursos.
 - **Encuesta:** se marca completada al abrir el enlace externo. Es independiente del puntaje.
 - **Certificado:** reconocimiento simbólico, no una acreditación académica oficial.
 
@@ -179,11 +179,12 @@ permite **verlos dentro del curso** y **descargarlos**; no se depende de Google 
 |---------|---------|---------------|
 | Guía PVA | `recursos/Guía PVA.pdf` | Visor integrado (8 páginas) |
 | Infografía | `recursos/Infografía.pdf` | Visor integrado |
+| Video | `recursos/Video.mp4` | Reproductor HTML5 nativo y responsivo |
 | Ruta de emergencia | `recursos/Ruta de emergencia.pdf` | Visor integrado |
 | Tips | `recursos/Recomendaciones.pdf` | Visor integrado |
-| Videotutorial | `recursos/Tutorial.mp4` | Reproductor HTML5 nativo y responsivo |
+| Llamado a la acción | `recursos/Tarjeta.jpg` | Visor de imagen; «Compartir» donde el dispositivo lo permite |
 
-Los documentos se dibujan con PDF.js (Mozilla, Apache-2.0), incluido en
+Los documentos PDF se dibujan con PDF.js (Mozilla, Apache-2.0), incluido en
 `assets/vendor/pdfjs/` y cargado solo al abrir un documento. Los archivos originales
 no se modifican.
 
