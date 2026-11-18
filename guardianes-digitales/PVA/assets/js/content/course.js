@@ -25,10 +25,6 @@
       "Vas a recorrer una experiencia breve y práctica: no una clase teórica, sino " +
       "un espacio para decidir, equivocarte sin riesgo y aprender a reconocer un " +
       "engaño por SMS o llamada antes de responder.",
-    intro:
-      "El smishing y el vishing afectan a quienes usan billeteras digitales, banca móvil, " +
-      "redes sociales y plataformas de compraventa. El 85 % de las 20 personas consultadas " +
-      "en la encuesta diagnóstica había recibido mensajes o llamadas sospechosas.",
     goals: [
       "Reconocer señales de smishing (mensajes de texto y mensajería instantánea).",
       "Identificar intentos de vishing (llamadas telefónicas y clonación de voz).",

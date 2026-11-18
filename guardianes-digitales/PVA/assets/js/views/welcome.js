@@ -37,7 +37,7 @@
           "</div>" +
           "<h1>" + U.esc(W.title) + "</h1>" +
           '<p class="lede">' + U.esc(W.lede) + "</p>" +
-          '<p class="welcome-hero__intro">' + U.esc(W.intro) + "</p>" +
+          (W.intro ? '<p class="welcome-hero__intro">' + U.esc(W.intro) + "</p>" : "") +
           '<div class="hero__cta">' +
             '<button class="btn" type="button" data-start>' +
               U.esc(done ? "Ir al Módulo 1" : W.start) + " " + U.icon("arrowRight") +
