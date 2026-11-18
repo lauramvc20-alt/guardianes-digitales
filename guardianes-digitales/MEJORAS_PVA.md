@@ -1,86 +1,95 @@
-Realiza los siguientes ajustes en la plataforma Guardián Digital: PAUSA, VERIFICA Y ACTÚA. Antes de modificar, revisa la estructura actual del proyecto y utiliza las skills instaladas que sean pertinentes para mantener la calidad del diseño y la implementación.
+PROMPT: ACTUALIZAR EL CURSO Y LOS RECURSOS DEL KIT DIGITAL
 
-1. Corrección de contenido
+Necesito realizar dos modificaciones en la plataforma educativa existente del proyecto “PAUSA, VERIFICA Y ACTÚA: Sé un guardián digital”.
 
-Realiza los siguientes cambios de texto:
+Antes de modificar el código, revisa la estructura actual del proyecto, identifica dónde están implementados los recursos del Kit Digital y cómo se presentan dentro del curso.
 
-- Cambiar: «En nuestra encuesta, el 75 % de la muestra utiliza billeteras digitales y el 35 % banca móvil».
-- Quitar por completo: «En algunas preguntas hubo 19 respuestas y en otras 20, y las preguntas sobre canales podían tener varias selecciones».
-- Cambiar: «Actívala primero en el correo electrónico, ya que suele ser la llave para recuperar el resto de tus servicios si llegas a ser víctima».
+IMPORTANTE SOBRE LOS ARCHIVOS: Todos los archivos necesarios para estos cambios se encuentran en la carpeta llamada "recursos" del proyecto. Debes localizar allí los archivos correspondientes y utilizarlos directamente. No necesitas solicitarme que los vuelva a adjuntar.
 
-Conserva el sentido de los textos y verifica que los cambios se reflejen en todos los lugares donde aparezcan.
+No reconstruyas la plataforma desde cero. Trabaja sobre la implementación existente y conserva su diseño, identidad visual, funcionalidades y progreso del estudiante.
 
-2. Corregir navegación hacia el certificado desde el Kit Digital
+1. Agregar el recurso «Llamado a la acción»
 
-En la vista de escritorio visualizada desde un celular, al ingresar al Kit Digital y pulsar el botón «Ir al certificado», la plataforma desplaza al usuario hasta el inicio de toda la página en lugar de llevarlo a la sección del certificado.
+Actualmente falta incorporar el sexto recurso del Kit Digital: el llamado a la acción.
 
-Revisa el comportamiento de navegación y corrige el destino del botón. Debe dirigir correctamente a la sección del certificado, independientemente del dispositivo o tamaño de pantalla.
+En la carpeta "recursos" encontrarás el archivo llamado exactamente "Tarjeta". Este es el diseño final que debes utilizar.
 
-Verifica que funcione tanto en la vista de escritorio como en la versión móvil.
+Requisitos de integración:
 
-3. Visualización nativa de los recursos del Kit Digital
+- Incorporar el archivo "Tarjeta" al apartado del Kit Digital.
+- Crear un espacio para este recurso con la misma estructura, dimensiones, distribución y estilo visual que tienen los otros cinco recursos.
+- Utilizar exactamente el título: Llamado a la acción.
+- Agregar una descripción breve que explique su propósito.
+- Permitir visualizar la tarjeta y, si es posible, descargarla o compartirla.
+- Mantener la coherencia visual con los demás recursos.
+- No crear una sección independiente ni colocar la tarjeta fuera del Kit Digital.
 
-Ya no quiero que los recursos del Kit Digital dependan de Google Drive para su visualización.
+Descripción sugerida:
 
-Modifica la implementación para que los recursos puedan visualizarse directamente dentro de la plataforma, sin tener que abrir Google Drive ni salir del curso.
+“Comparte lo que aprendiste y ayuda a familiares, amigos y conocidos a reconocer posibles estafas digitales y proteger su información personal”.
+
+El recurso debe transmitir la importancia de compartir los conocimientos adquiridos y promover la prevención de las estafas digitales en el entorno cercano.
+
+2. Reemplazar el video actual
+
+Actualmente, el recurso audiovisual del curso explica el procedimiento para activar la autenticación en dos pasos (2FA). Ese contenido debe retirarse porque ya está explicado en la infografía del Kit Digital.
+
+En la carpeta "recursos" encontrarás el nuevo archivo llamado exactamente "Video". Debes utilizar ese archivo para reemplazar el video actual.
 
 Requisitos:
 
-- Los documentos deben contar con un visor integrado en la plataforma.
-- Debe existir una opción para descargar cada recurso.
-- Los videos deben reproducirse mediante un reproductor nativo integrado en la plataforma.
-- El reproductor debe tener un diseño responsivo y adaptarse correctamente a celulares, tabletas y computadores.
-- Mantén una experiencia de navegación sencilla y coherente con la identidad visual del proyecto.
-- Evita que los documentos o videos se corten, desborden sus contenedores o generen problemas de desplazamiento.
-- Revisa cómo están almacenados actualmente los archivos y adapta la solución para que los recursos se sirvan desde la propia plataforma o desde una ubicación compatible con su visualización integrada. No mantengas Google Drive como requisito para acceder a ellos.
+- Localizar el archivo "Video" dentro de la carpeta "recursos".
+- Reemplazar el video actual por este nuevo archivo.
+- No conservar el video anterior ni presentarlo como una segunda opción.
+- Cambiar el título del recurso a: Video.
+- Escribir una descripción breve que corresponda al contenido real del nuevo video.
+- Mantener el reproductor y el espacio visual que utiliza actualmente este recurso, siempre que funcionen correctamente.
+- No llamarlo videotutorial ni tutorial, porque el nuevo contenido no es un tutorial.
+- No modificar la infografía de autenticación en dos pasos.
+- No duplicar innecesariamente el contenido del video en otras secciones.
 
-Importante: conserva los recursos existentes y sus contenidos. No sustituyas los archivos por versiones de ejemplo ni elimines materiales.
+IMPORTANTE: Primero revisa el contenido del archivo "Video" para redactar una descripción que realmente corresponda a lo que presenta. No inventes su temática ni utilices la descripción del video anterior.
 
-4. Mejorar el diseño responsivo del certificado emitido
+3. Revisar la integración de los seis recursos
 
-Mejora la presentación del certificado que aparece en pantalla después de completar el curso.
+Al finalizar, el Kit Digital debe contener exactamente estos seis recursos:
 
-Importante: me refiero al certificado que se muestra dentro de la plataforma antes de descargarlo, no al diseño del archivo descargable.
+1. Guía preventiva y protocolo PVA: documento para profundizar en PAUSA, VERIFICA y ACTÚA.
+2. Infografía: paso a paso para la autenticación en dos pasos (2FA).
+3. Video: contenido audiovisual sobre prácticas seguras para promover la cultura de seguridad digital.
+4. Ruta de emergencia: guía de actuación inmediata en caso de ser víctima de un ciberdelito.
+5. Tips: recomendaciones para protegerse ante las estafas digitales.
+6. Llamado a la acción: tarjeta digital para compartir el curso y promover la prevención.
 
-Ajusta su presentación para que:
+4. Condiciones importantes
 
-- Se adapte correctamente a celulares, tabletas y computadores.
-- Mantenga una distribución equilibrada de los elementos.
-- Los textos sean legibles y no queden cortados.
-- El nombre del participante, la fecha, el reconocimiento y los demás elementos tengan una jerarquía visual clara.
-- No se generen desbordamientos horizontales ni espacios innecesarios.
-- Mantenga la identidad visual del proyecto y su apariencia de certificado.
+- No modificar el contenido académico de los módulos.
+- No cambiar las preguntas ni las respuestas de la evaluación.
+- No alterar las condiciones de desbloqueo del Kit Digital, el certificado ni la encuesta.
+- No eliminar los otros recursos existentes.
+- No modificar sus enlaces ni sus archivos.
+- Conservar la mascota RO-BIT y la identidad visual del proyecto.
+- Mantener la adaptación a dispositivos móviles.
+- No dejar botones sin funcionalidad ni enlaces provisionales visibles.
+- No inventar enlaces ni archivos.
+- No modificar el progreso guardado de los estudiantes.
+- Respetar la estructura actual de las tarjetas de recursos, de modo que los seis elementos mantengan una presentación uniforme.
 
-No alteres la información ni las condiciones de emisión del certificado.
+IMPORTANTE: Los archivos "Tarjeta" y "Video" ya se encuentran en la carpeta "recursos". Localízalos y utilízalos directamente. No generes sustitutos ni utilices imágenes o videos ficticios.
 
 5. Verificación final
 
-Una vez implementados los cambios:
+Antes de terminar, comprueba que:
 
-- Comprueba que los textos se hayan actualizado correctamente.
-- Prueba el botón «Ir al certificado» desde el Kit Digital en diferentes tamaños de pantalla.
-- Verifica la visualización y descarga de los documentos.
-- Comprueba la reproducción de los videos en el reproductor integrado.
-- Revisa el diseño del certificado emitido en celular, tableta y computador.
-- Asegúrate de que no se hayan afectado otras secciones ni funcionalidades existentes.
+- Los seis recursos aparecen correctamente en el Kit Digital.
+- El recurso nuevo tiene el título exacto Llamado a la acción.
+- La tarjeta "Tarjeta" se visualiza correctamente.
+- El recurso audiovisual tiene el título exacto Video.
+- El archivo "Video" reemplazó completamente al anterior.
+- La descripción del video corresponde a su contenido real.
+- Los otros cuatro recursos conservan sus archivos, enlaces y funcionamiento.
+- Todos los recursos mantienen una presentación uniforme.
+- No se modificaron el progreso ni las condiciones de acceso al curso.
+- La plataforma continúa funcionando correctamente en computador y celular.
 
-Realiza los cambios directamente en el proyecto. No te limites a presentar recomendaciones o fragmentos de código. Conserva la arquitectura y las funcionalidades que ya funcionan, evita introducir dependencias o servicios de pago y, al finalizar, informa qué archivos modificaste, qué ajustes implementaste y qué pruebas realizaste.
-
-Antes de implementar los cambios del Kit Digital, inspecciona los recursos disponibles en la carpeta "public/recursos/" del proyecto.
-
-Identifica los documentos, videos e imágenes existentes y relaciónalos con las tarjetas correspondientes del Kit Digital.
-
-Utiliza los archivos originales para implementar la visualización integrada y las opciones de descarga. Para los videos, implementa un reproductor HTML5 nativo y responsivo.
-
-No inventes recursos, no sustituyas los archivos originales ni utilices enlaces de Google Drive. Si falta algún archivo necesario, indícame exactamente cuál es antes de reemplazarlo por otra alternativa.
-
-Cambia las descripciones de cada recurso acorde a los contenidos porque eso también debe cambiar, cada recurso que está en la carpeta de recursos está nombrado con el mismo nombre como está nombrada en la plataforma.
-
----
-
-## Ronda 8 (implementada)
-
-1. **Textos:** «el 75 % de la muestra utiliza billeteras digitales y el 35 % banca móvil»; eliminada la frase de «19 respuestas y 20»; 2FA: «…ya que suele ser la llave para recuperar el resto de tus servicios si llegas a ser víctima» (también en las respuestas de RO-BIT).
-2. **«Ir al certificado»:** la vista marca su destino (`data-scroll-target`) y el enrutador lo respeta: sin certificado emitido lleva a la cabecera de finalización; con certificado emitido, a la hoja del certificado, en cualquier tamaño de pantalla.
-3. **Kit sin Google Drive:** los archivos de `public/recursos/` se movieron a `PVA/recursos/` (Vercel solo publica `PVA/`) sin modificarlos. Cada tarjeta tiene «Ver» (visor integrado con PDF.js, incluido en `assets/vendor/pdfjs/`, cargado solo al abrir un documento) o «Reproducir» (reproductor HTML5 nativo) y «Descargar». Descripciones nuevas según el contenido real de cada archivo.
-4. **Certificado en pantalla:** tamaños que escalan con el ancho (container queries), bloque central centrado (a quién · nombre · reconocimiento · descripción), datos en tres columnas o apilados, sin cambios en el PDF ni en las condiciones de emisión.
+Realiza únicamente estos cambios. No aproveches esta actualización para rediseñar, reorganizar o modificar otras partes de la plataforma.
