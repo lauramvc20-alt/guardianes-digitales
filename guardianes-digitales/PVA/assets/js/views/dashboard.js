@@ -57,7 +57,7 @@
           '<div class="hero__eyebrow">' +
             '<span class="chip chip--turq">' + U.icon("shieldCheck") + " Curso gratuito</span>" +
             '<span class="chip">' + U.icon("user") + " Sin registro</span>" +
-            '<span class="chip">' + U.icon("clock") + " 10 a 15 minutos</span>" +
+            '<span class="chip">' + U.icon("clock") + " Unos 12 minutos</span>" +
           "</div>" +
           "<h1>PAUSA, VERIFICA Y <em>ACTÚA</em></h1>" +
           '<p class="lede" style="max-width:52ch">' +

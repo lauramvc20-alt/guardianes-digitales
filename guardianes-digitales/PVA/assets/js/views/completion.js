@@ -11,7 +11,7 @@
       '<article class="cert-sheet" id="certSheet" aria-labelledby="certTitle">' +
         '<div class="cert-sheet__top">' +
           '<div>' +
-            '<span class="cert-sheet__kicker">Reconocimiento simbólico · RO-BIT</span>' +
+            '<span class="cert-sheet__kicker">Reconocimiento simbólico</span>' +
             '<h3 class="cert-sheet__main-title">PAUSA, VERIFICA Y ACTÚA</h3>' +
           '</div>' +
           '<span class="cert-sheet__seal cert-sheet__seal--logo" aria-hidden="true">' + PVA.logo.svg() + "</span>" +
@@ -31,7 +31,7 @@
           "<div><span>Resultado de evaluación</span><b>" + score + " de " + total + " correctas</b></div>" +
         "</div>" +
         '<p class="cert-sheet__note">' +
-          "El certificado emitido es un reconocimiento simbólico y no constituye una acreditación educativa." +
+          "La emisión de este certificado es estrictamente simbólica y no confiere una acreditación formal ni tiene validez académica o profesional." +
         "</p>" +
       "</article>"
     );
@@ -74,8 +74,8 @@
 
     root.innerHTML =
       '<section class="completion-hero enter print-hide">' +
-        '<span class="kicker kicker--yellow">Recorrido completo</span>' +
         '<div class="badge-seal badge-seal--logo" aria-hidden="true">' + PVA.logo.svg() + "</div>" +
+        '<p class="completion-hero__status">' + U.icon("check") + " Recorrido completo</p>" +
         '<h1>Guardián Digital</h1>' +
         '<p class="lede" style="max-width:56ch;margin:0 auto .8rem">' +
           "Completaste el protocolo PVA, los módulos de smishing y vishing, el simulacro, " +

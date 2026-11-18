@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PVA · Encuesta de satisfacción (etapa independiente de la evaluación)
+   PVA · Encuesta de percepción (etapa independiente de la evaluación)
    ========================================================================== */
 (function (global) {
   "use strict";
@@ -39,8 +39,7 @@
       "</div>" +
 
       '<section class="survey-card enter-2" aria-labelledby="surveyTitle">' +
-        '<span class="kicker kicker--yellow">Tu opinión cuenta</span>' +
-        '<h2 id="surveyTitle" style="margin-top:.4rem;max-width:30ch">' + U.esc(S.lede) + "</h2>" +
+        '<h2 id="surveyTitle" style="max-width:34ch">' + U.esc(S.lede) + "</h2>" +
         '<p style="color:var(--ink-soft);max-width:62ch;margin-top:.8rem">' + U.esc(S.text) + "</p>" +
         '<div class="hero__cta" style="margin-top:1.4rem">' +
           '<a class="btn" href="' + U.esc(S.url) + '" target="_blank" rel="noopener noreferrer" data-survey>' +
@@ -70,7 +69,7 @@
 
       if (store.markDone("encuesta")) {
         PVA.audio.play("win");
-        PVA.ui.toast("¡Recorrido completo! Gracias por responder la encuesta.", "ok", 5200);
+        PVA.ui.toast("¡Recorrido completo! Gracias por tu percepción.", "ok", 5200);
       }
 
       var state = root.querySelector("[data-survey-state]");

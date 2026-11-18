@@ -24,9 +24,8 @@
       return (
         '<article class="kit-card">' +
           '<span class="kit-card__icon">' + U.icon(resource.icon) + "</span>" +
-          '<span class="kicker kicker--violet">Recurso ' + (index + 1) + "</span>" +
           "<h3>" + U.esc(resource.name) + "</h3>" +
-          '<p class="tiny muted" style="margin-top:-.3rem">' + U.esc(resource.kind) + "</p>" +
+          '<p class="kit-card__kind">' + U.esc(resource.kind) + "</p>" +
           "<p>" + U.esc(resource.description) + "</p>" +
           '<a class="btn btn--ghost" href="' + U.esc(resource.url) + '" target="_blank" ' +
             'rel="noopener noreferrer" data-resource="' + resource.id + '">' +
@@ -76,7 +75,7 @@
         '<p class="tiny muted" style="margin-top:.9rem">' + U.esc(KIT.note) + "</p>" +
         '<p class="tiny muted">Puedes continuar sin abrir todos los recursos: los enlaces ' +
         "seguirán disponibles en esta página. La plataforma no descarga ni copia los archivos; " +
-        "solo enlaza a las carpetas oficiales del proyecto.</p>" +
+        "solo enlaza a las carpetas oficiales.</p>" +
       "</section>";
 
     function refreshCount() {

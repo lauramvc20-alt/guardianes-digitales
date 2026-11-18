@@ -1,11 +1,11 @@
 /* ==========================================================================
    PVA · Simulaciones del Módulo 4
    Escenarios hipotéticos construidos a partir de las modalidades de estafa
-   descritas en el documento académico del proyecto (2026).
+   de smishing y vishing (2026).
 
    Cada caso tiene la mecánica que corresponde a su situación:
    - kind "chat"  : conversación por turnos (los mensajes siguientes dependen de lo que respondes).
-   - kind "exam"  : examinar un SMS por cuenta propia y después decidir.
+   - kind "inspect": comprobar el SMS con herramientas de verificación y después decidir.
    - kind "call"  : llamada por etapas, con la opción de colgar en cualquier momento.
 
    En los casos con árbol de decisiones, cada opción tiene:
@@ -163,24 +163,21 @@
     /* ------------------------------------------------ Caso 2 · examinar y decidir */
     {
       id: "paquete",
-      kind: "exam",
+      kind: "inspect",
       tag: "Smishing · paquete retenido",
       channel: "SMS",
       icon: "sms",
       title: "Un cobro pequeño con un enlace extraño",
       brief: "Recibes un SMS de una supuesta empresa de envíos que dice que tu paquete está retenido.",
-      task: "Primero examina el mensaje por tu cuenta y toca lo que te parezca sospechoso. Después decide qué hacer.",
+      task: "Comprueba lo que quieras del mensaje y decide qué hacer.",
       contact: { name: "Envíos Express", sub: "+57 301 000 0000" },
-      examPrompt: "Toca las palabras o frases que te parezcan sospechosas. Puedes marcar y desmarcar.",
-      parts: [
-        { t: "Envíos Express: ", sig: false, why: "El nombre de una empresa de envíos no es una señal por sí solo: lo sospechoso es lo que te pide el mensaje." },
-        { t: "TU PAQUETE ESTÁ RETENIDO EN BODEGA", sig: true, why: "No hay una compra previa que explique el envío, y las mayúsculas buscan alarmarte." },
-        { t: ". " },
-        { t: "Paga $3.900", sig: true, why: "El cobro pequeño baja la guardia: parece que no vale la pena desconfiar." },
-        { t: " " },
-        { t: "en las próximas 24 horas o será devuelto", sig: true, why: "Urgencia y amenaza de perder el paquete para que no verifiques." },
-        { t: ": " },
-        { t: "http://envios-express-pago.info/retener", sig: true, why: "El dominio no es el de una transportadora oficial; el enlace es un canal controlado por el estafador." }
+      text: "Envíos Express: TU PAQUETE ESTÁ RETENIDO EN BODEGA. Paga $3.900 en las próximas 24 horas o será devuelto: http://envios-express-pago.info/retener",
+      examPrompt: "Toca las comprobaciones que quieras hacer. Cada una te muestra lo que encontrarías.",
+      tools: [
+        { label: "Revisar el remitente", icon: "phone", result: "Escribe desde un celular corriente (+57 301…), no desde un código corto oficial de una transportadora." },
+        { label: "Ver adónde lleva el enlace", icon: "link", decisive: true, result: "El enlace va a envios-express-pago.info, un dominio que no es de ninguna transportadora oficial." },
+        { label: "Revisar mis compras", icon: "cart", result: "No tienes ningún pedido pendiente de entrega, así que no hay un paquete que reclamar." },
+        { label: "Leer el tono del mensaje", icon: "hourglass", result: "Mayúsculas, un plazo de 24 horas y un cobro pequeño: busca que pagues sin pensar." }
       ],
       question: "¿Qué haces con el mensaje?",
       options: [

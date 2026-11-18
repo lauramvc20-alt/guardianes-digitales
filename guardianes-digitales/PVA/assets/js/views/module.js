@@ -10,8 +10,8 @@
 
   var TICK_MS = 250;
   /* Tiempo mínimo de lectura por bloque: ~250 ms por palabra (unas 240 ppm), con piso de 8 s. */
-  var MS_PER_WORD = 250;
-  var MIN_READ_MS = 8000;
+  var MS_PER_WORD = 110;
+  var MIN_READ_MS = 3000;
 
   function keyCount(obj) {
     return Object.keys(obj || {}).filter(function (k) { return !!obj[k]; }).length;
@@ -40,13 +40,15 @@
       };
     }
 
-    if (cfg.type === "defense") {
-      var d = act.defense || {};
-      var n = keyCount(d.placed);
+    if (cfg.type === "privacy") {
+      var pv = (act.privacy || {}).vals || {};
+      var safe = cfg.items.filter(function (it) {
+        return (pv[it.key] == null ? it.start : pv[it.key]) === it.safe;
+      }).length;
       return {
-        done: n >= cfg.items.length,
-        ratio: n / cfg.items.length,
-        text: n + " de " + cfg.items.length + " medidas clasificadas"
+        done: safe >= cfg.items.length,
+        ratio: safe / cfg.items.length,
+        text: safe + " de " + cfg.items.length + " ajustes protegidos"
       };
     }
 
@@ -77,7 +79,7 @@
   }
 
   function requiredReadMs(step) {
-    return Math.max(MIN_READ_MS, wordCount(step) * MS_PER_WORD);
+    return Math.min(9000, Math.max(MIN_READ_MS, wordCount(step) * MS_PER_WORD));
   }
 
   function blockHtml(step, index, total) {

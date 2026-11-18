@@ -292,10 +292,10 @@
       },
       {
         id: "encuesta",
-        title: "Encuesta de satisfacción",
+        title: "Encuesta de percepción",
         keywords: ["encuesta de satisfaccion", "opinar", "calificar el curso", "evaluar el curso", "feedback"],
         answer: [
-          "La encuesta de satisfacción es el último paso, independiente del certificado, para evaluar esta propuesta educativa."
+          "La encuesta de percepción es el último paso, independiente del certificado, para evaluar esta propuesta educativa."
         ],
         links: [{ label: "Encuesta", to: "/encuesta" }]
       },
@@ -325,7 +325,7 @@
         title: "Privacidad de la plataforma",
         keywords: ["registro", "cuenta", "costo", "gratis", "cuanto cuesta", "mis preguntas", "recopilan", "espian", "duracion", "cuanto dura", "cuanto tarda"],
         answer: [
-          "El curso es libre, gratuito y sin registro; dura entre 10 y 15 minutos. No se solicitan datos personales ni credenciales y tu avance se guarda solo en tu navegador.",
+          "El curso es libre, gratuito y sin registro; dura unos 12 minutos. No se solicitan datos personales ni credenciales y tu avance se guarda solo en tu navegador.",
           "Yo funciono localmente: lo que me escribes no sale de tu navegador."
         ]
       },

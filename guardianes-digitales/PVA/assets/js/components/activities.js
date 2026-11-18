@@ -280,44 +280,38 @@
   };
 
   /* ----------------------------------------------- Arma tu defensa (clasificación) */
-  var defense = {
+  var privacy = {
     html: function (cfg, moduleId) {
-      var st = activityState(moduleId).defense || {};
-      var placed = st.placed || {};
-      var items = cfg.items;
-      var order = st.order || items.map(function (it) { return it.key; });
-
-      var zones = cfg.zones.map(function (z) {
-        var inside = items.filter(function (it) { return placed[it.key] === z.key; }).map(function (it) {
-          return '<li class="dz-item"><span aria-hidden="true">' + icon("check") + "</span>" + esc(it.label) + "</li>";
-        }).join("");
+      var st = activityState(moduleId).privacy || {};
+      var vals = st.vals || {};
+      var rows = cfg.items.map(function (it) {
+        var on = vals[it.key] == null ? it.start : vals[it.key];
         return (
-          '<section class="dz" data-zone="' + z.key + '">' +
-            '<header class="dz__head"><span class="dz__ico" aria-hidden="true">' + icon(z.icon) + "</span>" +
-              "<div><h4>" + esc(z.title) + "</h4><small>" + esc(z.text) + "</small></div>" +
-              '<span class="dz__count" data-zcount="' + z.key + '"></span></header>' +
-            '<ul class="dz__list" data-zlist="' + z.key + '">' + inside + "</ul>" +
-            '<button class="dz__drop" type="button" data-drop="' + z.key + '">Colocar aquí la medida elegida</button>' +
-          "</section>"
+          '<li class="priv__row" data-row="' + it.key + '">' +
+            '<span class="priv__ico" aria-hidden="true">' + icon(it.icon) + "</span>" +
+            '<span class="priv__txt"><b id="pl-' + it.key + '">' + esc(it.label) + "</b><small>" + esc(it.hint) + "</small></span>" +
+            '<button class="switch" type="button" role="switch" aria-labelledby="pl-' + it.key + '" aria-checked="' + (on ? "true" : "false") + '" data-switch="' + it.key + '"><span></span></button>' +
+          "</li>"
         );
       }).join("");
-
-      var tray = order.filter(function (k) { return !placed[k]; }).map(function (k) {
-        var it = items.filter(function (x) { return x.key === k; })[0];
-        return '<button class="dchip" type="button" draggable="true" data-chip="' + k + '" aria-pressed="false">' + esc(it.label) + "</button>";
-      }).join("");
-
       return (
-        '<section class="worksheet act defense" id="actividad" aria-labelledby="actTitle">' +
+        '<section class="worksheet act privacy" id="actividad" aria-labelledby="actTitle">' +
           '<h3 id="actTitle">' + esc(cfg.title) + "</h3>" +
-          '<p class="act__intro">' + esc(cfg.goal) + " Toca una medida y luego su zona, o arrástrala.</p>" +
-          '<div class="defense__meter"><div class="defense__meter-top"><b data-dmeter-label></b><span class="tiny muted" data-dscore></span></div>' +
-            '<div class="defense__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span data-dbar></span></div></div>' +
-          '<div class="defense__tray-wrap"><p class="tiny muted" data-dhint>Elige una medida.</p>' +
-            '<div class="defense__tray" data-tray aria-label="Medidas por clasificar">' + tray + "</div></div>" +
-          '<div class="defense__feedback" data-dfeedback role="status" aria-live="polite" hidden></div>' +
-          '<div class="defense__zones">' + zones + "</div>" +
-          '<div class="defense__end" data-dend hidden></div>' +
+          '<p class="act__intro">' + esc(cfg.goal) + "</p>" +
+          '<div class="priv">' +
+            '<div class="priv__screen">' +
+              '<div class="priv__me"><span class="priv__avatar" aria-hidden="true">' + PVA.logo.svg() + "</span>" +
+                '<div><b>Tu cuenta</b><small data-pwho></small></div></div>' +
+              '<ul class="priv__list">' + rows + "</ul>" +
+            "</div>" +
+            '<aside class="priv__panel" aria-label="Estado de tu protección">' +
+              '<div class="priv__meter"><div class="priv__meter-top"><span>Exposición</span><b data-plevel></b></div>' +
+                '<div class="priv__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span data-pbar></span></div>' +
+                '<small class="muted" data-pcount></small></div>' +
+              '<div class="priv__feedback" data-pfeedback role="status" aria-live="polite">' + esc(cfg.idle) + "</div>" +
+              '<div class="priv__end" data-pend hidden></div>' +
+            "</aside>" +
+          "</div>" +
         "</section>"
       );
     },
@@ -325,154 +319,69 @@
     bind: function (root, cfg, moduleId, handlers) {
       var items = cfg.items;
       var total = items.length;
-      var state = activityState(moduleId).defense || {};
-      var placed = state.placed || {};
-      var first = state.first || {};
-      var tries = state.tries || {};
-      var order = state.order || null;
-      var selected = null;
+      var state = activityState(moduleId).privacy || {};
+      var vals = state.vals || {};
+      items.forEach(function (it) { if (vals[it.key] == null) vals[it.key] = it.start; });
+      var moves = state.moves || 0;
 
       function byKey(k) { return items.filter(function (it) { return it.key === k; })[0]; }
-      function zoneOf(k) { return cfg.zones.filter(function (z) { return z.key === k; })[0]; }
-      function persist() { saveActivity(moduleId, { defense: { placed: placed, first: first, tries: tries, order: order } }); }
-      function placedCount() { return Object.keys(placed).length; }
-      function firstCount() { return Object.keys(first).filter(function (k) { return first[k]; }).length; }
-      function chipHtml(k) {
-        return '<button class="dchip" type="button" draggable="true" data-chip="' + k + '" aria-pressed="false">' + esc(byKey(k).label) + "</button>";
-      }
-
-      if (!order) {
-        order = items.map(function (it) { return it.key; });
-        for (var i = order.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
-          var t = order[i]; order[i] = order[j]; order[j] = t;
-        }
-        var tray0 = root.querySelector("[data-tray]");
-        if (tray0) tray0.innerHTML = order.filter(function (k) { return !placed[k]; }).map(chipHtml).join("");
-        persist();
-      }
-
-      function level(pct) {
-        return pct >= 100 ? "Defensa completa" : pct >= 66 ? "Defensa sólida" : pct >= 33 ? "Defensa en marcha" : "Defensa por construir";
-      }
-
-      function finish() {
-        var good = firstCount();
-        var C = cfg.conclusion;
-        var msg = good >= 10 ? C.high : good >= 7 ? C.mid : C.low;
-        var weak = items.filter(function (it) { return (tries[it.key] || 0) > 0; });
-        var end = root.querySelector("[data-dend]");
-        end.hidden = false;
-        end.innerHTML =
-          '<div class="defense__score"><b>' + good + " / " + total + "</b><span>a la primera</span></div>" +
-          '<div class="defense__end-body"><h4>' + esc(level(100)) + "</h4><p>" + esc(msg) + "</p>" +
-          (weak.length ? '<p class="tiny muted">Para repasar: ' + weak.map(function (w) { return esc(w.label); }).join(" · ") + "</p>" : "") +
-          '<button class="btn btn--ghost" type="button" data-dreset>' + icon("rotateCcw") + " Repetir el desafío</button></div>";
-      }
+      function persist() { saveActivity(moduleId, { privacy: { vals: vals, moves: moves } }); }
+      function safeCount() { return items.filter(function (it) { return vals[it.key] === it.safe; }).length; }
 
       function paint() {
-        var n = placedCount();
+        var n = safeCount();
         var pct = Math.round((n / total) * 100);
-        root.querySelector("[data-dmeter-label]").textContent = level(pct);
-        root.querySelector("[data-dscore]").textContent = n + " de " + total + " medidas colocadas";
-        var bar = root.querySelector("[data-dbar]");
+        var level = n >= total ? "Baja" : n >= Math.ceil(total / 2) ? "Media" : "Alta";
+        var lv = root.querySelector("[data-plevel]");
+        lv.textContent = level;
+        lv.className = "is-" + (n >= total ? "low" : level === "Media" ? "mid" : "high");
+        var bar = root.querySelector("[data-pbar]");
         bar.style.width = pct + "%";
         bar.parentNode.setAttribute("aria-valuenow", String(pct));
-        cfg.zones.forEach(function (z) {
-          var c = root.querySelector('[data-zcount="' + z.key + '"]');
-          var cnt = items.filter(function (it) { return it.zone === z.key; }).length;
-          var have = items.filter(function (it) { return placed[it.key] === z.key; }).length;
-          if (c) c.textContent = have + "/" + cnt;
+        root.querySelector("[data-pcount]").textContent = n + " de " + total + " ajustes protegidos";
+        root.querySelector("[data-pwho]").textContent =
+          vals.perfil === false ? "Solo tus contactos ven tu perfil" : "Cualquier persona puede ver tu perfil";
+        items.forEach(function (it) {
+          var btn = root.querySelector('[data-switch="' + it.key + '"]');
+          if (btn) btn.setAttribute("aria-checked", vals[it.key] ? "true" : "false");
+          var row = root.querySelector('[data-row="' + it.key + '"]');
+          if (row) row.classList.toggle("is-safe", vals[it.key] === it.safe);
         });
-        var hint = root.querySelector("[data-dhint]");
-        if (hint) hint.textContent = n >= total ? "No quedan medidas por clasificar." : selected ? "Ahora toca la zona donde cumple su función." : "Elige una medida.";
-        root.querySelectorAll("[data-drop]").forEach(function (b) { b.disabled = !selected; });
-        var trayWrap = root.querySelector(".defense__tray-wrap");
         announce(handlers, n, total);
+        var end = root.querySelector("[data-pend]");
         if (n >= total) {
-          trayWrap.hidden = true;
-          finish();
+          end.hidden = false;
+          end.innerHTML =
+            "<p><b>" + esc(cfg.done.title) + "</b> " + esc(cfg.done.text) + "</p>" +
+            '<button class="btn btn--ghost" type="button" data-preset>' + icon("rotateCcw") + " Volver a empezar</button>";
           completeIfReady(handlers, true);
         } else {
-          trayWrap.hidden = false;
-          root.querySelector("[data-dend]").hidden = true;
+          end.hidden = true;
         }
       }
 
       function say(kind, html) {
-        var f = root.querySelector("[data-dfeedback]");
-        f.hidden = false;
-        f.className = "defense__feedback is-" + kind;
+        var f = root.querySelector("[data-pfeedback]");
+        f.className = "priv__feedback is-" + kind;
         f.innerHTML = html;
       }
 
-      function select(key) {
-        selected = selected === key ? null : key;
-        root.querySelectorAll("[data-chip]").forEach(function (c) {
-          c.setAttribute("aria-pressed", c.getAttribute("data-chip") === selected ? "true" : "false");
-        });
-        paint();
-      }
-
-      function place(key, zoneKey) {
-        var it = byKey(key);
-        if (!it || placed[key]) return;
-        var chip = root.querySelector('[data-chip="' + key + '"]');
-        if (it.zone === zoneKey) {
-          placed[key] = zoneKey;
-          if (!tries[key]) first[key] = true;
-          selected = null;
-          if (chip) chip.remove();
-          var li = document.createElement("li");
-          li.className = "dz-item is-new";
-          li.innerHTML = '<span aria-hidden="true">' + icon("check") + "</span>" + esc(it.label);
-          root.querySelector('[data-zlist="' + zoneKey + '"]').appendChild(li);
-          say("ok", "<b>Correcto.</b> " + esc(it.why));
-        } else {
-          tries[key] = (tries[key] || 0) + 1;
-          var z = root.querySelector('[data-zone="' + zoneKey + '"]');
-          if (z) { z.classList.remove("is-shake"); void z.offsetWidth; z.classList.add("is-shake"); }
-          say("no", "<b>Esa no va en «" + esc(zoneOf(zoneKey).title) + "».</b> Piensa en su propósito: " + esc(it.why));
-        }
-        PVA.audio.play("tap");
-        persist();
-        paint();
-      }
-
       root.addEventListener("click", function (event) {
-        var chip = event.target.closest("[data-chip]");
-        if (chip && root.contains(chip)) { select(chip.getAttribute("data-chip")); return; }
-        if (event.target.closest("[data-dreset]")) {
-          saveActivity(moduleId, { defense: { placed: {}, first: {}, tries: {}, order: null } });
+        if (event.target.closest("[data-preset]")) {
+          saveActivity(moduleId, { privacy: { vals: {}, moves: 0 } });
           PVA.router.refresh();
           return;
         }
-        var zone = event.target.closest("[data-zone]");
-        if (zone && root.contains(zone) && selected) place(selected, zone.getAttribute("data-zone"));
-      });
-
-      /* Arrastrar y soltar (además del toque) */
-      root.addEventListener("dragstart", function (event) {
-        var chip = event.target.closest && event.target.closest("[data-chip]");
-        if (!chip) return;
-        event.dataTransfer.setData("text/plain", chip.getAttribute("data-chip"));
-        event.dataTransfer.effectAllowed = "move";
-      });
-      root.addEventListener("dragover", function (event) {
-        var zone = event.target.closest && event.target.closest("[data-zone]");
-        if (zone) { event.preventDefault(); zone.classList.add("is-over"); }
-      });
-      root.addEventListener("dragleave", function (event) {
-        var zone = event.target.closest && event.target.closest("[data-zone]");
-        if (zone) zone.classList.remove("is-over");
-      });
-      root.addEventListener("drop", function (event) {
-        var zone = event.target.closest && event.target.closest("[data-zone]");
-        if (!zone) return;
-        event.preventDefault();
-        zone.classList.remove("is-over");
-        var key = event.dataTransfer.getData("text/plain");
-        if (key) place(key, zone.getAttribute("data-zone"));
+        var sw = event.target.closest("[data-switch]");
+        if (!sw || !root.contains(sw)) return;
+        var it = byKey(sw.getAttribute("data-switch"));
+        vals[it.key] = !vals[it.key];
+        moves += 1;
+        if (vals[it.key] === it.safe) say("ok", "<b>" + esc(it.label) + ".</b> " + esc(it.ok));
+        else say("no", "<b>" + esc(it.label) + ".</b> " + esc(it.bad));
+        PVA.audio.play("tap");
+        persist();
+        paint();
       });
 
       paint();
@@ -500,65 +409,16 @@
     return count ? Math.round((sum(points) / (2 * count)) * 3 * 10) / 10 : 0;
   }
 
-  /* ---- Mecánica «examinar»: el texto se divide en palabras tocables, sin ninguna pista visual. ---- */
-  function tokenize(parts) {
-    var tokens = [];
-    parts.forEach(function (part, p) {
-      part.t.split(/(\s+)/).forEach(function (piece) {
-        if (!piece) return;
-        if (/^\s+$/.test(piece)) tokens.push({ space: piece, part: p });
-        else tokens.push({ w: piece, part: p, idx: tokens.length });
-      });
-    });
-    return tokens;
-  }
-
-  function tokenHtml(sim, marks, reveal) {
-    var parts = sim.parts;
-    var found = {}, missed = {}, falseA = {};
-    if (reveal === true) {
-      var ev = evaluateExam(sim, marks);
-      ev.found.forEach(function (p) { found[p] = 1; });
-      ev.missed.forEach(function (p) { missed[p] = 1; });
-      ev.falseAlarms.forEach(function (p) { falseA[p] = 1; });
-    }
-    return tokenize(parts).map(function (tk) {
-      if (tk.space) return tk.space;
-      var on = !!marks[tk.idx];
-      if (reveal === "plain") return '<span class="tok tok--static">' + esc(tk.w) + "</span>";
-      if (!reveal) {
-        return '<button type="button" class="tok' + (on ? " is-on" : "") + '" data-tok="' + tk.idx + '" aria-pressed="' + (on ? "true" : "false") + '">' + esc(tk.w) + "</button>";
-      }
-      var cls = found[tk.part] ? "is-hit" : missed[tk.part] ? "is-miss" : falseA[tk.part] && on ? "is-false" : on ? "is-on" : "";
-      return '<span class="tok tok--static ' + cls + '">' + esc(tk.w) + "</span>";
-    }).join("");
-  }
-
-  /* Una señal se considera detectada si el estudiante tocó al menos una de sus palabras. */
-  function evaluateExam(sim, marks) {
-    var touched = {};
-    tokenize(sim.parts).forEach(function (tk) { if (!tk.space && marks[tk.idx]) touched[tk.part] = true; });
-    var found = [], missed = [], falseAlarms = [];
-    sim.parts.forEach(function (part, p) {
-      if (typeof part.sig !== "boolean") return;
-      if (part.sig && touched[p]) found.push(p);
-      else if (part.sig) missed.push(p);
-      else if (touched[p]) falseAlarms.push(p);
-    });
-    return { found: found, missed: missed, falseAlarms: falseAlarms, total: found.length + missed.length };
-  }
-
-  function examLink(sim, chosen, ev) {
+  /* ---- Mecánica «comprobar»: herramientas de verificación y luego una decisión. ---- */
+  function inspectLink(sim, chosen, checked) {
+    var n = Object.keys(checked).filter(function (k) { return checked[k]; }).length;
     if (chosen.verdict === "best") {
-      return ev.missed.length === 0
-        ? "Tu decisión se apoyó en una revisión completa: viste todas las señales."
-        : "Decidiste bien, aunque se te pasó alguna señal. Detectarlas todas te da más seguridad para actuar.";
+      return n === sim.tools.length
+        ? "Tu decisión se apoyó en una revisión completa."
+        : "Decidiste bien. Revisar más pistas antes de actuar te da todavía más seguridad.";
     }
-    if (ev.missed.length) {
-      var m = sim.parts[ev.missed[0]];
-      return "Esto se relaciona con lo que dejaste pasar: «" + m.t.trim() + "». " + m.why;
-    }
-    return "Detectaste las señales, pero la acción elegida no te protege: ver el riesgo no basta, hay que pausar y verificar por un canal oficial.";
+    var key = sim.tools.filter(function (t) { return t.decisive; })[0] || sim.tools[0];
+    return "Lo tenías a mano: " + key.result;
   }
 
   function stateOf(moduleId) { return activityState(moduleId).sim2 || {}; }
@@ -596,7 +456,7 @@
       function newState(i) {
         var s = list[i];
         if (done[s.id]) return { phase: "final" };
-        if (s.kind === "exam") return { phase: "exam", marks: {}, sel: null };
+        if (s.kind === "inspect") return { phase: "inspect", checked: {} };
         var node = s.nodes[s.start];
         return { phase: "decide", node: s.start, hist: [], retried: false, pending: null, lines: node.say.map(function (t) { return { from: "them", text: t }; }) };
       }
@@ -628,13 +488,12 @@
       /* ---------- Escena (izquierda) ---------- */
       function sceneHtml() {
         var s = sim();
-        if (s.kind === "exam") {
-          var reveal = cs.phase !== "exam";
+        if (s.kind === "inspect") {
           return (
             '<div class="device device--chat" aria-label="Mensaje SMS recibido">' +
-              '<div class="device__bar"><span class="device__avatar" aria-hidden="true">E</span>' +
+              '<div class="device__bar"><span class="device__avatar" aria-hidden="true">' + esc(s.contact.name.charAt(0)) + "</span>" +
               '<div><b class="device__name">' + esc(s.contact.name) + '</b><span class="device__state">' + esc(s.contact.sub) + " · SMS</span></div></div>" +
-              '<div class="chat device__chat"><div class="bubble bubble--exam">' + tokenHtml(s, cs.marks || {}, cs.phase === "final" ? "plain" : reveal) + "</div></div>" +
+              '<div class="chat device__chat"><div class="bubble">' + esc(s.text) + "</div></div>" +
             "</div>"
           );
         }
@@ -680,24 +539,13 @@
         var s = sim();
         if (cs.phase === "final") return finalPanel(done[s.id], s);
 
-        if (s.kind === "exam") {
-          if (cs.phase === "exam") {
-            var n = Object.keys(cs.marks).filter(function (k) { return cs.marks[k]; }).length;
-            return (
-              '<h4 class="sim-panel__q">Paso 1 · Examina</h4>' +
-              '<p class="sim-panel__p">' + esc(s.examPrompt) + "</p>" +
-              '<p class="tiny muted" data-sim-marked>' + n + " palabra(s) marcada(s)</p>" +
-              '<div class="sim-panel__actions"><button class="btn" type="button" data-sim-check' + (n ? "" : " disabled") + ">Comprobar " + icon("arrowRight") + "</button></div>"
-            );
-          }
-          if (cs.phase === "review") return reviewPanel(s);
-        }
+        if (s.kind === "inspect" && cs.phase === "inspect") return inspectPanel(s);
 
         if (cs.phase === "decide") {
-          var node = s.kind === "exam" ? { prompt: s.question, options: s.options } : s.nodes[cs.node];
+          var node = s.kind === "inspect" ? { prompt: s.question, options: s.options } : s.nodes[cs.node];
           var opts = node.options.map(function (o, k) { return o.hangup ? "" : '<button type="button" class="opt" data-sim-opt="' + k + '"><span class="opt__k" aria-hidden="true">' + String.fromCharCode(65 + k) + "</span><span>" + esc(o.label) + "</span></button>"; }).join("");
           return (
-            '<h4 class="sim-panel__q">' + esc(s.kind === "exam" ? "Paso 2 · Decide" : "Turno " + (cs.hist.length + 1)) + "</h4>" +
+            '<h4 class="sim-panel__q">' + esc(s.kind === "inspect" ? "Decide" : "Turno " + (cs.hist.length + 1)) + "</h4>" +
             '<p class="sim-panel__p"><strong>' + esc(node.prompt) + "</strong></p>" +
             '<div class="opt-list">' + opts + "</div>" +
             (s.kind === "call" && hangOption() ? '<p class="tiny muted">También puedes colgar con el botón del teléfono.</p>' : "")
@@ -706,10 +554,10 @@
 
         if (cs.phase === "feedback") {
           var o = cs.pending;
-          var extra = s.kind === "exam" ? '<p class="sim-panel__link">' + esc(examLink(s, o, evaluateExam(s, cs.marks))) + "</p>" : "";
+          var extra = s.kind === "inspect" ? '<p class="sim-panel__link">' + esc(inspectLink(s, o, cs.checked)) + "</p>" : "";
           var okPath = o.verdict === "best";
-          var tail = s.kind === "exam" || o.end
-            ? '<button class="btn" type="button" data-sim-next>' + (s.kind === "exam" ? "Ver el desenlace" : "Ver el desenlace") + " " + icon("arrowRight") + "</button>"
+          var tail = s.kind === "inspect" || o.end
+            ? '<button class="btn" type="button" data-sim-next>' + "Ver el desenlace" + " " + icon("arrowRight") + "</button>"
             : '<button class="btn" type="button" data-sim-next>Continuar ' + icon("arrowRight") + "</button>";
           return (
             verdictBadge(o.verdict) +
@@ -739,27 +587,23 @@
         return '<button class="btn" type="button" data-sim-endnext>' + (last ? "Ver resultado" : "Siguiente caso") + " " + icon("arrowRight") + "</button>";
       }
 
-      function reviewPanel(s) {
-        var ev = evaluateExam(s, cs.marks);
-        var chips = [];
-        ev.found.forEach(function (p) { chips.push({ p: p, k: "hit", icon: "check" }); });
-        ev.missed.forEach(function (p) { chips.push({ p: p, k: "miss", icon: "warning" }); });
-        ev.falseAlarms.forEach(function (p) { chips.push({ p: p, k: "false", icon: "info" }); });
-        var sel = cs.sel == null ? null : cs.sel;
-        var part = sel == null ? null : s.parts[sel];
-        var kind = sel == null ? "" : ev.found.indexOf(sel) >= 0 ? "Detectada" : ev.missed.indexOf(sel) >= 0 ? "Se te pasó" : "No era una señal";
+      function inspectPanel(s) {
+        var n = Object.keys(cs.checked).filter(function (k) { return cs.checked[k]; }).length;
+        var btns = s.tools.map(function (tl, i) {
+          var on = !!cs.checked[i];
+          return '<button type="button" class="tool' + (on ? " is-done" : "") + '" data-sim-tool="' + i + '" aria-pressed="' + (on ? "true" : "false") + '">' +
+            '<span class="tool__ico" aria-hidden="true">' + icon(on ? "check" : tl.icon) + "</span><span>" + esc(tl.label) + "</span></button>";
+        }).join("");
+        var found = s.tools.map(function (tl, i) {
+          return cs.checked[i] ? '<li class="finding"><b>' + esc(tl.label) + "</b><span>" + esc(tl.result) + "</span></li>" : "";
+        }).join("");
         return (
-          '<h4 class="sim-panel__q">Tu revisión</h4>' +
-          '<p class="sim-panel__p"><strong>' + ev.found.length + " de " + ev.total + "</strong> señales detectadas" +
-            (ev.falseAlarms.length ? " · " + ev.falseAlarms.length + " falsa(s) alarma(s)" : "") + ".</p>" +
-          '<div class="sig-chips" role="group" aria-label="Señales">' + chips.map(function (c) {
-            return '<button type="button" class="sig-chip sig-chip--' + c.k + (sel === c.p ? " is-selected" : "") + '" data-sim-sig="' + c.p + '" aria-pressed="' + (sel === c.p ? "true" : "false") + '">' +
-              icon(c.icon) + esc(s.parts[c.p].t.trim().slice(0, 34)) + (s.parts[c.p].t.trim().length > 34 ? "…" : "") + "</button>";
-          }).join("") + "</div>" +
-          '<div class="sig-explain" data-sim-explain>' + (part
-            ? "<b>" + kind + ".</b> " + esc(part.why)
-            : '<span class="muted">Toca una señal para ver por qué importa.</span>') + "</div>" +
-          '<div class="sim-panel__actions"><button class="btn" type="button" data-sim-decide>Decidir qué hacer ' + icon("arrowRight") + "</button></div>"
+          '<h4 class="sim-panel__q">Comprueba antes de decidir</h4>' +
+          '<p class="sim-panel__p">' + esc(s.examPrompt) + "</p>" +
+          '<div class="tool-grid">' + btns + "</div>" +
+          '<ul class="findings" aria-live="polite">' + found + "</ul>" +
+          '<div class="sim-panel__actions"><button class="btn" type="button" data-sim-decide>Decidir qué hacer ' + icon("arrowRight") + "</button>" +
+          '<span class="tiny muted">' + n + " de " + s.tools.length + " comprobaciones</span></div>"
         );
       }
 
@@ -836,13 +680,13 @@
       /* ---------- Acciones ---------- */
       function chooseOption(k) {
         var s = sim();
-        var node = s.kind === "exam" ? { options: s.options } : s.nodes[cs.node];
+        var node = s.kind === "inspect" ? { options: s.options } : s.nodes[cs.node];
         var o = node.options[k];
         if (!o) return;
         PVA.audio.play("tap");
         cs.pending = o;
         cs.pendingIndex = k;
-        if (s.kind !== "exam") {
+        if (s.kind !== "inspect") {
           if (o.hangup) {
             cs.lines.push({ from: "sys", text: "Cuelgas la llamada." });
             cs.hungUp = true;
@@ -862,11 +706,10 @@
       function finishCase(outcome) {
         var s = sim();
         var points, verdict, found = 0, totalSig = 0;
-        if (s.kind === "exam") {
-          var ev = evaluateExam(s, cs.marks);
-          found = ev.found.length; totalSig = ev.total;
-          points = POINTS[cs.pending.verdict] - (cs.retried ? 1 : 0);
-          points = Math.max(0, points) + (ev.total ? ev.found.length / ev.total : 0);
+        if (s.kind === "inspect") {
+          var nChecked = Object.keys(cs.checked).filter(function (k) { return cs.checked[k]; }).length;
+          found = nChecked; totalSig = s.tools.length;
+          points = Math.max(0, POINTS[cs.pending.verdict] - (cs.retried ? 1 : 0)) + (totalSig ? found / totalSig : 0);
           verdict = cs.pending.verdict;
         } else {
           var pts = cs.hist.map(function (h) { return Math.max(0, POINTS[h.verdict] - (h.retried ? 1 : 0)); });
@@ -889,22 +732,10 @@
 
         if ((el = t.closest("[data-sim-go]")) && !el.disabled) { enter(Number(el.getAttribute("data-sim-go"))); return; }
 
-        if ((el = t.closest("[data-tok]"))) {
-          var key = el.getAttribute("data-tok");
-          cs.marks[key] = !cs.marks[key];
-          el.classList.toggle("is-on", !!cs.marks[key]);
-          el.setAttribute("aria-pressed", cs.marks[key] ? "true" : "false");
-          var n = Object.keys(cs.marks).filter(function (k) { return cs.marks[k]; }).length;
-          var label = root.querySelector("[data-sim-marked]");
-          if (label) label.textContent = n + " palabra(s) marcada(s)";
-          var chk = root.querySelector("[data-sim-check]");
-          if (chk) chk.disabled = n === 0;
-          return;
-        }
-
-        if (t.closest("[data-sim-check]")) { cs.phase = "review"; cs.sel = null; paint(true); animateIn(root.querySelector("[data-sim-panel]")); return; }
-        if ((el = t.closest("[data-sim-sig]"))) {
-          cs.sel = Number(el.getAttribute("data-sim-sig"));
+        if ((el = t.closest("[data-sim-tool]"))) {
+          var ti = el.getAttribute("data-sim-tool");
+          cs.checked[ti] = !cs.checked[ti] ? true : cs.checked[ti];
+          PVA.audio.play("tap");
           paintPanelOnly();
           return;
         }
@@ -919,8 +750,8 @@
 
         if (t.closest("[data-sim-fix]")) {
           var s0 = sim();
-          if (s0.kind !== "exam" && cs.pending.hangup) { cs.lines.pop(); cs.hungUp = false; }
-          else if (s0.kind !== "exam" && cs.pending.reply) cs.lines.pop();
+          if (s0.kind !== "inspect" && cs.pending.hangup) { cs.lines.pop(); cs.hungUp = false; }
+          else if (s0.kind !== "inspect" && cs.pending.reply) cs.lines.pop();
           cs.retried = true;
           cs.pending = null;
           cs.phase = "decide";
@@ -932,7 +763,7 @@
         if (t.closest("[data-sim-next]")) {
           var s1 = sim();
           var o = cs.pending;
-          if (s1.kind === "exam") {
+          if (s1.kind === "inspect") {
             finishCase(o.outcome);
           } else {
             recordDecision();
@@ -976,7 +807,7 @@
   var registry = {
     quickcheck: quickcheck,
     flagHunt: flagHunt,
-    defense: defense,
+    privacy: privacy,
     scenarios: scenarios
   };
 

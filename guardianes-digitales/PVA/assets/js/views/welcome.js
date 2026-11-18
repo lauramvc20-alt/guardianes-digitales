@@ -66,7 +66,7 @@
           '<ul class="aside-list aside-list--spaced">' +
             "<li>" + U.icon("check") + " Un dispositivo con navegador actualizado.</li>" +
             "<li>" + U.icon("check") + " No instalar nada ni crear una cuenta.</li>" +
-            "<li>" + U.icon("check") + " Entre 10 y 15 minutos en total.</li>" +
+            "<li>" + U.icon("check") + " Unos 12 minutos en total.</li>" +
           "</ul>" +
           '<p class="tiny muted" style="margin-top:1rem">' + U.esc(W.audience) + "</p>" +
           '<p class="tiny muted">' + U.esc(W.privacy) + "</p>" +

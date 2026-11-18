@@ -108,7 +108,6 @@ html[data-theme="light"] .rb-form input { background: #ffffff; color: #0f172a; b
 
 @media (max-width: 640px) {
   .rb-fab { bottom: 60px; padding-right: 0.35rem; }
-  .rb-fab__label { display: none; }
   .rb-tip { bottom: 116px; }
   .rb-panel { right: 0; left: 0; bottom: 0; width: 100%; height: min(78vh, 600px); border-radius: 22px 22px 0 0; }
 }
@@ -116,3 +115,6 @@ html[data-theme="light"] .rb-form input { background: #ffffff; color: #0f172a; b
   .rb-panel, .rb-msg, .rb-dots i, .rb-fab, .rb-tip { animation: none !important; transition: none !important; }
 }
 @media print { .rb-fab, .rb-panel, .rb-tip { display: none !important; } }
+
+/* Pantallas bajas o pequeñas: el globo de ayuda no tapa el contenido */
+@media (max-height: 520px) { .rb-tip { display: none !important; } }

@@ -137,3 +137,17 @@ Skills de diseño solicitadas: Figma Design, Emil Kowalski e Impeccable (aplicar
    - 4.5. Progresión clara: caso actual, qué hacer, qué se completó, qué falta y cuándo avanzar.
 5. **Dirección visual:** identidad propia, evitar tarjetas genéricas, iconos grandes, columnas estrechas y vacíos; animaciones discretas y útiles; coherencia entre modo claro y oscuro.
 6. **Condiciones técnicas:** reutilizar componentes, no duplicar código, conservar contenidos, referencias, progreso y evaluación; sin dependencias de pago.
+
+---
+
+## Ronda 5 (implementada)
+
+1. **Redacción:** se quitaron las referencias a «el documento / el proyecto» en módulos, kit, simulaciones y bienvenida; textos más directos.
+2. **Tiempos:** etapas de 1 a 3 min según su extensión (total ≈ 12 min). La espera mínima de lectura bajó de 8 s a 3 s (máx. 9 s).
+3. **Módulo 3:** nueva actividad «Ajusta tu perfil» (6 interruptores de privacidad y un medidor de exposición en vivo). Reemplaza «Arma tu defensa».
+4. **Módulo 4, caso 2:** ya no se marcan palabras; se eligen comprobaciones (remitente, enlace, compras, tono) y luego se decide. Simulacro más compacto (escena y panel sin espacios sobrantes).
+5. **Kit:** cinco tarjetas iguales (3 + 2 centradas en escritorio, 2 columnas en tablet, 1 en móvil).
+6. **Finalización:** el logo ya no se superpone con «Recorrido completo». **Certificado:** sin RO-BIT, con la nota simbólica exacta; el PDF cabe en una página A4 horizontal.
+7. **Encuesta:** «Percepción», «Ayúdanos a evaluar este proyecto educativo» y la aclaración de Google Forms. El enlace no cambió.
+8. **Menú lateral:** causa real, un ancho máximo que dependía del estado del menú (1160/1440 px) dejaba huecos laterales al reabrirlo. Ahora hay un único ancho máximo y solo cambia la columna del menú.
+9. **Responsividad:** revisión en 320–1920 px, vertical y horizontal; sin desbordes; espacio final en móvil para los botones flotantes.

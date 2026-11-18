@@ -15,7 +15,7 @@
     { path: "/evaluacion", view: "assessment", title: "Evaluación de conocimientos", stage: "evaluacion" },
     { path: "/kit", view: "kit", title: "Kit Digital", stage: "kit" },
     { path: "/certificado", view: "completion", title: "Finalización y certificado", stage: "certificado" },
-    { path: "/encuesta", view: "survey", title: "Encuesta de satisfacción", stage: "encuesta" }
+    { path: "/encuesta", view: "survey", title: "Encuesta de percepción", stage: "encuesta" }
   ];
 
   function currentPath() {

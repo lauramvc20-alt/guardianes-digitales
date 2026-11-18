@@ -1,6 +1,6 @@
 /* ==========================================================================
    PVA · Kit Digital y encuesta
-   Los enlaces externos son los definidos por el proyecto. No se modifican
+   Los enlaces externos no se modifican
    ni se generan direcciones alternativas.
    ========================================================================== */
 (function (global) {
@@ -13,7 +13,7 @@
     lede:
       "Un paquete de recursos para llevar contigo y compartir. Puedes abrirlos " +
       "cuando quieras: quedan disponibles en este navegador y en los enlaces " +
-      "oficiales del proyecto.",
+      "oficiales.",
     note:
       "Los recursos abren en Google Drive, en una pestaña nueva. Son de acceso " +
       "gratuito y no requieren registro en esta plataforma.",
@@ -78,20 +78,14 @@
   };
 
   PVA.content.survey = {
-    title: "Encuesta de satisfacción",
+    title: "Encuesta de percepción",
     kicker: "Cierre · Tu experiencia",
-    lede:
-      "Tu opinión es importante. Ayúdanos a evaluar esta propuesta educativa y a " +
-      "identificar oportunidades de mejora",
+    lede: "Ayúdanos a evaluar este proyecto educativo",
     text:
-      "La encuesta es independiente de la evaluación: no modifica tu resultado ni " +
-      "tu certificado. Se responde en Google Forms y es anónima desde esta " +
-      "plataforma.",
+      "La encuesta se responde en Google Forms, no necesitas registro previo o inicio de sesión.",
     button: "COMPLETAR ENCUESTA",
     url: "https://forms.gle/JM6KNtX9RvKmXwUu9",
-    thanks:
-      "Gracias por completar el recorrido y por aportar a la evaluación de esta " +
-      "propuesta educativa.",
+    thanks: "Gracias por completar el recorrido y por tu percepción sobre este proyecto.",
     note:
       "Si la encuesta no se abre, copia este enlace en tu navegador: " +
       "https://forms.gle/JM6KNtX9RvKmXwUu9"
