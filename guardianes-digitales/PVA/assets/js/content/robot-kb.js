@@ -101,7 +101,7 @@
         keywords: ["smishing", "sms", "mensaje de texto", "mensajes de texto", "mensaje falso", "paquete retenido", "whatsapp falso"],
         answer: [
           "El smishing es una estafa de suplantación por mensajes de texto (SMS o mensajería instantánea): se hacen pasar por bancos o empresas e incluyen enlaces falsos.",
-          "Desconfía de enlaces cortos o dominios raros que piden confirmar datos. En la encuesta del proyecto, el 47,6 % de las personas lo identificó como un canal frecuente (muestra de 20 personas)."
+          "Desconfía de enlaces cortos o dominios raros que piden confirmar datos. En la encuesta del proyecto, el 47,6 % de las personas lo identificó como un canal frecuente (según la muestra)."
         ],
         links: [M2],
         follow: ["senales", "vishing"]
@@ -334,8 +334,8 @@
         title: "Encuesta de diagnóstico",
         keywords: ["20 personas", "cifras", "porcentaje", "resultados de la encuesta", "muestra", "colombia", "estadistica", "por que este curso", "encuesta de diagnostico", "diagnostico", "datos del proyecto", "estadisticas"],
         answer: [
-          "En la encuesta de diagnóstico (20 personas, Google Forms): el 20 % fue víctima directa de una estafa y el 50 % conoce a un familiar o amigo cercano que lo fue. El smishing y el vishing concentran cada uno el 47,6 % de las elecciones de canal.",
-          "Ojo: es una muestra de conveniencia de 20 personas. Describe a quienes participaron y no representa estadísticamente a toda Colombia."
+          "En la encuesta de diagnóstico (Google Forms): el 20 % fue víctima directa de una estafa y el 50 % conoce a un familiar o amigo cercano que lo fue. El smishing y el vishing concentran cada uno el 47,6 % de las elecciones de canal.",
+          "Ojo: es una muestra de conveniencia. Describe a quienes participaron y no representa estadísticamente a toda Colombia."
         ],
         follow: ["habitos", "origen"]
       },
@@ -344,7 +344,7 @@
         title: "Hábitos de seguridad en la encuesta",
         keywords: ["habitos", "que hace la gente", "autopercepcion", "se sienten capacitados", "cuantos usan 2fa", "cuantos verifican", "78", "57", "47 4"],
         answer: [
-          "Entre las 20 personas: el 78,9 % cuelga o ignora el contacto sospechoso y verifica por el canal oficial; el 57,9 % usa contraseñas distintas por aplicación y el 47,4 % tiene activada la autenticación en dos pasos. Solo el 5,3 % revisa técnicamente los enlaces.",
+          "En la muestra: el 78,9 % cuelga o ignora el contacto sospechoso y verifica por el canal oficial; el 57,9 % usa contraseñas distintas por aplicación y el 47,4 % tiene activada la autenticación en dos pasos. Solo el 5,3 % revisa técnicamente los enlaces.",
           "En autopercepción (escala 1 a 5), el 55 % se siente moderadamente capacitado y el 30 % poco capacitado. Es una muestra pequeña y de conveniencia."
         ],
         links: [M3],
