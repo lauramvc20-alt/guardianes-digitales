@@ -12,7 +12,7 @@
   var M1 = { label: "Módulo 1 · Protocolo PVA", to: "/modulo/1" };
   var M2 = { label: "Módulo 2 · Smishing y vishing", to: "/modulo/2" };
   var M3 = { label: "Módulo 3 · Protección de datos", to: "/modulo/3" };
-  var M4 = { label: "Módulo 4 · Simulaciones", to: "/modulo/4" };
+  var M4 = { label: "Módulo 4 · Simulacro", to: "/modulo/4" };
 
   PVA.content.robotKb = {
     name: "RO-BIT",
@@ -251,7 +251,7 @@
       },
       {
         id: "simulaciones",
-        title: "Simulaciones",
+        title: "Simulacro",
         keywords: ["simulacion", "simulaciones", "simulacro", "escenario", "escenarios", "modulo 4", "caso"],
         answer: [
           "El Módulo 4 tiene tres escenarios ficticios: una oferta de empleo por WhatsApp, un SMS de paquete retenido (smishing) y una llamada de un supuesto asesor bancario (vishing).",

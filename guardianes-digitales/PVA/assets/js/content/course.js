@@ -372,8 +372,8 @@
     4: {
       id: "m4",
       n: 4,
-      title: "Simulaciones: decide en tiempo real",
-      navTitle: "Simulaciones",
+      title: "Simulacro: decide en tiempo real",
+      navTitle: "Simulacro",
       kicker: "Módulo 4 · El simulacro",
       lede: "Tres escenarios hipotéticos basados en casos de smishing y vishing. Elige una acción y recibe retroalimentación sobre los riesgos y las señales de alerta.",
       robot: "feedback",

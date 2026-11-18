@@ -51,8 +51,8 @@
     },
     {
       id: "m4",
-      label: "Módulo 4 · Simulaciones",
-      navLabel: "Simulaciones",
+      label: "Módulo 4 · Simulacro",
+      navLabel: "Simulacro",
       short: "Tres escenarios prácticos",
       route: "#/modulo/4",
       minutes: 3,
