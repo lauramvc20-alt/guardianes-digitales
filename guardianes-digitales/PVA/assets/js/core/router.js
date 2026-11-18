@@ -11,7 +11,7 @@
     { path: "/modulo/1", view: "module", title: "Módulo 1 · Protocolo PVA", stage: "m1", module: 1 },
     { path: "/modulo/2", view: "module", title: "Módulo 2 · Smishing y vishing", stage: "m2", module: 2 },
     { path: "/modulo/3", view: "module", title: "Módulo 3 · Protección de datos", stage: "m3", module: 3 },
-    { path: "/modulo/4", view: "module", title: "Módulo 4 · Simulaciones", stage: "m4", module: 4 },
+    { path: "/modulo/4", view: "module", title: "Módulo 4 · Simulacro", stage: "m4", module: 4 },
     { path: "/evaluacion", view: "assessment", title: "Evaluación de conocimientos", stage: "evaluacion" },
     { path: "/kit", view: "kit", title: "Kit Digital", stage: "kit" },
     { path: "/certificado", view: "completion", title: "Finalización y certificado", stage: "certificado" },
